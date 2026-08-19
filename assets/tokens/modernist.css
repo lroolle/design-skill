@@ -1,0 +1,182 @@
+/* modernist -- Swiss grid, grotesk, one signal color, air
+ * Token contract: see design-systems/README.md. Same names in every
+ * system; swap this file to change the language. App code uses only
+ * these variables; raw hex/oklch outside this file is a defect.
+ * Seed hue 250 (cool trace, near-achromatic), accent hue 28 (Swiss red),
+ * strategy committed on brand surfaces, restrained on product surfaces.
+ * Fonts: Switzer is free for commercial use (Fontshare) -- self-host it.
+ */
+
+:root {
+  /* surfaces */
+  --bg:          oklch(0.975 0.003 250);
+  --surface:     oklch(0.955 0.004 250);
+  --surface-2:   oklch(0.925 0.005 250);
+  --overlay:     oklch(0.975 0.003 250);
+
+  /* text */
+  --fg:          oklch(0.13 0.005 250);
+  --fg-2:        oklch(0.40 0.006 250);
+  --fg-3:        oklch(0.56 0.006 250);
+
+  /* lines */
+  --line:        oklch(0.86 0.005 250);
+  --line-strong: oklch(0.72 0.006 250);
+
+  /* accent: one red element per view */
+  --accent:       oklch(0.55 0.21 28);
+  --accent-hover: oklch(0.50 0.21 28);
+  --accent-fg:    oklch(0.975 0.003 250);
+  --accent-soft:  oklch(0.94 0.03 28);
+
+  /* semantic (danger shares the accent hue: use the word, not a border) */
+  --ok:          oklch(0.52 0.10 150);
+  --ok-soft:     oklch(0.94 0.03 150);
+  --warn:        oklch(0.68 0.14 80);
+  --warn-soft:   oklch(0.95 0.04 80);
+  --danger:      oklch(0.55 0.21 28);
+  --danger-soft: oklch(0.94 0.03 28);
+  --info:        oklch(0.45 0.06 250);
+  --info-soft:   oklch(0.94 0.01 250);
+
+  /* focus */
+  --focus:       oklch(0.13 0.005 250);
+
+  /* type faces: one family carries every role */
+  --font-display: var(--font-body);
+  --font-body:    "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --font-cjk:     "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", sans-serif;
+
+  /* type scale: ratio 1.5, base 1.0625rem */
+  --text-xs:   0.708rem;
+  --text-sm:   0.8125rem;
+  --text-base: 1.0625rem;
+  --text-lg:   1.594rem;
+  --text-xl:   2.39rem;
+  --text-2xl:  clamp(2.6rem, 1.6rem + 3vw, 3.586rem);
+  --text-3xl:  clamp(3rem, 1.4rem + 5vw, 5.379rem);
+  --text-4xl:  clamp(3.4rem, 1rem + 8vw, 8.068rem);
+
+  /* type metrics */
+  --leading-body:     1.5;
+  --leading-tight:    1.02;
+  --tracking-display: -0.03em;
+  --measure:          64ch;
+
+  /* space: 4px scale x density 1.25 (brand); set --density: 1 on product surfaces */
+  --density:  1.25;
+  --space-1:  calc(0.25rem * var(--density));
+  --space-2:  calc(0.5rem  * var(--density));
+  --space-3:  calc(0.75rem * var(--density));
+  --space-4:  calc(1rem    * var(--density));
+  --space-5:  calc(1.5rem  * var(--density));
+  --space-6:  calc(2rem    * var(--density));
+  --space-7:  calc(3rem    * var(--density));
+  --space-8:  calc(4rem    * var(--density));
+  --space-9:  calc(6rem    * var(--density));
+  --space-10: calc(8rem    * var(--density));
+  --space-11: calc(12rem   * var(--density));
+  --space-12: calc(16rem   * var(--density));
+
+  /* shape */
+  --radius:    0;
+  --radius-sm: 0;
+  --radius-lg: 0;
+  --line-w:    1px;
+
+  /* elevation: flat; shadow-1 only where a dialog must part from a photo */
+  --shadow-1: 0 1px 2px oklch(0.13 0.005 250 / 0.06), 0 2px 8px oklch(0.13 0.005 250 / 0.05);
+  --shadow-2: 0 4px 12px oklch(0.13 0.005 250 / 0.08), 0 16px 40px oklch(0.13 0.005 250 / 0.10);
+
+  /* motion: snappy; navigation cuts */
+  --dur-micro:   100ms;
+  --dur-base:    180ms;
+  --dur-enter:   250ms;
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-subtle: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* layout: wide margins, 12-column field */
+  --container:      84rem;
+  --container-wide: 100rem;
+
+  color-scheme: light dark;
+}
+
+[data-theme="dark"] {
+  /* keep the cool trace and L 0.13-0.15; a neutral L 0.05 ground plus
+   * full-chroma red is the vermilion-on-black tell */
+  --bg:          oklch(0.14 0.005 250);
+  --surface:     oklch(0.17 0.006 250);
+  --surface-2:   oklch(0.21 0.007 250);
+  --overlay:     oklch(0.19 0.006 250);
+
+  --fg:          oklch(0.93 0.004 250);
+  --fg-2:        oklch(0.70 0.005 250);
+  --fg-3:        oklch(0.55 0.005 250);
+
+  --line:        oklch(0.27 0.007 250);
+  --line-strong: oklch(0.38 0.008 250);
+
+  --accent:       oklch(0.62 0.17 28);
+  --accent-hover: oklch(0.68 0.17 28);
+  --accent-fg:    oklch(0.14 0.005 250);
+  --accent-soft:  oklch(0.24 0.05 28);
+
+  --ok:          oklch(0.68 0.09 150);
+  --ok-soft:     oklch(0.22 0.03 150);
+  --warn:        oklch(0.80 0.12 80);
+  --warn-soft:   oklch(0.24 0.04 80);
+  --danger:      oklch(0.62 0.17 28);
+  --danger-soft: oklch(0.24 0.05 28);
+  --info:        oklch(0.70 0.05 250);
+  --info-soft:   oklch(0.22 0.01 250);
+
+  --focus:       oklch(0.93 0.004 250);
+
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.30), 0 2px 8px oklch(0 0 0 / 0.25);
+  --shadow-2: 0 4px 12px oklch(0 0 0 / 0.35), 0 16px 40px oklch(0 0 0 / 0.40);
+}
+
+/* base: the few rules the tokens imply */
+html { color-scheme: light dark; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), var(--font-cjk);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-cjk);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+p { text-wrap: pretty; max-width: var(--measure); }
+code, kbd, samp, pre, [data-mono] { font-family: var(--font-mono); font-variant-numeric: tabular-nums slashed-zero; }
+table { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color var(--dur-micro) var(--ease-subtle);
+}
+a:hover { text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+/* the one label device: uppercase tracked, at most once per view */
+.label, [data-label] { text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--text-sm); font-weight: 500; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

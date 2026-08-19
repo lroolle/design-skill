@@ -1,0 +1,196 @@
+/* nocturnes -- dark-first, one light source
+ * Token contract: see design-systems/README.md. Same names in every
+ * system; swap this file to change the language. App code uses only
+ * these variables; raw hex/oklch outside this file is a defect.
+ *
+ * DARK-FIRST. The identity lives in [data-theme="dark"]; projects set
+ * <html data-theme="dark"> by default. :root still holds the light
+ * ("day") theme by contract, for docs, settings and print. The dark
+ * block is listed first here for readability; the selectors are the
+ * contract. Seed hue 235 (blue-grey, visibly tinted), accent hue 85
+ * (gold) on dark / hue 70 (brass) on light, strategy restrained.
+ * Fonts: Schibsted Grotesk + JetBrains Mono (OFL), self-host woff2.
+ */
+
+[data-theme="dark"] {
+  /* surfaces: lightness carries elevation, 0.04 steps */
+  --bg:          oklch(0.15 0.025 235);
+  --surface:     oklch(0.19 0.025 235);
+  --surface-2:   oklch(0.23 0.025 235);
+  --overlay:     oklch(0.21 0.025 235);
+
+  /* text: gaslight white, never pure */
+  --fg:          oklch(0.91 0.010 80);
+  --fg-2:        oklch(0.68 0.012 235);
+  --fg-3:        oklch(0.52 0.012 235);
+
+  /* lines */
+  --line:        oklch(0.28 0.020 235);
+  --line-strong: oklch(0.38 0.020 235);
+
+  /* accent: gold sparks */
+  --accent:       oklch(0.80 0.13 85);
+  --accent-hover: oklch(0.86 0.13 85);
+  --accent-fg:    oklch(0.15 0.025 235);
+  --accent-soft:  oklch(0.28 0.05 85);
+
+  /* semantic: warn at hue 60 stays clear of gold's 85 */
+  --ok:          oklch(0.72 0.12 150);
+  --ok-soft:     oklch(0.24 0.04 150);
+  --warn:        oklch(0.78 0.14 60);
+  --warn-soft:   oklch(0.26 0.05 60);
+  --danger:      oklch(0.68 0.16 20);
+  --danger-soft: oklch(0.25 0.05 20);
+  --info:        oklch(0.72 0.09 235);
+  --info-soft:   oklch(0.24 0.04 235);
+
+  /* focus */
+  --focus:       oklch(0.80 0.13 85);
+
+  /* elevation: lit from above; drop shadows deep and neutral */
+  --shadow-1: inset 0 1px 0 oklch(1 0 0 / 0.04), 0 2px 8px oklch(0 0 0 / 0.30);
+  --shadow-2: inset 0 1px 0 oklch(1 0 0 / 0.05), 0 8px 24px oklch(0 0 0 / 0.40), 0 24px 64px oklch(0 0 0 / 0.45);
+
+  /* light-on-dark compensation (see base rules) */
+  --weight-body:  450;
+  --tracking-body: 0.005em;
+}
+
+:root {
+  /* surfaces: the light "day" theme -- mist */
+  --bg:          oklch(0.96 0.012 235);
+  --surface:     oklch(0.94 0.012 235);
+  --surface-2:   oklch(0.91 0.014 235);
+  --overlay:     oklch(0.97 0.010 235);
+
+  /* text */
+  --fg:          oklch(0.18 0.030 235);
+  --fg-2:        oklch(0.42 0.025 235);
+  --fg-3:        oklch(0.56 0.020 235);
+
+  /* lines */
+  --line:        oklch(0.86 0.014 235);
+  --line-strong: oklch(0.74 0.016 235);
+
+  /* accent: brass -- gold fails contrast on mist */
+  --accent:       oklch(0.52 0.12 70);
+  --accent-hover: oklch(0.46 0.12 70);
+  --accent-fg:    oklch(0.97 0.010 235);
+  --accent-soft:  oklch(0.93 0.04 80);
+
+  /* semantic */
+  --ok:          oklch(0.54 0.12 150);
+  --ok-soft:     oklch(0.94 0.04 150);
+  --warn:        oklch(0.62 0.14 60);
+  --warn-soft:   oklch(0.95 0.05 60);
+  --danger:      oklch(0.52 0.17 20);
+  --danger-soft: oklch(0.95 0.04 20);
+  --info:        oklch(0.50 0.09 235);
+  --info-soft:   oklch(0.93 0.03 235);
+
+  /* focus */
+  --focus:       oklch(0.52 0.12 70);
+
+  /* type faces */
+  --font-display: "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body:    "Schibsted Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-cjk:     "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+
+  /* type scale: ratio 1.333, base 1rem */
+  --text-xs:   0.563rem;
+  --text-sm:   0.75rem;
+  --text-base: 1rem;
+  --text-lg:   1.333rem;
+  --text-xl:   1.777rem;
+  --text-2xl:  2.369rem;
+  --text-3xl:  clamp(2.4rem, 1.7rem + 2.3vw, 3.157rem);
+  --text-4xl:  clamp(2.8rem, 1.9rem + 3.4vw, 4.209rem);
+
+  /* type metrics (light theme; dark overrides weight/tracking) */
+  --leading-body:     1.55;
+  --leading-tight:    1.05;
+  --tracking-display: -0.02em;
+  --measure:          66ch;
+  --weight-body:      400;
+  --tracking-body:    0;
+
+  /* space: 4px scale x density 1.0 */
+  --density:  1;
+  --space-1:  calc(0.25rem * var(--density));
+  --space-2:  calc(0.5rem  * var(--density));
+  --space-3:  calc(0.75rem * var(--density));
+  --space-4:  calc(1rem    * var(--density));
+  --space-5:  calc(1.5rem  * var(--density));
+  --space-6:  calc(2rem    * var(--density));
+  --space-7:  calc(3rem    * var(--density));
+  --space-8:  calc(4rem    * var(--density));
+  --space-9:  calc(6rem    * var(--density));
+  --space-10: calc(8rem    * var(--density));
+  --space-11: calc(12rem   * var(--density));
+  --space-12: calc(16rem   * var(--density));
+
+  /* shape */
+  --radius:    0.375rem;
+  --radius-sm: 0.1875rem;
+  --radius-lg: 0.75rem;
+  --line-w:    1px;
+
+  /* elevation (light theme) */
+  --shadow-1: 0 1px 2px oklch(0.18 0.03 235 / 0.06), 0 2px 8px oklch(0.18 0.03 235 / 0.06);
+  --shadow-2: 0 6px 16px oklch(0.18 0.03 235 / 0.10), 0 20px 48px oklch(0.18 0.03 235 / 0.12);
+
+  /* motion: deliberate */
+  --dur-micro:   150ms;
+  --dur-base:    300ms;
+  --dur-enter:   500ms;
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-subtle: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* layout */
+  --container:      80rem;
+  --container-wide: 96rem;
+
+  color-scheme: light dark;
+}
+
+/* base: the few rules the tokens imply */
+html { color-scheme: light dark; }
+[data-theme="dark"] { color-scheme: dark; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), var(--font-cjk);
+  font-size: var(--text-base);
+  font-weight: var(--weight-body);
+  letter-spacing: var(--tracking-body);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-cjk);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+p { text-wrap: pretty; max-width: var(--measure); }
+code, kbd, samp, pre, [data-mono] { font-family: var(--font-mono); font-variant-numeric: tabular-nums slashed-zero; }
+table { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* body links underline; brand surfaces may use [data-spark] for the border-bottom form */
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.15em; }
+[data-spark] a, a[data-spark] { text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+/* the one light source: apply to the hero only */
+[data-light-source] { background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--surface), var(--bg) 70%); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

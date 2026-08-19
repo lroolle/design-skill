@@ -1,0 +1,189 @@
+/* classical -- book typography, warm paper, restraint
+ * Token contract: see design-systems/README.md. Same names in every
+ * system; swap this file to change the language. App code uses only
+ * these variables; raw hex/oklch outside this file is a defect.
+ * Seed hue 80 (warm paper), ink hue 60, accent hue 20 (oxblood),
+ * strategy restrained. Adds --font-ui for chrome (a humanist sans keeps
+ * controls from reading as prose).
+ * Fonts: EB Garamond, Source Sans 3, Source Code Pro are OFL -- self-host.
+ */
+
+:root {
+  /* surfaces */
+  --bg:          oklch(0.975 0.008 80);
+  --surface:     oklch(0.955 0.010 80);
+  --surface-2:   oklch(0.925 0.012 80);
+  --overlay:     oklch(0.975 0.008 80);
+
+  /* text */
+  --fg:          oklch(0.20 0.015 60);
+  --fg-2:        oklch(0.44 0.014 60);
+  --fg-3:        oklch(0.58 0.012 60);
+
+  /* lines */
+  --line:        oklch(0.87 0.010 80);
+  --line-strong: oklch(0.74 0.012 80);
+
+  /* accent: oxblood, darker and redder than terracotta */
+  --accent:       oklch(0.42 0.12 20);
+  --accent-hover: oklch(0.37 0.12 20);
+  --accent-fg:    oklch(0.975 0.008 80);
+  --accent-soft:  oklch(0.94 0.02 20);
+
+  /* semantic (validation and status only; the page has no badges) */
+  --ok:          oklch(0.50 0.09 155);
+  --ok-soft:     oklch(0.94 0.03 155);
+  --warn:        oklch(0.66 0.12 80);
+  --warn-soft:   oklch(0.95 0.04 80);
+  --danger:      oklch(0.50 0.14 25);
+  --danger-soft: oklch(0.95 0.03 25);
+  --info:        oklch(0.46 0.08 260);
+  --info-soft:   oklch(0.94 0.02 260);
+
+  /* focus */
+  --focus:       oklch(0.42 0.12 20);
+
+  /* type faces */
+  --font-display: var(--font-body);
+  --font-body:    "EB Garamond", "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-ui:      "Source Sans 3", system-ui, sans-serif;
+  --font-mono:    "Source Code Pro", ui-monospace, Menlo, monospace;
+  --font-cjk:     "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  --font-cjk-ui:  "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+  /* type scale: ratio 1.333, base 1.125rem (18px) */
+  --text-xs:   0.633rem;
+  --text-sm:   0.844rem;
+  --text-base: 1.125rem;
+  --text-lg:   1.5rem;
+  --text-xl:   2rem;
+  --text-2xl:  2.665rem;
+  --text-3xl:  clamp(2.8rem, 2rem + 2.4vw, 3.552rem);
+  --text-4xl:  clamp(3.2rem, 2rem + 4vw, 4.735rem);
+
+  /* type metrics */
+  --leading-body:     1.6;
+  --leading-tight:    1.15;
+  --tracking-display: -0.005em;
+  --measure:          62ch;
+
+  /* space: 4px scale x density 1.15 */
+  --density:  1.15;
+  --space-1:  calc(0.25rem * var(--density));
+  --space-2:  calc(0.5rem  * var(--density));
+  --space-3:  calc(0.75rem * var(--density));
+  --space-4:  calc(1rem    * var(--density));
+  --space-5:  calc(1.5rem  * var(--density));
+  --space-6:  calc(2rem    * var(--density));
+  --space-7:  calc(3rem    * var(--density));
+  --space-8:  calc(4rem    * var(--density));
+  --space-9:  calc(6rem    * var(--density));
+  --space-10: calc(8rem    * var(--density));
+  --space-11: calc(12rem   * var(--density));
+  --space-12: calc(16rem   * var(--density));
+
+  /* shape */
+  --radius:    0;
+  --radius-sm: 0.125rem;
+  --radius-lg: 0;
+  --line-w:    1px;
+
+  /* elevation: flat; overlays sit on --surface with a line */
+  --shadow-1: 0 1px 2px oklch(0.20 0.015 60 / 0.05), 0 2px 8px oklch(0.20 0.015 60 / 0.04);
+  --shadow-2: 0 4px 12px oklch(0.20 0.015 60 / 0.07), 0 16px 40px oklch(0.20 0.015 60 / 0.09);
+
+  /* motion: deliberate and minimal */
+  --dur-micro:   150ms;
+  --dur-base:    300ms;
+  --dur-enter:   500ms;
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-subtle: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* layout: one column, generous margins */
+  --container:      64rem;
+  --container-wide: 80rem;
+
+  color-scheme: light dark;
+}
+
+[data-theme="dark"] {
+  /* leather, not night: warm dark ground at hue 60 */
+  --bg:          oklch(0.16 0.010 60);
+  --surface:     oklch(0.19 0.011 60);
+  --surface-2:   oklch(0.23 0.012 60);
+  --overlay:     oklch(0.21 0.011 60);
+
+  --fg:          oklch(0.90 0.008 80);
+  --fg-2:        oklch(0.70 0.010 80);
+  --fg-3:        oklch(0.56 0.010 80);
+
+  --line:        oklch(0.28 0.012 60);
+  --line-strong: oklch(0.38 0.014 60);
+
+  --accent:       oklch(0.72 0.10 25);
+  --accent-hover: oklch(0.78 0.10 25);
+  --accent-fg:    oklch(0.16 0.010 60);
+  --accent-soft:  oklch(0.25 0.04 20);
+
+  --ok:          oklch(0.68 0.08 155);
+  --ok-soft:     oklch(0.22 0.03 155);
+  --warn:        oklch(0.80 0.10 80);
+  --warn-soft:   oklch(0.24 0.04 80);
+  --danger:      oklch(0.68 0.12 25);
+  --danger-soft: oklch(0.24 0.04 25);
+  --info:        oklch(0.70 0.07 260);
+  --info-soft:   oklch(0.22 0.03 260);
+
+  --focus:       oklch(0.72 0.10 25);
+
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.30), 0 2px 8px oklch(0 0 0 / 0.25);
+  --shadow-2: 0 4px 12px oklch(0 0 0 / 0.35), 0 16px 40px oklch(0 0 0 / 0.40);
+}
+
+/* base: the few rules the tokens imply */
+html { color-scheme: light dark; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), var(--font-cjk);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  font-feature-settings: "onum", "kern", "liga";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-cjk);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+p { text-wrap: pretty; max-width: var(--measure); }
+/* chrome in the humanist sans: controls should not read as prose */
+button, input, select, textarea, label, th, nav, [data-ui] {
+  font-family: var(--font-ui), var(--font-cjk-ui);
+  font-feature-settings: "kern", "liga";
+}
+code, kbd, samp, pre, [data-mono] { font-family: var(--font-mono); font-variant-numeric: tabular-nums slashed-zero; }
+table, [data-lining] { font-variant-numeric: lining-nums tabular-nums; }
+.smcp, [data-smcp] { font-variant-caps: small-caps; letter-spacing: 0.06em; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+a:hover { color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

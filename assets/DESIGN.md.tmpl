@@ -1,0 +1,83 @@
+# DESIGN.md -- the material
+
+Read this before touching anything under the app's UI ({UI DIRS: e.g.
+`src/app/`, `src/components/`, `src/blocks/`}). `TASTE.md` holds prior
+rulings; this file holds the material. The one-line test for any UI
+change: **a change that makes the surface prettier and the task harder
+must fail.**
+
+<!-- Replace every {PLACEHOLDER}. This is a contract: if it lies about
+what the code does it is worse than none. Rewrite it in the same commit
+that changes the material. Delete this comment when filled. -->
+
+## Direction
+
+**{SYSTEM NAME}**, re-seeded as "{one-line feel}". Chosen {DATE}
+because {one sentence: the sense-card job and audience it serves}.
+Rejected: {A: system -- why not}; {B: system -- why not}.
+
+Scene: {the one physical sentence}.
+
+## Surface classification
+
+- **Brand surfaces** ({LIST: landing, launch, marketing}): design IS
+  the product; expressiveness is load-bearing; spend the identity
+  budget here.
+- **Product surfaces** ({LIST: dashboard, settings, editor, admin,
+  auth}): design serves the task; density is a feature; expressiveness
+  competes with it.
+
+Protected functions (must not break, ever): {LIST: the primary task
+path, the information the user actually reads, labels and navigation,
+legal copy, the conversion path}.
+
+## The material
+
+Tokens live in `{PATH: e.g. src/styles/tokens.css}` (copied from
+`assets/tokens/{system}.css` and re-seeded). App code uses tokens
+only.
+
+| Dimension | Value | Law |
+|---|---|---|
+| Color seed | hue {N} ({name}), neutrals C {range} | Both themes derive from it. Dark mode is a redesign: surface lightness carries elevation, accent chroma drops ~15%. Never chroma 0, never pure black or white. |
+| Strategy | {restrained / committed / full / drenched} | {coverage rule for this strategy} |
+| Accent | `--accent` {oklch value} ({name}) | One accent: primary action, links, focus, selection. Semantic states from tokens only, never raw palette classes. |
+| Type | display {face} / body {face} / mono {face} | {pairing axis or one-family rationale}. CJK: {face}, {preloaded / system}; a CJK-primary product picks the CJK face first. Ratio {N}, base {N}. |
+| Radius | `--radius: {value}`, one corner language | `-sm` / `-lg` derive from it. A second corner language is a defect. |
+| Surfaces | {1px lines + tone steps / elevation model} | Structure before shadow. Shadow only where elevation carries meaning, tinted to the seed. |
+| Density | {value}; product {value}, brand {value} | Never delete information to make a layout breathe: summarize above the data, never instead of it. |
+| Motion | {personality}: {micro / base / enter ms}, `{ease}` | Budget: {feedback, overlays, ...}. No urgency devices. `prefers-reduced-motion` honored. |
+| Icons | {set} at {weight} | One set, one weight; icon + label on anything multi-state. |
+| Imagery | {photography treatment / illustration / none} | {caption rule; dark-mode dimming} |
+
+## Signature moves and device ration
+
+Signature: {1. ...} {2. ...} {3. ...} -- these and no others.
+
+Per page: **one masthead device** ({which}) + **one section-label
+device** ({which}). At most two sub-12px sizes. Uppercase-tracked
+labels, eyebrows, italic runs, colored kickers are devices; each one
+used elsewhere is a defect.
+
+## Voice
+
+{Register in one line.} Verbs on buttons, sentence case, the user's
+vocabulary, no fake names or numbers, {system-specific line}.
+
+## Hard bans (run `scripts/bans.sh`)
+
+Raw hex or oklch outside the token file; raw palette classes for
+semantic states; pure black/white; urgency animation classes;
+layout-property transitions; side-stripe accents; gradient text;
+`lorem` / `Acme` / `John Doe`. Your generator-managed component
+library ({e.g. `src/components/ui/`}) is exempt: it is token-driven.
+
+## Behavioral floor
+
+Visible state (landmarks stay put), disabled-not-hidden, object then
+action, discoverable then fast, verbs on buttons, undo over
+confirmation, modes visible and escapable, honest feedback in the
+user's words, trustworthy representation, keyboard and assistive
+parity. A change proposed against any of these runs the verdict
+protocol first: protected functions, counted evidence, behavior, then
+better / different / costume.

@@ -1,0 +1,168 @@
+/* default -- paper and ink
+ * Token contract: see design-systems/README.md. Same names in every
+ * system; swap this file to change the language. App code uses only
+ * these variables; raw hex/oklch outside this file is a defect.
+ * Seed hue 75 (warm paper), accent hue 250 (ink blue), strategy restrained.
+ */
+
+:root {
+  /* surfaces */
+  --bg:          oklch(0.985 0.005 75);
+  --surface:     oklch(0.965 0.006 75);
+  --surface-2:   oklch(0.935 0.008 75);
+  --overlay:     oklch(0.985 0.005 75);
+
+  /* text */
+  --fg:          oklch(0.18 0.010 75);
+  --fg-2:        oklch(0.42 0.010 75);
+  --fg-3:        oklch(0.58 0.010 75);
+
+  /* lines */
+  --line:        oklch(0.88 0.008 75);
+  --line-strong: oklch(0.76 0.010 75);
+
+  /* accent */
+  --accent:       oklch(0.45 0.10 250);
+  --accent-hover: oklch(0.40 0.11 250);
+  --accent-fg:    oklch(0.985 0.005 75);
+  --accent-soft:  oklch(0.94 0.02 250);
+
+  /* semantic (hue offsets from the seed family, held here only) */
+  --ok:          oklch(0.52 0.10 150);
+  --ok-soft:     oklch(0.94 0.03 150);
+  --warn:        oklch(0.65 0.13 75);
+  --warn-soft:   oklch(0.95 0.04 75);
+  --danger:      oklch(0.52 0.16 25);
+  --danger-soft: oklch(0.95 0.03 25);
+  --info:        oklch(0.50 0.08 250);
+  --info-soft:   oklch(0.94 0.02 250);
+
+  /* focus */
+  --focus:       oklch(0.55 0.14 250);
+
+  /* type faces */
+  --font-display: var(--font-body);
+  --font-body:    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-cjk:     "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+
+  /* type scale: ratio 1.25, base 1rem */
+  --text-xs:   0.64rem;
+  --text-sm:   0.8rem;
+  --text-base: 1rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5625rem;
+  --text-2xl:  1.953rem;
+  --text-3xl:  clamp(2.2rem, 1.6rem + 1.8vw, 2.441rem);
+  --text-4xl:  clamp(2.6rem, 1.8rem + 2.6vw, 3.052rem);
+
+  /* type metrics */
+  --leading-body:     1.5;
+  --leading-tight:    1.2;
+  --tracking-display: -0.01em;
+  --measure:          68ch;
+
+  /* space: 4px scale x density 1.0 */
+  --density:  1;
+  --space-1:  calc(0.25rem * var(--density));
+  --space-2:  calc(0.5rem  * var(--density));
+  --space-3:  calc(0.75rem * var(--density));
+  --space-4:  calc(1rem    * var(--density));
+  --space-5:  calc(1.5rem  * var(--density));
+  --space-6:  calc(2rem    * var(--density));
+  --space-7:  calc(3rem    * var(--density));
+  --space-8:  calc(4rem    * var(--density));
+  --space-9:  calc(6rem    * var(--density));
+  --space-10: calc(8rem    * var(--density));
+  --space-11: calc(12rem   * var(--density));
+  --space-12: calc(16rem   * var(--density));
+
+  /* shape */
+  --radius:    0.25rem;
+  --radius-sm: 0.125rem;
+  --radius-lg: 0.5rem;
+  --line-w:    1px;
+
+  /* elevation: tinted to the seed, visible only on overlays */
+  --shadow-1: 0 1px 2px oklch(0.18 0.01 75 / 0.06), 0 2px 8px oklch(0.18 0.01 75 / 0.05);
+  --shadow-2: 0 4px 12px oklch(0.18 0.01 75 / 0.08), 0 16px 40px oklch(0.18 0.01 75 / 0.10);
+
+  /* motion: snappy */
+  --dur-micro:   100ms;
+  --dur-base:    180ms;
+  --dur-enter:   240ms;
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-subtle: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* layout */
+  --container:      72rem;
+  --container-wide: 90rem;
+
+  color-scheme: light dark;
+}
+
+[data-theme="dark"] {
+  --bg:          oklch(0.14 0.008 75);
+  --surface:     oklch(0.17 0.009 75);
+  --surface-2:   oklch(0.21 0.010 75);
+  --overlay:     oklch(0.19 0.009 75);
+
+  --fg:          oklch(0.92 0.006 75);
+  --fg-2:        oklch(0.70 0.008 75);
+  --fg-3:        oklch(0.55 0.008 75);
+
+  --line:        oklch(0.26 0.010 75);
+  --line-strong: oklch(0.36 0.012 75);
+
+  --accent:       oklch(0.72 0.09 250);
+  --accent-hover: oklch(0.78 0.09 250);
+  --accent-fg:    oklch(0.14 0.008 75);
+  --accent-soft:  oklch(0.24 0.03 250);
+
+  --ok:          oklch(0.70 0.10 150);
+  --ok-soft:     oklch(0.22 0.03 150);
+  --warn:        oklch(0.78 0.12 75);
+  --warn-soft:   oklch(0.24 0.04 75);
+  --danger:      oklch(0.68 0.14 25);
+  --danger-soft: oklch(0.24 0.04 25);
+  --info:        oklch(0.70 0.08 250);
+  --info-soft:   oklch(0.22 0.03 250);
+
+  --focus:       oklch(0.72 0.12 250);
+
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.30), 0 2px 8px oklch(0 0 0 / 0.25);
+  --shadow-2: 0 4px 12px oklch(0 0 0 / 0.35), 0 16px 40px oklch(0 0 0 / 0.40);
+}
+
+/* base: the few rules the tokens imply */
+html { color-scheme: light dark; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), var(--font-cjk);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-cjk);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+p { text-wrap: pretty; max-width: var(--measure); }
+code, kbd, samp, pre, [data-mono] { font-family: var(--font-mono); font-variant-numeric: tabular-nums slashed-zero; }
+table { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

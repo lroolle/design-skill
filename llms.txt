@@ -1,0 +1,52 @@
+# lroolle-design-skill
+
+> One agent skill for designing any user-facing surface with taste
+> built in: sense the brief, offer two to four genuinely different
+> design directions, lock one as a DESIGN.md contract with tokens,
+> build against it, critique with evidence (better / different /
+> costume). Seven design languages as contracts sharing one token
+> schema; a craft layer loaded by need; surface recipes; runnable
+> bans. MIT. Private pre-release.
+
+Install: clone into your agent's skill root (e.g.
+`~/.claude/skills/lroolle-design`) or `npx skills@latest add
+lroolle/lroolle-design-skill` once public. No build step; `bans.sh`
+and `validate.sh` are bash + grep.
+
+## Entry
+
+- [SKILL.md](SKILL.md): the protocol -- gate, laws, six phases (sense,
+  direct, contract, build, critique, deliver), the first-sense table
+  by territory, the check, the repository map
+
+## Design systems (contracts; same token names, swap the css file)
+
+- [design-systems/README.md](design-systems/README.md): the table, the
+  12-section contract schema, the token contract and its invariants
+- [default](design-systems/default.md) · [modernist](design-systems/modernist.md) ·
+  [classical](design-systems/classical.md) · [industry](design-systems/industry.md) ·
+  [organic](design-systems/organic.md) · [nocturnes](design-systems/nocturnes.md) ·
+  [broadsheets](design-systems/broadsheets.md) · [_template](design-systems/_template.md)
+- tokens: `assets/tokens/<system>.css` (light + dark, OKLCH);
+  [assets/specimen.html](assets/specimen.html) renders any of them
+
+## References (craft layer)
+
+- [references/README.md](references/README.md): index with load-when
+- [thinking](references/thinking.md) · [methods](references/methods.md) ·
+  [patterns](references/patterns.md) · [anti-patterns](references/anti-patterns.md) ·
+  [typography](references/typography.md) · [fontbook](references/fontbook.md) ·
+  [color](references/color.md) · [palettes](references/palettes.md) ·
+  [motion](references/motion.md) · [platforms](references/platforms.md) ·
+  [frameworks](references/frameworks.md) · [sites](references/sites.md) ·
+  [skills](references/skills.md)
+
+## Templates (surface recipes)
+
+- [templates/README.md](templates/README.md): landing, dashboard, docs,
+  editorial, portfolio, app-shell, forms, deck, _template
+
+## Assets and proof
+
+- [assets/DESIGN.md.tmpl](assets/DESIGN.md.tmpl) · [assets/TASTE.md.tmpl](assets/TASTE.md.tmpl) ·
+  [assets/bans.sh](assets/bans.sh) · [scripts/validate.sh](scripts/validate.sh)

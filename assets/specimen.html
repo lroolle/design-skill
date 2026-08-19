@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>lroolle-design specimen</title>
+<link id="tokens" rel="stylesheet" href="tokens/default.css">
+<style>
+/* specimen: component CSS only; every value is a token. Base rules
+   (body, headings, links, focus, reduced motion) come from the token file. */
+* { box-sizing: border-box; }
+body { margin: 0; }
+.wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--space-4); }
+.bar { position: sticky; top: 0; z-index: 10; background: var(--surface); border-bottom: var(--line-w) solid var(--line); }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); align-items: center; padding-top: var(--space-2); padding-bottom: var(--space-2); font-size: var(--text-sm); }
+.bar select, .bar button { font: inherit; }
+.bar .feel { color: var(--fg-2); flex: 1 1 16rem; }
+.bar label { display: inline-flex; gap: var(--space-2); align-items: center; }
+.seg { display: inline-flex; border: var(--line-w) solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.seg button { background: var(--surface); color: var(--fg-2); border: 0; padding: var(--space-1) var(--space-3); cursor: pointer; }
+.seg button + button { border-left: var(--line-w) solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--surface-2); color: var(--fg); font-weight: 500; }
+section { padding: var(--space-8) 0; border-top: var(--line-w) solid var(--line); }
+section:first-of-type { border-top: 0; }
+h2 { font-size: var(--text-xl); margin: 0 0 var(--space-5); }
+h3 { font-size: var(--text-lg); margin: var(--space-6) 0 var(--space-3); }
+.meta { color: var(--fg-3); font-size: var(--text-sm); }
+.mono { font-family: var(--font-mono); font-size: var(--text-sm); }
+.masthead { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-5); align-items: center; padding: var(--space-4) 0; }
+.masthead .wordmark { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); letter-spacing: var(--tracking-display); margin-right: auto; }
+.masthead nav { display: flex; gap: var(--space-4); }
+.masthead nav a { text-decoration: none; color: var(--fg-2); }
+.masthead nav a:hover, .masthead nav a[aria-current] { color: var(--fg); }
+.hero { padding: var(--space-9) 0 var(--space-8); }
+.hero h1 { font-size: var(--text-4xl); margin: var(--space-3) 0; max-width: 22ch; }
+.hero .dek { font-size: var(--text-lg); color: var(--fg-2); max-width: 48ch; margin: 0 0 var(--space-5); }
+.kicker, [data-kicker] { font-size: var(--text-xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+.row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 2.25rem; padding: 0 var(--space-4); border-radius: var(--radius); border: var(--line-w) solid transparent; font: inherit; font-weight: 500; line-height: 1; cursor: pointer; text-decoration: none;
+  background: var(--accent); color: var(--accent-fg); transition: background var(--dur-micro) var(--ease-subtle), transform var(--dur-micro) var(--ease-out); }
+.btn:hover { background: var(--accent-hover); }
+.btn:active { transform: scale(0.98); }
+.btn.secondary { background: var(--surface); color: var(--fg); border-color: var(--line-strong); }
+.btn.secondary:hover { background: var(--surface-2); }
+.btn.ghost { background: transparent; color: var(--fg-2); }
+.btn.ghost:hover { color: var(--fg); background: var(--surface); }
+.btn.danger { background: var(--danger); color: var(--bg); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.ladder { list-style: none; margin: 0; padding: 0; }
+.ladder li { display: flex; align-items: baseline; gap: var(--space-4); padding: var(--space-2) 0; border-bottom: var(--line-w) solid var(--line); }
+.ladder .mono { min-width: 9rem; color: var(--fg-3); }
+.ladder .sample { font-family: var(--font-display); line-height: var(--leading-tight); }
+.prose { max-width: var(--measure); }
+.prose blockquote { margin: var(--space-5) 0; padding-left: var(--space-4); border-left: var(--line-w) solid var(--line-strong); color: var(--fg-2); font-size: var(--text-lg); }
+.prose code { background: var(--surface-2); padding: 0 0.3em; border-radius: var(--radius-sm); font-size: 0.9em; }
+.prose p:lang(zh) { line-height: 1.75; font-family: var(--font-cjk); }
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--space-3); }
+.swatch { border: var(--line-w) solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.swatch .chip { height: 3rem; }
+.swatch .lbl { padding: var(--space-2); font-size: var(--text-xs); }
+.swatch .lbl b { display: block; font-family: var(--font-mono); font-weight: 500; }
+.swatch .lbl span { color: var(--fg-3); font-family: var(--font-mono); word-break: break-all; }
+.grid2 { display: grid; grid-template-columns: 1fr; gap: var(--space-6); }
+@media (min-width: 768px) { .grid2 { grid-template-columns: 1fr 1fr; } }
+.field { display: grid; gap: var(--space-1); margin-bottom: var(--space-4); }
+.field label { font-size: var(--text-sm); font-weight: 500; }
+.field input, .field select, .field textarea { font: inherit; color: var(--fg); background: var(--surface); border: var(--line-w) solid var(--line-strong); border-radius: var(--radius); padding: var(--space-2) var(--space-3); min-height: 2.25rem; width: 100%; }
+.field .help { font-size: var(--text-xs); color: var(--fg-3); }
+.field.error input { border-color: var(--danger); }
+.field.error .help { color: var(--danger); }
+.check { display: flex; gap: var(--space-2); align-items: center; margin-bottom: var(--space-2); font-size: var(--text-sm); }
+.toggle { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); cursor: pointer; }
+.toggle .track { width: 2.25rem; height: 1.25rem; border-radius: var(--radius-lg); background: var(--line-strong); position: relative; transition: background var(--dur-base) var(--ease-subtle); }
+.toggle .track::after { content: ""; position: absolute; top: 0.125rem; left: 0.125rem; width: 1rem; height: 1rem; border-radius: var(--radius-lg); background: var(--bg); transition: transform var(--dur-base) var(--ease-out); }
+.toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.toggle input:checked + .track { background: var(--accent); }
+.toggle input:checked + .track::after { transform: translateX(1rem); }
+.toggle input:focus-visible + .track { outline: 2px solid var(--focus); outline-offset: 2px; }
+.summary { display: flex; flex-wrap: wrap; gap: var(--space-4); margin-bottom: var(--space-3); font-size: var(--text-sm); color: var(--fg-2); }
+.summary b { color: var(--fg); font-family: var(--font-mono); }
+.tablewrap { overflow: auto; border: var(--line-w) solid var(--line); border-radius: var(--radius); }
+table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+th, td { padding: var(--space-2) var(--space-3); text-align: left; border-bottom: var(--line-w) solid var(--line); white-space: nowrap; }
+th { position: sticky; top: 0; background: var(--surface); font-weight: 600; color: var(--fg-2); }
+td.num, th.num { text-align: right; font-family: var(--font-mono); }
+tbody tr:hover { background: var(--surface-2); }
+tbody tr:last-child td { border-bottom: 0; }
+.ladder2 { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+@media (min-width: 768px) { .ladder2 { grid-template-columns: repeat(4, 1fr); } }
+.ladder2 .item { padding: var(--space-2) 0; }
+.ladder2 .item b { display: block; }
+.ladder2 .item span { color: var(--fg-2); font-size: var(--text-sm); }
+.g-space .item { padding: var(--space-3) 0; }
+.g-rule .item + .item { border-top: var(--line-w) solid var(--line); }
+.g-tone .item { background: var(--surface); padding: var(--space-3); }
+.g-tone .item + .item { margin-top: var(--space-1); }
+.g-card { border: var(--line-w) solid var(--line); border-radius: var(--radius); padding: var(--space-3); background: var(--surface); }
+.skeleton { display: grid; gap: var(--space-2); }
+.skeleton span { display: block; height: 0.75rem; background: var(--surface-2); border-radius: var(--radius-sm); }
+.empty { border: var(--line-w) dashed var(--line-strong); border-radius: var(--radius); padding: var(--space-6); text-align: left; }
+.empty p { margin: 0 0 var(--space-3); color: var(--fg-2); }
+.note { display: flex; gap: var(--space-3); align-items: flex-start; padding: var(--space-3); border: var(--line-w) solid var(--line); border-radius: var(--radius); font-size: var(--text-sm); }
+.note.error { border-color: var(--danger); background: var(--danger-soft); }
+.note.ok { border-color: var(--ok); background: var(--ok-soft); }
+.note b { font-weight: 600; }
+.dialog { max-width: 32rem; background: var(--overlay); border: var(--line-w) solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-2); padding: var(--space-5); }
+.dialog h3 { margin-top: 0; }
+.dialog .row { justify-content: flex-end; margin-top: var(--space-5); }
+.press { min-height: 2.75rem; padding: 0 var(--space-5); }
+footer { padding: var(--space-8) 0; color: var(--fg-3); font-size: var(--text-sm); border-top: var(--line-w) solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar" role="region" aria-label="Specimen controls">
+  <div class="wrap">
+    <label>System
+      <select id="sys" aria-label="Design system">
+        <option value="default">default</option>
+        <option value="modernist">modernist</option>
+        <option value="classical">classical</option>
+        <option value="industry">industry</option>
+        <option value="organic">organic</option>
+        <option value="nocturnes">nocturnes</option>
+        <option value="broadsheets">broadsheets</option>
+      </select>
+    </label>
+    <span class="feel" id="feel"></span>
+    <div class="seg" role="group" aria-label="Theme">
+      <button type="button" data-theme-btn="light" aria-pressed="true">Light</button>
+      <button type="button" data-theme-btn="dark" aria-pressed="false">Dark</button>
+    </div>
+    <div class="seg" role="group" aria-label="Density">
+      <button type="button" data-density="0.85" aria-pressed="false">0.85</button>
+      <button type="button" data-density="1" aria-pressed="true">1.0</button>
+      <button type="button" data-density="1.15" aria-pressed="false">1.15</button>
+    </div>
+  </div>
+</div>
+
+<header class="wrap">
+  <div class="masthead">
+    <span class="wordmark">Harbor</span>
+    <nav aria-label="Primary">
+      <a href="#" aria-current="page">Overview</a>
+      <a href="#">Vessels</a>
+      <a href="#">Berths</a>
+      <a href="#">Reports</a>
+    </nav>
+    <a class="btn" href="#">New booking</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="hero" aria-labelledby="h-hero">
+    <span data-kicker class="kicker">Port operations</span>
+    <h1 id="h-hero">Berth scheduling that stays legible at shift change.</h1>
+    <p class="dek">Harbor plans arrivals, crane windows and pilotage for a regional port, and keeps the whole day on one screen for the people who run it.</p>
+    <div class="row">
+      <a class="btn" href="#">Open today's board</a>
+      <a class="btn secondary" href="#">Read the handbook</a>
+    </div>
+    <p class="meta">Specimen note: no webfonts are loaded here. Each system names its faces in the token file; you see whichever are installed, else the fallback stack.</p>
+  </section>
+
+  <section aria-labelledby="h-type">
+    <h2 id="h-type">Type scale</h2>
+    <ul class="ladder" id="ladder"></ul>
+  </section>
+
+  <section aria-labelledby="h-prose">
+    <h2 id="h-prose">Prose</h2>
+    <div class="prose">
+      <h2>Why the board is one screen</h2>
+      <p>A berth plan is read, not browsed. The pilot on the morning shift scans about forty rows to find the two that changed overnight, so the table keeps every row visible and puts the summary above the data, never instead of it. Density here is a feature.</p>
+      <p>Times render in <code>HH:MM</code> with tabular numerals so columns stay aligned as values change; the <a href="#">vessel register</a> opens in a side panel rather than a modal, because the planner usually needs both at once.</p>
+      <ul>
+        <li>Arrivals and departures share one timeline.</li>
+        <li>Crane windows are drawn as bars, not listed as text.</li>
+        <li>Every change carries who made it and when.</li>
+      </ul>
+      <blockquote>The plan is a promise to a ship that is still at sea. Make it legible before you make it pretty.</blockquote>
+      <p lang="zh">中文排版示例：正文采用 思源黑体 或系统中文字体，行高放大到 1.7 以上；中英文与数字之间留半角空格，例如 泊位 12 号 于 08:30 靠港。标点使用全角，不与西文标点混排。</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-color">
+    <h2 id="h-color">Color tokens</h2>
+    <div class="swatches" id="swatches"></div>
+  </section>
+
+  <section aria-labelledby="h-comp">
+    <h2 id="h-comp">Components</h2>
+    <div class="grid2">
+      <div>
+        <h3>Buttons</h3>
+        <div class="row">
+          <button class="btn" type="button">Save plan</button>
+          <button class="btn secondary" type="button">Export CSV</button>
+          <button class="btn ghost" type="button">Cancel</button>
+          <button class="btn danger" type="button">Delete 3 bookings</button>
+          <button class="btn" type="button" disabled>Publish (no changes)</button>
+        </div>
+        <h3>Selection</h3>
+        <label class="toggle"><input type="checkbox" checked> <span class="track" aria-hidden="true"></span> Show departed vessels</label>
+        <div style="height: var(--space-3)"></div>
+        <label class="check"><input type="checkbox" checked> Notify pilotage on change</label>
+        <label class="check"><input type="checkbox"> Lock crane windows</label>
+        <label class="check"><input type="radio" name="view" checked> Timeline view</label>
+        <label class="check"><input type="radio" name="view"> Table view</label>
+      </div>
+      <form onsubmit="return false">
+        <h3>Form</h3>
+        <div class="field">
+          <label for="f-vessel">Vessel name</label>
+          <input id="f-vessel" type="text" value="MV Tamar Reach" autocomplete="off">
+          <span class="help">As it appears on the AIS record.</span>
+        </div>
+        <div class="field">
+          <label for="f-berth">Berth</label>
+          <select id="f-berth"><option>Berth 12 (bulk)</option><option>Berth 14 (container)</option><option>Berth 3 (ro-ro)</option></select>
+        </div>
+        <div class="field error">
+          <label for="f-eta">ETA</label>
+          <input id="f-eta" type="text" value="31:70" aria-invalid="true" aria-describedby="f-eta-err">
+          <span class="help" id="f-eta-err">Enter a time as HH:MM in port local time, for example 08:30.</span>
+        </div>
+        <div class="field">
+          <label for="f-notes">Notes for pilotage</label>
+          <textarea id="f-notes" rows="3">Draught 9.1 m; needs the afternoon tide.</textarea>
+        </div>
+        <button class="btn" type="submit">Create booking</button>
+      </form>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-table">
+    <h2 id="h-table">Data table</h2>
+    <div class="summary"><span>Arrivals today <b>6</b></span><span>Worst delay <b>+42 min</b></span><span>Crane hours booked <b>31.5</b></span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Vessel</th><th>Berth</th><th class="num">ETA (local)</th><th class="num">Draught (m)</th><th class="num">Delay (min)</th></tr></thead>
+        <tbody>
+          <tr><td>MV Tamar Reach</td><td>12</td><td class="num">06:10</td><td class="num">9.10</td><td class="num">0</td></tr>
+          <tr><td>Esk Carrier</td><td>14</td><td class="num">07:45</td><td class="num">11.25</td><td class="num">+12</td></tr>
+          <tr><td>Lyra Sound</td><td>3</td><td class="num">08:30</td><td class="num">6.80</td><td class="num">0</td></tr>
+          <tr><td>Corran Ferry II</td><td>3</td><td class="num">11:05</td><td class="num">5.40</td><td class="num">+42</td></tr>
+          <tr><td>Hebrides Trader</td><td>14</td><td class="num">14:20</td><td class="num">10.90</td><td class="num">-5</td></tr>
+          <tr><td>Kessock Light</td><td>12</td><td class="num">17:55</td><td class="num">8.35</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-group">
+    <h2 id="h-group">Grouping ladder</h2>
+    <p class="meta">The same three items, cheapest separation first. Reach for a card only when the items are discrete objects.</p>
+    <div class="ladder2">
+      <div class="g-space"><span class="meta">space</span><div class="item"><b>Pilotage</b><span>2 on duty</span></div><div class="item"><b>Tugs</b><span>3 available</span></div><div class="item"><b>Cranes</b><span>4 of 5 up</span></div></div>
+      <div class="g-rule"><span class="meta">rule</span><div class="item"><b>Pilotage</b><span>2 on duty</span></div><div class="item"><b>Tugs</b><span>3 available</span></div><div class="item"><b>Cranes</b><span>4 of 5 up</span></div></div>
+      <div class="g-tone"><span class="meta">tone step</span><div class="item"><b>Pilotage</b><span>2 on duty</span></div><div class="item"><b>Tugs</b><span>3 available</span></div><div class="item"><b>Cranes</b><span>4 of 5 up</span></div></div>
+      <div><span class="meta">card</span><div class="g-card"><div class="item"><b>Pilotage</b><span>2 on duty</span></div><div class="item"><b>Tugs</b><span>3 available</span></div><div class="item"><b>Cranes</b><span>4 of 5 up</span></div></div></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-states">
+    <h2 id="h-states">States</h2>
+    <div class="grid2">
+      <div>
+        <h3>Loading</h3>
+        <div class="skeleton" aria-busy="true" aria-label="Loading berth plan"><span style="width:60%"></span><span style="width:90%"></span><span style="width:75%"></span><span style="width:40%"></span></div>
+        <h3>Empty</h3>
+        <div class="empty"><p>No arrivals are scheduled for Sunday yet. Bookings usually land 48 hours ahead; add the first one or import the weekly manifest.</p><button class="btn secondary" type="button">Import manifest</button></div>
+      </div>
+      <div>
+        <h3>Error</h3>
+        <div class="note error" role="alert"><b>Could not save the plan.</b><span>Berth 14 is already booked 07:30 to 09:00 for Esk Carrier. Choose another window or move that booking first.</span></div>
+        <h3>Success</h3>
+        <div class="note ok" role="status"><b>Plan published.</b><span>Pilotage and tug operators were notified at 06:02.</span></div>
+        <h3>Overlay</h3>
+        <div class="dialog" role="dialog" aria-labelledby="d-title">
+          <h3 id="d-title">Move Corran Ferry II to Berth 3?</h3>
+          <p>The 11:05 slot overlaps Lyra Sound by 20 minutes. Moving it delays Lyra Sound's departure; both crews will be notified.</p>
+          <div class="row"><button class="btn ghost" type="button">Keep current plan</button><button class="btn" type="button">Move and notify</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-motion">
+    <h2 id="h-motion">Motion</h2>
+    <div class="row">
+      <button class="btn press" type="button">Press me</button>
+      <span class="meta" id="motion-note"></span>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">specimen for lroolle-design -- tokens from assets/tokens/&lt;name&gt;.css; install a system by copying the file and re-seeding.</footer>
+
+<script>
+(function () {
+  var FEEL = {
+    default: "paper and ink; quiet, structural, system type",
+    modernist: "Swiss grid, grotesk, one signal color, air",
+    classical: "book typography, warm paper, restraint",
+    industry: "instrument panel: dense, ruled, mono data, safety accents",
+    organic: "humanist, warm, rounded, tactile, hand-made",
+    nocturnes: "dark-first, one light source, blue-grey mists and gold sparks",
+    broadsheets: "newsroom hierarchy: hed, dek, columns, hairlines, real photos"
+  };
+  var SIZES = ["xs","sm","base","lg","xl","2xl","3xl","4xl"];
+  var CHIPS = ["bg","surface","surface-2","fg","fg-2","fg-3","line","line-strong","accent","accent-soft","ok","warn","danger","info","focus"];
+  var root = document.documentElement, link = document.getElementById("tokens");
+  var sel = document.getElementById("sys"), feel = document.getElementById("feel");
+  var state = { system: "default", theme: "light", density: "1" };
+
+  function readHash() {
+    location.hash.replace(/^#/, "").split("&").forEach(function (kv) {
+      var p = kv.split("="); if (p[0] && p[1] && p[0] in state) state[p[0]] = decodeURIComponent(p[1]);
+    });
+    if (!(state.system in FEEL)) state.system = "default";
+  }
+  function writeHash() {
+    var h = "system=" + state.system + "&theme=" + state.theme + (state.density !== "1" ? "&density=" + state.density : "");
+    if (history.replaceState) history.replaceState(null, "", "#" + h); else location.hash = h;
+  }
+  function apply() {
+    link.href = "tokens/" + state.system + ".css";
+    sel.value = state.system;
+    feel.textContent = state.system + " -- " + FEEL[state.system];
+    if (state.theme === "dark") root.setAttribute("data-theme", "dark"); else root.removeAttribute("data-theme");
+    root.style.setProperty("--density", state.density);
+    var hero = document.getElementById("hero");
+    if (state.system === "nocturnes") hero.setAttribute("data-light-source", ""); else hero.removeAttribute("data-light-source");
+    document.querySelectorAll("[data-theme-btn]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-theme-btn") === state.theme)); });
+    document.querySelectorAll("[data-density]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-density") === state.density)); });
+    writeHash();
+    link.onload = render; setTimeout(render, 300);
+  }
+  function render() {
+    var cs = getComputedStyle(document.body);
+    var ladder = document.getElementById("ladder"); ladder.innerHTML = "";
+    SIZES.forEach(function (s) {
+      var li = document.createElement("li");
+      var v = cs.getPropertyValue("--text-" + s).trim();
+      li.innerHTML = '<span class="mono">--text-' + s + ' ' + v + '</span><span class="sample" style="font-size: var(--text-' + s + ')">Berth 12, 08:30 tide</span>';
+      ladder.appendChild(li);
+    });
+    var sw = document.getElementById("swatches"); sw.innerHTML = "";
+    CHIPS.forEach(function (c) {
+      var d = document.createElement("div"); d.className = "swatch";
+      d.innerHTML = '<div class="chip" style="background: var(--' + c + ')"></div><div class="lbl"><b>--' + c + '</b><span>' + cs.getPropertyValue("--" + c).trim() + '</span></div>';
+      sw.appendChild(d);
+    });
+    document.getElementById("motion-note").textContent = "micro " + cs.getPropertyValue("--dur-micro").trim() + " / base " + cs.getPropertyValue("--dur-base").trim() + " / enter " + cs.getPropertyValue("--dur-enter").trim() + " / ease-out " + cs.getPropertyValue("--ease-out").trim();
+  }
+  sel.addEventListener("change", function () { state.system = sel.value; apply(); });
+  document.querySelectorAll("[data-theme-btn]").forEach(function (b) { b.addEventListener("click", function () { state.theme = b.getAttribute("data-theme-btn"); apply(); }); });
+  document.querySelectorAll("[data-density]").forEach(function (b) { b.addEventListener("click", function () { state.density = b.getAttribute("data-density"); apply(); }); });
+  window.addEventListener("hashchange", function () { readHash(); apply(); });
+  readHash(); apply();
+})();
+</script>
+</body>
+</html>
