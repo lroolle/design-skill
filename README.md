@@ -6,7 +6,7 @@
 
 seven material languages · a deck of worlds the dice deal from · one token schema · a reviewer that can say costume
 
-<sub>status: private, pre-release -- the protocol and contracts are complete, the specimen and platform notes are being proven on real surfaces</sub>
+<sub>v0.1.0 -- the protocol, contracts and decks are complete; the specimen and platform notes are being proven on real surfaces</sub>
 
 </div>
 
