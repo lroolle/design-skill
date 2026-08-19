@@ -64,6 +64,7 @@ for (const theme of themes) {
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       h1: (document.querySelector('h1') || {}).textContent?.trim().slice(0, 40),
       figs: document.querySelectorAll('figure svg, .specimen').length,
+      seats: document.querySelectorAll('.sponsors .seat').length,
     }));
 
     const name = `${theme}-${width}.png`;
@@ -77,10 +78,10 @@ await browser.close();
 server.close();
 
 for (const r of report) {
-  const bad = r.overflow > 0 || !r.h1 || r.figs < 4;
+  const bad = r.overflow > 0 || !r.h1 || r.figs < 4 || r.seats !== 4;
   console.log(
     `${bad ? 'CHECK' : 'ok   '} ${r.name.padEnd(14)} h=${String(r.height).padStart(6)}px ` +
-    `overflow=${r.overflow}px figures=${r.figs}` + (r.errors ? `  errors=${r.errors.length}` : '')
+    `overflow=${r.overflow}px figures=${r.figs} seats=${r.seats}` + (r.errors ? `  errors=${r.errors.length}` : '')
   );
   if (r.errors) r.errors.forEach((e) => console.log(`        ${e}`));
 }

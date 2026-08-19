@@ -5,7 +5,7 @@ It describes what the code does, not what the direction intended. If the code
 and this file disagree, this file is wrong; rewrite it in the same commit that
 changes the material.
 
-Surface: one page, four sheets, live at `lroolle.com/design-skill`
+Surface: one page, five sheets, live at `lroolle.com/design-skill`
 (Cloudflare Worker + assets binding; see `deploy/`).
 Mode: **persuade** (the product behind it is operate).
 World: **patent-drawing-sheets** (`skills/design-skill/worlds/`).
@@ -61,6 +61,41 @@ contracts -- material wearing a world's clothes, not a world.
   marks ink in. Nothing else moves except the instant highlight and the
   specimen re-ink. `prefers-reduced-motion` leaves the page complete and still.
 
+## The sponsor band (SHEET 5, and the strip on every viewport)
+
+Composition rolled at surface scope, key **5849b9a3**, which dealt
+`first-viewport-is-the-product-running` first: for an ad slot that means the
+region must *demonstrate itself* rather than describe itself. Written back into
+the deck as `stagings/sponsor-seats-as-a-numbered-plate.md`.
+
+- **A deliberate register break, by one rule.** The band is always the negative
+  of the page: `--band-ground: var(--fg)` and `--band-ink: var(--bg)`, so it is
+  an ink strip on paper sheets in light and a paper strip on ink sheets in dark,
+  with no second set of values. It reads as something laid *on* the document,
+  which is what an ad honestly is.
+- **Four seats, all visible, always.** The loop moves a spotlight, never the
+  contents. A sponsor is on screen 100% of the time rather than one cycle in
+  four -- that is the product being sold, so it has to be true rather than
+  claimed. `site/behaviour.mjs` asserts the band and the SHEET 5 plate render
+  from the same array.
+- **The idle loop is the demo.** A drafting crosshair crosses from the call to
+  action to an open seat, presses, and the frame's dashes close into a solid
+  line as a mark inks in. One SVG rect per seat with `pathLength="100"` makes
+  dashed and solid the same two-number `stroke-dasharray`, so the frame closes
+  by interpolation instead of a border-style swap.
+- **Motion, governed.** Stops on pointer, on focus, on a backgrounded tab; does
+  not exist under reduced motion, where one seat stays filled so the offer still
+  reads. Only `transform`, `opacity`, `stroke` and colour animate.
+- **No borrowed logos.** The demo seat is tagged `specimen` for exactly as long
+  as it is one. A name in that band is a public claim about somebody else's
+  company; putting Anthropic or OpenAI there would be the invented proof this
+  page argues against, and a trademark problem the moment money changes hands.
+  Real sponsors are one array entry in `site/sponsors.js`.
+- **The band may not outrank the page.** Hard rule, measured at every commit:
+  the band's height must not push the page's own headline, reason and action
+  below the fold at 390. It costs 52px there, and the dek steps down to pay for
+  it.
+
 ## Tokens
 
 `site/tokens.css` is the only place raw colour may live; `page.css` and
@@ -83,6 +118,10 @@ The figure caption says so; the readout prints the file each value came from.
   build step, so it carries no font binaries either. Now that it ships from a
   Worker with an assets binding, subsetting the four faces into `site/` and
   dropping the third-party `<link>` is a straight swap -- still open.
+- **Price is "on enquiry" (accepted).** Stripe is not live, so a number on the
+  page would be invented. `PRICE` and `SPONSORS` are single constants at the top
+  of `site/sponsors.js`; setting them switches the call to action to
+  "Claim a seat / $X a year" and points it at checkout. Nothing else changes.
 - **The switch is a radiogroup without roving arrow keys (P2).** Tab reaches
   every option and `aria-checked` is correct; arrow-key roving is the polish
   that is missing.
@@ -101,8 +140,8 @@ The figure caption says so; the readout prints the file each value came from.
 
 ## What this build changed in the skill
 
-Using the skill on a real surface found two defects in the skill itself, both
-fixed in the same commit:
+Using the skill on a real surface found defects in the skill itself and in this
+page's earlier passes, all fixed:
 
 1. `assets/bans.sh` read HTML numeric entities (`&#183;`) as three-digit hex
    and reported them as raw colour. Guarded with `(^|[^&])`.
@@ -111,6 +150,11 @@ fixed in the same commit:
    table headers and fine print. Re-solved to L 0.545 light / 0.600 dark, and
    `scripts/validate.sh` now gates it with a browser-free lightness proxy that
    was proven to trip on the old value.
+3. The sponsor pass then surfaced two layout defects that predated it: the
+   panning figure was a grid item without `min-width: 0`, and the FIG. 3
+   readout printed an unbreakable file path into a fixed grid column. Together
+   they widened the page at 360. Both fixed; overflow is now zero at 320, 360,
+   390, 414, 768 and 1440.
 
 ## Synthetic content to replace
 

@@ -1,0 +1,379 @@
+/* The seats -- the sponsor band and SHEET 5.
+ *
+ * A deliberate register break: the page is white drafting paper with hairline
+ * ink; the band is the plate inverted. Same ink, same faces, opposite value.
+ * It reads as something laid ON the sheet rather than drawn into it, which is
+ * what an ad slot honestly is.
+ *
+ * Every value is a token from tokens.css.
+ */
+
+/* ------------------------------------------------------------------- band */
+
+.sponsors {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--band-ground);
+  color: var(--band-ink);
+  font-family: var(--font-display);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.sponsors__inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-height: 3.25rem;
+}
+
+.sponsors__label {
+  margin: 0;
+  flex: none;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-stretch: 82%;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--band-dim);
+  white-space: nowrap;
+}
+.sponsors__label b { color: var(--band-ink); font-weight: 600; }
+
+/* the plotter pass: one thin live line crossing the band, then gone */
+.sponsors__sweep {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 2px;
+  z-index: 1;
+  background: var(--band-live);
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+.sponsors.is-running .sponsors__sweep {
+  animation: seat-sweep 9s var(--ease-subtle) infinite;
+}
+
+@keyframes seat-sweep {
+  0%        { transform: translateX(0);      opacity: 0; }
+  4%        {                                opacity: 0.75; }
+  46%       {                                opacity: 0.75; }
+  50%       { transform: translateX(100vw);  opacity: 0; }
+  100%      { transform: translateX(100vw);  opacity: 0; }
+}
+
+/* ------------------------------------------------------------------ seats */
+
+.seats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-3);
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+}
+
+.seat {
+  position: relative;
+  flex: 1 1 0;
+  max-width: 15rem;
+  min-width: 0;
+  min-height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seat .seat__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.seat__rect {
+  fill: none;
+  stroke: var(--band-dim);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  /* pathLength=100 normalises the dash units, so "dashed" and "solid" are the
+     same two-number list and CSS can interpolate straight between them */
+  stroke-dasharray: 1.6 1.6;
+  transition:
+    stroke-dasharray var(--dur-enter) var(--ease-out),
+    stroke var(--dur-enter) var(--ease-out),
+    stroke-width var(--dur-enter) var(--ease-out);
+}
+
+/* vacant: marching ants, so the empty seat reads as waiting rather than broken */
+.sponsors.is-running .seat--open .seat__rect {
+  animation: seat-march 2.4s linear infinite;
+}
+@keyframes seat-march { to { stroke-dashoffset: -6.4; } }
+
+/* taken: the dashes close into one continuous line */
+.seat--taken .seat__rect {
+  stroke-dasharray: 100 0;
+  stroke: var(--band-ink);
+}
+
+/* the beat the spotlight is on */
+.seat--lit .seat__rect { stroke: var(--band-live); stroke-width: 1.5; }
+
+.seat__body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  width: 100%;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  min-height: 44px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.seat__no {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--band-dim);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--dur-base) var(--ease-out);
+}
+.seat--lit .seat__no { color: var(--band-live); }
+
+.seat__name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-stretch: 88%;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--band-ink);
+}
+.seat__open {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  font-stretch: 82%;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--band-dim);
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-out);
+}
+.seat--lit .seat__open { color: var(--band-ink); }
+
+.seat--open:hover .seat__rect,
+.seat--open:focus-within .seat__rect { stroke: var(--band-live); stroke-width: 1.5; }
+.seat--open:hover .seat__open,
+.seat--open:focus-within .seat__open { color: var(--band-ink); }
+
+/* the affordance says what the click does, and only on the seat you are on */
+.seat__open .on-hover { display: none; }
+.seat--open:hover .seat__open .at-rest,
+.seat--open:focus-within .seat__open .at-rest { display: none; }
+.seat--open:hover .seat__open .on-hover,
+.seat--open:focus-within .seat__open .on-hover { display: inline; color: var(--band-live); }
+
+/* the specimen tag: this seat is showing what a seat looks like, not a sponsor */
+.seat__tag {
+  position: absolute;
+  /* inside the band: .sponsors clips its overflow, and a tag hanging above
+     the edge was being cut in half */
+  top: 3px;
+  right: 3px;
+  z-index: 2;
+  font-size: 0.56rem;
+  font-weight: 600;
+  font-stretch: 82%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--band-ground);
+  background: var(--band-live);
+  padding: 0 var(--space-1);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+.seat--specimen .seat__tag { opacity: 1; }
+
+/* the mark inking in when a seat is claimed */
+.seat--taken .seat__name,
+.seat--specimen .seat__name { animation: seat-ink 420ms var(--ease-out) both; }
+@keyframes seat-ink {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------------------- the drafting mark */
+
+.sponsors__cursor {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: opacity var(--dur-base) var(--ease-out),
+              transform 720ms var(--ease-out);
+}
+.sponsors__cursor.is-placing { transition: opacity var(--dur-base) var(--ease-out); }
+.sponsors__cursor svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.sponsors__cursor line { stroke: var(--band-live); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sponsors__cursor circle { fill: none; stroke: var(--band-live); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.sponsors__cursor .ring { transform-origin: center; opacity: 0; }
+.sponsors__cursor.is-visible { opacity: 1; }
+.sponsors__cursor.is-pressing .ring { animation: seat-ring 520ms var(--ease-out) both; }
+@keyframes seat-ring {
+  from { opacity: 0.9; transform: scale(0.35); }
+  to   { opacity: 0;   transform: scale(2.4); }
+}
+
+/* ------------------------------------------------------------------- cta */
+
+.sponsors__cta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  background: var(--band-ink);
+  color: var(--band-ground);
+  border: var(--line-w) solid var(--band-ink);
+  text-decoration: none;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-stretch: 88%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+}
+.sponsors__cta:hover { background: var(--band-live); border-color: var(--band-live); color: var(--band-ground); }
+
+/* ------------------------------------------------------------- SHEET 5 */
+
+.seatplate {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 48rem) { .seatplate { grid-template-columns: repeat(4, 1fr); } }
+
+.seatplate__cell {
+  position: relative;
+  min-height: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+.seatplate__cell .seat__frame { position: absolute; inset: 0; height: 100%; }
+.seatplate__cell .seat__rect { stroke: var(--line-strong); }
+.seatplate__no {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--fg-3);
+  font-variant-numeric: tabular-nums;
+}
+.seatplate__state {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-stretch: 88%;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+}
+
+.terms {
+  margin: var(--space-6) 0 0;
+  border-top: var(--line-w) solid var(--line);
+  font-size: var(--text-sm);
+}
+.terms > div {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: var(--line-w) solid var(--line);
+}
+@media (max-width: 30rem) { .terms > div { grid-template-columns: 1fr; gap: 0; } }
+.terms dt {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-stretch: 88%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.terms dd { margin: 0; color: var(--fg-2); min-width: 0; overflow-wrap: anywhere; }
+
+/* --------------------------------------------------------------- adapt */
+
+@media (max-width: 61.99rem) {
+  .sponsors__label span { display: none; }
+}
+/* Phones: one row, no wrap. A second row cost 64px and pushed the page's own
+   call to action below the fold at 390 -- the band may not buy its prominence
+   with the thing the page is actually for. The seat numbers and the marching
+   dashes carry the meaning; the aria-label still says "Seat 3 is open". */
+@media (max-width: 44rem) {
+  .sponsors__inner {
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    flex-wrap: nowrap;
+    min-height: 3.25rem;
+  }
+  .sponsors__label { display: none; }
+  .seats { gap: var(--space-2); }
+  /* a paid seat gets the room to be read; the open ones shrink to their
+     number, because an ellipsised sponsor name is worth nothing to anyone */
+  /* 0 0 auto + min-width: a shrinking seat fell under the 44px target */
+  .seat--open { flex: 0 0 auto; min-width: 46px; }
+  .seat--taken { flex: 1 1 auto; min-width: 0; }
+  .seat__body { padding-inline: var(--space-1); gap: var(--space-1); min-height: 44px; }
+  .seat__open { display: none; }
+  .seat__name { font-size: 0.66rem; letter-spacing: 0.02em; }
+  .seat__no { font-size: 0.7rem; }
+  .seat__tag { font-size: 0.48rem; top: 2px; right: 2px; }
+  .sponsors__cta { padding: var(--space-2) var(--space-3); min-height: 44px; font-size: 0.62rem; letter-spacing: 0.1em; }
+}
+
+/* very narrow phones: the band still fits on one line */
+@media (max-width: 23rem) {
+  .sponsors__inner { padding-inline: var(--space-2); gap: var(--space-1); }
+  .seat--open { min-width: 44px; }
+  .sponsors__cta { font-size: 0.56rem; padding-inline: var(--space-2); letter-spacing: 0.06em; }
+}
+
+/* Nothing here moves for a reader who asked for stillness: no sweep, no
+   marching ants, no cursor. The seats render in their settled state and the
+   specimen seat stays filled, so the offer is still legible and complete. */
+@media (prefers-reduced-motion: reduce) {
+  .sponsors.is-running .sponsors__sweep,
+  .sponsors.is-running .seat--open .seat__rect { animation: none; }
+  .sponsors__sweep { opacity: 0; }
+  .sponsors__cursor { display: none; }
+  .seat--taken .seat__name, .seat--specimen .seat__name { animation: none; }
+}

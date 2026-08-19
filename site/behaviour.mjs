@@ -88,6 +88,82 @@ t('reduced motion: the drawing is fully inked', await page2.evaluate(() => {
   return cs.strokeDashoffset === '0px' && parseFloat(getComputedStyle(document.querySelector('.draw text')).opacity) === 1;
 }));
 
+// --------------------------------------------------------------- the seats
+// four seats, always present, never a carousel
+t('four seats render', await page.evaluate(() => document.querySelectorAll('.sponsors .seat').length === 4));
+t('every seat is a real link', await page.evaluate(() =>
+  [...document.querySelectorAll('.sponsors .seat .seat__body')].every((a) => a.tagName === 'A' && a.href)));
+t('SHEET 5 plate matches the band', await page.evaluate(() =>
+  document.querySelectorAll('#seatplate .seatplate__cell').length ===
+  document.querySelectorAll('.sponsors .seat').length));
+t('no borrowed brand is shown as a sponsor', await page.evaluate(() => {
+  const txt = document.querySelector('.sponsors').textContent.toLowerCase();
+  return !/anthropic|openai|claude|vercel|google/.test(txt);
+}));
+
+// the demo claims a seat, and labels it a specimen while it does
+await page.waitForSelector('.sponsors .seat--specimen', { timeout: 15000 });
+t('the demo claims a seat', true);
+t('a claimed demo seat is tagged specimen', await page.evaluate(() => {
+  const s = document.querySelector('.seat--specimen');
+  return s && getComputedStyle(s.querySelector('.seat__tag')).opacity === '1';
+}));
+t('the specimen tag is inside the band, not clipped', await page.evaluate(() => {
+  const b = document.querySelector('.sponsors').getBoundingClientRect();
+  const g = document.querySelector('.seat--specimen .seat__tag').getBoundingClientRect();
+  return g.top >= b.top - 0.5 && g.bottom <= b.bottom + 0.5;
+}));
+t('the dashes close when a seat fills', await page.evaluate(() =>
+  getComputedStyle(document.querySelector('.seat--specimen .seat__rect')).strokeDasharray.replace(/px/g, '') === '100, 0'));
+
+// good-citizen rules for anything that moves on its own
+await page.hover('.sponsors__label');
+await page.waitForTimeout(200);
+t('pointing at the band stops it', await page.evaluate(() =>
+  !document.getElementById('sponsors').classList.contains('is-running')));
+await page.mouse.move(700, 700); await page.waitForTimeout(400);
+t('leaving resumes it', await page.evaluate(() =>
+  document.getElementById('sponsors').classList.contains('is-running')));
+await page.keyboard.press('Tab'); await page.waitForTimeout(200);
+
+// the band is sticky, so it never scrolls off screen -- that is the point of
+// buying a seat. The pause that actually applies is the backgrounded tab.
+await page.evaluate(() => document.getElementById('sheet-4').scrollIntoView());
+await page.waitForTimeout(500);
+t('sticky: the band is still on screen after scrolling', await page.evaluate(() => {
+  const r = document.getElementById('sponsors').getBoundingClientRect();
+  return r.top >= -1 && r.bottom > 0;
+}));
+await page.evaluate(() => window.scrollTo(0, 0)); await page.waitForTimeout(500);
+
+await page.evaluate(() => {
+  Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
+  document.dispatchEvent(new Event('visibilitychange'));
+});
+await page.waitForTimeout(300);
+t('a backgrounded tab stops it', await page.evaluate(() =>
+  !document.getElementById('sponsors').classList.contains('is-running')));
+await page.evaluate(() => {
+  Object.defineProperty(document, 'hidden', { configurable: true, get: () => false });
+  document.dispatchEvent(new Event('visibilitychange'));
+});
+await page.waitForTimeout(400);
+t('returning to the tab resumes it', await page.evaluate(() =>
+  document.getElementById('sponsors').classList.contains('is-running')));
+
+const ctx3 = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+const page3 = await ctx3.newPage();
+await page3.goto(base, { waitUntil: 'networkidle' }); await page3.waitForTimeout(900);
+t('reduced motion: the band never runs', await page3.evaluate(() =>
+  !document.getElementById('sponsors').classList.contains('is-running')));
+t('reduced motion: the offer is still complete, not blank', await page3.evaluate(() => {
+  const filled = document.querySelector('.sponsors .seat--specimen .seat__name');
+  const cta = document.querySelector('.sponsors__cta');
+  return !!filled && !!cta && cta.textContent.trim().length > 0;
+}));
+t('reduced motion: no marching ants', await page3.evaluate(() =>
+  getComputedStyle(document.querySelector('.seat--open .seat__rect')).animationName === 'none'));
+
 ok.forEach((n) => console.log('ok    ' + n));
 bad.forEach((n) => console.log('FAIL  ' + n));
 if (errors.length) { console.log('FAIL  console/page errors: ' + errors.length); errors.slice(0, 5).forEach((e) => console.log('      ' + e)); }

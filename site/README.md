@@ -2,8 +2,13 @@
 
 The page at `lroolle.com/design-skill`, designed by the skill in this repo.
 
-Static: `index.html`, `tokens.css`, `page.css`, `page.js`. No build step, no
-dependencies, no framework. Every asset path is relative, so the directory
+Static: `index.html`, `tokens.css`, `page.css`, `page.js`, plus
+`sponsors.css` / `sponsors.js` for the seats. No build step, no dependencies,
+no framework.
+
+**To sell a seat:** add one entry to `SPONSORS` in `site/sponsors.js` and set
+`PRICE`. The band, the SHEET 5 plate, the seat count in the copy and the call
+to action all follow from that array -- there is nowhere for them to disagree. Every asset path is relative, so the directory
 works at any base path -- `/`, `/design-skill/`, or anywhere else.
 
 - [DESIGN.md](DESIGN.md) -- the material contract, written at finish from the
