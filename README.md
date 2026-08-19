@@ -109,6 +109,7 @@ design-skill/
   .github/workflows/validate.yml      the proof, on every push
   scripts/validate.sh                 the proof: schema, tokens, links, decks, roll, bans self-test
   site/                               lroolle.com/design-skill, designed by the skill (DESIGN.md inside)
+  deploy/                             wrangler config + the base-path worker for site/
   skills/design-skill/                <- the installed unit
     SKILL.md                the protocol: gate, modes, laws, six phases, first-sense table, check
     worlds/                 the challenger deck (born-designed graphic systems) + README + _template
@@ -153,7 +154,9 @@ repo is the standalone all-in-one; that quartet is the modular one.
 `site/` is the page at [lroolle.com/design-skill](https://lroolle.com/design-skill),
 built by running this protocol end to end. The roll key is printed in the
 title block; the promise it was audited against is the first comment in the
-body of `site/index.html`; `site/DESIGN.md` records what was bound, what was
+body of `site/index.html`; It is live at
+[design-skill.1lm.workers.dev](https://design-skill.1lm.workers.dev).
+`site/DESIGN.md` records what was bound, what was
 deferred and why, and the two defects the run found in the skill itself -- a
 `bans.sh` false positive on HTML numeric entities, and `--fg-3` failing the
 4.5:1 floor in all seven token files. Both fixed, the second now gated by

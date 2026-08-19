@@ -36,16 +36,40 @@ It reports rendered height, horizontal overflow and console errors per width,
 and writes PNGs to `.captures/` (gitignored) -- a capture reviewed unseen is a
 round wasted.
 
-## Graft it into lroolle.com
+## Deploy
 
-lroolle.com is a Vite SPA behind a Cloudflare Worker. Two ways in, both of
-which keep this directory as the source of truth:
+The page is a Cloudflare Worker with a static-assets binding. `deploy/worker.js`
+is the only file that knows about the base path: it strips `/design-skill`
+before handing the request to the assets binding, so the same build serves
+correctly at a site root *and* at the path, and nothing in `site/` hard-codes
+either.
 
-1. **Static passthrough (simplest).** Copy `site/` into the SPA's `public/`
-   as `public/design-skill/` and let the router leave `/design-skill/*` alone.
-   Vite copies `public/` verbatim, so the relative paths keep working.
-2. **Worker route.** Serve this directory from its own Pages project or asset
-   binding and add a route for `lroolle.com/design-skill*` ahead of the SPA.
+```bash
+# needs CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID
+npx wrangler deploy -c deploy/wrangler.jsonc
+```
 
-Either way `index.html` needs no edit: the `<link>` and `<script>` hrefs are
-relative and `<link rel="canonical">` already points at the final URL.
+Live now at **https://design-skill.1lm.workers.dev** (both `/` and
+`/design-skill/` serve the page). `site/.assetsignore` keeps the repo docs and
+the evidence scripts out of the deployed bundle.
+
+### The last step, lroolle.com/design-skill
+
+lroolle.com is served by a separate Worker (`lroolle`, a Vite SPA with its own
+assets). This page is deployed *beside* it, not into it, so nothing about the
+existing site changes. It needs one route:
+
+```
+lroolle.com/design-skill*   ->   design-skill
+```
+
+Cloudflare resolves the most specific route first, so this takes precedence
+over the SPA's `lroolle.com/*` without touching it. Add it either way:
+
+```bash
+# API -- needs a token with Zone > Workers Routes > Edit on lroolle.com
+npx wrangler deploy -c deploy/wrangler.jsonc --route 'lroolle.com/design-skill*'
+```
+
+or in the dashboard: **Workers & Pages -> design-skill -> Settings -> Domains
+& Routes -> Add route**.
