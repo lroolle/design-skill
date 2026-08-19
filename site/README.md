@@ -45,31 +45,32 @@ correctly at a site root *and* at the path, and nothing in `site/` hard-codes
 either.
 
 ```bash
-# needs CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID
+# needs CLOUDFLARE_API_TOKEN + CLOUDFLARE_ACCOUNT_ID; the token needs
+# Zone > Workers Routes > Edit on lroolle.com for the route trigger
 npx wrangler deploy -c deploy/wrangler.jsonc
 ```
 
-Live now at **https://design-skill.1lm.workers.dev** (both `/` and
-`/design-skill/` serve the page). `site/.assetsignore` keeps the repo docs and
-the evidence scripts out of the deployed bundle.
+Two triggers, both declared in `deploy/wrangler.jsonc` so a deploy reproduces
+them:
 
-### The last step, lroolle.com/design-skill
+| URL | What it is |
+|---|---|
+| https://lroolle.com/design-skill | the page |
+| https://design-skill.1lm.workers.dev | the same worker, checkable without touching lroolle.com |
 
-lroolle.com is served by a separate Worker (`lroolle`, a Vite SPA with its own
-assets). This page is deployed *beside* it, not into it, so nothing about the
-existing site changes. It needs one route:
+`site/.assetsignore` keeps the repo docs and the evidence scripts out of the
+deployed bundle -- four files ship.
 
-```
-lroolle.com/design-skill*   ->   design-skill
-```
+### Why a route and not a custom domain
 
-Cloudflare resolves the most specific route first, so this takes precedence
-over the SPA's `lroolle.com/*` without touching it. Add it either way:
+`lroolle.com` is a Workers **Custom Domain** bound to a different worker
+(`lroolle`, the Vite SPA). This page is deployed *beside* it: the path route
+`lroolle.com/design-skill*` is more specific, so it claims that prefix and
+leaves every other path on the SPA untouched. Verified after the change --
+`lroolle.com/` returns bytes identical to its pre-change hash.
 
-```bash
-# API -- needs a token with Zone > Workers Routes > Edit on lroolle.com
-npx wrangler deploy -c deploy/wrangler.jsonc --route 'lroolle.com/design-skill*'
-```
+Do not edit the `lroolle` worker to add this page. Its source is not in this
+repo, and the route makes editing it unnecessary.
 
-or in the dashboard: **Workers & Pages -> design-skill -> Settings -> Domains
-& Routes -> Add route**.
+Route propagation takes ~20s; a 404 immediately after deploying is lag, not a
+misconfiguration.

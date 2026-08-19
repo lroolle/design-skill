@@ -5,7 +5,8 @@ It describes what the code does, not what the direction intended. If the code
 and this file disagree, this file is wrong; rewrite it in the same commit that
 changes the material.
 
-Surface: one page, four sheets, grafted at `lroolle.com/design-skill`.
+Surface: one page, four sheets, live at `lroolle.com/design-skill`
+(Cloudflare Worker + assets binding; see `deploy/`).
 Mode: **persuade** (the product behind it is operate).
 World: **patent-drawing-sheets** (`skills/design-skill/worlds/`).
 Material: **default**, re-seeded (`site/tokens.css`).
@@ -78,9 +79,10 @@ The figure caption says so; the readout prints the file each value came from.
   not read as the action. The world's grammar has no concept of "an action";
   the page adds one fill and spends it there. Recorded rather than hidden.
 - **Fonts load from the Google Fonts CDN (P1).** The skill's own rule is
-  self-hosted subset woff2 with size-adjusted fallbacks. This page is built to
-  graft into a site it does not control, so it carries no build step and no
-  font binaries. Self-host at graft time.
+  self-hosted subset woff2 with size-adjusted fallbacks. The page carries no
+  build step, so it carries no font binaries either. Now that it ships from a
+  Worker with an assets binding, subsetting the four faces into `site/` and
+  dropping the third-party `<link>` is a straight swap -- still open.
 - **The switch is a radiogroup without roving arrow keys (P2).** Tab reaches
   every option and `aria-checked` is correct; arrow-key roving is the polish
   that is missing.

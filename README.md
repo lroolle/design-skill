@@ -155,7 +155,7 @@ repo is the standalone all-in-one; that quartet is the modular one.
 built by running this protocol end to end. The roll key is printed in the
 title block; the promise it was audited against is the first comment in the
 body of `site/index.html`; It is live at
-[design-skill.1lm.workers.dev](https://design-skill.1lm.workers.dev).
+[lroolle.com/design-skill](https://lroolle.com/design-skill).
 `site/DESIGN.md` records what was bound, what was
 deferred and why, and the two defects the run found in the skill itself -- a
 `bans.sh` false positive on HTML numeric entities, and `--fg-3` failing the
