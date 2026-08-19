@@ -7,10 +7,10 @@ two files need the same fact, one owns it and the other points.
 
 | File | Owns | Load when |
 |---|---|---|
-| [thinking.md](thinking.md) | the ten beliefs everything derives from | once, to calibrate; when a rule seems arbitrary |
-| [methods.md](methods.md) | sense card, direction cards, reference decomposition, brand extraction, behavioral floor, verdict, critique rubric (P0/P1/P2), scars, handover | Sense, Direct, Critique, Deliver |
+| [thinking.md](thinking.md) | the eleven beliefs everything derives from | once, to calibrate; when a rule seems arbitrary |
+| [methods.md](methods.md) | sense card, direction cards, reference decomposition, brand extraction, behavioral floor, the promise, review rubric (P0/P1/P2), dispositions, scars, handover | Sense, Direct, Review, Deliver |
 | [patterns.md](patterns.md) | structural building blocks: scale, rhythm, density, composition, grouping ladder, color ladder, states, disclosure, nav, forms, tables, device ration | Build; structural audits |
-| [anti-patterns.md](anti-patterns.md) | permanent failures + dated zeitgeist tells (2026-Q3), the three current AI looks, domain reflexes, saturated components and copy | Sense (name the reflex), Critique |
+| [anti-patterns.md](anti-patterns.md) | permanent failures + dated zeitgeist tells (2026-Q3), the three current AI looks, domain reflexes, saturated components and copy | Sense (name the reflex), Review |
 | [typography.md](typography.md) | type roles, scale, pairing axes, measure and rhythm, details that read as authored, light-on-dark, CJK, loading, the device ration | Build touching type; re-seed |
 | [fontbook.md](fontbook.md) | the faces: saturated list (dated), class tables with license and pairing, recipes incl. CJK-first | choosing or swapping a face |
 | [color.md](color.md) | OKLCH derivation, strategies, dark as redesign, contrast floors, semantic set, data-viz palettes, shadows, gradients-as-lighting | Contract; re-seed; any palette question |

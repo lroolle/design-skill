@@ -1,6 +1,6 @@
 <div align="center">
 
-# lroolle-design
+# design-skill
 
 **A design skill with taste built in: sense, roll, promise, build, review.**
 
@@ -65,8 +65,8 @@ adopts its official system.
 
 ## Worlds and stagings
 
-`worlds/` holds our deck: born-designed graphic systems with five
-system rules each (palette/material, type/composition,
+Inside the skill, `worlds/` holds our deck: born-designed graphic
+systems with five system rules each (palette/material, type/composition,
 topology/navigation, controls/state, responsive/motion), a spark, the
 browser technique they ask for, and an honest rating. Our half of the
 world that the big catalogs lack -- movable-type formes, thread-bound
@@ -93,40 +93,54 @@ language turns to slop. All compile to the same token names.
 | nocturnes | dark-first, one light source, blue-grey mists and gold sparks | music, film, events, games, pro creative tools |
 | broadsheets | newsroom hierarchy: hed, dek, columns, hairlines, real photos | news, magazines, newsletters, changelogs |
 
-`assets/specimen.html` renders one specimen against any of them --
-open it, switch systems, flip the theme, see the material before
-choosing it.
+`skills/design-skill/assets/specimen.html` renders one specimen
+against any of them -- open it, switch systems, flip the theme, see
+the material before choosing it.
 
 ## What is in the box
 
+One repo, one skill. Everything an agent loads lives under
+`skills/design-skill/`; everything above it is packaging.
+
 ```text
-lroolle-design-skill/
-  SKILL.md                 the protocol: gate, modes, laws, six phases, first-sense table, check
-  worlds/                  the challenger deck (born-designed graphic systems) + README + _template
-  stagings/                compositions that dress in any world + README + _template
-  scripts/roll.mjs         the dice: assigned index + dealt challengers, deterministic by key
-  design-systems/          seven material contracts + token schema + _template
-  references/              the craft layer, loaded by need:
-    thinking  methods  patterns  anti-patterns  typography  fontbook
-    color  palettes  motion  platforms  frameworks  sites  skills
-  templates/               surface recipes: landing, dashboard, docs, editorial,
-                           portfolio, app-shell, forms, deck (+ _template)
-  assets/
-    tokens/<system>.css    the token contract, light + dark, per system
-    specimen.html          see any system rendered
-    DESIGN.md.tmpl         the material contract a repo gets
-    TASTE.md.tmpl          scars, seeded with the structural ones
-    bans.sh                the grep-able scars, exit 1 on any
-  scripts/validate.sh      the proof: schema, tokens, links, decks, roll, bans self-test
+design-skill/
+  README.md  LICENSE  llms.txt        repo surface
+  .claude-plugin/                     plugin.json + marketplace.json (Claude Code plugin)
+  .github/workflows/validate.yml      the proof, on every push
+  scripts/validate.sh                 the proof: schema, tokens, links, decks, roll, bans self-test
+  skills/design-skill/                <- the installed unit
+    SKILL.md                the protocol: gate, modes, laws, six phases, first-sense table, check
+    worlds/                 the challenger deck (born-designed graphic systems) + README + _template
+    stagings/               compositions that dress in any world + README + _template
+    scripts/roll.mjs        the dice: assigned index + dealt challengers, deterministic by key
+    design-systems/         seven material contracts + token schema + _template
+    references/             the craft layer, loaded by need:
+      thinking  methods  patterns  anti-patterns  typography  fontbook
+      color  palettes  motion  platforms  frameworks  sites  skills
+    templates/              surface recipes: landing, dashboard, docs, editorial,
+                            portfolio, app-shell, forms, deck (+ _template)
+    assets/
+      tokens/<system>.css   the token contract, light + dark, per system
+      specimen.html         see any system rendered
+      DESIGN.md.tmpl        the material contract a repo gets
+      TASTE.md.tmpl         scars, seeded with the structural ones
+      bans.sh               the grep-able scars, exit 1 on any
 ```
 
 ## Install
 
 ```bash
-# any agent that reads SKILL.md folders
-git clone https://github.com/lroolle/lroolle-design-skill ~/.claude/skills/lroolle-design
-# or, once public
-npx skills@latest add lroolle/lroolle-design-skill
+# skills CLI -- Claude Code, Codex, Cursor, OpenCode, and 50 more agents
+npx skills@latest add lroolle/design-skill
+
+# Claude Code plugin marketplace
+/plugin marketplace add lroolle/design-skill
+/plugin install design-skill@lroolle
+
+# or by hand, into any agent that reads SKILL.md folders
+git clone https://github.com/lroolle/design-skill /tmp/design-skill
+cp -R /tmp/design-skill/skills/design-skill ~/.claude/skills/design-skill
+cp -R /tmp/design-skill/skills/design-skill ~/.agents/skills/design-skill
 ```
 
 Do not run this beside `kiln`, `taste`, or `design-system` from
@@ -153,8 +167,8 @@ Taste is judgment anchored in evidence, exercised on behavior before
 surfaces. References give coordinates, not answers. Constraint breeds
 identity. Direction before detail; contract, then memory. The one
 line under all of it: a change that makes the surface prettier and
-the task harder must fail. `references/thinking.md` has the ten
-beliefs; every rule in the repo traces to one.
+the task harder must fail. `references/thinking.md` inside the skill
+has the eleven beliefs; every rule in the repo traces to one.
 
 ## Lineage and license
 

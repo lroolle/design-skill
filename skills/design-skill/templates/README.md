@@ -35,7 +35,7 @@ newsletter and a changelog.
    for this surface (density, ratio, motion budget, measure).
 4. Run the recipe's Verify items on top of the rubric in
    `references/methods.md`. The Failure modes section is the diagnosis
-   list when a critique says "something is off".
+   list when a review says "something is off".
 
 ## Adding a recipe
 

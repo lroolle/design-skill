@@ -1,0 +1,14 @@
+{
+  "name": "design-skill",
+  "version": "0.1.0",
+  "description": "Design instrument for any user-facing surface, with taste built in: sense the brief, let dice assign a grounded direction against foreign-form challengers, lock it as a written promise plus a token contract, build with full commitment, then review the render against the promise in a fresh context.",
+  "author": {
+    "name": "Eric Wang",
+    "url": "https://github.com/lroolle"
+  },
+  "homepage": "https://github.com/lroolle/design-skill",
+  "repository": "https://github.com/lroolle/design-skill",
+  "license": "MIT",
+  "keywords": ["design", "ui", "ux", "typography", "color", "design-system", "frontend", "taste"],
+  "skills": ["./skills/design-skill"]
+}

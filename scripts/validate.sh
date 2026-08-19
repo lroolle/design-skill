@@ -1,27 +1,59 @@
 #!/usr/bin/env bash
 # validate.sh -- the proof behind the README's claims.
-# Checks: SKILL.md frontmatter + body length; every relative markdown
-# link resolves; every design system has the 12 contract sections and
-# a token file; every token file defines every contract token on both
-# themes; no raw hex in token-consuming assets; the specimen only uses
-# defined tokens; bans.sh passes a self-test; forbidden names absent.
-# Exit non-zero on any failure.
+#
+# Repo layout checks (packaging: skills/<name>/SKILL.md, plugin manifests)
+# then skill checks (frontmatter, links, systems, tokens, specimen, bans,
+# decks, dice). Exit non-zero on any failure. No dependencies beyond bash,
+# grep, awk, and -- for the dice -- node.
 set -uo pipefail
-cd "$(dirname "$0")/.."
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+cd "$ROOT"
+SKILL_DIR=skills/design-skill
+SKILL_NAME=design-skill
 fail=0
 ok()   { printf 'ok    %s\n' "$1"; }
 bad()  { printf 'FAIL  %s\n' "$1"; fail=1; }
 
+# 0. Packaging: what `npx skills add` and Claude Code plugins look for
+[ -f "$SKILL_DIR/SKILL.md" ] && ok "skill at $SKILL_DIR/SKILL.md" || bad "no SKILL.md at $SKILL_DIR"
+[ -f SKILL.md ] && bad "a root SKILL.md shadows skills/ discovery -- remove it" || ok "no root SKILL.md"
+for f in README.md LICENSE llms.txt .claude-plugin/plugin.json .claude-plugin/marketplace.json; do
+  [ -f "$f" ] && ok "repo asset $f" || bad "missing repo asset $f"
+done
+if command -v node >/dev/null 2>&1; then
+  for f in .claude-plugin/plugin.json .claude-plugin/marketplace.json; do
+    node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" 2>/dev/null \
+      && ok "$f parses" || bad "$f is not valid JSON"
+  done
+  pn=$(node -e "console.log(JSON.parse(require('fs').readFileSync('.claude-plugin/plugin.json','utf8')).name)" 2>/dev/null)
+  [ "$pn" = "$SKILL_NAME" ] && ok "plugin.json name = $pn" || bad "plugin.json name is '$pn', expected $SKILL_NAME"
+fi
+
+# 0b. Root-level markdown links (README, llms.txt) resolve
+rootbroken=""
+for f in README.md llms.txt; do
+  while IFS= read -r link; do
+    [ -z "$link" ] && continue
+    case "$link" in http://*|https://*|mailto:*) continue ;; esac
+    [ -e "$link" ] || rootbroken="$rootbroken $f->$link"
+  done < <(grep -oE '\]\(([^)#]+)(#[^)]*)?\)' "$f" | sed -E 's/^\]\(//; s/\)$//; s/#.*$//')
+done
+[ -z "$rootbroken" ] && ok "root links resolve" || bad "root links broken:$rootbroken"
+
+cd "$SKILL_DIR"
+
 # 1. SKILL.md
 name=$(awk '/^name:/{print $2; exit}' SKILL.md)
-[ "$name" = "lroolle-design" ] && ok "frontmatter name = $name" || bad "frontmatter name is '$name'"
+[ "$name" = "$SKILL_NAME" ] && ok "frontmatter name = $name" || bad "frontmatter name is '$name', expected $SKILL_NAME"
+[ "$name" = "$(basename "$PWD")" ] && ok "name matches directory" || bad "name '$name' != directory '$(basename "$PWD")'"
+grep -q '^license:' SKILL.md && ok "frontmatter license" || bad "frontmatter has no license"
 lines=$(wc -l < SKILL.md)
 [ "$lines" -le 500 ] && ok "SKILL.md $lines lines (<= 500)" || bad "SKILL.md $lines lines (> 500)"
-desc=$(awk '/^description:/{f=1; next} f && /^---/{exit} f {gsub(/^ +| +$/, ""); printf "%s ", $0}' SKILL.md)
+desc=$(awk '/^description:/{f=1; next} f && /^[a-z]+:/{exit} f && /^---/{exit} f {gsub(/^ +| +$/, ""); printf "%s ", $0}' SKILL.md)
 [ ${#desc} -le 1024 ] && ok "description ${#desc} chars (<= 1024)" || bad "description ${#desc} chars (> 1024)"
 
 # 2. Relative links resolve (markdown files only; skip http and anchors)
-broken=0
+rm -f /tmp/.lds_broken
 while IFS= read -r f; do
   dir=$(dirname "$f")
   grep -oE '\]\(([^)#]+)(#[^)]*)?\)' "$f" | sed -E 's/^\]\(//; s/\)$//; s/#.*$//' | while IFS= read -r link; do
@@ -76,6 +108,7 @@ if [ -f assets/specimen.html ]; then
 fi
 
 # 6. bans.sh self-test: clean fixture passes, dirty fixture trips
+BANS="$PWD/assets/bans.sh"
 tmp=$(mktemp -d); mkdir -p "$tmp/clean/app" "$tmp/dirty/app"
 cat > "$tmp/clean/app/page.css" <<'EOF'
 .x { color: var(--fg); background: var(--bg); transition: opacity var(--dur-base) var(--ease-out); }
@@ -84,15 +117,17 @@ EOF
 cat > "$tmp/dirty/app/page.tsx" <<'EOF'
 <div className="text-red-500 border-l-4 animate-pulse" style={{color:'#ffffff'}}>Acme Lorem ipsum</div>
 EOF
-if (cd "$tmp/clean" && bash "$OLDPWD/assets/bans.sh" app >/dev/null); then ok "bans.sh clean fixture"; else bad "bans.sh flags a clean fixture"; fi
-if (cd "$tmp/dirty" && bash "$OLDPWD/assets/bans.sh" app >/dev/null); then bad "bans.sh misses a dirty fixture"; else ok "bans.sh trips on dirty fixture"; fi
+if (cd "$tmp/clean" && bash "$BANS" app >/dev/null); then ok "bans.sh clean fixture"; else bad "bans.sh flags a clean fixture"; fi
+if (cd "$tmp/dirty" && bash "$BANS" app >/dev/null); then bad "bans.sh misses a dirty fixture"; else ok "bans.sh trips on dirty fixture"; fi
 rm -rf "$tmp"
 
 # 7. Forbidden names (WIP rule) and non-ascii outside CJK samples
+cd "$ROOT"
 if grep -rniE 'open-design|opendesign' . --exclude-dir=.git --exclude=validate.sh -q; then bad "forbidden name present"; else ok "no forbidden names"; fi
 if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --include='*.md' --include='*.css' --include='*.sh' -q; then
   bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --include='*.md' --include='*.css' --include='*.sh' | head -5
 else ok "ascii punctuation"; fi
+cd "$SKILL_DIR"
 
 # 8. Decks: worlds/ and stagings/ frontmatter + sections; roll.mjs deterministic
 for deck in worlds stagings; do

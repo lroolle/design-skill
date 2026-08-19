@@ -176,7 +176,8 @@ Checked before surfaces, on every review. Pass / fail / n-a.
 ## The promise
 
 The direction written into the artifact as the first comment in the
-body, five blocks, under 150 words, surviving the production build:
+body: **five audited blocks** plus one unaudited FINISH line, under
+150 words total, surviving the production build.
 
 ```
 THESIS          the one idea this surface owns; the category arrangement it refuses
@@ -184,7 +185,9 @@ OWN-WORLD       palette and component language, recognizable with all content re
 STORY           what the visitor understands, believes, and does
 FIRST VIEWPORT  the exact composition: what is where, at what scale, where the action sits
 FORM            the chosen world, its position on your list, the roll key
-FINISH          "unreviewed is unfinished: this build ends with the review, the verdict, and DESIGN.md"
+--
+FINISH          "unreviewed is unfinished: this build ends with the review,
+                the verdict, and DESIGN.md"   <- a standing note, not audited
 ```
 
 If a block reads like a mood, the direction is not decided. Grep the

@@ -1,5 +1,5 @@
 ---
-name: lroolle-design
+name: design-skill
 description: >-
   Design instrument for any user-facing surface, with taste built in:
   sense the brief, derive grounded directions and let dice assign
@@ -14,9 +14,13 @@ description: >-
   (DESIGN.md + tokens + bans) into a repo. Motion, copy, color, and
   typography are covered inside. A throwaway page with no product
   life needs only the floor, not the ceremony.
+license: MIT
+metadata:
+  version: "0.1.0"
+  homepage: https://github.com/lroolle/design-skill
 ---
 
-# lroolle-design
+# design-skill
 
 Sense first, then a direction the dice chose from grounded
 candidates, then a promise written down, then pixels that keep it.
@@ -347,7 +351,11 @@ Smash the delivered work if any survive:
 - competent but forgettable: the self-diff found nothing changed from
   the default. That is the one this skill exists to fail.
 
-## Repository map
+## Skill map
+
+Every path in this file -- the tables below, `scripts/roll.mjs`,
+`assets/bans.sh` -- is relative to **this skill's own directory**, not
+to the project being designed. Resolve it there before running it.
 
 | Path | Holds | Load when |
 |---|---|---|

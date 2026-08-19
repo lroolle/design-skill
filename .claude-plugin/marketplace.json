@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "lroolle",
+  "description": "Design skill by lroolle: one folder that carries a whole design practice -- sense, dice-assigned direction, written promise, committed build, fresh-context review.",
+  "owner": {
+    "name": "Eric Wang",
+    "url": "https://github.com/lroolle"
+  },
+  "plugins": [
+    {
+      "name": "design-skill",
+      "description": "Design instrument for any user-facing surface, with taste built in: seven material languages, a deck of born-designed worlds the dice deal from, one token schema, and a reviewer that can say costume.",
+      "category": "design",
+      "source": "./",
+      "homepage": "https://github.com/lroolle/design-skill",
+      "license": "MIT",
+      "author": { "name": "Eric Wang", "url": "https://github.com/lroolle" }
+    }
+  ]
+}
