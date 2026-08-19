@@ -17,5 +17,8 @@
   // keep the workers.dev URL alive beside the route: it is where the page can
   // be checked without touching lroolle.com
   "workers_dev": true,
+  // version preview URLs, so a change this visible can be reviewed on its own
+  // hostname before it reaches lroolle.com
+  "preview_urls": true,
   "observability": { "enabled": true }
 }
