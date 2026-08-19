@@ -1,0 +1,229 @@
+/* design-skill site -- `default` re-seeded to the Patent Drawing Sheets world.
+ *
+ * Token contract: skills/design-skill/design-systems/README.md. Same names as
+ * every system in the repo; this file is the only place raw color may live.
+ *
+ * Seed hue 250 (cool drafting paper), accent hue 27 (drafting-pencil red,
+ * the single highlight on the part under discussion), strategy restrained.
+ *
+ * Light  = the sheet on the drafting table: cool white ground, one uniform
+ *          ink line for outlines, a lighter one for leaders and hatching.
+ * Dark   = the same drawing reproduced as a photostat negative: dark ground,
+ *          white line. A reproduction, not an inversion.
+ */
+
+:root {
+  /* surfaces -- the table is darker than the sheet lying on it */
+  --bg:          oklch(0.949 0.005 250);
+  --surface:     oklch(0.988 0.003 250);
+  --surface-2:   oklch(0.966 0.004 250);
+  --overlay:     oklch(0.988 0.003 250);
+
+  /* text -- drawing ink, leader ink, hatching */
+  --fg:          oklch(0.165 0.014 250);
+  --fg-2:        oklch(0.405 0.011 250);
+  --fg-3:        oklch(0.520 0.009 250);
+
+  /* lines -- `line` rules the sheet, `line-strong` IS the drawing line */
+  --line:        oklch(0.845 0.007 250);
+  --line-strong: oklch(0.195 0.014 250);
+
+  /* accent -- the examiner's red pencil */
+  --accent:       oklch(0.470 0.175 27);
+  --accent-hover: oklch(0.405 0.185 27);
+  --accent-fg:    oklch(0.988 0.003 250);
+  --accent-soft:  oklch(0.928 0.048 27);
+
+  /* semantic (hue offsets from the seed family, held here only) */
+  --ok:          oklch(0.50 0.10 150);
+  --ok-soft:     oklch(0.94 0.03 150);
+  --warn:        oklch(0.62 0.13 75);
+  --warn-soft:   oklch(0.95 0.04 75);
+  --danger:      oklch(0.50 0.17 27);
+  --danger-soft: oklch(0.95 0.03 27);
+  --info:        oklch(0.48 0.09 250);
+  --info-soft:   oklch(0.93 0.02 250);
+
+  /* focus */
+  --focus:       oklch(0.470 0.175 27);
+
+  /* type faces -- Archivo draughts, Spectral specifies, JetBrains keys */
+  --font-display: "Archivo", "Archivo Fallback", system-ui, sans-serif;
+  --font-body:    "Spectral", Charter, "Iowan Old Style", Georgia, serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-cjk:     "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+  /* type scale: ratio 1.25, base 1rem */
+  --text-xs:   0.64rem;
+  --text-sm:   0.8rem;
+  --text-base: 1rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5625rem;
+  --text-2xl:  1.953rem;
+  --text-3xl:  clamp(2.1rem, 1.5rem + 2.0vw, 2.441rem);
+  --text-4xl:  clamp(2.5rem, 1.5rem + 3.4vw, 3.815rem);
+
+  /* type metrics -- the spec column is narrow, like a printed column */
+  --leading-body:     1.55;
+  --leading-tight:    1.08;
+  --tracking-display: -0.015em;
+  --measure:          62ch;
+
+  /* space: 4px scale x density 1.0 */
+  --density:  1;
+  --space-1:  calc(0.25rem * var(--density));
+  --space-2:  calc(0.5rem  * var(--density));
+  --space-3:  calc(0.75rem * var(--density));
+  --space-4:  calc(1rem    * var(--density));
+  --space-5:  calc(1.5rem  * var(--density));
+  --space-6:  calc(2rem    * var(--density));
+  --space-7:  calc(3rem    * var(--density));
+  --space-8:  calc(4rem    * var(--density));
+  --space-9:  calc(6rem    * var(--density));
+  --space-10: calc(8rem    * var(--density));
+  --space-11: calc(12rem   * var(--density));
+  --space-12: calc(16rem   * var(--density));
+
+  /* shape -- a drawing has no rounded corners. One corner language: none. */
+  --radius:    0;
+  --radius-sm: 0;
+  --radius-lg: 0;
+  --line-w:    1px;
+
+  /* elevation -- a sheet lying on a table, not a card floating over one */
+  --shadow-1: 0 1px 0 oklch(0.165 0.014 250 / 0.10);
+  --shadow-2: 0 1px 0 oklch(0.165 0.014 250 / 0.14), 0 6px 20px oklch(0.165 0.014 250 / 0.07);
+
+  /* motion -- the highlight is instant; only the first figure draws itself */
+  --dur-micro:   90ms;
+  --dur-base:    160ms;
+  --dur-enter:   260ms;
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-subtle: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* layout */
+  --container:      74rem;
+  --container-wide: 90rem;
+
+  color-scheme: light dark;
+}
+
+[data-theme="dark"] {
+  --bg:          oklch(0.128 0.012 250);
+  --surface:     oklch(0.168 0.013 250);
+  --surface-2:   oklch(0.205 0.014 250);
+  --overlay:     oklch(0.185 0.013 250);
+
+  --fg:          oklch(0.935 0.006 250);
+  --fg-2:        oklch(0.705 0.009 250);
+  --fg-3:        oklch(0.600 0.010 250);
+
+  --line:        oklch(0.285 0.014 250);
+  --line-strong: oklch(0.905 0.007 250);
+
+  --accent:       oklch(0.685 0.175 27);
+  --accent-hover: oklch(0.745 0.165 27);
+  --accent-fg:    oklch(0.128 0.012 250);
+  --accent-soft:  oklch(0.285 0.075 27);
+
+  --ok:          oklch(0.70 0.10 150);
+  --ok-soft:     oklch(0.24 0.03 150);
+  --warn:        oklch(0.78 0.12 75);
+  --warn-soft:   oklch(0.25 0.04 75);
+  --danger:      oklch(0.68 0.16 27);
+  --danger-soft: oklch(0.25 0.05 27);
+  --info:        oklch(0.70 0.08 250);
+  --info-soft:   oklch(0.23 0.03 250);
+
+  --focus:       oklch(0.685 0.175 27);
+
+  --shadow-1: 0 1px 0 oklch(0.06 0.01 250 / 0.55);
+  --shadow-2: 0 1px 0 oklch(0.06 0.01 250 / 0.60), 0 6px 20px oklch(0.06 0.01 250 / 0.45);
+}
+
+/* base: the few rules the tokens imply */
+html { color-scheme: light dark; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body), var(--font-cjk);
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 {
+  font-family: var(--font-display), var(--font-cjk);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+p { text-wrap: pretty; max-width: var(--measure); }
+code, kbd, samp, pre, [data-mono] {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+table { font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+
+/* browser surfaces: the parts you did not draw still carry the design */
+::selection { background: var(--accent-soft); color: var(--fg); }
+html { caret-color: var(--accent); accent-color: var(--accent); scrollbar-color: var(--line) var(--bg); }
+hr { border: 0; border-top: var(--line-w) solid var(--line); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * FIG. 3 specimen scopes. The real ground / ink / rule / accent / corner /
+ * density values of the seven material contracts, lifted verbatim from
+ * skills/design-skill/assets/tokens/<system>.css so the figure re-inks with
+ * the actual material rather than an impression of it. Face names are printed
+ * as labels: the specimen is set in this page's two faces (see FIG. 3 note).
+ * ------------------------------------------------------------------------ */
+
+[data-spec] { --spec-face: var(--font-display); }
+
+[data-spec="default"] {
+  --spec-ground: oklch(0.985 0.005 75); --spec-ink: oklch(0.18 0.010 75);
+  --spec-rule:   oklch(0.88 0.008 75);  --spec-accent: oklch(0.45 0.10 250);
+  --spec-radius: 0.25rem; --spec-density: 1;
+}
+[data-spec="modernist"] {
+  --spec-ground: oklch(0.975 0.003 250); --spec-ink: oklch(0.13 0.005 250);
+  --spec-rule:   oklch(0.86 0.005 250);  --spec-accent: oklch(0.55 0.21 28);
+  --spec-radius: 0; --spec-density: 1.25;
+}
+[data-spec="classical"] {
+  --spec-ground: oklch(0.975 0.008 80); --spec-ink: oklch(0.20 0.015 60);
+  --spec-rule:   oklch(0.87 0.010 80);  --spec-accent: oklch(0.42 0.12 20);
+  --spec-radius: 0; --spec-density: 1.15; --spec-face: var(--font-body);
+}
+[data-spec="industry"] {
+  --spec-ground: oklch(0.975 0.004 230); --spec-ink: oklch(0.20 0.012 230);
+  --spec-rule:   oklch(0.87 0.008 230);  --spec-accent: oklch(0.63 0.19 45);
+  --spec-radius: 0.125rem; --spec-density: 0.8;
+}
+[data-spec="organic"] {
+  --spec-ground: oklch(0.975 0.012 90); --spec-ink: oklch(0.24 0.020 60);
+  --spec-rule:   oklch(0.86 0.014 90);  --spec-accent: oklch(0.46 0.09 145);
+  --spec-radius: 0.5rem; --spec-density: 1.1; --spec-face: var(--font-body);
+}
+[data-spec="nocturnes"] {
+  --spec-ground: oklch(0.15 0.025 235); --spec-ink: oklch(0.91 0.010 80);
+  --spec-rule:   oklch(0.28 0.020 235); --spec-accent: oklch(0.80 0.13 85);
+  --spec-radius: 0.375rem; --spec-density: 1;
+}
+[data-spec="broadsheets"] {
+  --spec-ground: oklch(0.985 0.004 80); --spec-ink: oklch(0.16 0.008 80);
+  --spec-rule:   oklch(0.86 0.006 80);  --spec-accent: oklch(0.50 0.19 25);
+  --spec-radius: 0; --spec-density: 0.85; --spec-face: var(--font-body);
+}

@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>design-skill &#183; an agent skill that will not let the model pick its own direction</title>
+<meta name="description" content="An agent skill for designing user-facing surfaces: an outside die assigns the direction from grounded candidates, foreign forms are dealt in as challengers, the choice is written into the artifact as a promise, and a fresh-context reviewer audits the render against it.">
+<link rel="canonical" href="https://lroolle.com/design-skill">
+<meta property="og:type" content="website">
+<meta property="og:title" content="design-skill">
+<meta property="og:description" content="A design skill with taste built in: sense, roll, promise, build, review. Seven material languages, a deck of born-designed worlds the dice deal from, and a reviewer that can say costume.">
+<meta property="og:url" content="https://lroolle.com/design-skill">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..112,400..700&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="page.css">
+<script>
+  // theme before paint: no flash, no layout shift
+  (function () {
+    var t = localStorage.getItem('ds-theme');
+    if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+</head>
+<body>
+<!--
+  PROMISE  design-skill / lroolle.com/design-skill / roll 666a7a49
+
+  THESIS          This page is the patent drawing of an instrument: the skill
+                  explained by numbered parts on leader lines, never by
+                  adjectives. It refuses the agent-skill landing -- near-black
+                  ground, one acid accent, three feature cards, "Get started".
+  OWN-WORLD       Cool drafting paper; one uniform ink line for outlines and a
+                  lighter one for leaders and hatching; no fills; drafting red
+                  as the only highlight, on the part under discussion. Archivo
+                  (width axis) draughts the FIG. labels and reference numerals,
+                  Spectral sets the numbered specification, JetBrains Mono the
+                  keys and commands. Zero radius everywhere; rules are drawing,
+                  not decoration.
+  STORY           The visitor sees a machine with named parts, believes it
+                  because the roll printed on the page is real and reproducible
+                  and the seven materials re-ink a live specimen, and copies one
+                  install line.
+  FIRST VIEWPORT  One sheet with a ruled border and a title block bottom-right.
+                  Left: the sentence, the dek, the install field as the single
+                  action. Right: FIG. 1, the six-station instrument with the die
+                  and the deck hanging over station 2, every part on a leader.
+                  Nothing else in the viewport.
+  FORM            Patent Drawing Sheets (worlds/patent-drawing-sheets.md), dealt
+                  as the graphic challenger against assigned candidate #7 (the
+                  test bench) and winning both axes. Roll key 666a7a49. Raises:
+                  one figure per viewport, from garden-framed-view (declined);
+                  one drawing re-inked by a single control, from
+                  sewing-pattern-sheet (declined).
+  --
+  FINISH          unreviewed is unfinished: this build ends with the review, the
+                  verdict, and DESIGN.md.
+-->
+<a class="skip" href="#fig-1">Skip to FIG. 1</a>
+
+<header class="rail">
+  <a class="wordmark" href="#sheet-1">design&#8209;skill</a>
+  <nav class="rail__nav" aria-label="Sheets">
+    <a href="#sheet-2">The deal</a>
+    <a href="#sheet-3">The material</a>
+    <a href="#sheet-4">The audit</a>
+    <a href="https://github.com/lroolle/design-skill">Repository</a>
+  </nav>
+  <button class="theme" type="button" id="theme" aria-pressed="false">
+    <span class="theme__label">Negative</span>
+  </button>
+</header>
+
+<main>
+
+<!-- ============================ SHEET 1 ============================ -->
+<section class="sheet" id="sheet-1">
+  <div class="sheet__frame">
+    <div class="sheet__body sheet__body--lede">
+
+      <div class="lede">
+        <h1>An agent skill that designs interfaces &#8212; and will not let the model pick its own direction.</h1>
+        <p class="dek">
+          A model ranks its own ideas and builds #1 every run, so every project
+          in a category gets the same page back. This one rolls a die you can
+          reproduce, deals in forms it would never have retrieved, writes the
+          choice into the file, and hands the render to a reviewer that can
+          fail it.
+        </p>
+
+        <div class="install">
+          <code class="install__cmd" id="cmd">npx skills add lroolle/design-skill</code>
+          <button class="install__copy" type="button" id="copy" data-cmd="npx skills add lroolle/design-skill">Copy</button>
+        </div>
+        <p class="lede__aside">
+          Installs into Claude Code, Codex, Cursor, OpenCode and 50 more agents.
+          <a href="https://github.com/lroolle/design-skill/blob/main/skills/design-skill/SKILL.md">Read the protocol</a>
+          &#183; MIT &#183; v0.1.0
+        </p>
+      </div>
+
+      <figure class="fig fig--hero fig--pan" id="fig-1">
+        <svg viewBox="0 0 640 400" role="img" aria-labelledby="fig-1-t fig-1-d" class="draw">
+          <title id="fig-1-t">FIG. 1 &#8212; the instrument in elevation</title>
+          <desc id="fig-1-d">Six protocol stations on a rail: sense, direct, contract, build, review, deliver. A brief enters at the left. A candidate rack fed by a die and a card deck stands over station two. Station three drops a promise and a token contract. A dashed boundary between build and review marks the reviewer's separate context. A four-way verdict gate after review either returns the work to build or releases it to deliver.</desc>
+
+          <!-- ---- 10: the brief, entering ---- -->
+          <g data-part="10" class="ink">
+            <path d="M14 150 h52 l-10 32 h-32 z"/>
+            <path d="M40 182 v14"/>
+            <path d="M40 200 l-5 -9 10 0 z" class="solidmark"/>
+          </g>
+          <g class="hair"><path d="M40 150 v-14"/></g>
+          <text class="numeral" x="32" y="130" data-ref="10">10</text>
+
+          <!-- ---- 18: the die ---- -->
+          <g data-part="18">
+            <g class="ink">
+              <path d="M40 58 l30 -18 30 18 v34 l-30 18 -30 -18 z"/>
+              <path d="M40 58 l30 18 30 -18 M70 76 v34"/>
+            </g>
+            <g class="pip">
+              <circle cx="55" cy="70" r="3"/><circle cx="55" cy="92" r="3"/>
+              <circle cx="85" cy="70" r="3"/><circle cx="85" cy="81" r="3"/><circle cx="85" cy="92" r="3"/>
+              <circle cx="70" cy="52" r="3"/>
+            </g>
+            <g class="hair"><path d="M70 110 v45 h52"/></g>
+            <path d="M128 155 l-9 -5 0 10 z" class="solidmark"/>
+          </g>
+          <g class="hair"><path d="M100 60 h16"/></g>
+          <text class="numeral" x="120" y="64" data-ref="18">18</text>
+
+          <!-- ---- 20: the deck of worlds ---- -->
+          <g data-part="20">
+            <g class="ink">
+              <rect x="262" y="46" width="66" height="46"/>
+              <rect x="256" y="52" width="66" height="46"/>
+              <rect x="250" y="58" width="66" height="46"/>
+              <path d="M258 74 h50 M258 84 h34 M258 94 h42"/>
+            </g>
+            <g class="hair"><path d="M250 104 v51 h-28"/></g>
+            <path d="M216 155 l9 -5 0 10 z" class="solidmark"/>
+          </g>
+          <g class="hair"><path d="M328 60 h16"/></g>
+          <text class="numeral" x="348" y="64" data-ref="20">20</text>
+
+          <!-- ---- 16: the candidate rack, seven grounded directions ---- -->
+          <g data-part="16">
+            <g class="ink"><rect x="128" y="132" width="88" height="46"/></g>
+            <g class="hair">
+              <path d="M138 172 v-26 M150 172 v-32 M162 172 v-22"/>
+              <path d="M186 172 v-30 M198 172 v-20 M208 172 v-27"/>
+            </g>
+            <path d="M174 172 v-34" class="lit-bar"/>
+            <circle cx="174" cy="132" r="5" class="lit-ring"/>
+            <g class="ink"><path d="M172 178 v18"/></g>
+            <path d="M172 200 l-5 -9 10 0 z" class="solidmark"/>
+          </g>
+          <g class="hair"><path d="M172 132 v-12"/></g>
+          <text class="numeral" x="164" y="114" data-ref="16">16</text>
+
+          <!-- ---- the rail and its six stations ---- -->
+          <g class="ink">
+            <line x1="6" y1="264" x2="634" y2="264" class="hair"/>
+            <g data-part="12"><rect x="30"  y="200" width="88" height="64"/></g>
+            <g data-part="14"><rect x="128" y="200" width="88" height="64"/></g>
+            <g data-part="22"><rect x="226" y="200" width="88" height="64"/></g>
+            <g data-part="26"><rect x="324" y="200" width="88" height="64"/></g>
+            <g data-part="28"><rect x="440" y="200" width="88" height="64"/></g>
+            <g data-part="34"><rect x="538" y="200" width="88" height="64"/></g>
+            <g class="hair">
+              <path d="M118 232 h6"/><path d="M128 232 l-9 -5 0 10 z" class="solidmark"/>
+              <path d="M216 232 h6"/><path d="M226 232 l-9 -5 0 10 z" class="solidmark"/>
+              <path d="M314 232 h6"/><path d="M324 232 l-9 -5 0 10 z" class="solidmark"/>
+              <path d="M412 232 h20"/><path d="M440 232 l-9 -5 0 10 z" class="solidmark"/>
+            </g>
+          </g>
+          <g class="numeral numeral--in">
+            <text x="36" y="216" data-ref="12">12</text>
+            <text x="134" y="216" data-ref="14">14</text>
+            <text x="232" y="216" data-ref="22">22</text>
+            <text x="330" y="216" data-ref="26">26</text>
+            <text x="446" y="216" data-ref="28">28</text>
+            <text x="544" y="216" data-ref="34">34</text>
+          </g>
+          <g class="label">
+            <text x="74"  y="244" text-anchor="middle">SENSE</text>
+            <text x="172" y="244" text-anchor="middle">DIRECT</text>
+            <text x="270" y="244" text-anchor="middle">CONTRACT</text>
+            <text x="368" y="244" text-anchor="middle">BUILD</text>
+            <text x="484" y="244" text-anchor="middle">REVIEW</text>
+            <text x="582" y="244" text-anchor="middle">DELIVER</text>
+          </g>
+
+          <!-- ---- 30 + 24: what station three writes down ---- -->
+          <g class="ink"><path d="M270 264 v20 M212 284 h92 M212 284 v16 M304 284 v16"/></g>
+          <g data-part="30" class="ink">
+            <rect x="170" y="300" width="84" height="52"/>
+            <path d="M178 312 h68 M178 320 h68 M178 328 h68 M178 336 h68 M178 344 h44"/>
+          </g>
+          <g class="hair"><path d="M170 326 h-20"/></g>
+          <text class="numeral" x="128" y="330" data-ref="30">30</text>
+
+          <g data-part="24" class="ink">
+            <rect x="262" y="300" width="84" height="52"/>
+            <path d="M270 316 h68 M270 328 h68 M270 340 h48"/>
+          </g>
+          <g class="hair"><path d="M304 352 v14"/></g>
+          <text class="numeral" x="296" y="382" data-ref="24">24</text>
+
+          <!-- ---- 32: the reviewer's boundary ---- -->
+          <g data-part="32">
+            <path d="M426 20 v360" class="boundary"/>
+          </g>
+          <g class="hair"><path d="M426 62 h14"/></g>
+          <text class="numeral" x="444" y="66" data-ref="32">32</text>
+          <text class="micro boundary__label" transform="translate(420,332) rotate(-90)">FRESH CONTEXT</text>
+
+          <!-- ---- 36: the verdict gate ---- -->
+          <g data-part="36">
+            <g class="ink">
+              <path d="M484 264 v18"/>
+              <path d="M462 318 l22 -18 22 18 -22 18 z"/>
+              <path d="M506 318 h76 v-46"/>
+              <path d="M582 264 l-5 9 10 0 z" class="solidmark"/>
+              <path d="M484 336 v36 h-116 v-100"/>
+              <path d="M368 264 l-5 9 10 0 z" class="solidmark"/>
+            </g>
+          </g>
+          <g class="hair"><path d="M498 332 h22"/></g>
+          <text class="numeral" x="524" y="338" data-ref="36">36</text>
+          <text class="micro" x="392" y="366">FIX / REBUILD</text>
+          <text class="micro" x="524" y="310">SHIP</text>
+
+          <text class="figlabel" x="6" y="394">FIG. 1</text>
+        </svg>
+        <p class="fig__pan-note">Drag sideways to read the drawing</p>
+        <figcaption>
+          The instrument in elevation. Every part carries its reference numeral;
+          the numerals in the specification below are live &#8212; point at one and
+          its part lights on the drawing.
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <div class="titleblock">
+      <div class="titleblock__cell"><span>Title</span><b>design-skill</b></div>
+      <div class="titleblock__cell"><span>Sheet</span><b>1 of 4</b></div>
+      <div class="titleblock__cell"><span>Roll</span><b data-mono>666a7a49</b></div>
+      <div class="titleblock__cell"><span>Form</span><b>patent-drawing-sheets</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SHEET 2 ============================ -->
+<section class="sheet" id="sheet-2">
+  <div class="sheet__frame">
+    <div class="sheet__body sheet__body--spec">
+
+      <div class="spec">
+        <h2 class="spec__head">Specification &#8212; the direction mechanism</h2>
+
+        <p class="spec__p">
+          <b>1.</b> A brief <button class="ref" data-ref="10">10</button> enters
+          at <i>sense</i>, where the surface is reduced to twelve lines: what it
+          is, the one job, the mode, who reads it and how often, what must not
+          break, one physical sentence about the room it is used in, and
+          <em>the reflex</em> &#8212; the page this category always ships, written
+          down so the next station can keep it off the list.
+        </p>
+
+        <p class="spec__p">
+          <b>2.</b> At <i>direct</i>, the model derives seven grounded candidate
+          directions <button class="ref" data-ref="16">16</button> from the
+          audience's own cultural material, ordered by its own sense of
+          resonance. It does not then choose. A die
+          <button class="ref" data-ref="18">18</button> &#8212; a SHA-256 of a
+          printed key, no network, no dependencies, the same deal on any machine
+          &#8212; assigns the index. The assignment never lands on an ungrounded
+          entry; it only refuses the argmax.
+        </p>
+
+        <p class="spec__p">
+          <b>3.</b> The same roll deals three challengers from a deck of
+          born-designed graphic systems <button class="ref" data-ref="20">20</button>:
+          one graphic, one interaction, one atmosphere. Each is fused with the
+          product before it is judged &#8212; the world supplies form and system
+          grammar, the product supplies every fact, clarity wins conflicts &#8212;
+          and then weighed on exactly two axes: audience identification, product
+          clarity. Wins both, it becomes the build. Holds one, it stays as a full
+          alternate. Loses both, it is declined and still donates the one
+          discipline the assigned direction lacked.
+        </p>
+
+        <p class="spec__p">
+          <b>4.</b> The bound direction is written down twice at <i>contract</i>:
+          as a five-block promise <button class="ref" data-ref="30">30</button>
+          in the artifact's own source, and as a token file
+          <button class="ref" data-ref="24">24</button> the build can only spend
+          from. At <i>review</i> the render is handed across a boundary
+          <button class="ref" data-ref="28">28</button> to a reviewer with no
+          share in the build's optimism, which audits each promise block as kept,
+          softened or broken and returns one of four dispositions
+          <button class="ref" data-ref="32">32</button>: recapture, rebuild, fix,
+          ship.
+        </p>
+      </div>
+
+      <figure class="fig fig--pan" id="fig-2">
+        <svg viewBox="0 0 520 300" role="img" aria-labelledby="fig-2-t fig-2-d">
+          <title id="fig-2-t">FIG. 2 &#8212; the deal that built this page</title>
+          <desc id="fig-2-d">Detail of the die and the deck. Key 666a7a49 assigns index seven of seven candidates. Three challengers are dealt: patent drawing sheets (graphic), garden framed view (interaction), sewing pattern sheet (atmosphere). Verdicts: wins, declined, declined.</desc>
+
+          <!-- key strip -->
+          <g class="ink"><rect x="14" y="16" width="150" height="34"/></g>
+          <text class="key" x="30" y="39">666a7a49</text>
+          <g class="hair"><path d="M164 33 h22"/></g>
+          <text class="micro" x="190" y="37">KEY, REPRODUCIBLE</text>
+
+          <!-- index scale 1..7 -->
+          <g class="ink"><path d="M30 92 h280"/></g>
+          <g class="hair">
+            <path d="M30 92 v-9 M70 92 v-9 M110 92 v-9 M150 92 v-9 M190 92 v-9 M230 92 v-9"/>
+          </g>
+          <path d="M270 92 v-22" class="lit-bar"/>
+          <circle cx="270" cy="66" r="8" class="lit-ring"/>
+          <g class="micro">
+            <text x="30" y="108" text-anchor="middle">1</text>
+            <text x="70" y="108" text-anchor="middle">2</text>
+            <text x="110" y="108" text-anchor="middle">3</text>
+            <text x="150" y="108" text-anchor="middle">4</text>
+            <text x="190" y="108" text-anchor="middle">5</text>
+            <text x="230" y="108" text-anchor="middle">6</text>
+          </g>
+          <text class="numeral numeral--lit" x="262" y="112">7</text>
+          <g class="hair"><path d="M310 92 h26"/></g>
+          <text class="micro" x="340" y="96">ASSIGNED</text>
+
+          <!-- three dealt cards -->
+          <g class="ink">
+            <rect x="14" y="150" width="146" height="118"/>
+            <rect x="180" y="150" width="146" height="118"/>
+            <rect x="346" y="150" width="146" height="118"/>
+            <path d="M14 182 h146 M180 182 h146 M346 182 h146"/>
+          </g>
+          <g class="label">
+            <text x="26" y="173">GRAPHIC</text>
+            <text x="192" y="173">INTERACTION</text>
+            <text x="358" y="173">ATMOSPHERE</text>
+          </g>
+          <g class="cardname">
+            <text x="26" y="208">Patent Drawing</text>
+            <text x="26" y="224">Sheets</text>
+            <text x="192" y="208">Garden Framed</text>
+            <text x="192" y="224">View</text>
+            <text x="358" y="208">Sewing Pattern</text>
+            <text x="358" y="224">Sheet</text>
+          </g>
+          <g class="verdict">
+            <text x="26" y="256" class="verdict--win">WINS &#8212; BUILT</text>
+            <text x="192" y="256">DECLINED</text>
+            <text x="358" y="256">DECLINED</text>
+          </g>
+          <text class="figlabel" x="14" y="292">FIG. 2</text>
+        </svg>
+        <p class="fig__pan-note">Drag sideways to read the drawing</p>
+        <figcaption>
+          The deal that produced this page, printed so you can run it:
+          <code data-mono>node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 666a7a49</code>.
+          The two declined cards were not discarded &#8212; one raised this sheet to
+          a single figure per viewport, the other to one drawing re-inked by one
+          control, which is what FIG. 3 does.
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <div class="titleblock">
+      <div class="titleblock__cell"><span>Title</span><b>The deal</b></div>
+      <div class="titleblock__cell"><span>Sheet</span><b>2 of 4</b></div>
+      <div class="titleblock__cell"><span>Deck</span><b>27 worlds &#183; 12 stagings</b></div>
+      <div class="titleblock__cell"><span>Scope</span><b>direction</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SHEET 3 ============================ -->
+<section class="sheet" id="sheet-3">
+  <div class="sheet__frame">
+    <div class="sheet__body sheet__body--spec">
+
+      <div class="spec">
+        <h2 class="spec__head">Specification &#8212; the material</h2>
+        <p class="spec__p">
+          <b>5.</b> Under every world sits a <i>material contract</i>: seed hue,
+          colour strategy, type roles, ratio, density, corner, elevation, motion
+          physics, imagery, component character, three rationed signature moves,
+          voice, and the specific ways that language turns to slop. Seven of them
+          ship with the skill. All seven compile to the same token names, so
+          changing the language of a surface is one file, and linting it is one
+          grep.
+        </p>
+        <p class="spec__p">
+          <b>6.</b> Switch the control and the same figure re-inks. Ground, ink,
+          rule, accent, corner and density below are the real token values, read
+          out of the file named under the specimen. The face is <i>named</i>
+          rather than loaded &#8212; this page ships two faces, not nine.
+        </p>
+      </div>
+
+      <figure class="fig" id="fig-3">
+        <div class="switch" role="radiogroup" aria-label="Material contract">
+          <button type="button" role="radio" aria-checked="true"  data-set="default">default</button>
+          <button type="button" role="radio" aria-checked="false" data-set="modernist">modernist</button>
+          <button type="button" role="radio" aria-checked="false" data-set="classical">classical</button>
+          <button type="button" role="radio" aria-checked="false" data-set="industry">industry</button>
+          <button type="button" role="radio" aria-checked="false" data-set="organic">organic</button>
+          <button type="button" role="radio" aria-checked="false" data-set="nocturnes">nocturnes</button>
+          <button type="button" role="radio" aria-checked="false" data-set="broadsheets">broadsheets</button>
+        </div>
+
+        <div class="specimen" id="specimen" data-spec="default">
+          <div class="specimen__head">
+            <h3 class="specimen__title">Incident 4471</h3>
+            <span class="specimen__tag">open</span>
+          </div>
+          <p class="specimen__body">
+            Search latency crossed the page threshold at 03:12 and recovered
+            after the replica was drained. Six services touched, one customer
+            report.
+          </p>
+          <div class="specimen__row"><span>duration</span><b data-mono>41m</b></div>
+          <div class="specimen__row"><span>owner</span><b>platform</b></div>
+          <div class="specimen__actions">
+            <span class="specimen__btn">Acknowledge</span>
+            <span class="specimen__btn specimen__btn--quiet">Assign</span>
+          </div>
+        </div>
+
+        <dl class="readout" id="readout">
+          <div><dt>file</dt><dd data-mono id="ro-file">assets/tokens/default.css</dd></div>
+          <div><dt>one line</dt><dd id="ro-line">paper and ink; quiet, structural, system type</dd></div>
+          <div><dt>face</dt><dd id="ro-face">system-ui (never a tell)</dd></div>
+          <div><dt>corner</dt><dd data-mono id="ro-radius">0.25rem</dd></div>
+          <div><dt>density</dt><dd data-mono id="ro-density">1.0</dd></div>
+        </dl>
+        <figcaption>
+          FIG. 3 &#8212; one specimen, seven materials. The colour, rule weight,
+          corner and density change; the token names never do.
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <div class="titleblock">
+      <div class="titleblock__cell"><span>Title</span><b>The material</b></div>
+      <div class="titleblock__cell"><span>Sheet</span><b>3 of 4</b></div>
+      <div class="titleblock__cell"><span>Contracts</span><b>7</b></div>
+      <div class="titleblock__cell"><span>Schema</span><b>one</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SHEET 4 ============================ -->
+<section class="sheet" id="sheet-4">
+  <div class="sheet__frame">
+    <div class="sheet__body sheet__body--spec">
+
+      <div class="spec">
+        <h2 class="spec__head">Specification &#8212; the audit</h2>
+        <p class="spec__p">
+          <b>7.</b> A direction described as radical ships conservative when
+          nobody holds it to its own words. So the promise is written into the
+          artifact before the first line of markup, in five blocks under 150
+          words, and it survives the production build. The review does not ask
+          whether the page is good. It asks, block by block, whether the render
+          kept it.
+        </p>
+        <p class="spec__p">
+          <b>8.</b> The reviewer runs in a fresh context. It gets the request,
+          the promise, captures at 390 / 768 / 1440, the mechanical bans report
+          and the world card &#8212; not the transcript that produced the build.
+          Order is fixed: evidence, promise audit, behavioural floor, then a
+          P0/P1/P2 rubric graded on the worst sustained band, not the average.
+        </p>
+        <p class="spec__p">
+          <b>9.</b> The last question is the one that decides whether anything
+          was designed: <em>for any similar brief, would I have produced this?
+          Name what changed.</em> If nothing changed, the work is competent and
+          forgettable, and that is the verdict this skill exists to hand down.
+        </p>
+
+        <div class="close">
+          <div class="install install--close">
+            <code class="install__cmd">npx skills add lroolle/design-skill</code>
+            <button class="install__copy" type="button" data-cmd="npx skills add lroolle/design-skill">Copy</button>
+          </div>
+          <p class="lede__aside">
+            Or, in Claude Code: <code data-mono>/plugin marketplace add lroolle/design-skill</code>.
+            <a href="https://github.com/lroolle/design-skill">Source, decks and the proof script</a>.
+          </p>
+        </div>
+      </div>
+
+      <figure class="fig fig--pan" id="fig-4">
+        <svg viewBox="0 0 520 320" role="img" aria-labelledby="fig-4-t fig-4-d">
+          <title id="fig-4-t">FIG. 4 &#8212; the audit path</title>
+          <desc id="fig-4-d">The five-block promise on the left feeds three captures at 390, 768 and 1440. The captures cross a dashed boundary into the reviewer, which marks each block kept, softened or broken and emits one of four dispositions: recapture, rebuild, fix, ship.</desc>
+
+          <!-- promise block -->
+          <g class="ink">
+            <rect x="14" y="30" width="120" height="118"/>
+            <path d="M14 52 h120"/>
+            <path d="M26 74 h96 M26 90 h96 M26 106 h96 M26 122 h96 M26 138 h64"/>
+          </g>
+          <text class="label" x="26" y="46">PROMISE</text>
+          <g class="micro">
+            <text x="140" y="78">THESIS</text>
+            <text x="140" y="94">OWN-WORLD</text>
+            <text x="140" y="110">STORY</text>
+            <text x="140" y="126">FIRST VIEWPORT</text>
+            <text x="140" y="142">FORM</text>
+          </g>
+
+          <!-- captures -->
+          <g class="ink">
+            <rect x="14" y="196" width="30" height="66"/>
+            <rect x="56" y="196" width="52" height="66"/>
+            <rect x="120" y="196" width="92" height="66"/>
+            <path d="M74 148 v34 M74 182 l-4 -9 8 0 z" class="hair"/>
+          </g>
+          <g class="micro">
+            <text x="14" y="278">390</text>
+            <text x="56" y="278">768</text>
+            <text x="120" y="278">1440</text>
+          </g>
+
+          <!-- boundary + reviewer -->
+          <path d="M250 10 v300" class="boundary"/>
+          <text class="micro boundary__label" x="256" y="24">FRESH CONTEXT</text>
+          <g class="ink">
+            <rect x="278" y="76" width="120" height="120"/>
+            <path d="M278 104 h120"/>
+            <path d="M212 229 h60 v-90 h6" class="hair"/>
+            <path d="M278 139 l-9 -4 0 8 z" class="solidmark"/>
+          </g>
+          <text class="label" x="290" y="96">REVIEWER</text>
+          <g class="micro">
+            <text x="290" y="126">KEPT</text>
+            <text x="290" y="146">SOFTENED</text>
+            <text x="290" y="166">BROKEN</text>
+          </g>
+          <g class="hair">
+            <path d="M370 121 h14 M370 141 h14 M370 161 h14"/>
+          </g>
+
+          <!-- dispositions -->
+          <g class="ink">
+            <path d="M398 136 h22"/>
+            <path d="M420 136 v-84 M420 136 v84 M420 136 h22"/>
+            <path d="M442 52 h56 M442 94 h56 M442 178 h56 M442 220 h56"/>
+            <path d="M420 52 h22 M420 94 h22 M420 178 h22 M420 220 h22"/>
+          </g>
+          <g class="micro">
+            <text x="446" y="46">RECAPTURE</text>
+            <text x="446" y="88">REBUILD</text>
+            <text x="446" y="132">FIX</text>
+            <text x="446" y="172">SHIP</text>
+          </g>
+          <text class="figlabel" x="14" y="308">FIG. 4</text>
+        </svg>
+        <p class="fig__pan-note">Drag sideways to read the drawing</p>
+        <figcaption>
+          The audit path. This page went through it: four promise blocks kept,
+          OWN-WORLD scored <i>softened</i> &#8212; a drawing has no filled elements
+          and this page has exactly one, the primary action. Deferred with a
+          reason, written into
+          <a href="https://github.com/lroolle/design-skill/blob/main/site/DESIGN.md">DESIGN.md</a>.
+        </figcaption>
+      </figure>
+
+    </div>
+
+    <div class="titleblock">
+      <div class="titleblock__cell"><span>Title</span><b>The audit</b></div>
+      <div class="titleblock__cell"><span>Sheet</span><b>4 of 4</b></div>
+      <div class="titleblock__cell"><span>Dispositions</span><b>4</b></div>
+      <div class="titleblock__cell"><span>Budget</span><b>2 rounds unattended</b></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__inner">
+    <p class="foot__line">
+      <b>design-skill</b> &#183; MIT &#183; built by
+      <a href="https://github.com/lroolle">lroolle</a> &#183;
+      <a href="https://github.com/lroolle/design-skill">github.com/lroolle/design-skill</a>
+    </p>
+    <p class="foot__line foot__line--quiet">
+      The direction mechanics follow the measured 2026 findings published by the
+      <a href="https://github.com/pbakaus/impeccable">impeccable</a> project
+      (Apache-2.0); the decks, the seven languages, the token contract and the
+      CJK half of the world are ours. Faces on this page: Archivo and Spectral
+      (OFL), JetBrains Mono (OFL).
+    </p>
+  </div>
+</footer>
+
+<script src="page.js" defer></script>
+</body>
+</html>

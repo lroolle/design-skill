@@ -22,7 +22,7 @@
   /* text: gaslight white, never pure */
   --fg:          oklch(0.91 0.010 80);
   --fg-2:        oklch(0.68 0.012 235);
-  --fg-3:        oklch(0.52 0.012 235);
+  --fg-3:        oklch(0.600 0.012 235);
 
   /* lines */
   --line:        oklch(0.28 0.020 235);
@@ -66,7 +66,7 @@
   /* text */
   --fg:          oklch(0.18 0.030 235);
   --fg-2:        oklch(0.42 0.025 235);
-  --fg-3:        oklch(0.56 0.020 235);
+  --fg-3:        oklch(0.545 0.020 235);
 
   /* lines */
   --line:        oklch(0.86 0.014 235);

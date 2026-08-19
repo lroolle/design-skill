@@ -123,6 +123,13 @@ Derivation invariants every token file obeys:
   elevation, accent chroma drops ~15%), never an inversion; never
   chroma 0, never pure black or white.
 - **Semantic states are hue offsets from the seed**, held in tokens.
+- **`--fg-3` carries text, so it clears 4.5:1.** It labels captions,
+  micro-labels, table headers and fine print -- all body-size text, none
+  of it exempt. Measured against the file's own `--bg`, not `--surface`,
+  because footers and page grounds are the harder case. The proxy
+  `scripts/validate.sh` can check without a browser: lightness <= 0.56 on
+  the light theme, >= 0.59 on the dark one. Measure the real ratio on any
+  re-seed; the proxy assumes the ground lightnesses in these seven files.
 - **One radius**, decided before the first component; `-sm`/`-lg`
   derive from it. One corner language per surface.
 - **Structure before shadow**: 1px lines and tone steps first; shadows

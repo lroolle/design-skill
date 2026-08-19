@@ -89,6 +89,13 @@ for css in assets/tokens/*.css; do
   for t in "${themed[@]}"; do grep -qE "^\s*--$t:" <<< "$dark" || miss="$miss dark:--$t"; done
   grep -qE '#(000000|ffffff|000|fff)\b' "$css" && miss="$miss pure-black/white"
   grep -q 'prefers-reduced-motion' "$css" || miss="$miss reduced-motion"
+  # --fg-3 carries body-size text (captions, micro-labels, fine print), so it
+  # has to clear 4.5:1. Lightness is a browser-free proxy for the real ratio
+  # against these files' ground lightnesses; see design-systems/README.md.
+  lroot=$(grep -oE -- '--fg-3:[[:space:]]*oklch\([0-9.]+' <<< "$root" | grep -oE '[0-9.]+$')
+  ldark=$(grep -oE -- '--fg-3:[[:space:]]*oklch\([0-9.]+' <<< "$dark" | grep -oE '[0-9.]+$')
+  awk -v v="$lroot" 'BEGIN{exit !(v!="" && v<=0.56)}' || miss="$miss fg-3-light-contrast($lroot)"
+  awk -v v="$ldark" 'BEGIN{exit !(v!="" && v>=0.59)}' || miss="$miss fg-3-dark-contrast($ldark)"
   [ -z "$miss" ] && ok "tokens $(basename "$css")" || bad "tokens $(basename "$css") missing:$miss"
 done
 

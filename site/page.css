@@ -1,0 +1,412 @@
+/* design-skill site -- Patent Drawing Sheets.
+ * Every value here is a token from tokens.css. If a raw colour appears in
+ * this file it is a defect: `skills/design-skill/assets/bans.sh site` catches it.
+ */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+
+.skip {
+  position: absolute; left: var(--space-4); top: calc(var(--space-4) * -6);
+  z-index: 10; padding: var(--space-2) var(--space-4);
+  background: var(--surface); color: var(--fg);
+  border: var(--line-w) solid var(--line-strong);
+  font-family: var(--font-display); font-size: var(--text-sm);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.skip:focus { transform: translateY(calc(var(--space-4) * 7)); }
+
+/* ------------------------------------------------------------------ rail */
+
+.rail {
+  position: sticky; top: 0; z-index: 8;
+  display: flex; align-items: center; gap: var(--space-5);
+  padding: var(--space-3) var(--space-5);
+  background: var(--bg);
+  border-bottom: var(--line-w) solid var(--line);
+  font-family: var(--font-display);
+}
+.wordmark {
+  font-size: var(--text-sm); font-weight: 700;
+  font-stretch: 88%; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fg); text-decoration: none;
+}
+.rail__nav { display: flex; gap: var(--space-5); margin-left: auto; }
+.rail__nav a {
+  font-size: var(--text-xs); font-stretch: 88%; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--fg-2); text-decoration: none;
+  padding-bottom: 2px; border-bottom: var(--line-w) solid transparent;
+  transition: color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.rail__nav a:hover { color: var(--fg); border-bottom-color: var(--line-strong); }
+.theme {
+  font-family: var(--font-display); font-size: var(--text-xs);
+  font-stretch: 88%; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--fg-2); background: none; cursor: pointer;
+  border: var(--line-w) solid var(--line); border-radius: var(--radius);
+  padding: var(--space-1) var(--space-3);
+  transition: color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.theme:hover { color: var(--fg); border-color: var(--line-strong); }
+
+/* ----------------------------------------------------------------- sheet */
+
+.sheet { padding: var(--space-5) var(--space-5) 0; }
+.sheet:last-of-type { padding-bottom: var(--space-7); }
+
+.sheet__frame {
+  position: relative;
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  background: var(--surface);
+  border: var(--line-w) solid var(--line-strong);
+  box-shadow: var(--shadow-1);
+  padding: var(--space-7) var(--space-6) 0;
+}
+
+.sheet__body { display: grid; gap: var(--space-7); align-items: center; }
+.sheet__body--spec { align-items: start; }
+
+@media (min-width: 62rem) {
+  .sheet__body--lede { grid-template-columns: 5fr 7fr; gap: var(--space-8); }
+  .sheet__body--spec { grid-template-columns: 1fr 1fr; gap: var(--space-8); }
+  .sheet__frame { padding: var(--space-8) var(--space-8) 0; }
+  #sheet-1 .sheet__frame { padding-top: var(--space-9); padding-bottom: var(--space-4); }
+  .sheet { padding-top: var(--space-6); }
+}
+
+/* the title block sits in the sheet's bottom-right corner, as it does on a
+   real sheet: the drawing above it, the record of the drawing inside it. */
+.titleblock {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: var(--space-7) calc(var(--space-6) * -1) 0;
+  border-top: var(--line-w) solid var(--line-strong);
+  font-family: var(--font-display);
+}
+@media (min-width: 62rem) {
+  .titleblock {
+    grid-template-columns: repeat(4, auto);
+    justify-content: end;
+    margin: var(--space-8) calc(var(--space-8) * -1) 0;
+  }
+}
+.titleblock__cell {
+  padding: var(--space-3) var(--space-5);
+  border-left: var(--line-w) solid var(--line);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.titleblock__cell:first-child { border-left: 0; }
+.titleblock__cell span {
+  font-size: var(--text-xs); font-stretch: 88%; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-3);
+}
+.titleblock__cell b { font-size: var(--text-sm); font-weight: 500; color: var(--fg); }
+
+/* ------------------------------------------------------------------ lede */
+
+h1 {
+  font-size: var(--text-4xl); font-weight: 700; font-stretch: 92%;
+  margin: 0 0 var(--space-5); max-width: 18ch;
+}
+.dek {
+  font-size: var(--text-lg); color: var(--fg-2); line-height: 1.5;
+  margin: 0 0 var(--space-6); max-width: 46ch;
+}
+
+.install {
+  display: flex; align-items: stretch;
+  border: var(--line-w) solid var(--line-strong);
+  max-width: 34rem;
+}
+.install__cmd {
+  flex: 1; min-width: 0; overflow-x: auto;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm); color: var(--fg); white-space: nowrap;
+}
+.install__copy {
+  flex: none; cursor: pointer;
+  padding: var(--space-3) var(--space-5);
+  border: 0; border-left: var(--line-w) solid var(--line-strong);
+  background: var(--accent); color: var(--accent-fg);
+  font-family: var(--font-display); font-size: var(--text-xs); font-weight: 600;
+  font-stretch: 88%; letter-spacing: 0.14em; text-transform: uppercase;
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+.install__copy:hover { background: var(--accent-hover); }
+.install__copy[data-done="1"] { background: var(--fg); }
+
+.lede__aside {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm); color: var(--fg-3); max-width: 46ch;
+}
+.lede__aside code { font-size: 0.9em; }
+
+/* --------------------------------------------------------------- figures */
+
+.fig { margin: 0; }
+.fig svg { display: block; width: 100%; height: auto; overflow: visible; }
+.fig figcaption {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm); color: var(--fg-3);
+  max-width: 54ch; line-height: 1.5;
+}
+.fig figcaption code { font-size: 0.86em; color: var(--fg-2); }
+
+/* the drawing: one uniform outline weight, a lighter one for leaders */
+.ink { fill: none; stroke: var(--line-strong); stroke-width: 1.25; vector-effect: non-scaling-stroke; }
+.hair { fill: none; stroke: var(--fg-3); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.solidmark { fill: var(--line-strong); stroke: none; }
+.pip { fill: var(--line-strong); stroke: none; }
+.boundary {
+  fill: none; stroke: var(--fg-3); stroke-width: 1;
+  stroke-dasharray: 5 5; vector-effect: non-scaling-stroke;
+}
+.lit-bar { stroke: var(--accent); stroke-width: 2.5; fill: none; vector-effect: non-scaling-stroke; }
+.lit-ring { stroke: var(--accent); stroke-width: 1.25; fill: none; vector-effect: non-scaling-stroke; }
+
+.label {
+  font-family: var(--font-display); font-size: 11px; font-weight: 600;
+  font-stretch: 82%; letter-spacing: 0.13em; fill: var(--fg-2);
+}
+.micro {
+  font-family: var(--font-display); font-size: 8.5px; font-weight: 500;
+  font-stretch: 82%; letter-spacing: 0.16em; fill: var(--fg-3);
+}
+.numeral {
+  font-family: var(--font-display); font-size: 12.5px; font-weight: 600;
+  fill: var(--fg); font-variant-numeric: tabular-nums;
+}
+.numeral--in { font-size: 10.5px; fill: var(--fg-3); }
+.numeral--lit { fill: var(--accent); }
+.figlabel {
+  font-family: var(--font-display); font-size: 13px; font-weight: 700;
+  font-stretch: 82%; letter-spacing: 0.22em; fill: var(--fg-2);
+}
+.key { font-family: var(--font-mono); font-size: 20px; fill: var(--fg); letter-spacing: 0.04em; }
+.cardname { font-family: var(--font-body); font-size: 15px; fill: var(--fg); }
+.verdict {
+  font-family: var(--font-display); font-size: 10px; font-weight: 600;
+  font-stretch: 82%; letter-spacing: 0.14em; fill: var(--fg-3);
+}
+.verdict--win { fill: var(--accent); }
+
+/* the signature: a numeral and its part light together */
+svg text { transition: fill var(--dur-micro) var(--ease-out); }
+.ink, .hair, .pip, .solidmark { transition: stroke var(--dur-micro) var(--ease-out), fill var(--dur-micro) var(--ease-out); }
+[data-part].is-lit .ink,
+[data-part].is-lit.ink { stroke: var(--accent); }
+[data-part].is-lit .pip,
+[data-part].is-lit .solidmark { fill: var(--accent); }
+[data-part].is-lit .hair { stroke: var(--accent); }
+text[data-ref].is-lit { fill: var(--accent); }
+.numeral[data-ref] { cursor: default; }
+
+/* ------------------------------------------------- specification columns */
+
+.spec__head {
+  font-size: var(--text-sm); font-weight: 600; font-stretch: 88%;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-3);
+  margin: 0 0 var(--space-5);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--line-w) solid var(--line);
+}
+.spec__p {
+  margin: 0 0 var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  max-width: 58ch;
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+.spec__p b {
+  font-family: var(--font-display); font-weight: 600; font-size: var(--text-sm);
+  color: var(--fg-3); font-variant-numeric: tabular-nums;
+}
+.spec__p i { font-style: italic; color: var(--fg); }
+.spec__p em { font-style: italic; }
+.spec__p.is-lit { background: var(--accent-soft); }
+
+/* a reference numeral in running text: the leader, made clickable */
+.ref {
+  font-family: var(--font-display); font-size: 0.82em; font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg); background: none; cursor: help;
+  border: 0; border-bottom: var(--line-w) solid var(--line-strong);
+  padding: 0 1px; margin: 0 1px;
+  transition: color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+}
+.ref:hover, .ref:focus-visible, .ref.is-lit { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* --------------------------------------------------- FIG. 3: the specimen */
+
+/* 4 + 3: a deliberate split, not six-then-one left over */
+.switch {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0;
+  margin-bottom: var(--space-5);
+}
+@media (min-width: 34rem) { .switch { grid-template-columns: repeat(4, 1fr); } }
+.switch button {
+  font-family: var(--font-display); font-size: var(--text-xs); font-weight: 500;
+  font-stretch: 88%; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--fg-3); background: none; cursor: pointer;
+  border: var(--line-w) solid var(--line);
+  margin: -0.5px 0 0 -0.5px;
+  padding: var(--space-2) var(--space-3);
+  transition: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out);
+}
+.switch button:hover { color: var(--fg); }
+.switch button[aria-checked="true"] { color: var(--accent-fg); background: var(--fg); border-color: var(--fg); }
+
+.specimen {
+  background: var(--spec-ground); color: var(--spec-ink);
+  border: var(--line-w) solid var(--spec-rule);
+  border-radius: var(--spec-radius);
+  padding: calc(var(--space-5) * var(--spec-density));
+  font-family: var(--spec-face);
+  transition: background-color var(--dur-enter) var(--ease-out),
+              color var(--dur-enter) var(--ease-out),
+              border-color var(--dur-enter) var(--ease-out);
+}
+.specimen__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: calc(var(--space-3) * var(--spec-density));
+  border-bottom: var(--line-w) solid var(--spec-rule);
+}
+.specimen__title { margin: 0; font-size: var(--text-xl); font-family: inherit; color: inherit; }
+.specimen__tag {
+  font-size: var(--text-xs); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--spec-accent); border: var(--line-w) solid var(--spec-accent);
+  border-radius: var(--spec-radius); padding: 2px var(--space-2);
+}
+.specimen__body {
+  margin: calc(var(--space-4) * var(--spec-density)) 0;
+  font-size: var(--text-sm); max-width: 48ch; opacity: 0.85;
+}
+.specimen__row {
+  display: flex; justify-content: space-between;
+  padding: calc(var(--space-2) * var(--spec-density)) 0;
+  border-top: var(--line-w) solid var(--spec-rule);
+  font-size: var(--text-sm);
+}
+.specimen__row span { opacity: 0.7; }
+.specimen__actions { display: flex; gap: var(--space-3); margin-top: calc(var(--space-5) * var(--spec-density)); }
+.specimen__btn {
+  display: inline-block; font-family: inherit; font-size: var(--text-sm);
+  padding: calc(var(--space-2) * var(--spec-density)) var(--space-4);
+  border: var(--line-w) solid var(--spec-accent);
+  border-radius: var(--spec-radius);
+  background: var(--spec-accent); color: var(--spec-ground); cursor: default;
+}
+.specimen__btn--quiet { background: none; color: var(--spec-accent); }
+
+.readout {
+  margin: var(--space-5) 0 0; padding: 0;
+  border-top: var(--line-w) solid var(--line);
+  font-size: var(--text-sm);
+}
+.readout > div {
+  display: grid; grid-template-columns: 8rem 1fr; gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: var(--line-w) solid var(--line);
+}
+.readout dt {
+  font-family: var(--font-display); font-size: var(--text-xs);
+  font-stretch: 88%; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--fg-3);
+}
+.readout dd { margin: 0; color: var(--fg-2); }
+
+/* ------------------------------------------------------------------ close */
+
+.close { margin-top: var(--space-6); }
+.install--close { max-width: 34rem; }
+
+/* ----------------------------------------------------------------- footer */
+
+.foot { border-top: var(--line-w) solid var(--line); margin-top: var(--space-7); }
+.foot__inner {
+  max-width: var(--container-wide); margin: 0 auto;
+  padding: var(--space-6) var(--space-5);
+}
+.foot__line { font-size: var(--text-sm); color: var(--fg-2); max-width: 74ch; margin: 0 0 var(--space-3); }
+.foot__line--quiet { color: var(--fg-3); font-size: var(--text-xs); line-height: 1.6; margin-bottom: 0; }
+
+/* ------------------------------------------------- the one entrance move */
+
+@media (prefers-reduced-motion: no-preference) {
+  .draw .ink, .draw .hair, .draw .boundary {
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+    animation: draw-on 1100ms var(--ease-subtle) forwards;
+  }
+  .draw .lit-bar, .draw .lit-ring { opacity: 0; animation: ink-in 400ms var(--ease-out) 900ms forwards; }
+  .draw text { opacity: 0; animation: ink-in 400ms var(--ease-out) 700ms forwards; }
+  .draw .pip, .draw .solidmark { opacity: 0; animation: ink-in 400ms var(--ease-out) 800ms forwards; }
+}
+@keyframes draw-on { to { stroke-dashoffset: 0; } }
+@keyframes ink-in  { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .draw .ink, .draw .hair, .draw .boundary { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .draw text, .draw .pip, .draw .solidmark, .draw .lit-bar, .draw .lit-ring { opacity: 1; }
+}
+
+/* ------------------------------------------------------------- responsive */
+
+@media (max-width: 61.99rem) {
+  .rail { flex-wrap: wrap; gap: var(--space-3); }
+  .rail__nav { order: 3; width: 100%; margin-left: 0; gap: var(--space-4); overflow-x: auto; }
+  .theme { margin-left: auto; }
+  h1 { max-width: 100%; }
+  .titleblock__cell { padding: var(--space-3) var(--space-4); }
+  .titleblock__cell:nth-child(odd) { border-left: 0; }
+  .titleblock__cell:nth-child(n+3) { border-top: var(--line-w) solid var(--line); }
+}
+@media (max-width: 30rem) {
+  .sheet { padding-left: var(--space-3); padding-right: var(--space-3); }
+  .sheet__frame { padding: var(--space-6) var(--space-4) 0; }
+  .titleblock { margin-left: calc(var(--space-4) * -1); margin-right: calc(var(--space-4) * -1); }
+  .install { flex-direction: column; align-items: stretch; }
+  .install__copy { border-left: 0; border-top: var(--line-w) solid var(--line-strong); }
+}
+
+@media (max-width: 61.99rem) {
+  .fig--pan {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .fig--pan svg { min-width: 34rem; }
+  /* the note appears only when the sheet really does extend past the frame */
+  .fig--pan.is-panning { border-bottom: var(--line-w) solid var(--line); padding-bottom: var(--space-3); }
+  .fig--pan.is-panning .fig__pan-note { display: block; }
+}
+.fig__pan-note {
+  display: none;
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-xs); font-stretch: 88%; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-3);
+}
+
+/* touch: every control clears 44px, and the numerals stay tappable.
+   Inline links inside running prose are text, not controls, and keep the
+   line rhythm; the reference numerals get an invisible expanded hit area
+   instead of a taller box. */
+.ref { position: relative; }
+.ref::after { content: ''; position: absolute; inset: -13px -7px; }
+
+@media (max-width: 61.99rem), (pointer: coarse) {
+  .wordmark,
+  .rail__nav a,
+  .theme,
+  .switch button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .install__copy, .install__cmd { min-height: 44px; display: flex; align-items: center; }
+  .skip { min-height: 44px; display: inline-flex; align-items: center; }
+}

@@ -34,12 +34,16 @@ if [ ${#existing[@]} -eq 0 ]; then echo "bans: no such dirs: ${dirs[*]}"; exit 2
 
 fail=0
 hit() { echo "DEFECT [$1]: $2"; fail=1; }
-scan() { grep -rInE "$1" "${existing[@]}" 2>/dev/null | grep -v '/ui/' | grep -vE "$tokens_glob" || true; }
+# Markdown is documentation, not app code: a DESIGN.md that names a token
+# value is doing its job. Every rule below is about code, so .md is skipped.
+scan() { grep -rInE "$1" "${existing[@]}" 2>/dev/null | grep -v '/ui/' | grep -v '\.md:' | grep -vE "$tokens_glob" || true; }
 
 # 1. Raw color outside the token file. Color lives in tokens so both
 #    themes stay coherent; a hex in a component is a color dark mode
 #    cannot reach, and a grep cannot audit.
-out=$(scan '#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b|\boklch\(|\brgba?\(|\bhsla?\(')
+# The leading (^|[^&]) guard keeps HTML numeric entities (&#183;) from
+#    reading as three-digit hex.
+out=$(scan '(^|[^&])(#[0-9a-fA-F]{6}\b|#[0-9a-fA-F]{3}\b)|\boklch\(|\brgba?\(|\bhsla?\(')
 [ -n "$out" ] && { hit color "raw hex/oklch/rgb/hsl outside the token file"; echo "$out" | head -20; }
 
 # 2. Raw utility palette classes. Semantic states derive from tokens;

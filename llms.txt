@@ -58,6 +58,12 @@ no dependencies.
 - [templates/README.md](skills/design-skill/templates/README.md): landing, dashboard, docs,
   editorial, portfolio, app-shell, forms, deck, _template
 
+## The skill used on itself
+
+- [site/README.md](site/README.md): the page at lroolle.com/design-skill -- static, no build step, base-path agnostic; how to run, prove and graft it
+- [site/DESIGN.md](site/DESIGN.md): the material contract written at finish -- the roll and its verdicts, the world as built, what was deferred with reasons, the evidence, and the defects this build found in the skill
+- [site/index.html](site/index.html): the promise is the first comment in the body
+
 ## Packaging and proof
 
 - [.claude-plugin/plugin.json](.claude-plugin/plugin.json) · [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json)

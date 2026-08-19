@@ -16,3 +16,6 @@ jobs:
           node-version: 22
       - name: Run the proof
         run: ./scripts/validate.sh
+
+      - name: Scars, on the site the skill built
+        run: bash skills/design-skill/assets/bans.sh site

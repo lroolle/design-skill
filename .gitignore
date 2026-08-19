@@ -4,3 +4,4 @@ node_modules/
 .agents/
 *.local.md
 .cctrace/
+.captures/
