@@ -3,7 +3,9 @@
 The page at `lroolle.com/design-skill`, designed by the skill in this repo.
 
 Static: `index.html`, `tokens.css`, `page.css`, `page.js`, plus
-`sponsors.css` / `sponsors.js` for the seats. No build step, no dependencies,
+`sponsors.css` / `sponsors.js` for the seats -- a split-flap departure board
+carrying four sponsor slots, deliberately a different world from the drawing
+sheet it sits on. No build step, no dependencies,
 no framework.
 
 **To sell a seat:** add one entry to `SPONSORS` in `site/sponsors.js` and set

@@ -93,44 +93,68 @@ t('reduced motion: the drawing is fully inked', await page2.evaluate(() => {
 t('four seats render', await page.evaluate(() => document.querySelectorAll('.sponsors .seat').length === 4));
 t('every seat is a real link', await page.evaluate(() =>
   [...document.querySelectorAll('.sponsors .seat .seat__body')].every((a) => a.tagName === 'A' && a.href)));
-t('SHEET 5 plate matches the band', await page.evaluate(() =>
+t('each seat is a board of flap cells', await page.evaluate(() =>
+  [...document.querySelectorAll('.sponsors .seat .board')].every((b) => b.querySelectorAll('.flap').length >= 5)));
+t('an open seat shows [+]', await page.evaluate(() =>
+  [...document.querySelectorAll('.sponsors .seat--open')].every((s) =>
+    [...s.querySelectorAll('.flap__ch')].map((f) => f.textContent).join('').includes('[+]'))));
+t('SHEET 5 plate matches the board', await page.evaluate(() =>
   document.querySelectorAll('#seatplate .seatplate__cell').length ===
   document.querySelectorAll('.sponsors .seat').length));
 t('no borrowed brand is shown as a sponsor', await page.evaluate(() => {
   const txt = document.querySelector('.sponsors').textContent.toLowerCase();
   return !/anthropic|openai|claude|vercel|google/.test(txt);
 }));
+t('the board is written settled on load, not flipped', await page.evaluate(() =>
+  document.querySelectorAll('.sponsors .flap.is-turn').length === 0));
 
-// the demo claims a seat, and labels it a specimen while it does
-await page.waitForSelector('.sponsors .seat--specimen', { timeout: 15000 });
+// focusing or hovering an open seat flips it to CLAIM. Focus is asserted
+// because it is deterministic and because keyboard parity is the floor;
+// pointer is asserted after an explicit move away, so a stale cursor position
+// left by an earlier step cannot make this pass or fail by accident.
+const readsClaim = (n) => page.waitForFunction((seat) => {
+  const s = document.querySelector(`.seat[data-seat="${seat}"]`);
+  return [...s.querySelectorAll('.flap__ch')].map((f) => f.textContent).join('').includes('CLAIM');
+}, n, { timeout: 8000 }).then(() => true, () => false);
+
+await page.focus('.seat[data-seat="2"] .seat__body');
+t('keyboard focus flips a seat to CLAIM', await readsClaim(2));
+await page.evaluate(() => document.activeElement.blur());
+await page.waitForTimeout(600);
+
+await page.mouse.move(5, 700); await page.waitForTimeout(300);
+await page.hover('.seat[data-seat="3"] .seat__body');
+t('hover flips a seat to CLAIM', await readsClaim(3));
+await page.mouse.move(5, 700); await page.waitForTimeout(700);
+
+// the demo claims a seat and labels it a specimen while it does
+await page.waitForSelector('.sponsors .seat--specimen', { timeout: 25000 });
 t('the demo claims a seat', true);
+t('the claimed seat reads the specimen mark', await page.evaluate(() =>
+  [...document.querySelector('.seat--specimen').querySelectorAll('.flap__ch')]
+    .map((f) => f.textContent).join('').includes('YOUR MARK')));
 t('a claimed demo seat is tagged specimen', await page.evaluate(() => {
   const s = document.querySelector('.seat--specimen');
   return s && getComputedStyle(s.querySelector('.seat__tag')).opacity === '1';
 }));
-t('the specimen tag is inside the band, not clipped', await page.evaluate(() => {
+t('the specimen tag is inside the board, not clipped', await page.evaluate(() => {
   const b = document.querySelector('.sponsors').getBoundingClientRect();
   const g = document.querySelector('.seat--specimen .seat__tag').getBoundingClientRect();
   return g.top >= b.top - 0.5 && g.bottom <= b.bottom + 0.5;
 }));
-t('the dashes close when a seat fills', await page.evaluate(() =>
-  getComputedStyle(document.querySelector('.seat--specimen .seat__rect')).strokeDasharray.replace(/px/g, '') === '100, 0'));
 
 // good-citizen rules for anything that moves on its own
-await page.hover('.sponsors__label');
-await page.waitForTimeout(200);
-t('pointing at the band stops it', await page.evaluate(() =>
+await page.hover('.sponsors__label'); await page.waitForTimeout(250);
+t('pointing at the board stops it', await page.evaluate(() =>
   !document.getElementById('sponsors').classList.contains('is-running')));
-await page.mouse.move(700, 700); await page.waitForTimeout(400);
+await page.mouse.move(700, 700); await page.waitForTimeout(500);
 t('leaving resumes it', await page.evaluate(() =>
   document.getElementById('sponsors').classList.contains('is-running')));
-await page.keyboard.press('Tab'); await page.waitForTimeout(200);
 
-// the band is sticky, so it never scrolls off screen -- that is the point of
-// buying a seat. The pause that actually applies is the backgrounded tab.
+// sticky: it never scrolls away, which is the thing being sold
 await page.evaluate(() => document.getElementById('sheet-4').scrollIntoView());
 await page.waitForTimeout(500);
-t('sticky: the band is still on screen after scrolling', await page.evaluate(() => {
+t('sticky: the board is still on screen after scrolling', await page.evaluate(() => {
   const r = document.getElementById('sponsors').getBoundingClientRect();
   return r.top >= -1 && r.bottom > 0;
 }));
@@ -147,22 +171,23 @@ await page.evaluate(() => {
   Object.defineProperty(document, 'hidden', { configurable: true, get: () => false });
   document.dispatchEvent(new Event('visibilitychange'));
 });
-await page.waitForTimeout(400);
+await page.waitForTimeout(500);
 t('returning to the tab resumes it', await page.evaluate(() =>
   document.getElementById('sponsors').classList.contains('is-running')));
 
 const ctx3 = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
 const page3 = await ctx3.newPage();
-await page3.goto(base, { waitUntil: 'networkidle' }); await page3.waitForTimeout(900);
-t('reduced motion: the band never runs', await page3.evaluate(() =>
+await page3.goto(base, { waitUntil: 'networkidle' }); await page3.waitForTimeout(1200);
+t('reduced motion: the board never runs', await page3.evaluate(() =>
   !document.getElementById('sponsors').classList.contains('is-running')));
+t('reduced motion: nothing is mid-turn', await page3.evaluate(() =>
+  document.querySelectorAll('.sponsors .flap.is-turn').length === 0));
 t('reduced motion: the offer is still complete, not blank', await page3.evaluate(() => {
-  const filled = document.querySelector('.sponsors .seat--specimen .seat__name');
+  const filled = document.querySelector('.sponsors .seat--specimen');
   const cta = document.querySelector('.sponsors__cta');
-  return !!filled && !!cta && cta.textContent.trim().length > 0;
+  const reads = filled && [...filled.querySelectorAll('.flap__ch')].map((f) => f.textContent).join('').includes('YOUR MARK');
+  return !!reads && !!cta && cta.textContent.trim().length > 0;
 }));
-t('reduced motion: no marching ants', await page3.evaluate(() =>
-  getComputedStyle(document.querySelector('.seat--open .seat__rect')).animationName === 'none'));
 
 ok.forEach((n) => console.log('ok    ' + n));
 bad.forEach((n) => console.log('FAIL  ' + n));

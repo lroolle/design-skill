@@ -229,19 +229,32 @@ hr { border: 0; border-top: var(--line-w) solid var(--line); }
 }
 
 /* ---------------------------------------------------------------------------
- * The sponsor band. One rule gives it maximum contrast in both themes: it is
- * always the NEGATIVE of the page. --fg and --bg swap between themes, so an
- * ink band sits on paper sheets in light, and a paper band sits on ink sheets
- * in dark, without a second set of values.
+ * The sponsor board.
+ *
+ * The page is a patent drawing sheet: white paper, hairline ink, no fills, no
+ * motion. The board is a different world laid on top of it -- a Solari
+ * split-flap departure board: matte enamel ground, fixed character cells with
+ * seams, solid flap faces, and change that clatters. Nothing about it is
+ * borrowed from the sheet, which is the point: an advertisement that pretends
+ * to be part of the document is a worse advertisement and a worse document.
+ *
+ * The board is a dark object in BOTH themes, because a departure board is. It
+ * separates from a paper page by value and from an ink page by being a mounted
+ * panel with a lit top bezel, cell seams and tile faces the page never has.
  * ------------------------------------------------------------------------ */
 
 .sponsors {
-  --band-ground: var(--fg);
-  --band-ink:    var(--bg);
-  --band-dim:    oklch(0.620 0.012 250);   /* clears 4.5:1 on the ink ground */
-  --band-live:   oklch(0.685 0.185 27);    /* drafting red, lifted for ink   */
+  --board:       oklch(0.155 0.012 250);   /* matte enamel ground        */
+  --board-tile:  oklch(0.232 0.012 250);   /* the flap face              */
+  --board-seam:  oklch(0.120 0.012 250);   /* the hinge line             */
+  --board-char:  oklch(0.965 0.004 250);   /* flap white                 */
+  --board-dim:   oklch(0.660 0.010 250);   /* secondary, clears 4.5 on tile */
+  --board-live:  oklch(0.700 0.195 27);    /* the remark colour          */
+  --board-edge:  oklch(0.330 0.012 250);   /* the bezel catching light   */
 }
 [data-theme="dark"] .sponsors {
-  --band-dim:    oklch(0.500 0.012 250);   /* clears 4.5:1 on the paper ground */
-  --band-live:   oklch(0.470 0.175 27);
+  --board:       oklch(0.205 0.010 250);
+  --board-tile:  oklch(0.275 0.010 250);
+  --board-seam:  oklch(0.165 0.010 250);
+  --board-edge:  oklch(0.395 0.010 250);
 }

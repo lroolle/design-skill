@@ -68,24 +68,41 @@ Composition rolled at surface scope, key **5849b9a3**, which dealt
 region must *demonstrate itself* rather than describe itself. Written back into
 the deck as `stagings/sponsor-seats-as-a-numbered-plate.md`.
 
-- **A deliberate register break, by one rule.** The band is always the negative
-  of the page: `--band-ground: var(--fg)` and `--band-ink: var(--bg)`, so it is
-  an ink strip on paper sheets in light and a paper strip on ink sheets in dark,
-  with no second set of values. It reads as something laid *on* the document,
-  which is what an ad honestly is.
+- **A different world, not an inverted one.** The first pass inverted the
+  sheet's own values; that was the cheap version of a register break. The band
+  now wears a second world outright -- `worlds/split-flap-departure-board.md`,
+  matte enamel ground, hinged character cells with visible seams, one condensed
+  uppercase grotesk, change that clatters. Nothing about it is borrowed from
+  the drawing sheet, which is the point. It is a dark object in both themes,
+  because a departure board is; it separates from an ink page by being a
+  mounted panel with a lit top bezel and tile faces the page never has.
 - **Four seats, all visible, always.** The loop moves a spotlight, never the
   contents. A sponsor is on screen 100% of the time rather than one cycle in
   four -- that is the product being sold, so it has to be true rather than
   claimed. `site/behaviour.mjs` asserts the band and the SHEET 5 plate render
   from the same array.
-- **The idle loop is the demo.** A drafting crosshair crosses from the call to
-  action to an open seat, presses, and the frame's dashes close into a solid
-  line as a mark inks in. One SVG rect per seat with `pathLength="100"` makes
-  dashed and solid the same two-number `stroke-dasharray`, so the frame closes
-  by interpolation instead of a border-style swap.
+- **The idle loop is the demo.** An open seat reads `[+]`; the loop clatters it
+  through glyphs and settles it on a mark, then clatters it back. Every fourth
+  beat the whole board runs left to right instead -- the hall clatter, every
+  seat rewriting itself to what it already says, which is what a real board does
+  when it refreshes. The shine is the mechanism: each flap brightens as it
+  passes 90 degrees, the edge catching the hall light, rather than a gradient
+  laid over a resting surface.
+- **Two clocks.** The beat sequence is cancellable so stopping the loop stops
+  the loop; individual cell turns are not, because a real board does not freeze
+  a flap halfway and because a hover rewrite is not part of the loop. Getting
+  this wrong made hover silently dead.
+- **Hover and focus flip a seat to CLAIM**, and the reader beats the demo: if
+  the loop happens to be filling the seat you arrive at, the demo is dropped
+  and the seat answers the pointer.
 - **Motion, governed.** Stops on pointer, on focus, on a backgrounded tab; does
-  not exist under reduced motion, where one seat stays filled so the offer still
-  reads. Only `transform`, `opacity`, `stroke` and colour animate.
+  not exist under reduced motion, where the board is written in full, one seat
+  stays filled, and nothing turns. The board is never flipped on load -- the
+  world's own rule. Only `transform`, `opacity`, `filter` and colour animate.
+- **One status colour.** Red marks state only: the seat the loop is on, the seat
+  under the pointer, the one action. An earlier pass had four red `[+]` signs,
+  which is four status lights and no status. A paying sponsor's mark is never
+  repainted in it -- the spotlight lifts their tiles instead.
 - **No borrowed logos.** The demo seat is tagged `specimen` for exactly as long
   as it is one. A name in that band is a public claim about somebody else's
   company; putting Anthropic or OpenAI there would be the invented proof this
