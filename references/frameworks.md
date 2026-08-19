@@ -179,6 +179,31 @@ Figma variables import from this shape (see
 Keep the CSS file as the rendered truth; regenerate, never hand-edit
 both.
 
+### Edit-time hook (optional)
+
+`assets/bans.sh --fast` is safe to run on every edit: it checks only the
+immediate tier (raw color outside tokens, palette classes, pure
+black/white, urgency classes, layout transitions). Wire it as a
+post-edit hook in the agent harness and let the full pass run once at
+Review -- a steady stream of copy-level findings on every edit makes a
+model timid, which is the opposite of what the floor is for. Claude
+Code example (`.claude/settings.json`):
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      { "matcher": "Edit|Write",
+        "hooks": [ { "type": "command",
+                     "command": "bash scripts/bans.sh --fast src/app src/components 2>&1 | tail -20" } ] }
+    ]
+  }
+}
+```
+
+The hook advises; it never blocks. A finding that is wrong gets a
+scar with a reason in TASTE.md, not a silent regex edit.
+
 ### Motion libraries
 
 Order of preference (motion.md has the why):

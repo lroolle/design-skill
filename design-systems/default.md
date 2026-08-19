@@ -145,6 +145,11 @@ marks, no marketing adjectives on product surfaces, no emoji.
 - **The cream-serif drift.** Adding a serif display and a terracotta
   accent lands it in the most recognizable current AI look. Keep the
   sans display; if re-seeding warm, re-seed the ground, not the accent.
+- **System face as the voice of a committed world.** The system stack
+  is right for product chrome and for this quiet default; the moment a
+  persuade or experience surface binds a world, source and self-host a
+  face whose character matches it -- the closest installed font is a
+  failure there, not a fallback.
 - **Sameness across products.** The fix is not more decoration; it is
   a re-seed (hue, accent, one webfont) plus one product-specific
   signature move.

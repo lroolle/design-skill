@@ -2,9 +2,9 @@
 
 # lroolle-design
 
-**A design skill with taste built in: sense, direct, contract, build, critique.**
+**A design skill with taste built in: sense, roll, promise, build, review.**
 
-seven design languages as contracts · one token schema · a verdict that can say costume
+seven material languages · a deck of worlds the dice deal from · one token schema · a reviewer that can say costume
 
 <sub>status: private, pre-release -- the protocol and contracts are complete, the specimen and platform notes are being proven on real surfaces</sub>
 
@@ -20,18 +20,29 @@ it is a judgment problem. Nothing in a normal stack ever asks what
 this thing wants to be, offers a real choice of language, writes the
 choice down, or checks whether the result made the task easier.
 
-This skill makes those four questions structural:
+This skill makes those questions structural -- and it knows the one
+thing prompting cannot fix: a model ranks its own ideas and builds #1
+every run, and a menu just hands the choice to a taste function that
+picks the safest card. So the index is assigned by dice, foreign forms
+are dealt in from a deck of born-designed graphic systems, the chosen
+world is written into the artifact as a five-block promise, and a
+fresh-context reviewer checks the render against it.
 
 ```text
 > design a landing page for our log-search product
 
-  sense    product surface behind it, brand surface in front; audience: SREs,
-           daily; reflex to name: near-black + acid green "developer tool"
-  direct   [A] default re-seeded steel  [B] industry, light-first  [C] nocturnes, gold
-           recommend B: the product IS a control panel; brand page shows it honestly
-  contract DESIGN.md + tokens/industry.css re-seeded hue 230 / accent orange
-  build    landing.md recipe; first screen states the product in one sentence at 390
-  critique 390/768/1440; bans clean; P1: accent on 6 things -> 3; self-diff named
+  sense    mode: persuade (the product behind it is operate); audience: SREs, daily;
+           rut named: near-black + acid green "developer tool", and its opposite
+  direct   seven grounded candidates from the SRE's world (runbooks, pager rotas,
+           incident timelines, terminal session logs, airport status boards, ...)
+           roll 3f9a2c1e -> ASSIGNED #3 "incident timeline as the first viewport";
+           challengers dealt: stone-rubbing (declined, donates total ink commitment),
+           split-flap-departure-board (competitive), almanac-tear-off (declined)
+  promise  THESIS / OWN-WORLD / STORY / FIRST VIEWPORT / FORM, in the body's first comment
+  contract tokens/industry.css re-seeded to the world's palette; DESIGN.md written at finish
+  build    landing.md recipe; the first viewport IS a live incident timeline on real data
+  review   fresh context; evidence valid; promise kept 4/5, FIRST VIEWPORT softened ->
+           fix; verdict pass: resolved; self-diff named
 ```
 
 Every phase ends on a condition the agent can check, and the last one
@@ -41,16 +52,29 @@ can fail the work.
 
 | Phase | Output | Done when |
 |---|---|---|
-| 1 Sense | a ten-line sense card: subject, job, audience, surface class, assets, protected functions, scene, the named reflex | reflex named |
-| 2 Direct | 2-4 direction cards that differ on an axis, one recommended -- or one bound with a reason | direction bound |
-| 3 Contract | `DESIGN.md` + `tokens.css` + `TASTE.md` + `bans.sh` in the repo | tokens exist and DESIGN.md describes exactly them |
-| 4 Build | the surface, in the project's stack, every value a token | renders; every value traces to a token |
-| 5 Critique | screenshots at three widths, bans, P0/P1/P2, verdict, self-diff | zero P0; self-diff names what changed |
-| 6 Deliver | what, where, direction and rejects, deferred items, scars | handed over |
+| 1 Sense | a sense card: subject, job, mode, invention level, audience, assets, protected functions, scene, the named reflex | mode and reflex named |
+| 2 Direct | seven grounded candidates; `roll.mjs` assigns one and deals challengers from `worlds/` (or stagings at surface scope); fuse, verdict, present one committed direction + the hand + the standing exit | direction bound, hand named |
+| 3 Contract | the five-block promise in the artifact; tokens re-seeded; `TASTE.md` + `bans.sh` in the repo | promise in, tokens exist |
+| 4 Build | first viewport as thesis, every atom committed, assets authored, browser surfaces themed, every value a token | renders; every value traces to a token |
+| 5 Review | captures validated; fresh-context reviewer: promise audit, floor, P0/P1/P2; recapture / rebuild / fix / ship | ship; scope of the verdict stated; self-diff named |
+| 6 Deliver | DESIGN.md from the built world; what, where, roll key, rejects, deferred, scars, synthetic list | handed over |
 
 The gate in front of it sizes the work: a token tweak gets no
 protocol; a throwaway page gets only the floor; a governed context
 adopts its official system.
+
+## Worlds and stagings
+
+`worlds/` holds our deck: born-designed graphic systems with five
+system rules each (palette/material, type/composition,
+topology/navigation, controls/state, responsive/motion), a spark, the
+browser technique they ask for, and an honest rating. Our half of the
+world that the big catalogs lack -- movable-type formes, thread-bound
+page furniture, stone rubbings, almanac tear-offs, metro diagrams,
+railway timetables, paired couplets, bamboo-slip scrolls -- beside the
+instrument, print and wayfinding systems everyone shares. `stagings/`
+holds compositions that dress in any world, for surface-scope rolls.
+Small and honest, grown one card per real project.
 
 ## Seven languages
 
@@ -77,8 +101,11 @@ choosing it.
 
 ```text
 lroolle-design-skill/
-  SKILL.md                 the protocol: gate, laws, six phases, first-sense table, check
-  design-systems/          seven contracts + token schema + _template
+  SKILL.md                 the protocol: gate, modes, laws, six phases, first-sense table, check
+  worlds/                  the challenger deck (born-designed graphic systems) + README + _template
+  stagings/                compositions that dress in any world + README + _template
+  scripts/roll.mjs         the dice: assigned index + dealt challengers, deterministic by key
+  design-systems/          seven material contracts + token schema + _template
   references/              the craft layer, loaded by need:
     thinking  methods  patterns  anti-patterns  typography  fontbook
     color  palettes  motion  platforms  frameworks  sites  skills
@@ -90,7 +117,7 @@ lroolle-design-skill/
     DESIGN.md.tmpl         the material contract a repo gets
     TASTE.md.tmpl          scars, seeded with the structural ones
     bans.sh                the grep-able scars, exit 1 on any
-  scripts/validate.sh      the proof: schema, tokens, links, bans self-test
+  scripts/validate.sh      the proof: schema, tokens, links, decks, roll, bans self-test
 ```
 
 ## Install
@@ -116,8 +143,9 @@ Frontmatter and body length; every relative link resolves; every
 system has the twelve contract sections and a token file; every token
 file defines every contract token on both themes with no pure
 black/white and a reduced-motion rule; the specimen uses only defined
-tokens and no raw color; `bans.sh` passes a clean fixture and trips on
-a dirty one; ascii punctuation throughout.
+tokens and no raw color; every world and staging card carries the full
+schema; `roll.mjs` is deterministic for a fixed key and re-rolls; `bans.sh`
+passes a clean fixture and trips on a dirty one; ascii punctuation.
 
 ## Doctrine
 
@@ -132,8 +160,11 @@ beliefs; every rule in the repo traces to one.
 
 Grown from the author's kiln / taste / animate-it / design-system
 skills (lroolle/skills), which distilled the Apple Human Interface
-Guidelines lineage, the anti-slop tooling of the impeccable and
-taste-skill generation (Apache-2.0 / MIT), and the reference-library
-practice. Ideas absorbed elsewhere are rewritten, not pasted; fonts
-named are OFL, Fontshare-licensed, or system, and each entry says
-which. MIT.
+Guidelines lineage and the reference-library practice. The direction
+mechanics -- dice that assign, challengers from a curated deck,
+fuse-then-verdict, the standing exit, the five-block promise audited by
+a separate reviewer -- follow the measured findings published by the
+impeccable project (Apache-2.0) in 2026; the decks, the languages, the
+token contract and the CJK half of the world are ours. Ideas absorbed
+are rewritten, not pasted; fonts named are OFL, Fontshare-licensed, or
+system, and each entry says which. MIT.

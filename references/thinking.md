@@ -123,3 +123,16 @@ the empty state, the error path, the phone, the keyboard user, or the
 CJK reader, it is unfinished, not minimal. Ship the smallest thing
 that fully solves one user's problem, and make it unmistakably
 finished.
+
+## 11. The model cannot roll its own dice
+
+Asked for candidates, a model produces a grounded list; asked to pick,
+it picks the same one every run, and a menu merely hands the choice to
+another taste function that picks the safest card. Variance is not
+creativity and temperature is not an idea. So the index is assigned
+from outside, foreign forms are dealt in as challengers, the chosen
+world is written down as a promise, and a separate reviewer checks the
+render against it -- because described-radical ships conservative when
+nobody holds it to its own words. Commit fully first, then clarify;
+filtering ambition before building is the timidity reflex wearing
+honesty's clothes.

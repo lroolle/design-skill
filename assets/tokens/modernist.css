@@ -172,6 +172,11 @@ a:hover { text-decoration-color: var(--accent); text-decoration-thickness: 2px; 
 /* the one label device: uppercase tracked, at most once per view */
 .label, [data-label] { text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--text-sm); font-weight: 500; }
 
+/* browser surfaces: the parts you did not draw still carry the design */
+::selection { background: var(--accent-soft); color: var(--fg); }
+html { caret-color: var(--accent); accent-color: var(--accent); scrollbar-color: var(--line-strong) var(--surface); }
+hr { border: 0; border-top: var(--line-w) solid var(--line); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

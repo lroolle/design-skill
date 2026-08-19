@@ -4,18 +4,25 @@
 # or a missing empty state. Pair it with the critique rubric on the
 # rendered thing. Exit 1 if any ban trips.
 #
-# Usage: bans.sh [--tokens FILE] [DIR ...]
+# Usage: bans.sh [--fast] [--tokens FILE] [DIR ...]
 #   DIR      app/page code to scan (default: src/app src/components src/blocks)
 #   --tokens the token file; it is the only place raw colors may live
 #            (default: any file named tokens*.css or globals.css is skipped)
+#   --fast   the immediate tier only (raw color, palette classes, pure
+#            black/white, layout transitions): safe to run on every edit
+#            or as an edit hook. The full pass runs once at Review -- a
+#            steady nag stream of copy-level findings makes a model timid,
+#            so the rest waits for the end.
 # Point it at app code, not at a generator-managed component library
 # (paths containing /ui/ are skipped; they are token-driven already).
 
 set -uo pipefail
 tokens_glob='tokens.*\.css|tokens\.css|globals\.css'
+fast=0
 dirs=()
 while [ $# -gt 0 ]; do
   case "$1" in
+    --fast) fast=1; shift ;;
     --tokens) tokens_glob="$(basename "$2")"; shift 2 ;;
     *) dirs+=("$1"); shift ;;
   esac
@@ -55,6 +62,7 @@ out=$(scan 'animate-(ping|pulse|bounce)|animation:[^;]*(pulse|blink|shake)')
 out=$(scan 'transition(-property)?:[^;]*\b(all|height|width|top|left|right|bottom|margin[a-z-]*|padding[a-z-]*)\b|transition-all\b')
 [ -n "$out" ] && { hit layout-anim "transition on layout properties or transition-all"; echo "$out" | head -20; }
 
+if [ "$fast" -eq 0 ]; then
 # 6. Side-stripe accent and gradient text. Imported emphasis devices
 #    that add weight without meaning.
 out=$(scan 'border-l-[2-9]|border-l-\[|border-left:\s*[2-9]px|bg-clip-text|background-clip:\s*text')
@@ -83,5 +91,8 @@ if grep -rIlE '@keyframes|animation:|transition:' "${existing[@]}" 2>/dev/null |
   fi
 fi
 
-if [ "$fail" -eq 0 ]; then echo "bans: clean (${existing[*]})"; fi
+fi # deferred tier
+
+tier=full; [ "$fast" -eq 1 ] && tier=fast
+if [ "$fail" -eq 0 ]; then echo "bans: clean [$tier tier] (${existing[*]})"; fi
 exit "$fail"

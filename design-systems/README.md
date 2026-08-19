@@ -26,6 +26,18 @@ seven on at least two axes (type voice, density, color strategy,
 hierarchy topology, motion physics) -- a palette swap is a re-seed,
 not a new system.
 
+## Material under a world
+
+These are the *material* layer. On persuade and experience surfaces a
+**world** (`worlds/`) sits above: it supplies what the page argues --
+topology, the first viewport, the signature interaction, the native
+motion -- and the design system underneath supplies tokens, type roles,
+component character and the behavioral floor. A world's palette
+re-seeds the system it sits on; the world card's Translation section
+names which system fits. On operate and read surfaces the material
+layer often carries the whole surface and a staging (`stagings/`)
+supplies the composition.
+
 ## Choosing
 
 Match the system to the **primary task and territory**, then re-seed

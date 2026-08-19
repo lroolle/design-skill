@@ -49,3 +49,12 @@ Protected functions, it is one recipe with a note.
 Each recipe stays language-agnostic: no token values, no font names,
 no hues. Those belong to the design system; the recipe names the
 dials and the directions that fit.
+
+## Modes
+
+Each recipe names its mode (SKILL.md): landing, pricing and deck are
+persuade; dashboard, app-shell and forms are operate; docs and editorial
+are read; portfolio is experience. A world from `worlds/` dresses the
+persuade and experience recipes; a staging from `stagings/` composes the
+operate and read ones. The recipe is the shape; the mode sets how much
+expressiveness the shape may spend.

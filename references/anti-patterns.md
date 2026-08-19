@@ -38,6 +38,14 @@ read of the rendered thing; `count` = count occurrences per viewport.
 | Layout-property animation | animating top/left/width/height/margin | transform + opacity | grep |
 | Fake content | John Doe, Acme, lorem, "99.99%", stock avatars, invented logos | real or honestly labelled sample data; real names of real things | grep (lorem, Acme, John Doe), eye |
 | Uncaptioned imagery | photos with no caption/credit on editorial surfaces | caption + credit; alt text everywhere | eye |
+| Hard offset shadow | `box-shadow: 4px 4px 0` as a depth system outside a world that chose it | depth with offset + soft blur, or none | grep, eye |
+| Glow halo | zero-offset colored shadow as decoration | offset + blur; glow only on focus or a named light source | grep, eye |
+| Geometric occlusion mask | circle/polygon/radial cutout approximating a photographic edge | an alpha matte from the image, or a cut-out asset, or omit | eye |
+| Sketchy SVG for pictures | doodle-style scenes, feTurbulence grain standing in for illustration | real illustration or none; SVG stays for geometry and diagrams | eye |
+| Stripes and grid backgrounds | repeating-linear-gradient stripes, two-axis grid overlays with no canvas under them | a surface textured only from the subject's world | grep, eye |
+| Mono as costume | monospace for "technical" rather than code, data, measurement | mono for code, numbers, IDs only | eye |
+| System display face on an own-world page | the platform sans as the display voice of a committed world | source and self-host a face whose character matches; system stacks are for product chrome and the quiet default | eye |
+| Template bones | a committed skin over the standard marketing grid (hero, three cards, logo row) | the world's own topology; the first viewport is a thesis | eye |
 | Framework default inherited | radius, shadow, ring, font never decided -- shipped as installed | every dimension decided in DESIGN.md | eye |
 
 ## Zeitgeist -- 2026-Q3
@@ -61,6 +69,13 @@ is the reflex -- first or second order.
 3. **Broadsheet costume.** Hairline rules, zero radius, numbered
    markers 01/02/03, serif headline, editorial layout -- on content
    that has no stories, bylines or dates. The "editorial" reflex.
+
+A bookish, warm, family or child-facing subject does not license
+cream and serif: book cloth, thread, jackets, endpapers and shelf
+ephemera span the whole saturated spectrum, and cream paper is the
+smallest corner of it. A pinned world pins the world, not its softest
+rendition. Energy is not the enemy of trust: a brief's "no hype, no
+gamification" rules out those devices, not exuberance.
 
 Sidestep by mechanism, not by picking a fourth look: classical keeps
 serif as body text with oxblood not terracotta; nocturnes tints the

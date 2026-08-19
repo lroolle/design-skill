@@ -128,7 +128,13 @@ content is simply already visible.
 | programmatic with CSS perf | WAAPI | hardware path with JS control |
 
 Rules:
-- Animate only transform and opacity. Never top/left/width/height/
+- One authored moment beats scattered effects, and one identical
+  entrance on every section is the worst of both.
+- On product surfaces animate only transform and opacity. On brand
+  surfaces the palette widens -- blur, backdrop-filter, clip-path,
+  mask, shadow -- when measured smooth on a mid-range phone; reach past
+  transform and opacity on purpose, never by default.
+- Never top/left/width/height/
   margin. Height reveals: grid-template-rows 0fr->1fr or measure once
   and animate transform.
 - `will-change` only while animating; remove after.

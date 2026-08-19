@@ -176,6 +176,11 @@ code, kbd, samp, pre, [data-mono], table, [data-num] {
 a { color: var(--info); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
 
 /* reduced motion is the default posture; the query removes the remainder */
+/* browser surfaces: the parts you did not draw still carry the design */
+::selection { background: var(--accent-soft); color: var(--fg); }
+html { caret-color: var(--accent); accent-color: var(--accent); scrollbar-color: var(--line-strong) var(--surface); }
+hr { border: 0; border-top: var(--line-w) solid var(--line); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

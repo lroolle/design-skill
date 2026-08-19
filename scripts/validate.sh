@@ -53,8 +53,8 @@ for css in assets/tokens/*.css; do
   miss=""
   root=$(awk '/^:root[[:space:]]*\{/{f=1} f{print} f&&/^\}/{exit}' "$css")
   dark=$(awk '/^\[data-theme="dark"\][[:space:]]*\{/{f=1} f{print} f&&/^\}/{exit}' "$css")
-  for t in "${tokens[@]}"; do echo "$root" | grep -qE "^\s*--$t:" || miss="$miss --$t"; done
-  for t in "${themed[@]}"; do echo "$dark" | grep -qE "^\s*--$t:" || miss="$miss dark:--$t"; done
+  for t in "${tokens[@]}"; do grep -qE "^\s*--$t:" <<< "$root" || miss="$miss --$t"; done
+  for t in "${themed[@]}"; do grep -qE "^\s*--$t:" <<< "$dark" || miss="$miss dark:--$t"; done
   grep -qE '#(000000|ffffff|000|fff)\b' "$css" && miss="$miss pure-black/white"
   grep -q 'prefers-reduced-motion' "$css" || miss="$miss reduced-motion"
   [ -z "$miss" ] && ok "tokens $(basename "$css")" || bad "tokens $(basename "$css") missing:$miss"
@@ -93,5 +93,43 @@ if grep -rniE 'open-design|opendesign' . --exclude-dir=.git --exclude=validate.s
 if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --include='*.md' --include='*.css' --include='*.sh' -q; then
   bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --include='*.md' --include='*.css' --include='*.sh' | head -5
 else ok "ascii punctuation"; fi
+
+# 8. Decks: worlds/ and stagings/ frontmatter + sections; roll.mjs deterministic
+for deck in worlds stagings; do
+  n=0; bad_files=""
+  for f in "$deck"/*.md; do
+    b=$(basename "$f"); case "$b" in README.md|_template.md) continue ;; esac
+    n=$((n+1)); miss=""
+    head -1 "$f" | grep -q '^---$' || miss="$miss frontmatter"
+    for k in id name modes rating platforms; do grep -qE "^$k:" "$f" || miss="$miss $k"; done
+    if [ "$deck" = worlds ]; then
+      for k in tier families grain origin; do grep -qE "^$k:" "$f" || miss="$miss $k"; done
+      grep -qE '^tier: (graphic|interaction|atmosphere)' "$f" || miss="$miss tier-value"
+      for h in "## Form" "## Spark" "## System" "## Web leverage" "## Translation" "## Risks"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
+      for r in "Palette/material:" "Type/composition:" "Topology/navigation:" "Controls/state:" "Responsive/motion:"; do grep -qF "$r" "$f" || miss="$miss $r"; done
+    else
+      grep -qE '^grain: (product|flow|view|region)$' "$f" || miss="$miss grain-single"
+      for h in "## Form" "## Spark" "## Grammar" "## Web leverage" "## Fits"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
+      for r in "Staging/hierarchy:" "Sequence/attention:" "Controls/state:" "Adaptation:"; do grep -qF "$r" "$f" || miss="$miss $r"; done
+    fi
+    grep -qE '^rating: [123]$' "$f" || miss="$miss rating-value"
+    idv=$(awk -F': ' '/^id:/{print $2; exit}' "$f"); [ "$idv" = "${b%.md}" ] || miss="$miss id!=filename"
+    [ -n "$miss" ] && bad_files="$bad_files
+      $b:$miss"
+  done
+  if [ -z "$bad_files" ]; then ok "$deck: $n cards, schema complete"; else bad "$deck schema"; printf "$bad_files
+"; fi
+done
+if command -v node >/dev/null 2>&1; then
+  a=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 3f9a2c1e --json | tr -d ' \n')
+  b=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 3f9a2c1e --json | tr -d ' \n')
+  [ "$a" = "$b" ] && [ -n "$a" ] && ok "roll.mjs deterministic for a fixed key" || bad "roll.mjs not deterministic"
+  r=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 3f9a2c1e --reroll 1 --json)
+  grep -q '"reroll": 1' <<< "$r" && ok "roll.mjs reroll" || bad "roll.mjs reroll"
+  s2=$(node scripts/roll.mjs --scope surface --mode operate --grain view --key 3f9a2c1e --json)
+  grep -q '"challengers"' <<< "$s2" && ok "roll.mjs surface scope" || bad "roll.mjs surface scope"
+else
+  echo "skip  node not found; roll.mjs untested"
+fi
 
 exit "$fail"

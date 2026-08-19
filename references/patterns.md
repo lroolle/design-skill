@@ -172,6 +172,18 @@ step, not a color. Density dense or packed. Sort and filter visible
 and labeled. Empty and loading states designed. Summaries (totals,
 worst case) above the table, never replacing it.
 
+## Browser surfaces
+
+The parts you did not draw still carry the design: text selection,
+the caret, scrollbars, focus rings, underline offset and thickness,
+`accent-color` on native controls, the numerals in tabular data. They
+ship with browser defaults that belong to no design system, and they
+are the cheapest signal that a page was built rather than assembled --
+and the one most reliably skipped. Theme them from the tokens
+(`::selection`, `caret-color`, `scrollbar-color`, `accent-color`,
+`:focus-visible`, `font-variant-numeric`); the token files do this in
+their base rules.
+
 ## Display-device ration
 
 Emphasis devices -- uppercase tracked microlabels, sub-12px sizes,
