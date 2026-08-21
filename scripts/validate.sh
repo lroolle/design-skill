@@ -130,9 +130,9 @@ rm -rf "$tmp"
 
 # 7. Forbidden names (WIP rule) and non-ascii outside CJK samples
 cd "$ROOT"
-if grep -rniE 'open-design|opendesign' . --exclude-dir=.git --exclude=validate.sh -q; then bad "forbidden name present"; else ok "no forbidden names"; fi
-if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --include='*.md' --include='*.css' --include='*.sh' -q; then
-  bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --include='*.md' --include='*.css' --include='*.sh' | head -5
+if grep -rniE 'open-design|opendesign' . --exclude-dir=.git --exclude-dir=node_modules --exclude=validate.sh -q; then bad "forbidden name present"; else ok "no forbidden names"; fi
+if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' -q; then
+  bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' | head -5
 else ok "ascii punctuation"; fi
 cd "$SKILL_DIR"
 
