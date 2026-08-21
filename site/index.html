@@ -66,6 +66,7 @@
   <div class="sponsors__inner">
     <p class="sponsors__label"><b>Four seats</b><span> on this sheet</span></p>
     <ol class="seats" aria-label="Four sponsor seats"></ol>
+    <p class="sponsors__clock" id="sponsors-clock"></p>
     <a class="sponsors__cta" href="#sheet-5"><span class="cta-long">Claim a seat</span><span class="cta-short">Claim</span></a>
   </div>
 </aside>
@@ -109,6 +110,13 @@
           Installs into Claude Code, Codex, Cursor, OpenCode and 50 more agents.
           <a href="https://github.com/lroolle/design-skill/blob/main/skills/design-skill/SKILL.md">Read the protocol</a>
           &#183; MIT &#183; v0.1.0
+        </p>
+        <p class="lede__sig">
+          This page is the specimen. It was designed by the skill, in one
+          session, by a backend engineer who cannot draw &#8212; and everything
+          needed to check that claim is on it: the roll key that assigned the
+          direction, the promise the render was audited against (first comment
+          in the source), and FIG. 4, the review that could have failed it.
         </p>
       </div>
 
@@ -613,50 +621,82 @@
       <div class="spec">
         <h2 class="spec__head">Specification &#8212; the seats</h2>
         <p class="spec__p">
-          <b>10.</b> This sheet carries four sponsor seats, and
-          <span id="seats-open">four</span> of them are open. They sit on the
-          board at the top of the page &#8212; a split-flap departure board,
-          matte enamel and hinged character cells, which is a different world
-          from this drawing sheet in every respect and is meant to be. An
-          advertisement that pretends to be part of the document is a worse
-          advertisement and a worse document; this one announces itself as
-          the foreign object it is.
+          <b>10.</b> This sheet carries four sponsor seats &#8212;
+          <span id="seats-open">four</span> open &#8212; and sells two different
+          things. Seat 01 goes <em>by the year</em>: one company holds the head
+          of the board for twelve months and there is no second one. Seats 02,
+          03 and 04 go <em>by the month</em>. Three and one is the entire
+          inventory. A board that grows a fifth seat when a fifth buyer arrives
+          is a banner farm, and the scarcity printed here is only real because
+          <code>site/sponsors.js</code> is the one place a seat can come from.
         </p>
         <p class="spec__p">
-          <b>11.</b> All four seats are on the board the whole time. The loop
+          <b>11.</b> They sit on the board at the top of the page &#8212; a
+          split-flap departure board, matte enamel and hinged character cells,
+          which is a different world from this drawing sheet in every respect
+          and is meant to be. An advertisement that pretends to be part of the
+          document is a worse advertisement and a worse document; this one
+          announces itself as the foreign object it is.
+        </p>
+        <p class="spec__p">
+          <b>12.</b> All four seats are on the board the whole time. The loop
           moves a <em>spotlight</em>, never the contents &#8212; nothing anyone
           paid for is ever hidden behind a timer, and a reader never waits a
           cycle to see who is here. The board never scrolls away either. The
           motion stops when you point at it, when you tab into it, when the tab
           goes to the background, and does not exist at all if your system asks
-          for reduced motion.
+          for reduced motion. Until a seat sells, the board shows what buying
+          one looks like: a <code>[+]</code> clatters through glyphs and settles
+          on a mark, tagged <em>specimen</em> for exactly as long as it is one.
+          No borrowed logos stand in for sponsors we do not have.
         </p>
         <p class="spec__p">
-          <b>12.</b> Until a seat sells, the board shows what buying one looks
-          like: a <code>[+]</code> clatters through glyphs and settles on a
-          mark, the flap edges catching the hall light as they turn. The filled
-          seat is tagged <em>specimen</em> for as long as it is one. No borrowed
-          logos stand in for sponsors we do not have &#8212; a name on that board
-          is a public claim about somebody else's company, and this whole page
-          exists to argue that invented proof is a defect.
+          <b>13.</b> The founding rate is a lock, not an introductory month.
+          Claim a seat before the date on the plate and that rate holds for as
+          long as you hold the seat, renewals included. The date is a constant
+          in <code>site/sponsors.js</code> and every price on this page is
+          derived from it, so when it passes the page quotes list and says so.
+          It does not move when you reload. A countdown the code does not
+          honour is the invented proof this whole document argues against.
+        </p>
+        <p class="spec__p">
+          <b>14.</b> What you cannot buy here is a number. This page loads no
+          analytics, sets no cookie and reports nothing back, so we cannot sell
+          you impressions and will not invent them. What is on offer is a
+          placement on a page that argues for its own craft, read by people who
+          came to find out how it was made &#8212; plus the request count from
+          the Cloudflare Worker that serves it, sent to every sponsor each
+          month, because that is the only figure this page can produce without
+          watching anybody.
         </p>
       </div>
 
       <figure class="fig" id="fig-5">
         <div class="seatplate" id="seatplate"></div>
+
+        <div class="founding" id="founding">
+          <p class="founding__head">Founding rate</p>
+          <p class="founding__rate" id="founding-rate">The year seat is <b>$200</b> rather than $600, a month seat <b>$20</b> rather than $60.</p>
+          <p class="founding__clock" id="founding-clock">The rate closes <time datetime="2026-10-19">2026-10-19</time>.</p>
+          <p class="founding__note" id="founding-note">Claim a seat before then and that rate is <b>locked for as long as you hold the seat</b>, renewals included. It is not an introductory month.</p>
+        </div>
+
         <dl class="terms">
-          <div><dt>Seats</dt><dd>Four. There will not be a fifth.</dd></div>
-          <div><dt>Term</dt><dd>One year, renewable, cancel any time.</dd></div>
+          <div><dt>Seats</dt><dd>Four. One by the year, three by the month. There will not be a fifth.</dd></div>
+          <div><dt>Year seat</dt><dd id="term-year">$200 the year <span class="was">(list $600)</span></dd></div>
+          <div><dt>Month seats</dt><dd id="term-month">$20 the month <span class="was">(list $60)</span></dd></div>
+          <div><dt>Term</dt><dd>Renewable, cancel any time. A month seat ends the month you say so; the year seat runs its twelve.</dd></div>
           <div><dt>Placement</dt><dd>Top of every viewport, on screen 100% of the time, both themes.</dd></div>
           <div><dt>Format</dt><dd>Your name, set in flaps on the board, and your link. No image, no iframe, no script of yours on this page.</dd></div>
           <div><dt>Tracking</dt><dd>None. This page loads no analytics, sets no cookie, and reports nothing back. You get a referrer, like any link.</dd></div>
-          <div><dt>Price</dt><dd>On enquiry &#8212; Stripe checkout is not live yet, so quoting a number here would be the invented proof this page argues against.</dd></div>
+          <div><dt>Reporting</dt><dd>The Worker&#8217;s own request count, sent to sponsors monthly. It is the only number we have, and it goes out undressed.</dd></div>
+          <div><dt>Payment</dt><dd>Stripe checkout is not live yet, so a seat is claimed by opening an issue and settled by invoice.</dd></div>
         </dl>
         <figcaption>
-          FIG. 5 &#8212; the four seats at drawing size, in this document's own
+          FIG. 5 &#8212; the four seats at drawing size, in this document&#8217;s own
           hand. Dashed is open. The board at the top of the page is the same four
           seats rendered from the same array, so the drawing and the board can
-          never disagree about what is for sale.
+          never disagree about what is for sale, on what term, or at what price.
         </figcaption>
       </figure>
 
@@ -665,8 +705,8 @@
     <div class="titleblock">
       <div class="titleblock__cell"><span>Title</span><b>The seats</b></div>
       <div class="titleblock__cell"><span>Sheet</span><b>5 of 5</b></div>
-      <div class="titleblock__cell"><span>Seats</span><b>4</b></div>
-      <div class="titleblock__cell"><span>Term</span><b>1 year</b></div>
+      <div class="titleblock__cell"><span>Seats</span><b>3 + 1</b></div>
+      <div class="titleblock__cell"><span>Term</span><b>Month / year</b></div>
     </div>
   </div>
 </section>

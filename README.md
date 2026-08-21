@@ -48,6 +48,26 @@ fresh-context reviewer checks the render against it.
 Every phase ends on a condition the agent can check, and the last one
 can fail the work.
 
+## Why a backend engineer built this
+
+I write backends. I can read a query plan and I cannot draw. For years
+that meant every interface I shipped wore someone else's defaults, and
+every interface an agent built for me came back as the same saturated
+sans, the same hero with two buttons and three feature cards --
+competent, anonymous, and in some ways worse than what it replaced,
+because now it *looked* finished.
+
+The bet in this repo is that most of what reads as taste is not a hand.
+It is a sequence you can run: refuse to let the model rank its own
+ideas, deal it a form it would never have retrieved, make it write the
+choice down before it builds, and hand the render to a reviewer that is
+allowed to say no. Do that and the output stops being average -- because
+average is exactly what ranking your own ideas produces.
+
+You do not need an eye to start. You need a protocol that will not let
+you skip the parts an eye would have caught.
+
+
 ## The loop
 
 | Phase | Output | Done when |
@@ -154,8 +174,9 @@ repo is the standalone all-in-one; that quartet is the modular one.
 `site/` is the page at [lroolle.com/design-skill](https://lroolle.com/design-skill),
 built by running this protocol end to end. The roll key is printed in the
 title block; the promise it was audited against is the first comment in the
-body of `site/index.html`; It is live at
-[lroolle.com/design-skill](https://lroolle.com/design-skill).
+body of `site/index.html`. I drew none of it: the die picked the direction,
+the deck dealt the challengers, the promise was written before the first line
+of CSS, and the review sent the page back once before it shipped.
 `site/DESIGN.md` records what was bound, what was
 deferred and why, and the two defects the run found in the skill itself -- a
 `bans.sh` false positive on HTML numeric entities, and `--fg-3` failing the
@@ -184,6 +205,20 @@ identity. Direction before detail; contract, then memory. The one
 line under all of it: a change that makes the surface prettier and
 the task harder must fail. `references/thinking.md` inside the skill
 has the eleven beliefs; every rule in the repo traces to one.
+
+## Sponsors
+
+The page carries four seats on a split-flap board: one sold by the year,
+three by the month. Founding rate until **2026-10-19** -- $200 the year
+(list $600), $20 the month (list $60) -- and it is a lock, not an
+introductory month: claim a seat before that date and the rate holds for
+as long as you hold it.
+
+No analytics run on that page, so there are no impression numbers to
+quote and none will be invented. What sponsors get instead is the
+Worker's own request count, sent out monthly, undressed.
+[The seats, and the whole of the terms](https://lroolle.com/design-skill#sheet-5)
+&middot; [claim one](https://github.com/lroolle/design-skill/issues/new?title=Sponsor+seat).
 
 ## Lineage and license
 

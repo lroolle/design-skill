@@ -12,14 +12,33 @@
  *    seat does, shown rather than written, which is the only honest way to
  *    advertise an ad slot.
  *
+ * 3. The board sells two things, not one. Seat 01 goes by the year and there is
+ *    one of it; seats 02-04 go by the month. The tier is a property of the
+ *    seat, so the strip, the plate on SHEET 5, the terms and the call to action
+ *    cannot disagree about what is for sale or what it costs.
+ *
+ * 4. The founding rate has a real deadline that this file enforces. It is a
+ *    constant instant; the copy is derived from it. Past it the page quotes
+ *    list. Reloading does not move it.
+ *
  * ---------------------------------------------------------------------------
- * TO SELL A SEAT: add an entry to SPONSORS and set PRICE. Nothing else.
+ * TO SELL A SEAT: add an entry to SPONSORS. To change the offer, edit RATE,
+ * FOUNDING_UNTIL or CHECKOUT. Nothing else.
  * ---------------------------------------------------------------------------
  */
 (function () {
   'use strict';
 
   var SEAT_COUNT = 4;
+
+  /* The seats are not interchangeable, and the difference is the product.
+     Seat 01 is sold by the year -- one company holds the head of the board for
+     twelve months and there is no second one. Seats 02, 03 and 04 are sold by
+     the month. Three and one is the entire inventory: a board that grows a
+     fifth seat when a fifth buyer turns up is a banner farm, and the scarcity
+     printed on this page is only real because this array is the one place a
+     seat can come from. */
+  var TERM = { 1: 'year', 2: 'month', 3: 'month', 4: 'month' };
 
   /* Real sponsors only. A name on this board is a public claim that the company
      pays for the seat, so an aspirational logo is not a placeholder -- it is a
@@ -28,11 +47,39 @@
      Shape: { seat: 1, name: 'Company', url: 'https://...', since: '2026' } */
   var SPONSORS = [];
 
-  /* Set this when Stripe is live. Until then the call to action says what is
-     actually true and points at a real inbox. */
-  var PRICE = null;   // e.g. { amount: '$480', period: 'year', url: 'https://buy.stripe.com/...' }
+  /* Two rates and one deadline, all of them real.
+
+     FOUNDING_UNTIL is a fixed instant, not a window that restarts on each
+     visit. Past it this file quotes list and says the founding rate closed --
+     the clock on SHEET 5 reads this constant and nothing else, and there is no
+     branch anywhere that extends it. A countdown that resets when you reload
+     is exactly the invented proof this page was built to argue against, so the
+     only way to keep the claim honest was to let the code enforce it.
+
+     What a founding sponsor buys is not a discount, it is a lock: the founding
+     rate holds for as long as they hold the seat, renewals included. */
+  var RATE = {
+    year:  { list: '$600', founding: '$200' },
+    month: { list: '$60',  founding: '$20'  }
+  };
+  var FOUNDING_UNTIL = Date.parse('2026-10-19T00:00:00Z');
+
+  /* Set each to a checkout URL when Stripe is live. Until then the call to
+     action points at a real inbox -- the price above is true either way. */
+  var CHECKOUT = { year: null, month: null };
 
   var ENQUIRE = 'https://github.com/lroolle/design-skill/issues/new?title=Sponsor+seat&body=Which+seat,+and+who+for%3F';
+
+  function founding() { return Date.now() < FOUNDING_UNTIL; }
+  function rateFor(term) {
+    var r = RATE[term];
+    return founding() ? r.founding : r.list;
+  }
+  function linkFor(n) {
+    var s = seatData(n);
+    if (s) return s.url;
+    return CHECKOUT[TERM[n]] || (ENQUIRE + '&seat=' + n);
+  }
 
   /* Shown while demonstrating what a filled seat looks like, and tagged
      SPECIMEN in the UI for exactly as long as it is one. */
@@ -124,8 +171,10 @@
      is a real thing a real board does. */
   function fieldFor(text) {
     var w = band.clientWidth || 1024;
-    if (w >= 960) return 12;
-    if (w >= 720) return 10;
+    /* Raised when the deadline strip joined the bezel: the board sizes itself
+       to the hall, and the hall now has one more fixture in it. */
+    if (w >= 1180) return 12;
+    if (w >= 860) return 10;
     var t = String(text).length;
     return Math.max(3, Math.min(t + 1, w < 560 ? 10 : 11));
   }
@@ -151,15 +200,24 @@
       li.setAttribute('data-seat', String(n));
       if (s) li.dataset.sold = '1';
 
+      var term = TERM[n];
+      li.setAttribute('data-term', term);
+
       var a = document.createElement('a');
       a.className = 'seat__body';
-      a.href = s ? s.url : (PRICE && PRICE.url ? PRICE.url : ENQUIRE);
+      a.href = linkFor(n);
       if (s) { a.rel = 'sponsored noopener'; a.target = '_blank'; }
+      /* The term mark rides with the seat number and disappears with it on a
+         narrow board -- the tier is useful context, never the headline. */
       a.innerHTML =
-        '<span class="seat__no">' + String(n).padStart(2, '0') + '</span>' +
+        '<span class="seat__no">' + String(n).padStart(2, '0') +
+          '<span class="seat__term">' + (term === 'year' ? 'YR' : 'MO') + '</span>' +
+        '</span>' +
         '<span class="board" aria-hidden="true">' + buildBoard(fieldFor(s ? s.name : VACANT)) + '</span>' +
         '<span class="visually-hidden">' +
-          (s ? 'Seat ' + n + ', sponsored by ' + esc(s.name) : 'Seat ' + n + ' is open. Claim it.') +
+          (s
+            ? 'Seat ' + n + ', the ' + term + 'ly seat, sponsored by ' + esc(s.name)
+            : 'Seat ' + n + ' is open, sold by the ' + term + ' at ' + rateFor(term) + '. Claim it.') +
         '</span>';
       li.appendChild(a);
 
@@ -176,23 +234,89 @@
     }
     paintLabel();
     paintPlate();
+    paintClock();
     wireHover();
   }
+
+  // --------------------------------------------------- the founding deadline
+
+  /* One instant, read in four places: the strip on the board, the rate line and
+     the clock on SHEET 5, and the two price cells in the terms. When it passes,
+     every one of them says so and the quoted price becomes list -- there is no
+     branch here that can extend it, and reloading does not move it. An offer
+     whose deadline the code does not honour is the invented proof this page
+     exists to argue against, so the deadline is a constant and the copy is
+     derived from it rather than the other way round. */
+
+  var UNTIL_ISO = new Date(FOUNDING_UNTIL).toISOString().slice(0, 10);
+  var bandClock = band.querySelector('.sponsors__clock');
+
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function remaining() {
+    var ms = FOUNDING_UNTIL - Date.now();
+    if (ms <= 0) return null;
+    var mins = Math.floor(ms / 60000);
+    return { d: Math.floor(mins / 1440), h: Math.floor((mins % 1440) / 60), m: mins % 60 };
+  }
+  function setText(id, html) { var el = document.getElementById(id); if (el) el.innerHTML = html; }
+
+  function paintClock() {
+    var r = remaining();
+    var stamp = '<time datetime="' + UNTIL_ISO + '">' + UNTIL_ISO + '</time>';
+
+    if (bandClock) {
+      /* Day resolution on the bezel, minute resolution on SHEET 5. A band that
+         repaints a minute digit next to a headline is asking to be watched
+         instead of read, and the hall has no width to spare for the colons. */
+      bandClock.textContent = r
+        ? 'Founding rate \u00b7 ' + (r.d > 0 ? r.d + 'd left' : r.h + 'h left')
+        : 'Founding rate closed';
+      bandClock.classList.toggle('is-closed', !r);
+    }
+
+    setText('founding-rate', r
+      ? 'The year seat is <b>' + RATE.year.founding + '</b> rather than ' + RATE.year.list +
+        ', a month seat <b>' + RATE.month.founding + '</b> rather than ' + RATE.month.list + '.'
+      : 'The year seat is <b>' + RATE.year.list + '</b>, a month seat <b>' + RATE.month.list + '</b>.');
+
+    setText('founding-clock', r
+      ? '<b data-mono>' + r.d + 'd ' + pad2(r.h) + 'h ' + pad2(r.m) + 'm</b> remaining \u2014 the rate closes ' + stamp + '.'
+      : 'The founding rate closed on ' + stamp + '. These are list prices.');
+
+    setText('founding-note', r
+      ? 'Claim a seat before then and that rate is <b>locked for as long as you hold the seat</b>, renewals included. It is not an introductory month.'
+      : 'Founding sponsors who claimed before ' + UNTIL_ISO + ' keep their rate for as long as they hold the seat.');
+
+    setText('term-year', rateFor('year') + ' the year' + (r ? ' <span class="was">(list ' + RATE.year.list + ')</span>' : ''));
+    setText('term-month', rateFor('month') + ' the month' + (r ? ' <span class="was">(list ' + RATE.month.list + ')</span>' : ''));
+  }
+
+  /* Minute resolution, so the page is not repainting a seconds digit forever.
+     The interval is cleared with nothing else -- it is the only timer here that
+     is allowed to outlive the motion loop, because the deadline is information,
+     not decoration, and it stays true under reduced motion and in a still tab. */
+  setInterval(paintClock, 30000);
 
   function paintLabel() {
     var open = SEAT_COUNT - SPONSORS.length;
     var label = band.querySelector('.sponsors__label');
     if (label) {
+      /* The label says the count and stops. Which seat is a year and which is a
+         month is written on the seats themselves -- a band that also spells it
+         out in words is claiming what the board is already showing, and the
+         words are what push the hall into overflow. */
       label.innerHTML = open === 0
         ? '<b>Four seats</b><span> on this sheet</span>'
-        : '<b>' + word(open) + (open === 1 ? ' seat' : ' seats') + ' open</b><span> on this sheet</span>';
+        : '<b>' + word(open) + (open === 1 ? ' seat' : ' seats') + ' open</b>';
     }
+    /* The call to action quotes the cheapest door, which is a month seat. It is
+       the true price at the instant it is read: rateFor() consults the clock. */
     if (cta) {
-      cta.href = PRICE && PRICE.url ? PRICE.url : ENQUIRE;
+      cta.href = CHECKOUT.month || (ENQUIRE + '&seat=2');
       var long = cta.querySelector('.cta-long');
       var short = cta.querySelector('.cta-short');
-      if (long) long.textContent = PRICE ? 'Claim a seat / ' + PRICE.amount + ' a ' + PRICE.period : 'Claim a seat';
-      if (short) short.textContent = PRICE ? PRICE.amount + '/' + PRICE.period.slice(0, 2) : 'Claim';
+      if (long) long.textContent = 'Claim a seat / ' + rateFor('month') + ' a month';
+      if (short) short.textContent = rateFor('month') + '/mo';
     }
   }
 
@@ -210,12 +334,16 @@
       var s = seatData(n);
       var cell = document.createElement('div');
       cell.className = 'seatplate__cell seat ' + (s ? 'seat--taken' : 'seat--open');
+      var term = TERM[n];
+      cell.setAttribute('data-term', term);
       cell.innerHTML =
         '<svg class="seat__frame" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">' +
           '<rect class="seat__rect" x="0.5" y="0.5" width="99" height="39" pathLength="100"></rect>' +
         '</svg>' +
         '<span class="seatplate__no">' + String(n).padStart(2, '0') + '</span>' +
-        '<span class="seatplate__state">' + (s ? esc(s.name) : VACANT) + '</span>';
+        '<span class="seatplate__state">' + (s ? esc(s.name) : VACANT) + '</span>' +
+        '<span class="seatplate__term">' + (term === 'year' ? 'by the year' : 'by the month') +
+          ' \u00b7 ' + rateFor(term) + '</span>';
       plate.appendChild(cell);
     }
     var count = document.getElementById('seats-open');
