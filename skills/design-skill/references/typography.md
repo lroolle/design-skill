@@ -67,6 +67,12 @@ phone.
   dashboards; proportional in prose. `slashed-zero` in mono/data.
 - Real quotes and apostrophes, real dashes, `&thinsp;` around em
   dashes where the face is tight; hanging punctuation on pull quotes.
+- Composition hygiene: one space between sentences; apostrophes curl
+  down (it's, '90s), foot and inch marks stay straight (5'10", 27");
+  a real ellipsis (…) not three periods; real © ® ™ glyphs, not
+  (c) (r) (tm); `&nbsp;` between a number and its unit or symbol
+  (section 3, 10 km, 4 pm) so they never split across a line. On
+  a persuade surface, ration exclamation points to one.
 - Optical size: use `font-optical-sizing: auto` on variable faces
   with an opsz axis; a text-optimized cut at 14px, a display cut at 64.
 - Tracking: tighten display, never body; uppercase runs get +0.04 to
