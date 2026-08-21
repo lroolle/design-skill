@@ -63,6 +63,7 @@ it. (frameworks.md has the adoption table and token mapping.)
 | [Laws of UX](https://lawsofux.com/) | Fitts, Hick, Jakob, Miller, Doherty, named | naming *why* a layout works |
 | [Nielsen Norman Group](https://www.nngroup.com/) | usability research | you need evidence for a flow or pattern choice |
 | [Refactoring UI](https://www.refactoringui.com/) | hierarchy, spacing, depth, for developers | a layout "feels off" and you cannot say why |
+| [Practical Typography](https://practicaltypography.com/) (Butterick) | the four body-text choices -- size, leading, measure, face -- and composition rules, written for non-designers | setting long-form, docs, or print type; a sanity pass on quotes, dashes, spaces. Its "avoid system fonts" rule is print-era and sells his faces; fontbook.md wins. All rights reserved: take the rules, not the prose |
 | [Inclusive Components](https://inclusive-components.design/) | accessible component patterns with state | building any menu, tab, toggle, disclosure |
 | [Hobday: safe rules](https://anthonyhobday.com/sideprojects/saferules/) | visual design rules that rarely fail | a fast sanity pass on contrast, spacing, alignment |
 | [Hobday: application visual design](https://anthonyhobday.com/sideprojects/quickstart/applicationvisualdesign) | product-surface visual design, end to end | styling an app screen, not a landing page |
