@@ -8,10 +8,21 @@ carrying four sponsor slots, deliberately a different world from the drawing
 sheet it sits on. No build step, no dependencies,
 no framework.
 
-**To sell a seat:** add one entry to `SPONSORS` in `site/sponsors.js` and set
-`PRICE`. The band, the SHEET 5 plate, the seat count in the copy and the call
-to action all follow from that array -- there is nowhere for them to disagree. Every asset path is relative, so the directory
-works at any base path -- `/`, `/design-skill/`, or anywhere else.
+**The offer, in four constants** at the top of `site/sponsors.js`:
+
+| Constant | What it decides |
+|---|---|
+| `TERM` | which seat sells by the year (01) and which by the month (02-04) |
+| `RATE` | list and founding price for each term |
+| `FOUNDING_UNTIL` | the instant the founding rate closes. Fixed; the page quotes list after it |
+| `CHECKOUT` | per-term checkout URL. Null means every seat link points at the enquiry inbox |
+
+**To sell a seat:** add one entry to `SPONSORS`. The band, the deadline strip,
+the SHEET 5 plate, the terms table, the seat count in the copy and the call to
+action all derive from those constants -- there is nowhere for them to
+disagree, and no way to quote a price the deadline has expired. Every asset
+path is relative, so the directory works at any base path -- `/`,
+`/design-skill/`, or anywhere else.
 
 - [DESIGN.md](DESIGN.md) -- the material contract, written at finish from the
   built world: what the roll dealt, what was bound, what was deferred and why,

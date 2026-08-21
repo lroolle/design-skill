@@ -251,10 +251,31 @@ hr { border: 0; border-top: var(--line-w) solid var(--line); }
   --board-dim:   oklch(0.660 0.010 250);   /* secondary, clears 4.5 on tile */
   --board-live:  oklch(0.700 0.195 27);    /* the remark colour          */
   --board-edge:  oklch(0.330 0.012 250);   /* the bezel catching light   */
+
+  /* Brass. A hall board of this kind is mounted in metal, and the position a
+     house reserves is a plate rather than a painted cell. So brass has exactly
+     one job here: it is the YEAR seat and the frame that holds it. It is not a
+     second status colour -- red still marks state (lit, hovered, the action)
+     and brass marks tier, permanently, on one seat. Two axes, no collision.
+     Nothing gradients and nothing glows at rest; the catch is still the flap
+     edge turning through the light. */
+  --board-brass:      oklch(0.425 0.088 84);   /* the reserved plate's face  */
+  --board-brass-seam: oklch(0.545 0.095 86);   /* its hinge, catching light  */
+  --board-brass-char: oklch(0.895 0.118 92);   /* struck letters on brass    */
+  --board-brass-dim:  oklch(0.720 0.080 88);   /* its numeral and term mark  */
+  --board-brass-edge: oklch(0.575 0.098 85);   /* the mounting bezel         */
+  --board-brass-lift: oklch(0.510 0.098 84);   /* brass under the spotlight  */
 }
 [data-theme="dark"] .sponsors {
   --board:       oklch(0.205 0.010 250);
   --board-tile:  oklch(0.275 0.010 250);
   --board-seam:  oklch(0.165 0.010 250);
   --board-edge:  oklch(0.395 0.010 250);
+
+  --board-brass:      oklch(0.452 0.090 84);
+  --board-brass-seam: oklch(0.575 0.097 86);
+  --board-brass-char: oklch(0.905 0.120 92);
+  --board-brass-dim:  oklch(0.745 0.082 88);
+  --board-brass-edge: oklch(0.615 0.100 85);
+  --board-brass-lift: oklch(0.538 0.100 84);
 }

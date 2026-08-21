@@ -21,7 +21,7 @@
   font-family: var(--font-display);
   /* a mounted panel: the top edge catches the hall light, the bottom sits in
      its own shadow. The only lit edge anywhere on this page. */
-  border-top: var(--line-w) solid var(--board-edge);
+  border-top: var(--line-w) solid var(--board-brass-edge);
   border-bottom: var(--line-w) solid var(--board-seam);
   overflow: hidden;
   isolation: isolate;
@@ -49,6 +49,10 @@
   text-transform: uppercase;
   color: var(--board-dim);
   white-space: nowrap;
+  /* Clip rather than spill: a fixture that overruns its box gets painted over
+     by the flap cells, which is how the hall reads as broken. */
+  min-width: 0;
+  overflow: hidden;
 }
 .sponsors__label b { color: var(--board-char); font-weight: 600; }
 
@@ -325,4 +329,164 @@
    offer is complete and legible, and nothing turns. */
 @media (prefers-reduced-motion: reduce) {
   .flap.is-turn .flap__ch { animation: none; }
+}
+
+/* ------------------------------------------------- the term mark and clock
+ *
+ * Two additions the two-tier board needs, both held to the world's own rules:
+ * one condensed uppercase grotesk, cells and rules for structure, and NO red.
+ * Red on this board is the status colour -- the seat the loop is on, the seat
+ * under the pointer, the one action. A deadline painted red would be a fourth
+ * status light, which is what having none looks like. The clock earns its
+ * weight from position and from the flap-white numeral, not from colour.
+ */
+
+.seat__term {
+  display: block;
+  margin-top: 0.15em;
+  font-size: 0.5rem;
+  font-weight: 600;
+  font-stretch: 70%;
+  letter-spacing: 0.14em;
+  color: var(--board-dim);
+}
+.seat--lit .seat__term { color: var(--board-char); }
+
+.sponsors__clock {
+  margin: 0;
+  flex: none;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-stretch: 82%;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--board-dim);
+  white-space: nowrap;
+  /* the deadline is a plate screwed to the bezel, not a sticker on the tiles */
+  border-inline-start: var(--line-w) solid var(--board-edge);
+  padding-inline-start: var(--space-4);
+  min-width: 0;
+  overflow: hidden;
+}
+.sponsors__clock.is-closed { color: var(--board-dim); }
+
+/* ---------------------------------------------- the founding note, SHEET 5
+ *
+ * On the sheet the seats are drawn in the document's own hand, never in the
+ * board's -- so this is a ruled note block with a legend riding the rule, the
+ * way a drawing carries a note. No fill, no accent: the accent on this page is
+ * spent in exactly four places and a price is not one of them.
+ */
+
+.seatplate__term {
+  display: block;
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-stretch: 82%;
+  letter-spacing: 0.06em;
+  color: var(--fg-3);
+}
+
+.founding {
+  position: relative;
+  margin-top: var(--space-6);
+  padding: var(--space-5) var(--space-4) var(--space-4);
+  border: var(--line-w) solid var(--line-strong);
+}
+.founding__head {
+  position: absolute;
+  top: 0;
+  inset-inline-start: var(--space-3);
+  transform: translateY(-50%);
+  margin: 0;
+  padding-inline: var(--space-2);
+  background: var(--surface);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  font-stretch: 82%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+.founding p { margin: 0; }
+.founding__rate {
+  font-size: var(--text-base);
+  color: var(--fg);
+  line-height: var(--leading-body);
+}
+.founding__rate b { font-weight: 600; }
+.founding__clock {
+  margin-top: var(--space-2) !important;
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
+.founding__clock b { font-weight: 600; color: var(--fg); }
+.founding__note {
+  margin-top: var(--space-3) !important;
+  padding-top: var(--space-3);
+  border-top: var(--line-w) solid var(--line);
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+  line-height: var(--leading-body);
+}
+
+.terms .was { color: var(--fg-3); }
+
+/* The clock is the first thing to go when the hall narrows: the hard rule on
+   this band is that it may not push the page's own headline below the fold. */
+@media (max-width: 61.99rem) {
+  .sponsors__clock { display: none; }
+}
+@media (max-width: 44rem) {
+  .seat__term { display: none; }
+}
+
+
+/* --------------------------------------------------------- the year seat
+ *
+ * One seat on this board is sold by the year and there is one of it. On a hall
+ * board the position a house keeps is not a painted cell, it is a plate --
+ * so seat 01 is made of the same brass the board is mounted in, and the three
+ * month seats stay enamel. The hierarchy is the material, which means it
+ * survives being screenshotted, printed, or read with the copy stripped out.
+ *
+ * Brass is a tier, not a status. Red still owns state: the seat the loop is
+ * on, the seat under the pointer, the one action. When those land on the year
+ * seat they win, because a reader needs to know where the pointer is more than
+ * they need to know which seat costs more.
+ *
+ * Nothing here gradients and nothing glows at rest. The shine is still the
+ * flap edge turning through the hall light -- brass just catches more of it.
+ */
+
+.sponsors .seat[data-term="year"] .flap { background: var(--board-brass); }
+/* On the enamel seats the seam is a shadow gap between two painted leaves. On
+   a brass plate the same edge is turned metal, so it catches the hall light
+   instead of swallowing it -- the hinge goes lighter than the face. That one
+   inversion is what makes the plate read as metal rather than as a warm
+   repaint, and it is a hairline, not a gradient laid over a resting surface. */
+.sponsors .seat[data-term="year"] .flap::after { background: var(--board-brass-seam); }
+.sponsors .seat[data-term="year"] .flap__ch { color: var(--board-brass-char); }
+.sponsors .seat[data-term="year"] .seat__no { color: var(--board-brass-dim); }
+.sponsors .seat[data-term="year"] .seat__term { color: var(--board-brass-dim); }
+
+/* the spotlight and the pointer lift brass into brass, not into grey */
+.sponsors .seat[data-term="year"].seat--lit .flap,
+.sponsors .seat[data-term="year"].seat--open:hover .flap,
+.sponsors .seat[data-term="year"].seat--open:focus-within .flap { background: var(--board-brass-lift); }
+.sponsors .seat[data-term="year"].seat--lit .seat__no { color: var(--board-live); }
+
+/* metal takes the light harder than enamel does. Same mechanism, one stop up. */
+.sponsors .seat[data-term="year"] .flap.is-turn .flap__ch { animation: flap-turn-brass 120ms linear; }
+@keyframes flap-turn-brass {
+  0%   { transform: rotateX(0deg);   filter: brightness(1); }
+  48%  { transform: rotateX(-84deg); filter: brightness(2.7); }
+  52%  { transform: rotateX(84deg);  filter: brightness(2.7); }
+  100% { transform: rotateX(0deg);   filter: brightness(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sponsors .seat[data-term="year"] .flap.is-turn .flap__ch { animation: none; }
 }
