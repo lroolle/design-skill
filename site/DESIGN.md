@@ -63,6 +63,10 @@ contracts -- material wearing a world's clothes, not a world.
 
 ## The sponsor band (SHEET 5, and the strip on every viewport)
 
+Four seats, two tiers: one sold by the year, three by the month, on a founding
+rate with a deadline the code enforces. The year seat is a brass plate on an
+enamel board -- the tier is the material, not a label.
+
 Composition rolled at surface scope, key **5849b9a3**, which dealt
 `first-viewport-is-the-product-running` first: for an ad slot that means the
 region must *demonstrate itself* rather than describe itself. Written back into
@@ -81,6 +85,55 @@ the deck as `stagings/sponsor-seats-as-a-numbered-plate.md`.
   four -- that is the product being sold, so it has to be true rather than
   claimed. `site/behaviour.mjs` asserts the band and the SHEET 5 plate render
   from the same array.
+- **Two tiers, one array.** Seat 01 sells by the year and there is one of it;
+  seats 02-04 sell by the month. The tier is a property of the seat (`TERM` in
+  `site/sponsors.js`), so the strip, the plate, the terms table and the call to
+  action are all derived and cannot disagree about what is for sale, on what
+  term, at what price. Three-and-one is the whole inventory: a board that grows
+  a fifth seat for a fifth buyer is a banner farm, and the scarcity the copy
+  claims is only true because the array is the only source of a seat.
+- **The founding rate is enforced, not decorated.** `FOUNDING_UNTIL` is a fixed
+  instant; every price string on the page is `rateFor(term)`, which reads it.
+  Past it the page quotes list and says the rate closed. There is no branch that
+  extends it and reloading does not move it. A countdown that resets on load is
+  the invented proof this page argues against, so the only way to earn the
+  urgency was to let the code honour the deadline. What a founding sponsor buys
+  is a lock rather than a discount -- the rate holds while they hold the seat.
+- **Brass marks the tier, and only the tier.** The board is mounted in brass
+  (the lit top bezel) and seat 01, the one sold by the year, is made of it: warm
+  tile faces, a brass numeral, brass letters. The three month seats stay enamel.
+  A hall board's reserved position is a plate rather than a painted cell, so the
+  hierarchy is carried by material -- which means it survives a screenshot, a
+  print, and a reader who skips the copy. Brass and red do not collide because
+  they are different axes: brass is tier and never moves, red is state and
+  always does. When the spotlight or the pointer lands on the year seat, red
+  wins the numeral and the plate lifts to a brighter brass rather than to grey.
+- **The brass hinge is the one inversion.** On the enamel seats the seam is
+  darker than the tile: a shadow gap between two painted leaves. On brass it is
+  lighter, because a metal edge catches the hall light instead of swallowing it.
+  That single flip is what makes the plate read as metal rather than as a warm
+  repaint, and it is a hairline, not a gradient over a resting surface. The
+  flap-turn catch is one stop brighter on brass (2.7 against 2.2) for the same
+  reason. Nothing glows at rest.
+- **Brass never reaches the drawing sheet.** The rules are scoped to
+  `.sponsors`. FIG. 5 renders the same four seats from the same array in the
+  document's own hand -- ink, dashes, no metal -- and `behaviour.mjs` asserts
+  the plate cells for the year and month seats share a background.
+- **Measured, not eyeballed.** Brass letters on brass clear the 4.5:1 floor in
+  both themes, sampled through a canvas round-trip because Chromium hands back
+  the colour function verbatim and parsing the string lies. `behaviour.mjs`
+  gates it.
+- **The deadline is not painted red.** Red on this band marks state only. A
+  countdown in `--board-live` would be a fourth status light next to the lit
+  seat, the hovered seat and the action, which is what having no status light
+  looks like. The clock is flap-white on enamel and earns its weight from
+  position: mounted on the bezel, inside a rule, right of the seats. It is also
+  the first element dropped below 62rem, because the band's hard rule outranks
+  it (see below).
+- **No number we cannot produce.** The page has no analytics, so it does not
+  sell impressions. What it publishes to sponsors instead is the Worker's own
+  request count -- the one figure this page can generate without watching
+  anybody, and a commitment `deploy/` can actually keep.
 - **The idle loop is the demo.** An open seat reads `[+]`; the loop clatters it
   through glyphs and settles it on a mark, then clatters it back. Every fourth
   beat the whole board runs left to right instead -- the hall clatter, every
@@ -135,10 +188,18 @@ The figure caption says so; the readout prints the file each value came from.
   build step, so it carries no font binaries either. Now that it ships from a
   Worker with an assets binding, subsetting the four faces into `site/` and
   dropping the third-party `<link>` is a straight swap -- still open.
-- **Price is "on enquiry" (accepted).** Stripe is not live, so a number on the
-  page would be invented. `PRICE` and `SPONSORS` are single constants at the top
-  of `site/sponsors.js`; setting them switches the call to action to
-  "Claim a seat / $X a year" and points it at checkout. Nothing else changes.
+- **Prices are published, checkout is not (accepted).** A price is a decision,
+  not a measurement, so quoting one is honest where quoting traffic would not
+  be. `RATE`, `FOUNDING_UNTIL`, `TERM` and `CHECKOUT` are single constants at
+  the top of `site/sponsors.js`. Stripe is still not live: `CHECKOUT` is null,
+  so every seat link points at a real inbox and the terms say so in plain words
+  rather than implying a card form that does not exist. Filling `CHECKOUT`
+  switches every link to checkout and changes nothing else.
+- **The clock ticks at minute resolution (accepted).** `setInterval` at 30s,
+  displaying days/hours/minutes. A seconds digit would repaint forever for
+  urgency this page does not need, and it would make every capture differ. The
+  interval is deliberately outside the motion loop: the deadline is information,
+  not decoration, so it keeps running under reduced motion and in a still tab.
 - **The switch is a radiogroup without roving arrow keys (P2).** Tab reaches
   every option and `aria-checked` is correct; arrow-key roving is the polish
   that is missing.

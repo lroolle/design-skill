@@ -425,3 +425,16 @@ text[data-ref].is-lit { fill: var(--accent); }
   .install__copy, .install__cmd { min-height: 44px; display: flex; align-items: center; }
   .skip { min-height: 44px; display: inline-flex; align-items: center; }
 }
+
+/* The specimen line: this page is the skill's own output, and the claim is
+   only worth making next to the things that let a reader check it. Set below
+   the action so it never costs the lede its install command. */
+.lede__sig {
+  margin: var(--space-5) 0 0;
+  padding-top: var(--space-3);
+  border-top: var(--line-w) solid var(--line);
+  max-width: 46ch;
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+  line-height: var(--leading-body);
+}
