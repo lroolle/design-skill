@@ -42,13 +42,18 @@ contracts -- material wearing a world's clothes, not a world.
   one lighter weight for leaders and hatching (`.hair`, 1px, `--fg-3`). No
   fills in any figure. `vector-effect: non-scaling-stroke` so the weight is
   constant however the sheet scales.
-- **Accent.** Drafting-pencil red, hue 27, `--accent`. It appears in exactly
-  four places: the assigned bar and ring, the WINS verdict, the primary
-  action, and links. Nothing else on the page is coloured.
+- **Accent.** Drafting-pencil red, hue 27, `--accent`. It marks the assigned
+  bar and ring, the WINS verdict, the primary action, links and link-styled
+  text actions (the "Roll again" under FIG. 1), and state on the bench's
+  controls (hover, focus, a key the visitor left invalid). Nothing else on the
+  page is coloured; the count was four places until the deal began to run,
+  and the honest line now is: accent is assignment, verdict, action, and
+  state.
 - **Numerals.** Every part carries a reference numeral on a leader; the
   numerals in the specification are live and light their part on hover and
-  focus, with the paragraph washed in `--accent-soft`. Fourteen parts, fourteen
-  numerals, one-to-one -- `scripts/validate.sh` does not check this, the
+  focus, with the paragraph washed in `--accent-soft`. Fifteen parts, fifteen
+  numerals, one-to-one -- the bench over FIG. 2 is part 40, because a control
+  on a drawing sheet without a numeral is chrome, and it lights like any part -- `scripts/validate.sh` does not check this, the
   binding is asserted by the markup (`data-part` / `data-ref`).
 - **Type.** Archivo (OFL, width axis 75-112) draughts FIG. labels, reference
   numerals and every label; the width axis is the one section-label device.
@@ -58,8 +63,73 @@ contracts -- material wearing a world's clothes, not a world.
   rounded corners on the page are inside the FIG. 3 specimen, which renders
   another material contract's radius on purpose.
 - **Motion.** One entrance: FIG. 1 draws itself in 1100ms, then its text and
-  marks ink in. Nothing else moves except the instant highlight and the
-  specimen re-ink. `prefers-reduced-motion` leaves the page complete and still.
+  marks ink in. Beyond that only the instant highlight, the specimen re-ink,
+  and the one living element below: the deal, running in FIG. 1 and FIG. 2.
+  `prefers-reduced-motion` leaves the page complete and still, the deal that
+  built it in the markup.
+
+## The living element: the deal, running (FIG. 1 and FIG. 2)
+
+Added 2026-08-23, the first build against `references/simulation.md`, and the
+surface that card was written for: a persuade page whose central claim -- "a
+die you can reproduce" -- a screenshot cannot prove. The model card is the
+header comment of `site/deal.js`.
+
+- **One model, two figures.** `site/deal.js` holds the state (key, deal,
+  tally) and the rule: `scripts/roll.mjs` ported line for line -- the same
+  SHA-256 ranks, the same rating tickets, the same mode and platform filters --
+  over `site/deck.js`, which `site/deck.mjs` generates from the same
+  `worlds/*.md` the CLI reads. FIG. 1 renders it at drawing scale (the key
+  under the die, the marked slot on the rack, the deal in words under the
+  figure); FIG. 2 renders it at bench scale (the key strip, the 1-7 scale, the
+  three cards, a tally). The same state drives both; a renderer is a skin.
+- **Review, 2026-08-23.** Fresh-context: promise kept 4/5, FIRST VIEWPORT
+  softened (a second control in the caption), none broken; disposition fix.
+  Fixed: the key field clipped its eighth glyph (`13ch`); bench controls were
+  40px and the roll button 19px at 390 (44px and a hit area now, asserted);
+  `:invalid` fired on every keystroke (`:user-invalid`); the idle interval was
+  shorter than the readout took to read (12s, and reading holds it); the bench
+  had no numeral (part 40); the caption carried the page's history (moved to
+  the specification). Accepted: the 10.5px key under the die is a tick at
+  phone scale, restated at body size in the caption.
+- **Proof, not claim.** `site/deal-check.mjs` deals N random keys through the
+  browser port under node's WebCrypto and through the CLI and fails on any
+  disagreement; `scripts/validate.sh` runs it, and checks `deck.js` regenerates
+  byte-identical. `site/behaviour.mjs` types `3f9a2c1e` into the bench and
+  asserts the page and the CLI deal the same hand, that the tally counts, that
+  a bad key is refused, that the idle roll produces fresh keys, that a
+  backgrounded tab stops it, and that reduced motion neither rolls by itself
+  nor blanks anything.
+- **Physics by personality.** The material is `default` (snappy): the pointer
+  travels on one critically damped spring (`SPRING_K`, no overshoot, ~0.4s
+  visible settle); the key cells spin hex glyphs for 380ms with a 28ms stagger
+  and settle left to right -- the mechanical register the world's own die can
+  carry. Nothing fills, nothing glows; the pointer is the same drafting-red bar
+  and ring the static drawing had. No keyframes were written: positions are
+  integrated toward targets every frame, and the loop sleeps when everything
+  has settled.
+- **Inputs and idle.** The bench (part 40: DOM controls above FIG. 2 -- a key
+  field, Deal, New key) and a text-button under FIG. 1. Unattended, the page
+  deals a fresh key every 12s while either figure is 20% on screen and the tab
+  is visible; it holds while a pointer or focus is on a figure (reading is
+  acting), and rests 40s after any visitor action. The FIG. 1 readout is one
+  short sentence so it can be read inside one interval. Keyboard reaches every control; the
+  readout is not a live region on idle rolls (a screen reader is not read a new
+  hand every seven seconds); a visitor's own roll is announced once.
+- **Honest at every key.** `666a7a49` is the deal that built this page and
+  shows the real verdicts; any other key shows the dealt cards' honest ratings
+  and reads UNJUDGED -- the die deals, the agent fuses and weighs, and the page
+  does not pretend otherwise. The tally is of this visit only and says so.
+- **Fallback.** No JS, or reduced motion: the markup already carries the deal
+  for `666a7a49`, pointer on slot 7, and nothing moves; a reduced-motion
+  visitor can still deal a key and gets the cut, not the travel.
+- **The world's rule, extended.** Patent drawing sheets say motion is the
+  highlight and an optional draw-on. A mechanism drawing that operates is the
+  one extension made here, and it is held to the drawing's discipline: the
+  parts that move are parts the drawing already had, drawn in the same ink, and
+  the still state is the drawing as filed. If the page ever animates a part for
+  effect rather than because the instrument does that, this section is the
+  scar to cite.
 
 ## The sponsor band (SHEET 5, and the strip on every viewport)
 
@@ -211,6 +281,9 @@ The figure caption says so; the readout prints the file each value came from.
 
 - Captures at 390 / 768 / 1440, light and dark, entrance settled:
   `node site/capture.mjs`. Zero horizontal overflow, zero console errors.
+- `node site/deal-check.mjs 40` -- 40/40 keys agree between the page's port
+  and the CLI (2026-08-23); `node site/behaviour.mjs` green including the
+  fifteen deal assertions.
 - `bash skills/design-skill/assets/bans.sh site` -- clean, full tier.
 - Contrast: 39 distinct text styles sampled per theme through a canvas
   conversion (Chromium serializes `oklch()` verbatim, so string parsing lies);
@@ -228,7 +301,13 @@ page's earlier passes, all fixed:
    table headers and fine print. Re-solved to L 0.545 light / 0.600 dark, and
    `scripts/validate.sh` now gates it with a browser-free lightness proxy that
    was proven to trip on the old value.
-3. The sponsor pass then surfaced two layout defects that predated it: the
+3. Making the die run surfaced an invented claim in the repo README: its
+   example transcript printed a real key, `3f9a2c1e`, with a hand the die does
+   not deal (stone-rubbing / split-flap / almanac; the real hand is
+   metro-diagram / garden-framed-view / olympic-pictogram-program). Corrected
+   to the true deal -- the exact failure the page argues against, caught by
+   the page being able to check it.
+4. The sponsor pass then surfaced two layout defects that predated it: the
    panning figure was a grid item without `min-width: 0`, and the FIG. 3
    readout printed an unbreakable file path into a fixed grid column. Together
    they widened the page at 360. Both fixed; overflow is now zero at 320, 360,
@@ -237,7 +316,7 @@ page's earlier passes, all fixed:
 ## Synthetic content to replace
 
 None. Every fact on the page is real: the roll key and its deal, the deck
-counts (27 worlds, 12 stagings), the seven contracts, the token values in
+counts (read from `deck.js`: 27 worlds, 14 stagings), the seven contracts, the token values in
 FIG. 3, the install commands. The FIG. 3 specimen shows an invented incident
 record (`Incident 4471`) as illustrative content -- it is labelled a specimen
 by the figure and caption and describes no real system.

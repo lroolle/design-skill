@@ -123,7 +123,7 @@
       <figure class="fig fig--hero fig--pan" id="fig-1">
         <svg viewBox="0 0 640 400" role="img" aria-labelledby="fig-1-t fig-1-d" class="draw">
           <title id="fig-1-t">FIG. 1 &#8212; the instrument in elevation</title>
-          <desc id="fig-1-d">Six protocol stations on a rail: sense, direct, contract, build, review, deliver. A brief enters at the left. A candidate rack fed by a die and a card deck stands over station two. Station three drops a promise and a token contract. A dashed boundary between build and review marks the reviewer's separate context. A four-way verdict gate after review either returns the work to build or releases it to deliver.</desc>
+          <desc id="fig-1-d">Six protocol stations on a rail: sense, direct, contract, build, review, deliver. A brief enters at the left. A candidate rack fed by a die and a card deck stands over station two; the die and the rack are running -- the key under the die and the marked slot on the rack change with each deal, and the caption prints the deal in words. Station three drops a promise and a token contract. A dashed boundary between build and review marks the reviewer's separate context. A four-way verdict gate after review either returns the work to build or releases it to deliver.</desc>
 
           <!-- ---- 10: the brief, entering ---- -->
           <g data-part="10" class="ink">
@@ -150,6 +150,7 @@
           </g>
           <g class="hair"><path d="M100 60 h16"/></g>
           <text class="numeral" x="120" y="64" data-ref="18">18</text>
+          <text class="keymini" x="73" y="146" data-deal="key" data-fig="1">666a7a49</text>
 
           <!-- ---- 20: the deck of worlds ---- -->
           <g data-part="20">
@@ -169,11 +170,13 @@
           <g data-part="16">
             <g class="ink"><rect x="128" y="132" width="88" height="46"/></g>
             <g class="hair">
-              <path d="M138 172 v-26 M150 172 v-32 M162 172 v-22"/>
-              <path d="M186 172 v-30 M198 172 v-20 M208 172 v-27"/>
+              <path d="M138 172 v-26 M150 172 v-32 M162 172 v-22 M174 172 v-30"/>
+              <path d="M186 172 v-30 M198 172 v-20 M210 172 v-27"/>
             </g>
-            <path d="M174 172 v-34" class="lit-bar"/>
-            <circle cx="174" cy="132" r="5" class="lit-ring"/>
+            <g data-deal="pointer" data-fig="1" transform="translate(210 0)">
+              <path d="M0 172 v-34" class="lit-bar"/>
+              <circle cx="0" cy="132" r="5" class="lit-ring"/>
+            </g>
             <g class="ink"><path d="M172 178 v18"/></g>
             <path d="M172 200 l-5 -9 10 0 z" class="solidmark"/>
           </g>
@@ -257,9 +260,10 @@
         </svg>
         <p class="fig__pan-note">Drag sideways to read the drawing</p>
         <figcaption>
-          The instrument in elevation. Every part carries its reference numeral;
-          the numerals in the specification below are live &#8212; point at one and
-          its part lights on the drawing.
+          The instrument in elevation, running: point at a numeral in the
+          specification below and its part lights; the die and the rack are
+          dealing. <span class="fig__deal" data-deal="readout" data-fig="1">Roll 666a7a49: candidate #7 of 7 assigned; dealt Patent Drawing Sheets, Garden Framed View, Sewing Pattern Sheet.</span>
+          <button class="roll" type="button" data-roll>Roll again</button>
         </figcaption>
       </figure>
 
@@ -299,7 +303,9 @@
           <button class="ref" data-ref="18">18</button> &#8212; a SHA-256 of a
           printed key, no network, no dependencies, the same deal on any machine
           &#8212; assigns the index. The assignment never lands on an ungrounded
-          entry; it only refuses the argmax.
+          entry; it only refuses the argmax. FIG. 2 is that die, running; the
+          bench <button class="ref" data-ref="40">40</button> above it deals
+          any key you type.
         </p>
 
         <p class="spec__p">
@@ -311,7 +317,9 @@
           and then weighed on exactly two axes: audience identification, product
           clarity. Wins both, it becomes the build. Holds one, it stays as a full
           alternate. Loses both, it is declined and still donates the one
-          discipline the assigned direction lacked.
+          discipline the assigned direction lacked. On this page the two
+          declined cards raised the sheet to one figure per viewport and to one
+          drawing re-inked by one control, which is what FIG. 3 does.
         </p>
 
         <p class="spec__p">
@@ -329,32 +337,53 @@
       </div>
 
       <figure class="fig fig--pan" id="fig-2">
+        <form class="bench" data-deal="form" data-part="40" aria-label="The bench: deal any key">
+          <span class="bench__num" data-ref="40" aria-hidden="true">40</span>
+          <label class="bench__label" for="bench-key">Key</label>
+          <input class="bench__key" id="bench-key" data-deal="input" value="666a7a49" maxlength="8" pattern="[0-9a-fA-F]{8}" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="bench-help">
+          <button class="bench__btn" type="submit">Deal</button>
+          <button class="bench__btn" type="button" data-roll>New key</button>
+          <span class="bench__help" id="bench-help">Eight hex characters; the same key gives the same hand in the CLI.</span>
+          <span class="vh" aria-live="polite" data-deal="live"></span>
+        </form>
         <svg viewBox="0 0 520 300" role="img" aria-labelledby="fig-2-t fig-2-d">
-          <title id="fig-2-t">FIG. 2 &#8212; the deal that built this page</title>
-          <desc id="fig-2-d">Detail of the die and the deck. Key 666a7a49 assigns index seven of seven candidates. Three challengers are dealt: patent drawing sheets (graphic), garden framed view (interaction), sewing pattern sheet (atmosphere). Verdicts: wins, declined, declined.</desc>
+          <title id="fig-2-t">FIG. 2 &#8212; the deal, running</title>
+          <desc id="fig-2-d">Detail of the die and the deck, running. Key 666a7a49 assigns index seven of seven candidates. Three challengers are dealt: patent drawing sheets (graphic), garden framed view (interaction), sewing pattern sheet (atmosphere). Verdicts: wins, declined, declined.</desc>
 
           <!-- key strip -->
           <g class="ink"><rect x="14" y="16" width="150" height="34"/></g>
-          <text class="key" x="30" y="39">666a7a49</text>
+          <text class="key" x="30" y="39" data-deal="key" data-fig="2">666a7a49</text>
           <g class="hair"><path d="M164 33 h22"/></g>
           <text class="micro" x="190" y="37">KEY, REPRODUCIBLE</text>
 
           <!-- index scale 1..7 -->
           <g class="ink"><path d="M30 92 h280"/></g>
           <g class="hair">
-            <path d="M30 92 v-9 M70 92 v-9 M110 92 v-9 M150 92 v-9 M190 92 v-9 M230 92 v-9"/>
+            <path d="M30 92 v-9 M70 92 v-9 M110 92 v-9 M150 92 v-9 M190 92 v-9 M230 92 v-9 M270 92 v-9"/>
           </g>
-          <path d="M270 92 v-22" class="lit-bar"/>
-          <circle cx="270" cy="66" r="8" class="lit-ring"/>
+          <g data-deal="pointer" data-fig="2" transform="translate(270 0)">
+            <path d="M0 92 v-22" class="lit-bar"/>
+            <circle cx="0" cy="66" r="8" class="lit-ring"/>
+          </g>
           <g class="micro">
-            <text x="30" y="108" text-anchor="middle">1</text>
-            <text x="70" y="108" text-anchor="middle">2</text>
-            <text x="110" y="108" text-anchor="middle">3</text>
-            <text x="150" y="108" text-anchor="middle">4</text>
-            <text x="190" y="108" text-anchor="middle">5</text>
-            <text x="230" y="108" text-anchor="middle">6</text>
+            <text x="30" y="108" text-anchor="middle" data-deal="tick">1</text>
+            <text x="70" y="108" text-anchor="middle" data-deal="tick">2</text>
+            <text x="110" y="108" text-anchor="middle" data-deal="tick">3</text>
+            <text x="150" y="108" text-anchor="middle" data-deal="tick">4</text>
+            <text x="190" y="108" text-anchor="middle" data-deal="tick">5</text>
+            <text x="230" y="108" text-anchor="middle" data-deal="tick">6</text>
+            <text x="270" y="108" text-anchor="middle" data-deal="tick" class="numeral--lit">7</text>
           </g>
-          <text class="numeral numeral--lit" x="262" y="112">7</text>
+          <g class="micro tally">
+            <text x="30" y="126" text-anchor="middle" data-deal="tally">&#183;</text>
+            <text x="70" y="126" text-anchor="middle" data-deal="tally">&#183;</text>
+            <text x="110" y="126" text-anchor="middle" data-deal="tally">&#183;</text>
+            <text x="150" y="126" text-anchor="middle" data-deal="tally">&#183;</text>
+            <text x="190" y="126" text-anchor="middle" data-deal="tally">&#183;</text>
+            <text x="230" y="126" text-anchor="middle" data-deal="tally">&#183;</text>
+            <text x="270" y="126" text-anchor="middle" data-deal="tally">&#183;</text>
+            <text x="310" y="126" data-deal="count">TALLY OF THIS VISIT</text>
+          </g>
           <g class="hair"><path d="M310 92 h26"/></g>
           <text class="micro" x="340" y="96">ASSIGNED</text>
 
@@ -371,27 +400,29 @@
             <text x="358" y="173">ATMOSPHERE</text>
           </g>
           <g class="cardname">
-            <text x="26" y="208">Patent Drawing</text>
-            <text x="26" y="224">Sheets</text>
-            <text x="192" y="208">Garden Framed</text>
-            <text x="192" y="224">View</text>
-            <text x="358" y="208">Sewing Pattern</text>
-            <text x="358" y="224">Sheet</text>
+            <text x="26" y="208" data-deal="name">Patent Drawing</text>
+            <text x="26" y="224" data-deal="name">Sheets</text>
+            <text x="192" y="208" data-deal="name">Garden Framed</text>
+            <text x="192" y="224" data-deal="name">View</text>
+            <text x="358" y="208" data-deal="name">Sewing Pattern</text>
+            <text x="358" y="224" data-deal="name">Sheet</text>
           </g>
           <g class="verdict">
-            <text x="26" y="256" class="verdict--win">WINS &#8212; BUILT</text>
-            <text x="192" y="256">DECLINED</text>
-            <text x="358" y="256">DECLINED</text>
+            <text x="26" y="256" class="verdict--win" data-deal="verdict">WINS &#8212; BUILT</text>
+            <text x="192" y="256" data-deal="verdict">DECLINED</text>
+            <text x="358" y="256" data-deal="verdict">DECLINED</text>
           </g>
           <text class="figlabel" x="14" y="292">FIG. 2</text>
         </svg>
         <p class="fig__pan-note">Drag sideways to read the drawing</p>
         <figcaption>
-          The deal that produced this page, printed so you can run it:
-          <code data-mono>node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 666a7a49</code>.
-          The two declined cards were not discarded &#8212; one raised this sheet to
-          a single figure per viewport, the other to one drawing re-inked by one
-          control, which is what FIG. 3 does.
+          The mechanism itself, running the CLI's algorithm on the CLI's deck:
+          left alone it deals a fresh key every few seconds; type one into the
+          bench and it deals that. Reproduce any hand:
+          <code data-mono data-deal="cmd">node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 666a7a49</code>.
+          Key 666a7a49 built this page and shows its verdicts; any other key is
+          dealt, not judged &#8212; fusing and weighing the hand is the agent's
+          work, not the die's.
         </figcaption>
       </figure>
 
@@ -400,7 +431,7 @@
     <div class="titleblock">
       <div class="titleblock__cell"><span>Title</span><b>The deal</b></div>
       <div class="titleblock__cell"><span>Sheet</span><b>2 of 5</b></div>
-      <div class="titleblock__cell"><span>Deck</span><b>27 worlds &#183; 12 stagings</b></div>
+      <div class="titleblock__cell"><span>Deck</span><b data-deal="decksize">27 worlds &#183; 14 stagings</b></div>
       <div class="titleblock__cell"><span>Scope</span><b>direction</b></div>
     </div>
   </div>
@@ -730,6 +761,8 @@
   </div>
 </footer>
 
+<script src="deck.js" defer></script>
+<script src="deal.js" defer></script>
 <script src="page.js" defer></script>
 <script src="sponsors.js" defer></script>
 </body>

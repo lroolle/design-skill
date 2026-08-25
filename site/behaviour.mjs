@@ -261,6 +261,12 @@ const fold = await pageFold.evaluate(() => {
 t(`headline, reason and action clear the fold at 390 (${fold.vh - fold.action}px spare, band ${fold.band}px)`,
   fold.action <= fold.vh);
 t('the deadline strip is not on the board at 390', fold.clock === 'none');
+t('the bench controls and the roll button clear 44px at 390', await pageFold.evaluate(() => {
+  const h = (s) => document.querySelector(s).getBoundingClientRect().height;
+  const roll = document.querySelector('.roll');
+  const hit = getComputedStyle(roll, '::after');
+  return h('.bench__key') >= 44 && h('.bench__btn') >= 44 && hit.position === 'absolute';
+}));
 
 // ------------------------------------------------------ the tier is material
 // Brass marks the year seat. If the hierarchy lived only in the copy it would
@@ -311,6 +317,137 @@ t(`brass letters clear the contrast floor (${brass.charClearsFloor.toFixed(2)}:1
   brass.charClearsFloor >= 4.5);
 t('there is exactly one plate', brass.onlyOnePlate);
 t('SHEET 5 draws the year seat in ink, not in metal', brass.sheetFiveStaysInk);
+
+// ------------------------------------------------------ the deal, running
+// One model, two figures. The markup carries the deal that built this page;
+// deal.js re-deals it on load (so the readouts agree with the drawing), then
+// rolls fresh keys unattended, and deals any key typed into the bench. The
+// proof that the browser port equals the CLI is site/deal-check.mjs; here the
+// page is asserted to behave like the claim.
+const ctxDeal = await browser.newContext({ viewport: { width: 1440, height: 900 } });
+const pageDeal = await ctxDeal.newPage();
+const dealErrors = [];
+pageDeal.on('pageerror', (e) => dealErrors.push(String(e)));
+await pageDeal.goto(base, { waitUntil: 'networkidle' });
+await pageDeal.waitForFunction(() => window.__deal && window.__deal.state.deal, null, { timeout: 5000 }).catch(() => {});
+t('the deal model is running', await pageDeal.evaluate(() => !!(window.__deal && window.__deal.state.deal)));
+t('on load the page deals its own key and the markup agrees', await pageDeal.evaluate(() => {
+  const d = window.__deal.state.deal;
+  const keys = [...document.querySelectorAll('[data-deal="key"]')].map((e) => e.textContent);
+  return d.key === '666a7a49' && d.assigned === 7 &&
+    d.challengers.map((c) => c.id).join() === 'patent-drawing-sheets,garden-framed-view,sewing-pattern-sheet' &&
+    keys.every((k) => k === '666a7a49') &&
+    document.querySelector('[data-deal="tick"].numeral--lit').textContent === '7';
+}));
+t('FIG. 1 and FIG. 2 pointers sit on the assigned slot', await pageDeal.evaluate(() => {
+  const tx = (f) => document.querySelector(`[data-deal="pointer"][data-fig="${f}"]`).getAttribute('transform');
+  return tx(1) === 'translate(210 0)' && tx(2) === 'translate(270 0)';
+}));
+// a typed key deals that key: 3f9a2c1e is the README's example roll
+await pageDeal.fill('#bench-key', '3f9a2c1e');
+await pageDeal.press('#bench-key', 'Enter');
+await pageDeal.waitForFunction(() => window.__deal.state.key === '3f9a2c1e', null, { timeout: 4000 }).catch(() => {});
+// the spring settles to the exact slot and the key cells stop spinning
+await pageDeal.waitForFunction(() => {
+  const a = window.__deal.state.deal.assigned;
+  return document.querySelector('[data-deal="pointer"][data-fig="2"]').getAttribute('transform') === `translate(${30 + (a - 1) * 40} 0)` &&
+    document.querySelector('[data-deal="key"][data-fig="2"]').textContent === '3f9a2c1e';
+}, null, { timeout: 4000 }).catch(() => {});
+const typed = await pageDeal.evaluate(() => {
+  const d = window.__deal.state.deal;
+  const keys = [...document.querySelectorAll('[data-deal="key"]')].map((e) => e.textContent);
+  const lit = document.querySelector('[data-deal="tick"].numeral--lit');
+  const p1 = document.querySelector('[data-deal="pointer"][data-fig="1"]').getAttribute('transform');
+  const p2 = document.querySelector('[data-deal="pointer"][data-fig="2"]').getAttribute('transform');
+  const names = [...document.querySelectorAll('[data-deal="name"]')].map((e) => e.textContent).join(' ').trim();
+  const verdicts = [...document.querySelectorAll('[data-deal="verdict"]')].map((e) => e.textContent);
+  return { key: d.key, assigned: d.assigned, keys, lit: lit && lit.textContent, p1, p2, names, verdicts,
+    readout: document.querySelector('[data-deal="readout"]').textContent,
+    cmd: document.querySelector('[data-deal="cmd"]').textContent,
+    count: window.__deal.state.count, tally: window.__deal.state.tally.slice() };
+});
+t('a typed key is dealt: both figures show it', typed.key === '3f9a2c1e' && typed.keys.every((k) => k === '3f9a2c1e'));
+t('the assigned slot is marked in both figures and the readout',
+  typed.lit === String(typed.assigned) &&
+  typed.p1 === `translate(${138 + (typed.assigned - 1) * 12} 0)` &&
+  typed.p2 === `translate(${30 + (typed.assigned - 1) * 40} 0)` &&
+  typed.readout.includes(`candidate #${typed.assigned} of 7`));
+t('the dealt cards are named from the deck', typed.names.length > 10 && !typed.names.includes('Patent Drawing'));
+t('a key that did not build this page is marked unjudged', typed.verdicts.every((v) => /UNJUDGED/.test(v)));
+t('the caption command reproduces the typed key', typed.cmd.endsWith('--key 3f9a2c1e'));
+t('the tally counts the visitor deal', typed.count === 1 && typed.tally[typed.assigned - 1] === 1);
+t('the key field shows all eight glyphs', await pageDeal.evaluate(() => {
+  const i = document.getElementById('bench-key'); return i.scrollWidth <= i.clientWidth;
+}));
+t('the bench is part 40: its numeral lights it', await pageDeal.evaluate(() => {
+  const ref = document.querySelector('.ref[data-ref="40"]');
+  ref.dispatchEvent(new Event('focus'));
+  const lit = document.querySelector('.bench').classList.contains('is-lit');
+  ref.dispatchEvent(new Event('blur'));
+  return lit && !document.querySelector('.bench').classList.contains('is-lit');
+}));
+// the CLI agrees with what the page just showed
+{
+  const { execFileSync } = await import('node:child_process');
+  const cli = JSON.parse(execFileSync('node', [join(here, '..', 'skills', 'design-skill', 'scripts', 'roll.mjs'),
+    '--scope', 'direction', '--mode', 'persuade', '--candidates', '7', '--key', '3f9a2c1e', '--json'], { encoding: 'utf8' }));
+  const ids = await pageDeal.evaluate(() => window.__deal.state.deal.challengers.map((c) => c.id).join());
+  t('the CLI deals the same hand for the typed key', cli.assigned === typed.assigned && cli.challengers.map((c) => c.id).join() === ids);
+}
+t('a bad key is refused, not dealt', await pageDeal.evaluate(async () => {
+  const before = window.__deal.state.key;
+  const r = await window.__deal.roll('zz', 'visitor');
+  return r === false && window.__deal.state.key === before;
+}));
+// unattended, it deals fresh keys -- after the rest a visitor's action earns,
+// and only once nothing is reading a figure (focus and pointer both hold it)
+await pageDeal.evaluate(() => document.activeElement && document.activeElement.blur());
+await pageDeal.mouse.move(5, 5);
+t('focus inside a figure holds the deal', await pageDeal.evaluate(async () => {
+  const P = window.__deal.params; P.REST_MS = 0; P.IDLE_MS = 300;
+  document.getElementById('bench-key').focus();
+  const k = window.__deal.state.key;
+  await new Promise((r) => setTimeout(r, 1200));
+  const held = window.__deal.state.key === k;
+  document.activeElement.blur();
+  return held;
+}));
+const idle = await pageDeal.evaluate(async () => {
+  const P = window.__deal.params; P.REST_MS = 0; P.IDLE_MS = 600;
+  const k0 = window.__deal.state.key;
+  await new Promise((r) => setTimeout(r, 1800));
+  const k1 = window.__deal.state.key;
+  await new Promise((r) => setTimeout(r, 1200));
+  return { k0, k1, k2: window.__deal.state.key, count: window.__deal.state.count };
+});
+t('left alone the mechanism deals fresh keys', idle.k1 !== idle.k0 && idle.k2 !== idle.k1 && idle.count >= 3);
+t('a backgrounded tab stops the dealing', await pageDeal.evaluate(async () => {
+  Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
+  const k = window.__deal.state.key;
+  await new Promise((r) => setTimeout(r, 1500));
+  const still = window.__deal.state.key === k;
+  Object.defineProperty(document, 'hidden', { configurable: true, get: () => false });
+  return still;
+}));
+t('the deal runs without console or page errors', dealErrors.length === 0);
+
+// reduced motion: the page's own deal stands, nothing rolls by itself, a roll still works, cut
+const ctxDealRM = await browser.newContext({ viewport: { width: 1440, height: 900 }, reducedMotion: 'reduce' });
+const pageDealRM = await ctxDealRM.newPage();
+await pageDealRM.goto(base, { waitUntil: 'networkidle' });
+await pageDealRM.waitForFunction(() => window.__deal && window.__deal.state.deal, null, { timeout: 5000 }).catch(() => {});
+const rm = await pageDealRM.evaluate(async () => {
+  const P = window.__deal.params; P.REST_MS = 0; P.IDLE_MS = 300;
+  await new Promise((r) => setTimeout(r, 1500));
+  const stood = window.__deal.state.key === '666a7a49';
+  await window.__deal.roll('3f9a2c1e', 'visitor');
+  const p1 = document.querySelector('[data-deal="pointer"][data-fig="1"]').getAttribute('transform');
+  const key = document.querySelector('[data-deal="key"][data-fig="2"]').textContent;
+  const a = window.__deal.state.deal.assigned;
+  return { stood, cut: p1 === `translate(${138 + (a - 1) * 12} 0)` && key === '3f9a2c1e' };
+});
+t('reduced motion: nothing deals by itself', rm.stood);
+t('reduced motion: a visitor roll still lands, cut not travelled', rm.cut);
 
 ok.forEach((n) => console.log('ok    ' + n));
 bad.forEach((n) => console.log('FAIL  ' + n));
