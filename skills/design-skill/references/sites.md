@@ -182,6 +182,12 @@ find the reference or the curve.
 | [Web Animations API (MDN)](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) | the platform API | programmatic animation with CSS performance |
 | [animations.dev](https://animations.dev/) | a paid course on UI animation | a route for going deeper; no content is reproduced here |
 
+Living elements (anything that runs by itself) are simulation.md's
+job; its Sources table carries the creative-coding references: The
+Nature of Code, Ten Minute Physics, the XPBD paper, OpenProcessing
+(per-sketch licenses), p5.js, Remotion, vibe-motion. Checked
+2026-08-23.
+
 ## 9. Color
 
 Color lives in the token layer. Reach for these when seeding a ramp,

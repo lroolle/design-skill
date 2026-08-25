@@ -11,8 +11,9 @@ description: >-
   right", "give me options"); choosing a design language, typeface,
   or palette for a product; auditing or rescuing an interface that
   looks generic or AI-made; and installing a design system
-  (DESIGN.md + tokens + bans) into a repo. Motion, copy, color, and
-  typography are covered inside. A throwaway page with no product
+  (DESIGN.md + tokens + bans) into a repo. Motion (transitions and
+  simulation-first living elements), copy, color, and typography are
+  covered inside. A throwaway page with no product
   life needs only the floor, not the ceremony.
 license: MIT
 metadata:
@@ -173,9 +174,11 @@ cards; a human locks one, an autonomous run builds the first dealt.
    grid's density courage -- written into the direction as a named
    raise, never its clothes).
 5. Present **one** direction fully committed and already raised:
-   world, first viewport, visitor path, signature interaction,
-   cross-surface reach, honest risk. Beside it: winning and
-   competitive challengers as full alternates; declined ones demoted
+   world, first viewport, visitor path, signature interaction (when
+   it runs, named as a model -- what objects, what force, what it
+   proves -- not as an effect), cross-surface reach, honest risk.
+   Beside it: winning and competitive challengers as full alternates;
+   declined ones demoted
    to a compact row with their verdict; your own top-ranked candidate
    as one card (never two, never a ranked list) when it is not the
    assigned one, with its familiarity named honestly; and the
@@ -247,6 +250,14 @@ web. Laws of the build:
   wearing chrome.
 - **Build the world's web leverage** -- the technique it names (mask,
   writing-mode, view transitions, canvas), not a static imitation.
+- **A living element is a model, not a timeline.** Where the surface
+  earns something that runs -- the first viewport proving the
+  mechanism, the signature interaction -- build objects, state,
+  constraints and forces whose frames emerge (simulation.md): model
+  card first, six layers kept apart, skin from the tokens, a settled
+  still frame under reduced motion. Seconds-and-pixels keyframes for a
+  thing that should respond is the hand-keyed world; a pasted library
+  demo is costume.
 - **Theme the browser surfaces.** Selection, caret, scrollbar, focus
   ring, underline offset, tabular numerals -- the parts you did not
   draw still carry the design; defaults there belong to no system.
@@ -343,6 +354,10 @@ Smash the delivered work if any survive:
   unlabelled where a visitor could mistake it
 - a state missing; horizontal scroll at 390; a target under 44px on
   touch; focus invisible; motion that ignores reduced-motion
+- a living element hand-keyed as a timeline, pasted from a library
+  demo, or fused so that its sprite, count, or input cannot change
+  without a re-author; one that proves nothing; one that vanishes
+  under reduced motion instead of settling
 - browser surfaces left at defaults on a committed world
 - device sprawl; accent on more than a handful of things per viewport
 - a review conducted inside the build transcript when subagents
@@ -366,6 +381,7 @@ to the project being designed. Resolve it there before running it.
 | [references/thinking.md](references/thinking.md) | the doctrine | once |
 | [references/methods.md](references/methods.md) | sense card, derivation, fusion and verdicts, extraction, floor, promise, review rubric and dispositions, scars | Sense, Direct, Review |
 | [references/patterns.md](references/patterns.md) · [typography.md](references/typography.md) · [color.md](references/color.md) · [motion.md](references/motion.md) | the craft | Build |
+| [references/simulation.md](references/simulation.md) | living elements: model card, six layers, primitives, solvers, the floor | Build with anything that runs |
 | [references/anti-patterns.md](references/anti-patterns.md) | permanent + dated tells, the calibration looks | Sense, Review |
 | [references/fontbook.md](references/fontbook.md) · [palettes.md](references/palettes.md) | faces, palette cards | re-seed |
 | [references/platforms.md](references/platforms.md) · [frameworks.md](references/frameworks.md) | per-platform rules; official systems; stack wiring; edit hooks | non-web, governed, wiring |

@@ -16,6 +16,7 @@ links checked 2026-08-19.
 | [NextLevelBuilder/ui-ux-pro-max-skill](https://github.com/NextLevelBuilder/ui-ux-pro-max-skill) | MIT | queryable CSV datasets (styles, palettes, pairings, UX rules) | structured rows with Do / Don't / code-good / code-bad are agent-friendly; and the cautionary side -- industry-to-style rules ("SaaS -> glass + trust blue") encode exactly the first-order reflex |
 | [lroolle/skills](https://github.com/lroolle/skills) -- kiln, taste, animate-it, design-system | Apache-2.0 | our own modular quartet | the layer-by-durability engine (principles never change, patterns rarely, materials per project, templates per aesthetic, zeitgeist dated), the verdict protocol (better / different / costume), scars as memory, the install-a-contract method. This skill descends from them |
 | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) | MIT | a corpus of design contracts extracted from sites | the schema of a written contract; the hazard of cloning a brand's prose |
+| [vibe-motion](https://github.com/vibe-motion) -- [skills](https://github.com/vibe-motion/skills), create-vibe-motion, auto-motion | mixed (MIT / Apache-2.0 on the repos that state one; check each) | "prompts -> code -> motion graphics": per-behavior agent motion skills (procedural fish, fabric curtain, Chladni particles, split assembly, Disney-rule review), Remotion scaffolds, an SRT-to-shots-to-video pipeline; the community around a 2026 zh creator-coding scene | the method under it, which we rewrite as model-first in simulation.md: build the physical object, not the timeline; parameters a sentence can change; git as the variant tree; behavior implementations as the thing worth collecting. The cautionary side -- one skill per effect is a template library by another name, and "object-oriented" is the wrong name for what is really simulation-first; an ECS or a pure function set builds the same world |
 | [Refero Styles](https://styles.refero.design/) | web | 2,000+ per-site design contracts | the one-line poetic style name as a handle ("a midnight precision instrument"); "copy the system, not the website" |
 
 ## What this skill keeps, and what it refuses
@@ -53,4 +54,5 @@ predictability. Pick one: this repo when you want one folder that
 carries the whole practice; the quartet when you want the modular
 pieces and already use them. animate-it is compatible either way
 (motion.md here covers the design half; animate-it goes deeper on
-implementation).
+implementation; simulation.md here covers living elements, which
+animate-it does not).

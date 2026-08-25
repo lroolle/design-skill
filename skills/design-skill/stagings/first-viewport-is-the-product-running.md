@@ -25,4 +25,4 @@ You land and the thing is already working: the search runs, the numbers move, yo
 An embedded instance or sandboxed build of the product sharing the page, with a labelled synthetic dataset and its own state handling, not a video or a screenshot.
 
 ## Fits
-Landing for tools, editors, search, data products -- anything whose value is felt in ten seconds of use. The trap: products that cannot be felt without an account or real data (the demo lies), and heavy demos that push the offer and action below the fold.
+Landing for tools, editors, search, data products -- anything whose value is felt in ten seconds of use. The trap: products that cannot be felt without an account or real data (the demo lies) -- stage those as mechanism-as-a-live-model instead -- and heavy demos that push the offer and action below the fold.
