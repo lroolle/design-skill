@@ -388,6 +388,7 @@ to the project being designed. Resolve it there before running it.
 | [references/sites.md](references/sites.md) · [skills.md](references/skills.md) | references by function; prior art | Sense; never operational |
 | [templates/](templates/README.md) | surface recipes | Build |
 | [assets/](assets/) | DESIGN.md / TASTE.md templates, bans.sh, tokens, specimen | Contract, Review |
+| [assets/primitives/](assets/primitives/README.md) | working behavior models in the six layers, with specimens | Build with anything that runs |
 
 ## Lineage
 
