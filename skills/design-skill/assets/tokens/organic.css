@@ -89,6 +89,7 @@
   --shadow-2: 0 6px 16px oklch(0.24 0.02 60 / 0.10), 0 20px 48px oklch(0.24 0.02 60 / 0.12);
 
   /* motion: weighted */
+  --motion-personality: weighted;
   --dur-micro:   120ms;
   --dur-base:    250ms;
   --dur-enter:   400ms;

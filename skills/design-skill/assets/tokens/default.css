@@ -88,6 +88,7 @@
   --shadow-2: 0 4px 12px oklch(0.18 0.01 75 / 0.08), 0 16px 40px oklch(0.18 0.01 75 / 0.10);
 
   /* motion: snappy */
+  --motion-personality: snappy;
   --dur-micro:   100ms;
   --dur-base:    180ms;
   --dur-enter:   240ms;
