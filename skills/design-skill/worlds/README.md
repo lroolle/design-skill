@@ -62,7 +62,8 @@ Spark as one physical second-person moment, the five System rules as
 interface-usable sentences (what is ground, what is ink, what is the
 one accent, how one moves between units, what states look like, what
 happens on a phone), the Web leverage as a technique a static
-imitation cannot fake, the Translation as nav/list/table/form/empty
+imitation cannot fake (when it runs, name the model -- the objects and
+the force -- not the effect; simulation.md), the Translation as nav/list/table/form/empty
 inside it plus the design system it sits on best, and the Risks as
 where it becomes costume. Rate it after building with it once; a
 world nobody has built with is rating 1 until it earns more.

@@ -136,3 +136,20 @@ render against it -- because described-radical ships conservative when
 nobody holds it to its own words. Commit fully first, then clarify;
 filtering ambition before building is the timidity reflex wearing
 honesty's clothes.
+
+## 12. The asset is the model, not the render
+
+A surface is the output of something smaller that generated it: a
+seed hue generates both themes, a token generates every use of a
+color, a world generates a topology, a model generates the frames of
+a living element. The durable asset is that generator, because a
+change to it is a parameter, a swap, a diff -- and a change to the
+render is a re-author. This is why the contract lives in tokens and
+DESIGN.md rather than in the CSS it produced, why the roll key is
+recorded, and why anything that moves by itself is built as objects,
+state, constraints and forces (simulation.md) rather than as seconds
+and pixels: "butterflies become musical notes" should be a sprite
+swap, and "20 become 80" a number. When the writing of code is cheap,
+designing the generator -- what is a parameter, what is a layer, what
+is a rule -- is the craft; what it cannot supply is what you have
+seen, what you can abstract from it, and what you decide to express.

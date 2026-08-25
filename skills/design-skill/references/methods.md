@@ -204,6 +204,17 @@ material with lighting and depth is raster whatever the stack; a CSS
 gradient is not a texture; a geometric mask is not a contour. Every
 produced or sourced raster carries its provenance (prompt or origin).
 
+## Model card (Build)
+
+Before building any region that runs, loops, or responds, write its
+model card (simulation.md): what it proves, objects, state,
+constraints, forces, inputs and idle behavior, rules, skin, the
+parameters a person could change in one sentence, and the settled
+still frame it falls back to. It lives in the region's header comment
+or beside the promise. A living element whose card will not fill is
+an effect, not a design; a forked sketch carries its license and
+provenance the way a raster does.
+
 ## Review
 
 ### Evidence
@@ -262,6 +273,9 @@ same order in-thread, disclosed in one line.
   ring, underline offset, tabular numerals)
 - motion budget exceeded; layout-property animation; one identical
   entrance on every section
+- a living element with no model card, pasted from a library demo in
+  its own palette, pointer-only with no idle behavior, or running
+  unbounded on a phone
 - imagery without caption/alt on editorial surfaces; a geometric mask
   standing in for a contour; sketchy SVG standing in for a picture
 - copy in the saturated register; buttons without verbs

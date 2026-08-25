@@ -5,7 +5,9 @@ communicates nothing is noise, and noise on a product surface costs
 attention every single time it plays. This file covers both halves:
 what should move and why (design), and how to make it move correctly
 (implementation). Load when a build has any motion, or when motion
-"feels wrong".
+"feels wrong". Transitions live here; anything that keeps running,
+loops, or responds is a living element and is built model-first in
+[simulation.md](simulation.md).
 
 ## Gate: should it move at all?
 
@@ -82,8 +84,9 @@ watching hardest. Built-in `ease` is too weak to feel authored.
 | page / view transition | 250-350ms | continuity, not a show |
 | exit (anything) | 50-70% of its entrance | dismissal was requested |
 
-UI stays under ~300ms. Anything longer is either brand choreography
-(one per viewport, on a brand surface) or a mistake.
+UI stays under ~300ms. Anything longer is brand choreography (one
+per viewport, on a brand surface), a living element built as a model
+(simulation.md), or a mistake.
 
 ## Stagger and choreography
 
@@ -178,7 +181,8 @@ color changes; cut movement.
 - no reduced-motion handling
 - uniform entrance (everything identical = no hierarchy)
 - scroll listeners instead of IntersectionObserver
-- continuous animation on anything that is not status
+- continuous animation on anything that is not status or a living
+  element with a model card that says what it proves (simulation.md)
 - exit slower than entrance
 - the urgency kit: pulsing dots, ticking countdowns, shaking CTAs --
   deadlines render as dated facts

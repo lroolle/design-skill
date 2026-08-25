@@ -138,7 +138,7 @@ design-skill/
     design-systems/         seven material contracts + token schema + _template
     references/             the craft layer, loaded by need:
       thinking  methods  patterns  anti-patterns  typography  fontbook
-      color  palettes  motion  platforms  frameworks  sites  skills
+      color  palettes  motion  simulation  platforms  frameworks  sites  skills
     templates/              surface recipes: landing, dashboard, docs, editorial,
                             portfolio, app-shell, forms, deck (+ _template)
     assets/
@@ -201,10 +201,13 @@ passes a clean fixture and trips on a dirty one; ascii punctuation.
 
 Taste is judgment anchored in evidence, exercised on behavior before
 surfaces. References give coordinates, not answers. Constraint breeds
-identity. Direction before detail; contract, then memory. The one
-line under all of it: a change that makes the surface prettier and
+identity. Direction before detail; contract, then memory. The asset
+is the model, not the render: a change should be a parameter, a swap,
+a diff -- so anything that runs by itself is built as a world that
+generates its frames (`references/simulation.md`), never as keyframes.
+The one line under all of it: a change that makes the surface prettier and
 the task harder must fail. `references/thinking.md` inside the skill
-has the eleven beliefs; every rule in the repo traces to one.
+has the twelve beliefs; every rule in the repo traces to one.
 
 ## Sponsors
 

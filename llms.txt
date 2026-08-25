@@ -49,7 +49,7 @@ no dependencies.
   [patterns](skills/design-skill/references/patterns.md) · [anti-patterns](skills/design-skill/references/anti-patterns.md) ·
   [typography](skills/design-skill/references/typography.md) · [fontbook](skills/design-skill/references/fontbook.md) ·
   [color](skills/design-skill/references/color.md) · [palettes](skills/design-skill/references/palettes.md) ·
-  [motion](skills/design-skill/references/motion.md) · [platforms](skills/design-skill/references/platforms.md) ·
+  [motion](skills/design-skill/references/motion.md) · [simulation](skills/design-skill/references/simulation.md) · [platforms](skills/design-skill/references/platforms.md) ·
   [frameworks](skills/design-skill/references/frameworks.md) · [sites](skills/design-skill/references/sites.md) ·
   [skills](skills/design-skill/references/skills.md)
 

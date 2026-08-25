@@ -36,6 +36,8 @@ read of the rendered thing; `count` = count occurrences per viewport.
 | Hover-gated function | something reachable only on hover | tap/keyboard path exists | eye |
 | No focus, no reduced motion | invisible focus; motion ignores the OS setting | :focus-visible ring; PRM block | grep |
 | Layout-property animation | animating top/left/width/height/margin | transform + opacity | grep |
+| Hand-keyed world | a looping or responding element authored as seconds and pixels, so every variant is a re-author | model-first: objects, state, constraints, forces, six layers (simulation.md) | eye |
+| Pasted demo | a physics or canvas library example in its own palette and defaults inside a committed world | re-skin from tokens, re-parameterize; the model card says what it proves | eye |
 | Fake content | John Doe, Acme, lorem, "99.99%", stock avatars, invented logos | real or honestly labelled sample data; real names of real things | grep (lorem, Acme, John Doe), eye |
 | Uncaptioned imagery | photos with no caption/credit on editorial surfaces | caption + credit; alt text everywhere | eye |
 | Hard offset shadow | `box-shadow: 4px 4px 0` as a depth system outside a world that chose it | depth with offset + soft blur, or none | grep, eye |
@@ -127,7 +129,9 @@ invented logos; pricing tables for plans that do not exist; bento
 grids as default; numbered markers as decoration; spotlight cursor;
 dotted-grid backgrounds; magnetic buttons; character-by-character text
 reveal; morphing blobs; Lottie hero illustrations; scroll-hijacked
-storytelling; parallax as identity.
+storytelling; parallax as identity; particle-constellation canvas
+backgrounds (dots joined by lines) and floating 3D blobs that prove
+nothing.
 
 ### Saturated copy
 
