@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>point-cloud primitive -- specimen</title>
+<link id="tokens" rel="stylesheet" href="../tokens/default.css">
+<style>
+/* specimen: component CSS only; every value is a token. */
+* { box-sizing: border-box; }
+body { margin: 0; }
+.wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--space-4); }
+.bar { position: sticky; top: 0; z-index: 10; background: var(--surface); border-bottom: var(--line-w) solid var(--line); }
+.bar .wrap { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-4); align-items: center; padding: var(--space-2) var(--space-4); font-size: var(--text-sm); }
+.bar label { display: inline-flex; gap: var(--space-2); align-items: center; }
+.bar select, .bar input { font: inherit; }
+.bar .feel { color: var(--fg-2); flex: 1 1 14rem; }
+section { padding: var(--space-8) 0; border-top: var(--line-w) solid var(--line); }
+section:first-of-type { border-top: 0; }
+h1 { font-size: var(--text-3xl); margin: 0 0 var(--space-3); }
+h2 { font-size: var(--text-xl); margin: 0 0 var(--space-2); }
+p.dek { color: var(--fg-2); max-width: var(--measure); margin: 0 0 var(--space-5); }
+.meta { color: var(--fg-3); font-size: var(--text-sm); }
+.mono { font-family: var(--font-mono); font-size: var(--text-sm); }
+
+/* the chip: what this primitive is actually for */
+.chip { display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: var(--space-1) var(--space-4) var(--space-1) var(--space-2);
+  border-radius: 999px; background: var(--surface-2); color: var(--fg-2); }
+.chip.sm { gap: var(--space-2); padding: 2px var(--space-3) 2px 4px; font-size: var(--text-sm); }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--space-4); }
+.cell { border: var(--line-w) solid var(--line); border-radius: var(--radius-lg); padding: var(--space-5);
+  display: flex; flex-direction: column; align-items: center; gap: var(--space-4); background: var(--surface); }
+.cell .name { font-family: var(--font-mono); font-size: var(--text-sm); color: var(--fg-3); }
+.cell .says { color: var(--fg-2); font-size: var(--text-sm); text-align: center; }
+
+.pair { display: flex; gap: var(--space-6); align-items: center; flex-wrap: wrap; }
+table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); }
+th, td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: var(--line-w) solid var(--line); vertical-align: middle; }
+th { color: var(--fg-3); font-weight: 500; }
+footer { color: var(--fg-3); font-size: var(--text-sm); padding: var(--space-6) 0; }
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <label>system
+    <select id="system">
+      <option>default</option><option>classical</option><option>nocturnes</option>
+      <option>broadsheets</option><option>organic</option><option>industry</option>
+      <option>modernist</option>
+    </select>
+  </label>
+  <label>speed <input id="speed" type="range" min="0.25" max="2" step="0.05" value="1"></label>
+  <span class="feel meta" id="feel"></span>
+</div></div>
+
+<div class="wrap">
+
+<section>
+  <h1>point-cloud</h1>
+  <p class="dek">The busy indicator for agent surfaces. Not &ldquo;something is
+  happening&rdquo; &mdash; <em>which kind</em> of thing is happening. One model,
+  four silhouettes; ink and physics both read from the design contract, so the
+  same form is stepped under <span class="mono">industry</span> and slow under
+  <span class="mono">nocturnes</span>. Switch the system above and watch the
+  physics change, not just the colour.</p>
+  <div class="pair">
+    <span class="chip"><canvas data-orb="scan" data-size="28"></canvas> Searching the codebase&hellip;</span>
+    <span class="chip sm"><canvas data-orb="orbit" data-size="20"></canvas> 3 agents running</span>
+  </div>
+</section>
+
+<section>
+  <h2>Four forms</h2>
+  <p class="dek">Each says something a spinner cannot. If two of them read the
+  same at 20px, one of them should not exist.</p>
+  <div class="grid" id="forms"></div>
+</section>
+
+<section>
+  <h2>The size rule</h2>
+  <p class="dek">A point cloud does not scale by scaling. Shrink it uniformly and
+  it turns to grey mush: the dots fall under a pixel and the silhouette dissolves.
+  Count falls <em>faster</em> than size, radius falls <em>slower</em>. Same
+  parameters, three sizes, no per-size lookup table.</p>
+  <table>
+    <thead><tr><th>size</th><th>rendered</th><th>dots</th><th>dot radius</th></tr></thead>
+    <tbody id="sizes"></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>The floor</h2>
+  <p class="dek">Under <span class="mono">prefers-reduced-motion</span> the loop
+  never starts and the cloud holds its settled frame &mdash; same composition,
+  same information, no motion. Not a blank, not a fallback spinner. It also parks
+  itself off-screen and in a hidden tab.</p>
+  <div class="pair">
+    <span class="chip"><canvas data-orb="braid" data-size="28" data-still="1"></canvas> settled frame</span>
+    <span class="meta">this one is rendered with the loop stopped</span>
+  </div>
+</section>
+
+<footer>specimen for the point-cloud primitive &mdash; tokens from
+<span class="mono">assets/tokens/&lt;name&gt;.css</span>; mechanism and provenance in
+<span class="mono">references/simulation.md</span>.</footer>
+
+</div>
+
+<script type="module">
+import { mount, forms } from './point-cloud.js';
+
+const SAYS = {
+  scan:   'sweeping a space',
+  orbit:  'several threads in flight',
+  braid:  'combining sources',
+  settle: 'converging, nearly done',
+};
+
+// forms grid
+const grid = document.getElementById('forms');
+for (const f of forms) {
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  cell.innerHTML = `<canvas data-orb="${f}" data-size="64"></canvas>
+    <div class="name">${f}</div><div class="says">${SAYS[f]}</div>
+    <span class="chip sm"><canvas data-orb="${f}" data-size="20"></canvas> at 20px</span>`;
+  grid.appendChild(cell);
+}
+
+// size table
+const sizes = document.getElementById('sizes');
+for (const s of [64, 36, 20]) {
+  const k = s / 64;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="mono">${s}px</td><td><canvas data-orb="scan" data-size="${s}"></canvas></td>
+    <td class="mono">${Math.round(220 * Math.pow(k, 1.2))}</td>
+    <td class="mono">${(Math.pow(k, 0.25)).toFixed(2)}&times;</td>`;
+  sizes.appendChild(tr);
+}
+
+// mount everything
+const live = [];
+for (const c of document.querySelectorAll('canvas[data-orb]')) {
+  const h = mount(c, { form: c.dataset.orb, size: +c.dataset.size, label: `${c.dataset.orb} indicator` });
+  if (c.dataset.still) h.destroy();      // the floor demo: settled frame, loop stopped
+  else live.push(h);
+}
+
+// controls
+const link = document.getElementById('tokens');
+const feel = document.getElementById('feel');
+function showFeel() {
+  const p = getComputedStyle(document.body).getPropertyValue('--motion-personality').trim();
+  feel.textContent = `--motion-personality: ${p || '(unset -> snappy)'}`;
+}
+document.getElementById('system').addEventListener('change', e => {
+  link.href = `../tokens/${e.target.value}.css`;
+  link.addEventListener('load', () => { live.forEach(h => h.refresh()); showFeel(); }, { once: true });
+});
+document.getElementById('speed').addEventListener('input', e => {
+  live.forEach(h => h.setSpeed(+e.target.value));
+});
+showFeel();
+</script>
+</body>
+</html>

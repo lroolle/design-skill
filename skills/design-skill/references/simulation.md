@@ -116,6 +116,7 @@ its license (see Sources), then rewrite it into the six layers.
 | mechanical state machine | split-flap, counter, gauge, shutter | discrete states; stepped transition; settle | step time, overshoot, sequence | machinery, certainty | low |
 | physical type | letters that hang, fall, drift, tear | glyphs as bodies in any model above | the model's, plus the text | the word as a thing | model-dependent |
 | ambient drift | slow breathing, a light that moves | noise-driven offsets at very low frequency | amplitude, period | stillness, weather, life in the room | low |
+| depth-sorted point cloud | a volume made of dots: a status orb, a globe, a constellation | points on a shell, moved by a closed-form function of t; orthographic projection; sort by z; depth becomes radius and alpha | count, spin, tilt, dot radius, depth ramp | volume, activity, *which kind* of work | low; hundreds of dots on canvas |
 
 Three questions order the table: which primitive *says* what this
 surface must prove (a schooling flock on an orchestration tool; a
@@ -163,6 +164,38 @@ Loop discipline, whatever the solver:
 Canvas and WebGL carry no semantics: give the element an accessible
 name and a text alternative saying what it shows, and keep any
 interactive control (a slider, a reset) in the DOM.
+
+## Small sizes are a re-tune, not a scale
+
+A model built at 64px and rendered at 20px does not become a smaller
+version of itself; it becomes mush. Dots fall under a pixel, counts
+that read as texture read as noise, and an angular rate that looked
+calm now looks stopped because the travel distance collapsed with the
+radius. Shipped point-cloud components solve this with a per-state,
+per-size table of hand-tuned numbers -- which works, and which is
+untransferable the moment you add a state.
+
+The transferable version is two exponents against a reference size:
+
+- **count falls faster than size** (`count * (s/64)^1.2` -- at 20px,
+  about a quarter of the dots)
+- **radius falls slower than size** (`r * (s/64)^0.25` -- at 20px,
+  about three quarters of the radius)
+
+Fewer dots, each nearly as big. That single rule replaces most of the
+table and survives a new form being added.
+
+Speed is the one that resists a rule. Small orbs generally need a
+faster turn to read as moving -- `(64/s)^0.35` is a sane default --
+but measured against a shipped reference the per-state factors ranged
+from 0.9x to 2.1x with no consistent relationship to size. Treat the
+default as a starting point and tune per form by eye; that part is
+taste, and saying so is more useful than a fake formula.
+
+The deeper rule: **check the smallest size first.** Two forms that
+are obviously different at 64px are routinely the same grey ball at
+20px, and a form that only reads at the large size is one form
+pretending to be two.
 
 ## Physics by personality
 
@@ -215,12 +248,21 @@ unattended, and any control a keyboard can reach.
 ## Sources, and the license step
 
 Behavior primitives are a library you grow -- open sketches, your own
-past elements, the vibe-motion style per-behavior skills. Three rules
-when taking from outside: read the license of the *specific sketch*
+past elements, the vibe-motion style per-behavior skills. Ours live in
+[assets/primitives/](../assets/primitives/README.md). Three rules when
+taking from outside: read the license of the *specific sketch*
 (OpenProcessing lets authors pick, including all rights reserved;
 visible source is not permission); take the mechanism and rewrite it
 into the six layers, never paste a demo; record provenance in
 DESIGN.md beside the raster provenance (methods.md, medium gate).
+
+A permissive licence is permission to copy, not a reason to. What
+carries across is the mechanism -- and the mechanism is usually older
+and more general than the thing you found it in. What does not carry
+is the author's tuning: their counts, rates and per-state constants
+are their taste applied to their product, and lifted wholesale they
+read as costume on yours. Take the idea, keep the citation, do your
+own tuning.
 
 | Source | What it is | Take |
 |---|---|---|
@@ -231,6 +273,7 @@ DESIGN.md beside the raster provenance (methods.md, medium gate).
 | [p5.js](https://p5js.org/) | the creative-coding canvas library | the drawing and input layer; bring your own solver |
 | [Remotion](https://www.remotion.dev/) | React programs that render deterministic video frames | when the deliverable is a video, not a page |
 | [vibe-motion](https://github.com/vibe-motion) | "prompts -> code -> motion graphics": per-behavior agent skills, scaffolds, an SRT-to-shots pipeline | the shape of a behavior skill: physical parameters, seamless loop, deterministic export (skills.md) |
+| [thinking-orbs](https://github.com/Jakubantalik/thinking-orbs) (Antalik, Brinza; MIT) | dotted status orbs for agent UIs: nine states, two sizes, hand-tuned | the idea that a busy indicator can name *which kind* of work; the small-size problem. Mechanism rebuilt in assets/primitives/point-cloud.js; forms and tuning ours |
 
 ## Anti-patterns
 
