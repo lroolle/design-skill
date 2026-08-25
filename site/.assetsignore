@@ -3,3 +3,5 @@ README.md
 DESIGN.md
 capture.mjs
 behaviour.mjs
+deck.mjs
+deal-check.mjs

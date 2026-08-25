@@ -174,4 +174,13 @@ else
   echo "skip  node not found; roll.mjs untested"
 fi
 
+# 9. The page's die is the CLI's die: site/deck.js regenerates byte-identical
+#    from the decks, and site/deal.js deals the same hand as roll.mjs
+cd "$ROOT"
+if command -v node >/dev/null 2>&1; then
+  node site/deck.mjs --check >/dev/null 2>&1 && ok "site/deck.js in sync with the decks" || bad "site/deck.js out of date: node site/deck.mjs"
+  out=$(node site/deal-check.mjs 12 2>&1); [ $? -eq 0 ] && ok "site/deal.js: $out" || { bad "site/deal.js disagrees with roll.mjs"; echo "$out" | head -5; }
+fi
+cd "$SKILL_DIR"
+
 exit "$fail"

@@ -36,8 +36,9 @@ fresh-context reviewer checks the render against it.
   direct   seven grounded candidates from the SRE's world (runbooks, pager rotas,
            incident timelines, terminal session logs, airport status boards, ...)
            roll 3f9a2c1e -> ASSIGNED #3 "incident timeline as the first viewport";
-           challengers dealt: stone-rubbing (declined, donates total ink commitment),
-           split-flap-departure-board (competitive), almanac-tear-off (declined)
+           challengers dealt: metro-diagram (competitive: a line diagram carries the
+           timeline's topology), garden-framed-view (declined, donates the one framed
+           view per viewport), olympic-pictogram-program (declined, donates one stroke)
   promise  THESIS / OWN-WORLD / STORY / FIRST VIEWPORT / FORM, in the body's first comment
   contract tokens/industry.css re-seeded to the world's palette; DESIGN.md written at finish
   build    landing.md recipe; the first viewport IS a live incident timeline on real data
@@ -181,7 +182,11 @@ of CSS, and the review sent the page back once before it shipped.
 deferred and why, and the two defects the run found in the skill itself -- a
 `bans.sh` false positive on HTML numeric entities, and `--fg-3` failing the
 4.5:1 floor in all seven token files. Both fixed, the second now gated by
-`validate.sh`.
+`validate.sh`. The die on that page is running: `site/deal.js` is
+`scripts/roll.mjs` ported to the browser over the same deck, so the key you
+type into FIG. 2 deals the hand the CLI deals -- `validate.sh` proves it on
+random keys every push. It is the first living element built against
+`references/simulation.md`.
 
 ## Proof
 
