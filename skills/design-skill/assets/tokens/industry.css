@@ -90,6 +90,7 @@
   --shadow-2: 0 4px 12px oklch(0.20 0.012 230 / 0.08), 0 16px 40px oklch(0.20 0.012 230 / 0.10);
 
   /* motion: mechanical; values update in place */
+  --motion-personality: mechanical;
   --dur-micro:   50ms;
   --dur-base:    100ms;
   --dur-enter:   150ms;

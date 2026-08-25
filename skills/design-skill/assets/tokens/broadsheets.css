@@ -94,6 +94,7 @@
   --shadow-2: none;
 
   /* motion: mechanical */
+  --motion-personality: mechanical;
   --dur-micro:   80ms;
   --dur-base:    150ms;
   --dur-enter:   200ms;

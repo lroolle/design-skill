@@ -141,6 +141,7 @@
   --shadow-2: 0 6px 16px oklch(0.18 0.03 235 / 0.10), 0 20px 48px oklch(0.18 0.03 235 / 0.12);
 
   /* motion: deliberate */
+  --motion-personality: deliberate;
   --dur-micro:   150ms;
   --dur-base:    300ms;
   --dur-enter:   500ms;
