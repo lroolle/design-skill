@@ -225,6 +225,13 @@ deterministic, pulls `almanac-tear-off` into the pool for an almanac
 brief, and assigns deck cards a real share of keys; the page's die
 equals the CLI's; ascii punctuation outside the CJK references.
 
+Beyond the static proof, `kit/render-check.mjs` measures the rendered
+page (contrast from painted pixels, overflow, targets, focus, reduced
+motion), and [evals/](evals/README.md) is the loop that makes rules
+earn their place: frozen scenarios, baselines, first attempts only,
+corrections routed to the narrowest layer that enforces them, and
+[evals/LEDGER.md](evals/LEDGER.md) recording which run earned what.
+
 ## Doctrine
 
 Taste is judgment anchored in evidence, exercised on behavior before

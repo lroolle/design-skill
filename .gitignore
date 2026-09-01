@@ -5,3 +5,4 @@ node_modules/
 *.local.md
 .cctrace/
 .captures/
+evals/runs/
