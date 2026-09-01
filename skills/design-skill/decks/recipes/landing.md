@@ -23,6 +23,12 @@ behave like a product surface -- honest and dense.
   hero's way.
 - Legal footer, contact, and the sign-in path for returning users.
 
+## Base material
+
+[Open the working landing base](../../kit/bases/landing.html). The offer,
+one action, and a running proof share the first viewport. Its split is
+replaceable; its truthful proposition, action, and proof are not.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

@@ -28,6 +28,7 @@ marketplace add lroolle/design-skill`), or by copying
 ## The kit (the product)
 
 - [kit/README.md](skills/design-skill/kit/README.md): which kit when; the zh switch; wiring by stack; governed systems; what check.sh enforces
+- [kit/bases/](skills/design-skill/kit/bases/README.md): eight renderable standing exits -- behavior and states to keep, topology for the roll to replace
 - [kit/floor/](skills/design-skill/kit/floor/tokens.css): correct without a look -- tokens, [base.css](skills/design-skill/kit/floor/base.css) (browser surfaces, focus, the `:lang(zh)` block), [fonts.zh.css](skills/design-skill/kit/floor/fonts.zh.css), [fonts.latin.css](skills/design-skill/kit/floor/fonts.latin.css)
 - [kit/house/](skills/design-skill/kit/house/tokens.css): our aesthetic -- ink on paper, administrative register, CJK-native, rules not boxes; [base.css](skills/design-skill/kit/house/base.css), [components.css](skills/design-skill/kit/house/components.css)
 - [kit/check.sh](skills/design-skill/kit/check.sh): FAIL / WARN tiers over source; raw color, palette classes, saturated faces, fake content, the promise and roll key, zh without a CJK webfont, leading, measure, the computed ramp, the floor shipped unchanged, the generated-dashboard shape
@@ -44,13 +45,13 @@ marketplace add lroolle/design-skill`), or by copying
 
 - [decks/worlds/](skills/design-skill/decks/worlds/_template.md): 27 born-designed graphic systems (a third CJK), affinity-tagged so they can enter the roll; one card per `<id>.md`
 - [decks/compositions/](skills/design-skill/decks/compositions/_template.md): 14 compositions for surface-scope rolls
-- [decks/recipes/](skills/design-skill/decks/recipes/_template.md): 8 surface recipes -- landing, dashboard, docs, editorial, portfolio, app-shell, forms, deck
+- [decks/recipes/](skills/design-skill/decks/recipes/_template.md): 8 surface contracts, each linked to a working base
 - [scripts/roll.mjs](skills/design-skill/scripts/roll.mjs): `node scripts/roll.mjs --scope direction|surface --mode <mode> --subject "<brief>" [--zh] [--grain] [--key] [--reroll n] [--list] [--json]`
 
-## Systems (material contracts; same token names, swap the css file)
+## Systems (tokens plus component geometry; swap the css file)
 
-- [systems/README.md](skills/design-skill/systems/README.md): the table, the token contract, the invariants
-- [default](skills/design-skill/systems/default.md) · [modernist](skills/design-skill/systems/modernist.md) · [classical](skills/design-skill/systems/classical.md) · [industry](skills/design-skill/systems/industry.md) · [organic](skills/design-skill/systems/organic.md) · [nocturnes](skills/design-skill/systems/nocturnes.md) · [broadsheets](skills/design-skill/systems/broadsheets.md) -- a 300-word card each beside `systems/<name>.css`
+- [systems/README.md](skills/design-skill/systems/README.md): token and component-geometry contract, base proof, invariants
+- [default](skills/design-skill/systems/default.md) · [modernist](skills/design-skill/systems/modernist.md) · [classical](skills/design-skill/systems/classical.md) · [industry](skills/design-skill/systems/industry.md) · [organic](skills/design-skill/systems/organic.md) · [nocturnes](skills/design-skill/systems/nocturnes.md) · [broadsheets](skills/design-skill/systems/broadsheets.md) -- compact proof card beside `systems/<name>.css`
 
 ## References (the why)
 

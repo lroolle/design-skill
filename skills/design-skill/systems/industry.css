@@ -102,6 +102,19 @@
   --container:      100%;
   --container-wide: 100%;
 
+  /* component geometry: compact instrument, fixed landmarks */
+  --system-control-height: 2.25rem;
+  --system-control-pad: var(--space-2);
+  --system-panel-fill: var(--surface);
+  --system-panel-border: var(--line-w) solid var(--line-strong);
+  --system-media-radius: var(--radius-sm);
+  --system-label-transform: uppercase;
+  --system-label-tracking: 0.06em;
+  --system-heading-weight: 600;
+  --system-row-height: 2.25rem;
+  --system-shell-gap: var(--space-3);
+  --system-rail-size: 20rem;
+
   color-scheme: light dark;
 }
 

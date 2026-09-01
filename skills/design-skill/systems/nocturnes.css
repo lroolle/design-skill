@@ -12,7 +12,7 @@
  * Fonts: Schibsted Grotesk + JetBrains Mono (OFL), self-host woff2.
  */
 
-[data-theme="dark"] {
+:root[data-theme="dark"] {
   /* surfaces: lightness carries elevation, 0.04 steps */
   --bg:          oklch(0.15 0.025 235);
   --surface:     oklch(0.19 0.025 235);
@@ -152,6 +152,19 @@
   /* layout */
   --container:      80rem;
   --container-wide: 96rem;
+
+  /* component geometry: dark stage, lifted rails, deliberate controls */
+  --system-control-height: 2.75rem;
+  --system-control-pad: var(--space-4);
+  --system-panel-fill: var(--surface);
+  --system-panel-border: var(--line-w) solid var(--line);
+  --system-media-radius: var(--radius-lg);
+  --system-label-transform: none;
+  --system-label-tracking: 0.02em;
+  --system-heading-weight: 700;
+  --system-row-height: 2.75rem;
+  --system-shell-gap: var(--space-5);
+  --system-rail-size: 18rem;
 
   color-scheme: light dark;
 }

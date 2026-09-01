@@ -20,6 +20,12 @@ else is chrome and should be quiet.
 - Version / edition / language switch where the product has them.
 - Links that look like links inside prose; external marked.
 
+## Base material
+
+[Open the working docs base](../../kit/bases/docs.html). Section
+navigation, one readable article, request, response, and recovery are
+real. Its three-column desktop arrangement is disposable.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

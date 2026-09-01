@@ -28,6 +28,9 @@ if command -v node >/dev/null 2>&1; then
   done
   pn=$(node -e "console.log(JSON.parse(require('fs').readFileSync('.claude-plugin/plugin.json','utf8')).name)" 2>/dev/null)
   [ "$pn" = "$SKILL_NAME" ] && ok "plugin.json name = $pn" || bad "plugin.json name is '$pn', expected $SKILL_NAME"
+  pv=$(node -e "console.log(JSON.parse(require('fs').readFileSync('.claude-plugin/plugin.json','utf8')).version)" 2>/dev/null)
+  sv=$(awk -F'"' '/^  version:/{print $2; exit}' "$SKILL_DIR/SKILL.md")
+  [ "$pv" = "$sv" ] && ok "plugin and skill version = $pv" || bad "version drift: plugin '$pv', skill '$sv'"
 fi
 
 # 0b. Root-level markdown links resolve
@@ -54,7 +57,7 @@ words=$(wc -w < SKILL.md)
 [ "$words" -le 2600 ] && ok "SKILL.md $words words (<= 2600)" || bad "SKILL.md $words words (> 2600): the protocol is growing back into a method"
 desc=$(awk '/^description:/{f=1; next} f && /^[a-z]+:/{exit} f && /^---/{exit} f {gsub(/^ +| +$/, ""); printf "%s ", $0}' SKILL.md)
 [ ${#desc} -le 1024 ] && ok "description ${#desc} chars (<= 1024)" || bad "description ${#desc} chars (> 1024)"
-for p in kit/README.md kit/check.sh kit/fonts.sh kit/floor/tokens.css kit/floor/base.css kit/floor/fonts.zh.css kit/floor/fonts.latin.css kit/house/tokens.css kit/house/base.css kit/house/components.css \
+for p in kit/README.md kit/check.sh kit/fonts.sh kit/bases/README.md kit/bases/base.css kit/bases/base.js kit/floor/tokens.css kit/floor/base.css kit/floor/fonts.zh.css kit/floor/fonts.latin.css kit/house/tokens.css kit/house/base.css kit/house/components.css \
          specimens/palettes/README.md specimens/type/README.md specimens/zh-voice.md decks/worlds/_template.md decks/compositions/_template.md decks/recipes/_template.md \
          scripts/roll.mjs systems/README.md references/thinking.md references/craft.md references/cjk.md references/color.md references/simulation.md references/anti-patterns.md references/priors.md references/platforms.md \
          assets/primitives/README.md assets/DESIGN.md.tmpl assets/TASTE.md.tmpl; do
@@ -81,14 +84,17 @@ if [ -f /tmp/.lds_broken ]; then rm -f /tmp/.lds_broken; bad "relative links"; e
 stale=$(grep -rnE 'design-systems/|assets/tokens/|assets/bans\.sh|references/(methods|patterns|typography|motion|fontbook|palettes|frameworks|sites|skills)\.md|specimen\.html|(^|[^/a-z-])(worlds|stagings|templates)/' --include='*.md' --include='*.css' --include='*.js' --include='*.mjs' --include='*.sh' --include='*.tmpl' --include='*.html' . 2>/dev/null | grep -v '^./decks/\(worlds\|compositions\)/[^:]*:.*decks/' | grep -vE 'validate|\.git/' | grep -vE 'decks/(worlds|compositions|recipes)/' | head -5)
 [ -z "$stale" ] && ok "no stale pre-rewrite paths" || { bad "stale paths"; echo "$stale" | sed 's/^/      /'; }
 
-# 3. Systems: a card + a css per system, README row, card size
+# 3. Systems: a card + css, component geometry, base proof, README row
 for css in systems/*.css; do
   n=$(basename "$css" .css); miss=""
   [ -f "systems/$n.md" ] || miss="$miss card"
-  for h in "## Faces" "## Dials" "## Signature moves" "## Turns to slop"; do grep -qF "$h" "systems/$n.md" 2>/dev/null || miss="$miss '$h'"; done
-  w=$(wc -w < "systems/$n.md" 2>/dev/null || echo 0); [ "$w" -le 360 ] || miss="$miss card-${w}w(>360)"
+  for h in "## Faces" "## Dials" "## Base proof" "## Signature moves" "## Turns to slop"; do grep -qF "$h" "systems/$n.md" 2>/dev/null || miss="$miss '$h'"; done
+  w=$(wc -w < "systems/$n.md" 2>/dev/null || echo 0); [ "$w" -le 390 ] || miss="$miss card-${w}w(>390)"
   grep -qF "[$n]($n.md)" systems/README.md || miss="$miss README-row"
   grep -q -- '--motion-personality:' "$css" || miss="$miss motion-personality"
+  for t in control-height control-pad panel-fill panel-border media-radius label-transform label-tracking heading-weight row-height shell-gap rail-size; do
+    grep -q -- "--system-$t:" "$css" || miss="$miss system-$t"
+  done
   [ -z "$miss" ] && ok "system $n" || bad "system $n missing:$miss"
 done
 
@@ -98,7 +104,7 @@ themed=(bg surface surface-2 overlay fg fg-2 fg-3 line line-strong accent accent
 for css in systems/*.css kit/floor/tokens.css kit/house/tokens.css; do
   miss=""
   root=$(awk '/^:root[[:space:]]*\{/{f=1} f{print} f&&/^\}/{exit}' "$css")
-  dark=$(awk '/^\[data-theme="dark"\][[:space:]]*\{/{f=1} f{print} f&&/^\}/{exit}' "$css")
+  dark=$(awk '/^(:root)?\[data-theme="dark"\][[:space:]]*\{/{f=1} f{print} f&&/^\}/{exit}' "$css")
   for t in "${tokens[@]}"; do grep -qE "^\s*--$t:" <<< "$root" || miss="$miss --$t"; done
   for t in "${themed[@]}"; do grep -qE "^\s*--$t:" <<< "$dark" || miss="$miss dark:--$t"; done
   grep -qE '#(000000|ffffff|000|fff)\b' "$css" && miss="$miss pure-black/white"
@@ -181,9 +187,26 @@ for deck in worlds compositions; do
 "; fi
 done
 zhn=$(grep -l '^zh: true' decks/worlds/*.md | wc -l | tr -d ' '); [ "$zhn" -ge 8 ] && ok "worlds: $zhn CJK cards" || bad "worlds: only $zhn CJK cards"
+# 7b. Every prose recipe binds to one renderable working base
+base_count=0
+for f in kit/bases/*.html; do
+  base_count=$((base_count+1)); miss=""; b=$(basename "$f")
+  grep -q 'data-base' "$f" || miss="$miss data-base"
+  grep -q 'id="system-css"' "$f" || miss="$miss system-css"
+  grep -q 'data-system-picker' "$f" || miss="$miss picker"
+  grep -q 'THESIS.*OWN-WORLD.*STORY.*FIRST VIEWPORT.*FORM' "$f" || miss="$miss promise"
+  grep -q 'base.js' "$f" && grep -q 'base.css' "$f" || miss="$miss base-assets"
+  [ -z "$miss" ] && ok "working base $b" || bad "working base $b missing:$miss"
+done
+[ "$base_count" -eq 8 ] && ok "working bases: 8" || bad "working bases: $base_count, expected 8"
+if command -v node >/dev/null 2>&1; then
+  node --check kit/bases/base.js 2>/dev/null && ok "working base behavior parses" || bad "kit/bases/base.js does not parse"
+fi
+
 for f in decks/recipes/*.md; do
   b=$(basename "$f"); case "$b" in _template.md) continue ;; esac
-  miss=""; for h in "## Job" "## Protected functions" "## The standing exit" "## Settings" "## States" "## Copy" "## Verify" "## Failure modes"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
+  miss=""; for h in "## Job" "## Protected functions" "## Base material" "## The standing exit" "## Settings" "## States" "## Copy" "## Verify" "## Failure modes"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
+  grep -qF "../../kit/bases/${b%.md}.html" "$f" || miss="$miss working-base-link"
   grep -qF "## Directions" "$f" && miss="$miss has-Directions"
   [ -z "$miss" ] && ok "recipe ${b%.md}" || bad "recipe $b:$miss"
 done

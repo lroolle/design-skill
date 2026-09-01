@@ -17,6 +17,9 @@ Does not fit: long-form reading, forms-heavy admin, print, daytime utility -- sh
 - elevation: surface lightness carries elevation; shadow-1 is an inset top highlight plus a soft neutral drop, shadow-2 deeper; no glow except focus and accent hover
 - motion deliberate: micro 150ms, base 300ms, enter 500ms; crossfades, no bounce
 
+## Base proof
+Run deck and portfolio in dark mode. Evidence must remain brighter than atmosphere, and lifted rails must still read without glow or acid accents.
+
 ## Signature moves
 - One light source: a single radial gradient anchoring the hero (`[data-light-source]`); everything else matte.
 - Gold sparks: accent as points, never areas -- a dot, an underline, a date, the one CTA.

@@ -106,6 +106,19 @@
   --container:      80rem;
   --container-wide: 96rem;
 
+  /* component geometry: dense issue, rules and captions, no boxes */
+  --system-control-height: 2.5rem;
+  --system-control-pad: var(--space-3);
+  --system-panel-fill: transparent;
+  --system-panel-border: 0;
+  --system-media-radius: 0;
+  --system-label-transform: uppercase;
+  --system-label-tracking: 0.08em;
+  --system-heading-weight: 700;
+  --system-row-height: 2.5rem;
+  --system-shell-gap: var(--space-4);
+  --system-rail-size: 15rem;
+
   color-scheme: light dark;
 }
 

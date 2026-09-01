@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-default-system="modernist">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Landing base - design-skill</title>
+  <link id="system-css" rel="stylesheet" href="../../systems/modernist.css">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-base class="base--landing">
+<!-- THESIS proof shares the first viewport with the offer; no feature-card march. OWN-WORLD system contract plus product evidence. STORY understand, inspect, start. FIRST VIEWPORT claim left and running release ledger right. FORM standing exit, pool 0, roll 00000000. -->
+<header class="base-bar">
+  <a class="base-brand" href="landing.html">Release Ledger</a>
+  <span class="base-meta">Structural fixture / labelled sample data</span>
+  <div class="base-tools">
+    <label for="system">System</label>
+    <select id="system" data-system-picker>
+      <option>default</option><option selected>modernist</option><option>classical</option><option>industry</option><option>organic</option><option>nocturnes</option><option>broadsheets</option>
+    </select>
+    <button type="button" data-theme-toggle aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main>
+  <section class="landing-first">
+    <div class="landing-claim">
+      <p class="base-kicker">Release review for product teams</p>
+      <h1 class="base-title">See what changed before customers do.</h1>
+      <p class="base-dek">One ordered record of deploys, flags, migrations, and the person who approved each change.</p>
+      <div class="base-cluster">
+        <a class="base-action" data-primary href="#sample">Open the sample ledger</a>
+        <a class="base-action" data-quiet href="#method">Read the method</a>
+      </div>
+    </div>
+
+    <section class="landing-proof" id="sample" aria-labelledby="sample-title">
+      <div class="base-spread">
+        <div><p class="base-kicker">Sample release</p><h2 id="sample-title">Web 2026.09.01</h2></div>
+        <span class="base-status" data-tone="ok">ready</span>
+      </div>
+      <div class="proof-sequence" aria-label="Sample release sequence">
+        <div class="proof-line"><span class="base-num">08:42</span><strong>Schema checked</strong><span class="base-status" data-tone="ok">passed</span></div>
+        <div class="proof-line"><span class="base-num">08:47</span><strong>Flag exposure</strong><span class="base-status" data-tone="warn">12%</span></div>
+        <div class="proof-line"><span class="base-num">09:03</span><strong>Owner approval</strong><span class="base-status" data-tone="ok">signed</span></div>
+        <div class="proof-line"><span class="base-num">09:10</span><strong>Production gate</strong><span class="base-status">waiting</span></div>
+      </div>
+      <div class="base-spread base-small"><span>4 changes / 1 open gate</span><strong class="base-num">RL-1048</strong></div>
+    </section>
+  </section>
+
+  <section class="landing-after" id="method" aria-label="Product method">
+    <div><p class="base-kicker">Before</p><h2>Collect the facts</h2><p>Deploy, migration, flag, owner, and evidence remain separate events with one order.</p></div>
+    <div><p class="base-kicker">During</p><h2>Raise the unresolved</h2><p>The release cannot look complete while an approval, check, or rollback path is missing.</p></div>
+    <div><p class="base-kicker">After</p><h2>Keep the receipt</h2><p>The record stays readable after the dashboard has moved on to the next release.</p></div>
+  </section>
+</main>
+<script src="base.js"></script>
+</body>
+</html>

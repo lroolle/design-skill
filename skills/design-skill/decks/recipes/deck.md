@@ -24,6 +24,12 @@ slide (they must be read and believed).
 - Export fidelity: what is shown is what the PDF and PPTX contain;
   fonts embedded or system.
 
+## Base material
+
+[Open the working deck base](../../kit/bases/deck.html). The slide has one
+claim, evidence, source debt, order, and speaker notes. Its editor frame
+is only a proof harness and never belongs in the presented deck.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

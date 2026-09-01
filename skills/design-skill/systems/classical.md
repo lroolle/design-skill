@@ -18,6 +18,9 @@ Does not fit: dashboards, developer tools, anything dense or fast.
 - elevation: flat -- overlays sit on `--surface` with a 1px line
 - motion deliberate: micro 150ms, base 300ms, enter 500ms; a book does not animate
 
+## Base proof
+Run docs and editorial. Reading measure must dominate while controls remain visibly chrome; no marketing card or italic hero may appear.
+
 ## Signature moves
 - Small caps and old-style figures in running text, set the way a printer would.
 - The measure: text IS the design; one column, 62ch, margins generous even on a phone.

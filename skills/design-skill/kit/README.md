@@ -1,11 +1,16 @@
 # kit -- start from material
 
-The product of this skill. A build begins by copying one of these two
-kits into the project and editing it, not by reading advice and then
-writing CSS from memory. What binds is what you start from.
+The product of this skill. A build begins by copying a working base and
+one of the two kits into the project and editing them, not by reading
+advice and writing CSS from memory. What binds is what you start from.
 
 ```
 kit/
+  bases/    eight renderable standing exits, one per recipe
+    base.css         shared behavioral components and responsive geometry
+    base.js          system/theme switch for the proof harness
+    *.html           landing, dashboard, docs, editorial, portfolio,
+                     app-shell, forms, deck
   floor/    correct but without a look. Build MUST overwrite palette + composition.
     tokens.css       every contract token, both themes, a real CJK face wired
     base.css         browser surfaces, focus, numerals, print, the zh mode (:lang)
@@ -33,6 +38,20 @@ kit/
 Load order: `tokens.css` -> `floor/base.css` -> (`house/base.css` ->
 `house/components.css`) -> the project's own CSS. The floor's base is
 always in the stack: it is the floor.
+
+## Which base
+
+Open `bases/<recipe>.html` before Build. It is a rendered standing exit,
+not a direction: keep its protected behavior and replace its topology
+with the dealt composition. `bases/base.css` gives actions, fields,
+tables, notices, empty states, tabs, rails, and overlays a stable markup
+contract. A system changes their geometry through `--system-*`
+properties; a system that only changes color and type fails its own card.
+
+The fixture pages use labelled sample data and accept `?system=<name>`.
+They may be opened directly or served. Never ship the fixture copy. If a
+finished surface keeps the base arrangement, DESIGN.md records why the
+standing exit beat the dealt composition.
 
 ## The zh switch
 
@@ -111,6 +130,8 @@ edit is too expensive; the grep tier covers edits). Renders each page
 at 390 and 1440, light and dark, reduced motion emulated. Colors are
 resolved by painting a pixel and reading it back -- never by parsing
 computed strings, which Chromium serializes verbatim for `oklch()`.
+When `<html>` already carries `data-theme`, the checker sets it to the
+scheme under test as well as emulating the OS preference.
 
 FAIL: horizontal overflow at 390; rendered text contrast under 4.5:1
 (3:1 large) in either scheme; a pure #fff/#000 ground; interactive

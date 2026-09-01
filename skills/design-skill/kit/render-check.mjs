@@ -233,6 +233,9 @@ for (const target of pages) {
   const pg = await browser.newPage({ viewport: { width: 1440, height: 900 } });
   await pg.emulateMedia({ colorScheme: 'light', reducedMotion: 'no-preference' });
   await pg.goto(url, { waitUntil: 'load' });
+  await pg.evaluate(() => {
+    if (document.documentElement.hasAttribute('data-theme')) document.documentElement.setAttribute('data-theme', 'light');
+  });
   await pg.evaluate(() => document.fonts.ready);
   await pg.waitForTimeout(300);
 
@@ -287,6 +290,9 @@ for (const target of pages) {
   // dark: authored, and holding the same floor
   if (!noDark) {
     await pg.emulateMedia({ colorScheme: 'dark', reducedMotion: 'no-preference' });
+    await pg.evaluate(() => {
+      if (document.documentElement.hasAttribute('data-theme')) document.documentElement.setAttribute('data-theme', 'dark');
+    });
     await pg.waitForTimeout(250);
     const dark = await pg.evaluate(contrastCheck);
     if (dark.bad.length) fail('contrast', `${name} dark: ${dark.bad.length} text elements below the floor`, dark.bad);

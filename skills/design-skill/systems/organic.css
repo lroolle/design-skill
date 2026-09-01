@@ -103,6 +103,19 @@
   --container:      76rem;
   --container-wide: 90rem;
 
+  /* component geometry: broad touch targets, toned sheets, soft media */
+  --system-control-height: 2.75rem;
+  --system-control-pad: var(--space-4);
+  --system-panel-fill: var(--surface);
+  --system-panel-border: 0;
+  --system-media-radius: var(--radius-lg);
+  --system-label-transform: none;
+  --system-label-tracking: 0;
+  --system-heading-weight: 600;
+  --system-row-height: 3rem;
+  --system-shell-gap: var(--space-6);
+  --system-rail-size: 18rem;
+
   color-scheme: light dark;
 }
 

@@ -16,7 +16,7 @@ description: >-
   lang attribute flips. A throwaway page needs only the floor.
 license: MIT
 metadata:
-  version: "0.2.0"
+  version: "0.3.0"
   homepage: https://github.com/lroolle/design-skill
 ---
 
@@ -165,10 +165,10 @@ Done when one direction is bound with verdicts and raises written.
 
 ### 3. Build
 
-Start from material. Copy `kit/floor/` (correct, no look) or
-`kit/house/` (ours: ink on paper, administrative register,
-CJK-native, rules not boxes) into the project; pick the system whose
-dials fit (`systems/`) if the world names one; **re-ink the palette
+Start from material. Copy the recipe's working base (`kit/bases/`),
+then `kit/floor/` (correct, no look) or `kit/house/` (ours: ink on
+paper, administrative register, CJK-native); pick the system whose
+component geometry fits (`systems/`) if the world names one; **re-ink
 from a specimen or the world card** (the floor palette warns when
 shipped); on a zh product run `kit/fonts.sh` and set `lang`. Wire it
 (kit/README.md). Then:
@@ -180,8 +180,8 @@ shipped); on a zh product run `kit/fonts.sh` and set `lang`. Wire it
   FIRST VIEWPORT (the exact composition), FORM (the world or
   candidate, the pool size, the roll key). A block that reads like a
   mood is not decided. `check.sh` fails without it.
-- A ten-line ASCII sketch of regions and hierarchy before code; the
-  recipe for the surface kind (`decks/recipes/`); the craft
+- Redraw the base as ten lines of regions and hierarchy before code;
+  the recipe (`decks/recipes/`); the craft
   (`references/craft.md`) when a call is open; `cjk.md` on zh;
   `simulation.md` for anything that runs (model card first, six
   layers, skin from tokens, a settled frame under reduced motion;
@@ -278,15 +278,15 @@ Smash the work if any survive:
 
 | Path | Holds | Load when |
 |---|---|---|
-| [kit/](kit/README.md) | floor and house kits, `check.sh` (source), `render-check.mjs` (rendered), `fonts.sh`; wiring by stack; governed systems | Build, always |
+| [kit/](kit/README.md) | eight working bases; floor and house; source and render checks; fonts; wiring | Build, always |
 | [specimens/palettes/](specimens/palettes/README.md) | observed palettes with provenance and their irregularity | Build (re-ink), Review |
 | [specimens/type/](specimens/type/README.md) | real settings at real sizes: zh body, zh display, Latin body, the ledger | Build |
 | [specimens/zh-voice.md](specimens/zh-voice.md) | Chinese copy register | any zh surface |
 | [decks/worlds/](decks/worlds/_template.md) | 27 born-designed graphic systems, affinity-tagged; enter the roll | Direct |
 | [decks/compositions/](decks/compositions/_template.md) | 14 compositions for surface-scope rolls | Direct (surface scope) |
-| [decks/recipes/](decks/recipes/_template.md) | 8 surface recipes: landing, dashboard, docs, editorial, portfolio, app-shell, forms, deck | Build |
+| [decks/recipes/](decks/recipes/_template.md) | 8 surface contracts, each bound to a working base in `kit/bases/` | Build |
 | [scripts/roll.mjs](scripts/roll.mjs) | the dice: pool = your candidates + affine deck cards; challengers; deterministic by key | Direct |
-| [systems/](systems/README.md) | seven material contracts as CSS, a 300-word card each, the token schema | Build, when the world names one |
+| [systems/](systems/README.md) | seven material contracts: tokens plus component geometry, proved on bases | Build, when the world names one |
 | [references/thinking.md](references/thinking.md) | the doctrine | once |
 | [references/craft.md](references/craft.md) | type, structure, motion | Build |
 | [references/cjk.md](references/cjk.md) | the zh mode: faces, rhythm, punctuation, loading | any zh surface |

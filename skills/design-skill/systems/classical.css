@@ -105,6 +105,19 @@
   --container:      64rem;
   --container-wide: 80rem;
 
+  /* component geometry: one reading sheet, chrome kept modest */
+  --system-control-height: 2.75rem;
+  --system-control-pad: var(--space-3);
+  --system-panel-fill: transparent;
+  --system-panel-border: 0;
+  --system-media-radius: 0;
+  --system-label-transform: none;
+  --system-label-tracking: 0.04em;
+  --system-heading-weight: 500;
+  --system-row-height: 3rem;
+  --system-shell-gap: var(--space-7);
+  --system-rail-size: 16rem;
+
   color-scheme: light dark;
 }
 

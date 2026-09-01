@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-default-system="industry">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>App-shell base - design-skill</title>
+  <link id="system-css" rel="stylesheet" href="../../systems/industry.css">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-base class="base--operate">
+<!-- THESIS the selected object owns the center; navigation and properties remain stable. OWN-WORLD tree, work surface, inspector, status line. STORY select, edit, verify, save. FIRST VIEWPORT complete shell with one object and visible state. FORM standing exit, pool 0, roll 00000000. -->
+<header class="base-bar">
+  <a class="base-brand" href="app-shell.html">Cut List</a>
+  <span class="base-meta">Fixture document / sample dimensions</span>
+  <div class="base-tools">
+    <label for="system">System</label>
+    <select id="system" data-system-picker><option>default</option><option>modernist</option><option>classical</option><option selected>industry</option><option>organic</option><option>nocturnes</option><option>broadsheets</option></select>
+    <button type="button" data-theme-toggle aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main class="app-grid">
+  <nav class="app-tree" aria-label="Objects">
+    <p class="base-kicker">Objects / 4</p>
+    <ul class="tree-list"><li><a href="#panel" aria-current="page">Panel R-17</a></li><li><a href="#rail">Rail R-18</a></li><li><a href="#shelf">Shelf R-19</a></li><li><a href="#back">Back R-20</a></li></ul>
+  </nav>
+
+  <section class="app-work" aria-labelledby="object-title">
+    <div class="base-tabs" role="tablist" aria-label="Document views"><button role="tab" aria-selected="true">Object</button><button role="tab" aria-selected="false">Assembly</button><button role="tab" aria-selected="false">Sheet</button></div>
+    <div class="app-canvas"><div class="cut-object" role="img" aria-label="Sample panel with one inset cut"></div></div>
+    <div class="operate-status"><span class="base-status" data-tone="ok">constraints valid</span><span class="base-status">sheet 1 / 2</span><span class="base-status">zoom 82%</span></div>
+  </section>
+
+  <aside class="app-inspector" aria-labelledby="object-title">
+    <p class="base-kicker">Selected object</p><h1 id="object-title">Panel R-17</h1>
+    <div class="base-stack">
+      <div class="base-field"><label for="width">Width, mm</label><input id="width" class="base-num" type="number" value="720"></div>
+      <div class="base-field"><label for="height">Height, mm</label><input id="height" class="base-num" type="number" value="480"></div>
+      <div class="base-field"><label for="material">Material</label><select id="material"><option>Birch ply / 18 mm</option><option>Maple / 20 mm</option></select></div>
+      <div class="base-notice"><strong>One dependent cut.</strong> Updating width keeps the inset 72 mm from the right edge.</div>
+      <button class="base-action" data-primary type="button">Save object</button>
+      <button class="base-action" type="button">Undo last change</button>
+    </div>
+  </aside>
+</main>
+<script src="base.js"></script>
+</body>
+</html>

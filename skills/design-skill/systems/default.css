@@ -100,6 +100,19 @@
   --container:      72rem;
   --container-wide: 90rem;
 
+  /* component geometry: quiet work surface, rules before panels */
+  --system-control-height: 2.5rem;
+  --system-control-pad: var(--space-3);
+  --system-panel-fill: transparent;
+  --system-panel-border: var(--line-w) solid var(--line);
+  --system-media-radius: var(--radius-lg);
+  --system-label-transform: none;
+  --system-label-tracking: 0;
+  --system-heading-weight: 650;
+  --system-row-height: 2.75rem;
+  --system-shell-gap: var(--space-5);
+  --system-rail-size: 17rem;
+
   color-scheme: light dark;
 }
 

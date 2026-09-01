@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-default-system="industry">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard base - design-skill</title>
+  <link id="system-css" rel="stylesheet" href="../../systems/industry.css">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-base class="base--operate">
+<!-- THESIS the population remains primary while one selected row explains itself. OWN-WORLD dense rules, tabular data, one signal. STORY scan, isolate, act without losing context. FIRST VIEWPORT status, filter, table, selected detail. FORM standing exit, pool 0, roll 00000000. -->
+<header class="base-bar">
+  <a class="base-brand" href="dashboard.html">North Dispatch</a>
+  <span class="base-meta">Shipment board / sample operations data</span>
+  <div class="base-tools">
+    <label for="system">System</label>
+    <select id="system" data-system-picker><option>default</option><option>modernist</option><option>classical</option><option selected>industry</option><option>organic</option><option>nocturnes</option><option>broadsheets</option></select>
+    <button type="button" data-theme-toggle aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<div class="operate-status" aria-label="System status">
+  <span class="base-status" data-tone="ok">intake current</span>
+  <span class="base-status" data-tone="warn">3 route holds</span>
+  <span class="base-status">updated <time class="base-num">09:16:04</time></span>
+</div>
+
+<main class="operate-grid">
+  <section class="operate-main" aria-labelledby="board-title">
+    <div class="base-spread"><div><p class="base-kicker">Today / west yard</p><h1 id="board-title">38 active shipments</h1></div><button class="base-action" data-primary type="button">Create shipment</button></div>
+    <div class="operate-toolbar">
+      <div class="base-field"><label for="filter">Find by route, owner, or ID</label><input id="filter" type="search" value="" placeholder="Search the board"></div>
+      <div class="base-field"><label for="state">State</label><select id="state"><option>All active</option><option>Held</option><option>At risk</option></select></div>
+      <button class="base-action" type="button">Apply filters</button>
+    </div>
+
+    <div class="base-table-wrap">
+      <table class="base-table">
+        <caption class="base-kicker">Sample data - worst variance first</caption>
+        <thead><tr><th>Shipment</th><th>Route</th><th>Owner</th><th data-num>Variance</th><th>State</th><th>Next event</th></tr></thead>
+        <tbody>
+          <tr data-select-row aria-selected="true"><td class="base-num">ND-2084</td><td>OAK / RNO</td><td>Lee</td><td data-num>+94m</td><td><span class="base-status" data-tone="danger">held</span></td><td class="base-num">09:32</td></tr>
+          <tr data-select-row aria-selected="false"><td class="base-num">ND-2117</td><td>SFO / PDX</td><td>Ortiz</td><td data-num>+31m</td><td><span class="base-status" data-tone="warn">review</span></td><td class="base-num">09:41</td></tr>
+          <tr data-select-row aria-selected="false"><td class="base-num">ND-2140</td><td>SJC / SEA</td><td>Patel</td><td data-num>-04m</td><td><span class="base-status" data-tone="ok">moving</span></td><td class="base-num">09:48</td></tr>
+          <tr data-select-row aria-selected="false"><td class="base-num">ND-2153</td><td>SMF / BOI</td><td>Tran</td><td data-num>+08m</td><td><span class="base-status" data-tone="ok">moving</span></td><td class="base-num">10:03</td></tr>
+          <tr data-select-row aria-selected="false"><td class="base-num">ND-2168</td><td>RNO / SLC</td><td>Ng</td><td data-num>+12m</td><td><span class="base-status">queued</span></td><td class="base-num">10:12</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <aside class="operate-rail" aria-labelledby="detail-title">
+    <p class="base-kicker">Selected shipment</p>
+    <h2 id="detail-title" class="base-num">ND-2084</h2>
+    <div class="base-notice" data-tone="danger"><strong>Route hold.</strong> Dock 4 scan is missing; departure cannot be represented as confirmed.</div>
+    <dl class="base-stack">
+      <div class="base-spread"><dt>Last evidence</dt><dd class="base-num">08:54</dd></div>
+      <div class="base-spread"><dt>Driver</dt><dd>M. Cole</dd></div>
+      <div class="base-spread"><dt>Trailer</dt><dd class="base-num">T-771</dd></div>
+      <div class="base-spread"><dt>Rollback</dt><dd>Return to bay</dd></div>
+    </dl>
+    <hr class="base-rule">
+    <div class="base-stack"><button class="base-action" data-primary type="button">Request dock scan</button><button class="base-action" type="button">Reassign owner</button></div>
+  </aside>
+</main>
+<script src="base.js"></script>
+</body>
+</html>
