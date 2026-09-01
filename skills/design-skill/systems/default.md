@@ -17,6 +17,9 @@ Does not fit: campaigns, portfolios, launches -- anything that must be remembere
 - elevation: flat -- tone steps and 1px lines; shadow-1 popovers, shadow-2 dialogs, tinted to the seed
 - motion snappy: micro 100ms, base 180ms, enter 240ms; ease-out `cubic-bezier(0.16, 1, 0.3, 1)`
 
+## Base proof
+Run dashboard, docs, and forms. Rules and tone must separate regions without turning them into cards; every control stays quiet enough for repeated work.
+
 ## Signature moves
 - Tone-step emphasis: regions differ by `--surface` steps; layered paper, not boxed cards.
 - Mono for identifiers: IDs, hashes, timestamps, counts in `--font-mono` at 0.9em.

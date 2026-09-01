@@ -17,6 +17,11 @@ What must not break on this kind of surface, regardless of restyle:
 the task path, the information actually read, labels and navigation,
 legal copy, the conversion path. A verdict checks against this list.
 
+## Base material
+
+Link the working `kit/bases/` standing exit. Name what it proves and
+what the dealt composition must be free to replace.
+
 ## The standing exit
 
 The category standard for this surface kind, played straight: the

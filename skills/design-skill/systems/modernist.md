@@ -17,6 +17,9 @@ Does not fit: dense product tools (unless `--density: 1`), warm or cozy brands, 
 - elevation: flat -- no shadows, texture or gradients; shadow-1 only where a dialog must part from a photo
 - motion snappy: micro 100ms, base 180ms, enter 250ms; navigation cuts; one hero moment per site
 
+## Base proof
+Run landing and portfolio. Scale, void, and one signal must reorganize attention; if only the red changes, the contract failed.
+
 ## Signature moves
 - The headline as image: display at 4xl and above, hard left rag, where a hero photo would sit.
 - The asymmetric grid with one void: 8/4 or 7/5 spans, one region left empty on purpose.

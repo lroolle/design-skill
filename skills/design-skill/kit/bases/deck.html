@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-default-system="nocturnes">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Deck base - design-skill</title>
+  <link id="system-css" rel="stylesheet" href="../../systems/nocturnes.css">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-base class="base--deck">
+<!-- THESIS one claim and its evidence own the slide; editor chrome stays outside. OWN-WORLD fixed frame, source-bearing figure, quiet order and notes. STORY see claim, inspect evidence, hear qualification. FIRST VIEWPORT slide, order, notes. FORM standing exit, pool 0, roll 00000000. -->
+<header class="base-bar">
+  <a class="base-brand" href="deck.html">Decision Deck</a>
+  <span class="base-meta">Slide 3 / sample evidence</span>
+  <div class="base-tools">
+    <label for="system">System</label>
+    <select id="system" data-system-picker><option>default</option><option>modernist</option><option>classical</option><option>industry</option><option>organic</option><option selected>nocturnes</option><option>broadsheets</option></select>
+    <button type="button" data-theme-toggle aria-pressed="true">Light</button>
+  </div>
+</header>
+
+<main class="deck-workbench">
+  <nav class="deck-order" aria-label="Slide order">
+    <div class="slide-thumb"><span class="base-num">01</span><br>Decision</div>
+    <div class="slide-thumb"><span class="base-num">02</span><br>Current record</div>
+    <div class="slide-thumb" aria-current="page"><span class="base-num">03</span><br>Worst handoff</div>
+    <div class="slide-thumb"><span class="base-num">04</span><br>Proposed change</div>
+  </nav>
+
+  <section class="deck-stage" aria-label="Current slide">
+    <article class="slide">
+      <div><p class="base-kicker">Sample finding / 03</p><h1>The average hid the only handoff that needed action.</h1></div>
+      <div class="slide-evidence"><strong class="base-num" style="font-size:var(--text-4xl)">94m</strong><p>Sort handoff variance, against 31 minutes at the next-worst stage.</p><small>Fixture dataset, not a published claim.</small></div>
+    </article>
+  </section>
+
+  <aside class="deck-notes" aria-labelledby="notes-title">
+    <p class="base-kicker">Speaker notes</p><h2 id="notes-title">Qualify the claim</h2>
+    <p>Say that later stages recovered time. The daily average was arithmetically correct and operationally insufficient.</p>
+    <div class="base-notice"><strong>Source required.</strong> Replace the fixture value and attach the event export before presenting.</div>
+    <hr class="base-rule"><button class="base-action" data-primary type="button">Present from this slide</button>
+  </aside>
+</main>
+<script src="base.js"></script>
+</body>
+</html>

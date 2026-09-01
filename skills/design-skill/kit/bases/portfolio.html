@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-default-system="organic">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio base - design-skill</title>
+  <link id="system-css" rel="stylesheet" href="../../systems/organic.css">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-base class="base--experience">
+<!-- THESIS work is the first navigation surface; biography waits. OWN-WORLD one project rail, real metadata, two actions. STORY inspect a project, understand the practice, start a project. FIRST VIEWPORT offer and horizontally countable work. FORM standing exit, pool 0, roll 00000000. -->
+<header class="base-bar">
+  <a class="base-brand" href="portfolio.html">Field Office</a>
+  <span class="base-meta">Selected work / sample project records</span>
+  <div class="base-tools">
+    <label for="system">System</label>
+    <select id="system" data-system-picker><option>default</option><option>modernist</option><option>classical</option><option>industry</option><option selected>organic</option><option>nocturnes</option><option>broadsheets</option></select>
+    <button type="button" data-theme-toggle aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main class="portfolio-first">
+  <section class="portfolio-intro">
+    <div><p class="base-kicker">Interface and information systems</p><h1 class="base-title">We make complicated work inspectable.</h1></div>
+    <div><p>Four fixture projects show the expected record: problem, role, shipped mechanism, and what changed for the person using it.</p><a class="base-action" data-primary href="mailto:studio@example.invalid">Start a sample inquiry</a></div>
+  </section>
+
+  <section class="project-rail" aria-label="Sample project rail">
+    <article class="project"><div class="project-figure" data-figure="dispatch" role="img" aria-label="Sample dispatch population with one selected outlier"><i></i><i></i><i></i></div><div class="project-copy"><p class="base-kicker">Operations / 2026</p><h2>Dispatch Board</h2><p>Population-first triage with selected-row recovery.</p><a href="#dispatch">Inspect project</a></div></article>
+    <article class="project"><div class="project-figure" data-figure="ledger" role="img" aria-label="Sample evidence ledger with three unequal records"><i></i><i></i><i></i></div><div class="project-copy"><p class="base-kicker">Research / 2026</p><h2>Evidence Ledger</h2><p>A source trail that survives the summary.</p><a href="#ledger">Inspect project</a></div></article>
+    <article class="project"><div class="project-figure" data-figure="shift" role="img" aria-label="Sample handoff between two owners"><i></i><i></i></div><div class="project-copy"><p class="base-kicker">Scheduling / 2025</p><h2>Shift Exchange</h2><p>One reversible handoff instead of three confirmations.</p><a href="#shift">Inspect project</a></div></article>
+    <article class="project"><div class="project-figure" data-figure="index" role="img" aria-label="Sample specimen beside its index key"><i></i><i></i></div><div class="project-copy"><p class="base-kicker">Archive / 2025</p><h2>Field Index</h2><p>Comparable records with the specimen beside the key.</p><a href="#index">Inspect project</a></div></article>
+  </section>
+</main>
+<script src="base.js"></script>
+</body>
+</html>

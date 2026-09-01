@@ -17,6 +17,9 @@ Does not fit: dense operations tools, fintech, monitoring; warmth on a control p
 - elevation: warm-tinted, subtle; shadow-1 on hover and popovers, shadow-2 overlays; nothing floats at rest
 - motion weighted: micro 120ms, base 250ms, enter 400ms; `--ease-spring` `cubic-bezier(0.34, 1.3, 0.64, 1)` on one brand element per view
 
+## Base proof
+Run portfolio and forms. Touch targets and media may soften; labels, errors, and project facts must keep their edge and contrast.
+
 ## Signature moves
 - The hand-drawn rule: one SVG stroke with a slight waver as section divider; once per page.
 - Layered paper: rhythm from `--bg` -> `--surface` -> `--surface-2`, sheets on a table.

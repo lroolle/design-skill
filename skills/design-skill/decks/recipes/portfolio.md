@@ -22,6 +22,12 @@ about what was done.
   cropping that hides it, no lazy placeholders that stay.
 - Links to the live thing, the repo, the publication where they exist.
 
+## Base material
+
+[Open the working portfolio base](../../kit/bases/portfolio.html). Work
+objects are the first navigation surface, with one project action and one
+business action. The horizontal rail must earn itself against the roll.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

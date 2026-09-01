@@ -1,6 +1,10 @@
 # Systems
 
-A system is a material contract: one css file with fixed token names, plus a card saying what the css cannot. The css is the truth.
+A system is a material contract: one css file with fixed token names,
+component geometry, and a card saying what the css cannot. The css is
+the truth. A palette and font swap is not a system; it must visibly
+change at least one working base in `../kit/bases/` without changing
+that base's protected task.
 
 | System | One line | Reach for it when |
 |---|---|---|
@@ -32,6 +36,12 @@ A system is a material contract: one css file with fixed token names, plus a car
 /* motion */           --dur-micro  --dur-base  --dur-enter
                        --ease-out  --ease-in-out  --ease-subtle
 /* layout */           --container  --container-wide
+/* component geometry */ --system-control-height  --system-control-pad
+                       --system-panel-fill  --system-panel-border
+                       --system-media-radius  --system-label-transform
+                       --system-label-tracking  --system-heading-weight
+                       --system-row-height  --system-shell-gap
+                       --system-rail-size
 ```
 
 Optional extras a system may add on top, always with a fallback in
@@ -49,12 +59,16 @@ documented in that system's card and nowhere else.
 - `--fg-3` carries text: 4.5:1 against `--bg` (proxy: L <= 0.56 light, >= 0.59 dark).
 - One radius; structure before shadow.
 - Type pairs on one axis, CJK partner named; `--motion-personality` stated.
+- Component geometry is explicit. If two systems produce the same
+  controls, regions, rows, labels, rails, and media edges, one is only a
+  re-ink and must be deleted.
 
 ## Extending
 
 Copy a card and its css.
 Define every token.
 Differ on two axes, or it is a re-ink, not a system.
+Name one affinity base and prove the task survives at 390 and 1440.
 
 ## Under a world
 

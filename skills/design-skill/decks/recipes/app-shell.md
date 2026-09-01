@@ -24,6 +24,12 @@ entirely; auth and onboarding are product surfaces too, not marketing.
   the user's typed values survive errors.
 - Onboarding: a visible stepper the user can leave and come back to.
 
+## Base material
+
+[Open the working app-shell base](../../kit/bases/app-shell.html). Object,
+action, work surface, properties, and persistent state are all present.
+The three-pane geometry is replaceable; the selection contract is not.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

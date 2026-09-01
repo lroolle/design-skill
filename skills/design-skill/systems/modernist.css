@@ -102,6 +102,19 @@
   --container:      84rem;
   --container-wide: 100rem;
 
+  /* component geometry: open grid, large controls, no framed panels */
+  --system-control-height: 3rem;
+  --system-control-pad: var(--space-4);
+  --system-panel-fill: transparent;
+  --system-panel-border: 0;
+  --system-media-radius: 0;
+  --system-label-transform: uppercase;
+  --system-label-tracking: 0.06em;
+  --system-heading-weight: 700;
+  --system-row-height: 3.25rem;
+  --system-shell-gap: var(--space-7);
+  --system-rail-size: 19rem;
+
   color-scheme: light dark;
 }
 

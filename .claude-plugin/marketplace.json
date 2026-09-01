@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "lroolle",
-  "description": "Design skill by lroolle: one folder that carries a whole design practice, material first -- a kit that starts correct, a deck that enters the roll, observed palettes, a zh mode, and a check that fails.",
+  "description": "Design skill by lroolle: working surface bases, component-level systems, a deck that enters the roll, observed palettes, a zh mode, and checks that fail.",
   "owner": {
     "name": "Eric Wang",
     "url": "https://github.com/lroolle"
@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "design-skill",
-      "description": "Design instrument for any user-facing surface, material first: two kits, ten observed palettes with provenance, a deck of born-designed worlds that competes in the roll, a zh mode one attribute flips, and kit/check.sh to fail what advice could not bind.",
+      "description": "Design instrument for any user-facing surface, material first: eight working bases, seven component-level systems, observed palettes, a world deck, a zh mode, and checks over source and render.",
       "category": "design",
       "source": "./",
       "homepage": "https://github.com/lroolle/design-skill",

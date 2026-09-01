@@ -24,6 +24,12 @@ they are most likely to make an error.
 - Accessibility of input: labels programmatically tied, input types
   and autocomplete set, keyboard order logical.
 
+## Base material
+
+[Open the working forms base](../../kit/bases/forms.html). Progress,
+labels, validation, review, draft, and submit coexist in one document.
+The review column may move; the repair path may not disappear.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

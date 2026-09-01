@@ -18,6 +18,9 @@ Does not fit: anything without a byline and a date.
 - elevation: flat, shadows `none`; hairlines and the 2px ink rule do the structure
 - motion mechanical: micro 80ms, base 150ms, enter 200ms; ease-in-out linear; budget: image crossfade, menu sheet
 
+## Base proof
+Run editorial and docs. Real hierarchy, captions, and sources must justify every rule; on product copy the contract must look obviously wrong.
+
 ## Signature moves
 - The hed/dek/dateline stack: kicker (sans, uppercase, tracked), hed (serif 700), dek (serif), byline and time (sans, time in mono).
 - Story-size hierarchy: lede 2x, secondaries 1x, briefs as a rule-separated list.

@@ -6,7 +6,7 @@
 
 two kits that start correct · a deck of worlds that enters the roll · observed palettes with provenance · a zh mode one attribute flips · a check that fails
 
-<sub>v0.2.0 -- rewritten material-first after a full build shipped the ritual and skipped the craft; the acceptance rebuild is next</sub>
+<sub>v0.3.0 -- eight rendered recipe bases; systems now bind component geometry, not only palette and type</sub>
 
 </div>
 
@@ -81,7 +81,7 @@ you skip the parts an eye would have caught.
 |---|---|---|
 | 1 Sense | a sense card: subject, job, mode, invention level, audience, assets, protected functions, scene, the named reflex | mode and reflex named |
 | 2 Direct | seven grounded candidates; `roll.mjs --subject "<brief>"` builds a pool of those plus the deck cards whose affinity matches, assigns one, deals challengers; fuse, verdict, present one committed direction + the hand + the standing exit | direction bound, hand named |
-| 3 Build | `kit/floor` or `kit/house` copied in and re-inked from a specimen or the world card; the five-block promise in the artifact; the recipe; every atom committed; `kit/check.sh` | renders; check clean of FAIL; promise in with its roll key |
+| 3 Build | working recipe base plus `kit/floor` or `kit/house` copied in; re-inked from a specimen or world; promise in the artifact; topology remade; `kit/check.sh` | renders; check clean of FAIL; promise in with its roll key |
 | 4 Review | captures compared against the named specimen and world card; fresh-context reviewer: promise audit, floor, P0/P1/P2; recapture / rebuild / fix / ship; DESIGN.md written from the built surface | ship; scope of the verdict stated; self-diff named |
 
 The gate in front of it sizes the work: a token tweak gets a lookup
@@ -99,6 +99,13 @@ build must overwrite its palette; `check.sh` warns when it did not.
 administrative register, CJK-native, rules instead of boxes, one
 cinnabar stamp -- read off the deck below and the house doctrine, not
 invented.
+
+`kit/bases` replaces the recipes' imaginary wireframes with eight
+renderable standing exits. Landing begins with an offer beside running
+proof; dashboard keeps the population beside selected detail; docs,
+editorial, portfolio, app-shell, forms, and deck each carry their real
+states and failure points. The roll is still allowed to replace every
+region edge. The base protects behavior, not topology.
 
 `specimens/palettes/` replaces the seed-hue recipe with ten observed
 palettes -- timetable paper, almanac leaf, stone rubbing, nautical
@@ -120,10 +127,10 @@ surface recipes.
 
 ## Seven languages
 
-Each is a contract, not a skin: seed hue, strategy, type roles,
-ratio, density, radius, elevation, motion physics, imagery, component
-character, three rationed signature moves, voice, and the ways that
-language turns to slop. All compile to the same token names.
+Each is a contract, not a skin: palette, type, density, radius, motion,
+and explicit component geometry for controls, panels, labels, rows,
+media, gaps, and rails. All compile to the same names and each names the
+working base that proves it changed more than color.
 
 | System | One line | Reach for it when |
 |---|---|---|
@@ -135,9 +142,9 @@ language turns to slop. All compile to the same token names.
 | nocturnes | dark-first, one light source, blue-grey mists and gold sparks | music, film, events, games, pro creative tools |
 | broadsheets | newsroom hierarchy: hed, dek, columns, hairlines, real photos | news, magazines, newsletters, changelogs |
 
-Each is one CSS file (`systems/<name>.css`) and a 300-word card; the
-prose that used to restate the CSS is gone. A system is bound when a
-world names one; the kits are where a build starts otherwise.
+Each is one CSS file (`systems/<name>.css`) and a compact card. A system
+is bound when a world names one; the bases prove its component character
+and the kits are where a build starts.
 
 ## What is in the box
 
@@ -155,6 +162,7 @@ design-skill/
   skills/design-skill/                <- the installed unit
     SKILL.md                the protocol: gate, modes, laws, four phases, check, map
     kit/                    the product
+      bases/                eight rendered recipe bases + shared behavior CSS
       floor/                tokens, base (browser surfaces + the :lang(zh) block), fonts.zh, fonts.latin
       house/                tokens with provenance, base, components (ledger, spec sheet, stamp, fields, void)
       check.sh              FAIL/WARN: the binding layer
@@ -162,7 +170,7 @@ design-skill/
     specimens/              palettes/ (ten observed, with provenance), type/ (real settings), zh-voice.md
     decks/                  worlds/ (27, affinity-tagged), compositions/ (14), recipes/ (8)
     scripts/roll.mjs        the dice: pool = your candidates + affine deck cards; challengers; deterministic by key
-    systems/                seven material contracts as css + a 300-word card each + the token schema
+    systems/                seven material contracts: tokens + component geometry + proof card
     references/             thinking  craft  cjk  color  simulation  anti-patterns  platforms
     assets/                 DESIGN.md.tmpl, TASTE.md.tmpl, primitives/ (working behavior models)
 ```

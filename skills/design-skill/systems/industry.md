@@ -17,6 +17,9 @@ Does not fit: brand campaigns, wellness, editorial, anything meant to be remembe
 - elevation: none on regions; shadow-1 on side panels and menus
 - motion mechanical: micro 50ms, base 100ms, enter 150ms; every easing linear; values update in place, nothing pulses
 
+## Base proof
+Run dashboard and app-shell. More rows must fit without losing targets, the population must outrank summaries, and landmarks may not move as values change.
+
 ## Signature moves
 - The status strip: a 1px-ruled bar of live states in mono; always visible, never animated.
 - Mono data columns with unit headers and dashed threshold lines; the outlier shows because everything else aligns.

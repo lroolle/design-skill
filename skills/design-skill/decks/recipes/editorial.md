@@ -24,6 +24,13 @@ authorship, the ability to find the next thing.
 - For changelogs: the version, the date, and what changed, in that
   order, every entry.
 
+## Base material
+
+[Open the working editorial base](../../kit/bases/editorial.html). One
+reported claim sits beside a captioned figure and source note. The issue
+grid is a baseline, not permission to put broadsheet clothes on product
+copy.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

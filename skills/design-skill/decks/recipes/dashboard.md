@@ -20,6 +20,12 @@ earns its keep by how fast the eye finds the row that is wrong.
 - Column headers with units; the current view's name; the account /
   environment switch.
 
+## Base material
+
+[Open the working dashboard base](../../kit/bases/dashboard.html). The
+population stays visible while one row explains itself; summaries never
+replace the table. The dealt composition may replace every region edge.
+
 ## The standing exit
 
 The category standard played straight -- the floor to orient from,

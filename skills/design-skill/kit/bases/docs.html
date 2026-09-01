@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-default-system="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docs base - design-skill</title>
+  <link id="system-css" rel="stylesheet" href="../../systems/default.css">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-base class="base--read">
+<!-- THESIS one document, one runnable proof, navigation subordinate to reading. OWN-WORLD quiet rules and code as evidence. STORY locate, understand, run, recover. FIRST VIEWPORT section tree, article start, request and response. FORM standing exit, pool 0, roll 00000000. -->
+<header class="base-bar">
+  <a class="base-brand" href="docs.html">Relay API</a>
+  <span class="base-meta">v3 reference / fixture endpoints</span>
+  <div class="base-tools">
+    <label for="system">System</label>
+    <select id="system" data-system-picker><option selected>default</option><option>modernist</option><option>classical</option><option>industry</option><option>organic</option><option>nocturnes</option><option>broadsheets</option></select>
+    <button type="button" data-theme-toggle aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main class="docs-grid">
+  <nav class="docs-nav" aria-label="Documentation sections">
+    <p class="base-kicker">Reference</p>
+    <ul><li><a href="#start" aria-current="page">Send an event</a></li><li><a href="#request">Request</a></li><li><a href="#response">Response</a></li><li><a href="#errors">Errors</a></li></ul>
+  </nav>
+
+  <article class="docs-article" id="start">
+    <p class="base-kicker">Events / create</p>
+    <h1>Send an event</h1>
+    <p class="base-dek">Create one immutable event and receive the address that consumers will acknowledge.</p>
+    <div class="base-notice"><strong>Fixture contract.</strong> The endpoint and payload below are sample data for this structural base.</div>
+
+    <h2 id="request">Request</h2>
+    <p>Send a client-generated idempotency key. Retrying the same key returns the first event instead of creating a second one.</p>
+    <div class="code-pair" aria-label="Sample request and response">
+      <pre><code>curl -X POST /v3/events \
+  -H "Idempotency-Key: evt-1048" \
+  -d '{"topic":"release.ready"}'</code></pre>
+      <pre id="response"><code>HTTP/1.1 201 Created
+{
+  "id": "ev_1048",
+  "state": "accepted"
+}</code></pre>
+    </div>
+
+    <h2 id="errors">Errors</h2>
+    <div class="base-table-wrap"><table class="base-table"><thead><tr><th>Code</th><th>Meaning</th><th>Recovery</th></tr></thead><tbody><tr><td class="base-num">409</td><td>Key reused with a different body</td><td>Generate a new key or restore the original body</td></tr><tr><td class="base-num">422</td><td>Topic is not registered</td><td>Use a topic returned by <code>GET /topics</code></td></tr></tbody></table></div>
+  </article>
+
+  <nav class="docs-onpage" aria-label="On this page">
+    <p class="base-kicker">On this page</p>
+    <ol><li><a href="#request">Request</a></li><li><a href="#response">Response</a></li><li><a href="#errors">Errors</a></li></ol>
+  </nav>
+</main>
+<script src="base.js"></script>
+</body>
+</html>

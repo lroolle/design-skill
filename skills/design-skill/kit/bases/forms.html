@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-default-system="default">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Forms base - design-skill</title>
+  <link id="system-css" rel="stylesheet" href="../../systems/default.css">
+  <link rel="stylesheet" href="base.css">
+</head>
+<body data-base class="base--operate">
+<!-- THESIS progress, fields, errors, and review remain one document. OWN-WORLD labels above lines, plain summary, reversible action. STORY orient, enter, repair, review, submit. FIRST VIEWPORT progress, current fields, persistent review. FORM standing exit, pool 0, roll 00000000. -->
+<header class="base-bar">
+  <a class="base-brand" href="forms.html">Field Report</a>
+  <span class="base-meta">New report / sample values</span>
+  <div class="base-tools">
+    <label for="system">System</label>
+    <select id="system" data-system-picker><option selected>default</option><option>modernist</option><option>classical</option><option>industry</option><option>organic</option><option>nocturnes</option><option>broadsheets</option></select>
+    <button type="button" data-theme-toggle aria-pressed="false">Dark</button>
+  </div>
+</header>
+
+<main class="form-grid">
+  <nav class="form-progress" aria-label="Report progress"><span>1. Place</span><span aria-current="step">2. Observation</span><span>3. Evidence</span><span>4. Review</span></nav>
+
+  <form class="form-fields" aria-labelledby="form-title">
+    <div><p class="base-kicker">Step 2 of 4</p><h1 id="form-title">Record the observation</h1><p class="base-muted">Say what was seen before explaining why it happened.</p></div>
+    <div class="base-field"><label for="observed-at">Observed at</label><input id="observed-at" type="datetime-local" value="2026-09-01T08:54"><small>Local time at the selected place.</small></div>
+    <div class="base-field"><label for="kind">Observation type</label><select id="kind"><option>Missing evidence</option><option>Delay</option><option>Damage</option><option>Safety condition</option></select></div>
+    <div class="base-field" data-invalid><label for="account">What did you observe?</label><textarea id="account" aria-invalid="true" aria-describedby="account-error">Dock 4 departure scan is missing.</textarea><small id="account-error" data-error>Add the object or person checked; the current sentence does not say what was inspected.</small></div>
+    <fieldset class="base-region"><legend>Immediate state</legend><label class="base-cluster"><input type="radio" name="state" checked> Work can continue</label><label class="base-cluster"><input type="radio" name="state"> Work is blocked</label></fieldset>
+    <div class="base-cluster"><button class="base-action" data-primary type="button">Save and continue</button><button class="base-action" type="button">Save draft</button></div>
+  </form>
+
+  <aside class="base-region form-review" aria-labelledby="review-title">
+    <p class="base-kicker">Review so far</p><h2 id="review-title">West yard / Dock 4</h2>
+    <dl class="base-stack"><div class="base-spread"><dt>Reporter</dt><dd>J. Lee</dd></div><div class="base-spread"><dt>Observed</dt><dd class="base-num">08:54</dd></div><div class="base-spread"><dt>Type</dt><dd>Missing evidence</dd></div><div class="base-spread"><dt>Attachments</dt><dd class="base-num">0</dd></div></dl>
+    <hr class="base-rule"><div class="base-notice"><strong>Not ready.</strong> Resolve the observation error before review.</div>
+  </aside>
+</main>
+<script src="base.js"></script>
+</body>
+</html>

@@ -361,7 +361,7 @@ const typed = await pageDeal.evaluate(() => {
   const p2 = document.querySelector('[data-deal="pointer"][data-fig="2"]').getAttribute('transform');
   const names = [...document.querySelectorAll('[data-deal="name"]')].map((e) => e.textContent).join(' ').trim();
   const verdicts = [...document.querySelectorAll('[data-deal="verdict"]')].map((e) => e.textContent);
-  return { key: d.key, assigned: d.assigned, keys, lit: lit && lit.textContent, p1, p2, names, verdicts,
+  return { key: d.key, assigned: d.assigned, ids: d.challengers.map((c) => c.id).join(), keys, lit: lit && lit.textContent, p1, p2, names, verdicts,
     readout: document.querySelector('[data-deal="readout"]').textContent,
     cmd: document.querySelector('[data-deal="cmd"]').textContent,
     count: window.__deal.state.count, tally: window.__deal.state.tally.slice() };
@@ -391,8 +391,7 @@ t('the bench is part 40: its numeral lights it', await pageDeal.evaluate(() => {
   const { execFileSync } = await import('node:child_process');
   const cli = JSON.parse(execFileSync('node', [join(here, '..', 'skills', 'design-skill', 'scripts', 'roll.mjs'),
     '--scope', 'direction', '--mode', 'persuade', '--candidates', '7', '--key', '3f9a2c1e', '--json'], { encoding: 'utf8' }));
-  const ids = await pageDeal.evaluate(() => window.__deal.state.deal.challengers.map((c) => c.id).join());
-  t('the CLI deals the same hand for the typed key', cli.assigned === typed.assigned && cli.challengers.map((c) => c.id).join() === ids);
+  t('the CLI deals the same hand for the typed key', cli.assigned.kind === 'yours' && cli.assigned.index === typed.assigned && cli.challengers.map((c) => c.id).join() === typed.ids);
 }
 t('a bad key is refused, not dealt', await pageDeal.evaluate(async () => {
   const before = window.__deal.state.key;
