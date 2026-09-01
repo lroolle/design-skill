@@ -30,7 +30,8 @@ marketplace add lroolle/design-skill`), or by copying
 - [kit/README.md](skills/design-skill/kit/README.md): which kit when; the zh switch; wiring by stack; governed systems; what check.sh enforces
 - [kit/floor/](skills/design-skill/kit/floor/tokens.css): correct without a look -- tokens, [base.css](skills/design-skill/kit/floor/base.css) (browser surfaces, focus, the `:lang(zh)` block), [fonts.zh.css](skills/design-skill/kit/floor/fonts.zh.css), [fonts.latin.css](skills/design-skill/kit/floor/fonts.latin.css)
 - [kit/house/](skills/design-skill/kit/house/tokens.css): our aesthetic -- ink on paper, administrative register, CJK-native, rules not boxes; [base.css](skills/design-skill/kit/house/base.css), [components.css](skills/design-skill/kit/house/components.css)
-- [kit/check.sh](skills/design-skill/kit/check.sh): FAIL / WARN tiers; raw color, palette classes, saturated faces, fake content, the promise and roll key, zh without a CJK webfont, leading, measure, the computed ramp, the floor shipped unchanged, the generated-dashboard shape
+- [kit/check.sh](skills/design-skill/kit/check.sh): FAIL / WARN tiers over source; raw color, palette classes, saturated faces, fake content, the promise and roll key, zh without a CJK webfont, leading, measure, the computed ramp, the floor shipped unchanged, the generated-dashboard shape
+- [kit/render-check.mjs](skills/design-skill/kit/render-check.mjs): same tiers over the rendered page (playwright) -- overflow at 390, contrast in both schemes read from painted pixels, tap targets, focus visibility, reduced-motion settling, evidence width, dark authored
 - [kit/fonts.sh](skills/design-skill/kit/fonts.sh): self-host any face as unicode-range slices (Google Fonts split, or `--slice` a vendor ttf)
 
 ## Specimens (observed, with provenance)

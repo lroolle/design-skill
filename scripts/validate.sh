@@ -196,6 +196,7 @@ ok "palette specimens carry provenance and irregularity"
 
 # 8. The dice: deterministic; the deck enters the pool by affinity; surface scope
 if command -v node >/dev/null 2>&1; then
+  node --check kit/render-check.mjs 2>/dev/null && ok "render-check.mjs parses" || bad "render-check.mjs does not parse"
   a=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --subject "docs for a payments api" --key 3f9a2c1e --json | tr -d ' \n')
   b=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --subject "docs for a payments api" --key 3f9a2c1e --json | tr -d ' \n')
   [ "$a" = "$b" ] && [ -n "$a" ] && ok "roll.mjs deterministic for a fixed key" || bad "roll.mjs not deterministic"

@@ -99,3 +99,29 @@ CJK; exclamation marks; italic on a zh page.
 Warnings ship only with a reason written in DESIGN.md. The layout
 reflexes warn rather than fail because a heuristic that blocks gets
 disabled; a heuristic that names the shape gets read.
+
+## render-check.mjs
+
+```
+node kit/render-check.mjs [--no-dark] [--no-focus] <page.html|url> ...
+```
+
+What only a browser can see, measured at Review (a browser on every
+edit is too expensive; the grep tier covers edits). Renders each page
+at 390 and 1440, light and dark, reduced motion emulated. Colors are
+resolved by painting a pixel and reading it back -- never by parsing
+computed strings, which Chromium serializes verbatim for `oklch()`.
+
+FAIL: horizontal overflow at 390; rendered text contrast under 4.5:1
+(3:1 large) in either scheme; a pure #fff/#000 ground; interactive
+targets under 24px; keyboard focus invisible on every tab stop;
+infinite animations still running under reduced motion.
+
+WARN: targets between 24 and 44px; adjacent heading sizes within
+1.15x; a table narrower than 70% of its available room; some tab
+stops without visible focus; dark rendering the same ground as light.
+
+Text over a `background-image` is skipped and counted -- measure it
+by eye. Needs playwright resolvable from the project or this repo
+(`npm i -D playwright && npx playwright install chromium`); exits 2
+when it is not, so a missing browser never masquerades as a pass.
