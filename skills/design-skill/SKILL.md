@@ -202,7 +202,10 @@ FAIL, and the promise is in the artifact with its roll key.
 
 Evidence first: render and capture at 390 / 768 / 1440 from the top,
 motion settled; open every capture and confirm it shows what its
-name claims. Then **compare the render against the named specimen or
+name claims; run `kit/render-check.mjs` on the served page -- it
+measures what grep cannot (rendered contrast both themes, overflow,
+targets, focus, reduced motion, evidence width) and its FAILs are
+P0s. Then **compare the render against the named specimen or
 world card**, not against your memory of one: the palette card's
 inks, the world's five system rules, the type specimen's settings.
 This is the one step that touches layout convergence directly; it
@@ -211,8 +214,8 @@ be reliable.
 
 The review runs in a **fresh context** when the harness has
 subagents; without them, step fully out of the build context and say
-so. Pass it: the request, the promise, the captures, the `check.sh`
-output, the world or specimen card, and this order:
+so. Pass it: the request, the promise, the captures, the `check.sh` and
+`render-check.mjs` output, the world or specimen card, and this order:
 
 0. evidence valid, or **recapture**;
 1. promise audit: each block kept / softened / broken; template bones
@@ -221,7 +224,8 @@ output, the world or specimen card, and this order:
 2. behavioral floor, pass / fail per law;
 3. rubric, graded on the worst sustained band --
    **P0**: a floor fail; a promise block broken; anything `check.sh`
-   fails; contrast below 4.5:1; a state missing; horizontal scroll at
+   or `render-check.mjs` fails; contrast below 4.5:1; a state
+   missing; horizontal scroll at
    390; targets under 44px; invented claims; one of the three
    calibration looks with no reason; a system stack on a zh page.
    **P1**: a promise block softened; any `check.sh` warning without a
@@ -254,7 +258,8 @@ one line on what only eyes on a device can check.
 Smash the work if any survive:
 
 - a behavioral-floor fail, or a protected function dropped
-- `kit/check.sh` reporting FAIL, or a WARN with no written reason
+- `kit/check.sh` or `kit/render-check.mjs` reporting FAIL, or a WARN
+  with no written reason
 - code on a new world before the roll; a roll without `--subject`
   on a direction-scope brief; a direction presented as a ranked list
 - a palette with no provenance, or the floor palette shipped
@@ -273,7 +278,7 @@ Smash the work if any survive:
 
 | Path | Holds | Load when |
 |---|---|---|
-| [kit/](kit/README.md) | floor and house kits, `check.sh`, `fonts.sh`; wiring by stack; governed systems | Build, always |
+| [kit/](kit/README.md) | floor and house kits, `check.sh` (source), `render-check.mjs` (rendered), `fonts.sh`; wiring by stack; governed systems | Build, always |
 | [specimens/palettes/](specimens/palettes/README.md) | observed palettes with provenance and their irregularity | Build (re-ink), Review |
 | [specimens/type/](specimens/type/README.md) | real settings at real sizes: zh body, zh display, Latin body, the ledger | Build |
 | [specimens/zh-voice.md](specimens/zh-voice.md) | Chinese copy register | any zh surface |
