@@ -6,6 +6,20 @@ recurring corrections into material: the same loop Vercel ran to
 build design.md (vercel.com/blog/how-our-agents-build-on-brand-pages-
 with-design-md), adapted to a skill that rolls dice.
 
+## Reference intake
+
+Browsing a template or gallery is exposure, not evidence. Record a
+shortlist under `intake/` from `_template.md`: name the exact mechanism,
+what it costs the task, Keep / Change / Do not copy, the narrowest place
+it might land, and the question a human must answer. A screenshot that
+only proves the skin is not enough.
+
+Intake status is `team-check`, `scenario-ready`, or `declined`. Nothing
+in intake changes SKILL.md, a deck, a recipe, the kit, or a check. A
+team-check may nominate a mechanism for a frozen scenario; only the
+scenario's first attempt and comparison can earn it a landing. This
+keeps a morning in galleries from quietly becoming doctrine.
+
 ## Scenario
 
 A scenario freezes everything except the skill: the prompt verbatim,
@@ -76,6 +90,8 @@ repeats. LEDGER.md records what landed where and which run earned it.
 
 - `scenarios/01-ds-site.md` -- persuade, one-shot site from a
   non-designer's five lines. Live; one run recorded.
+- `intake/2026-09-01-template-scout.md` -- five template candidates
+  from six libraries; awaiting the team's mechanism-level check.
 
 Planned, unwritten until their inputs are frozen: operate (a dense
 monitoring dashboard), read (an evidence-heavy decision report),
