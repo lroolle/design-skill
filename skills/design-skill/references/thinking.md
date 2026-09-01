@@ -31,7 +31,7 @@ defined as communication, not decoration.
 So the order of judgment is fixed: what must not break (protected
 functions), then behavior (invariants), then surfaces. A redesign that
 violates the floor to look better is costume by definition. See
-methods.md for the checklist form.
+SKILL.md for the checklist form.
 
 ## 3. Evidence before opinion
 
@@ -69,16 +69,33 @@ Then check the replacement: is the alternative *also* predictable?
 reflex, and by now as recognizable as the first. Anti-slop is
 adversarial; once a tell is known, the tell moves. This is why the
 skill ships a method and re-seedable systems, not a house look, and
-why the saturated-tell list (anti-patterns.md) is dated and expires.
+why the saturated-tell list (anti-craft.md) is dated and expires.
 
 ## 6. Constraint breeds identity
 
 Fewer choices made deliberately create more character than many
-choices by default. One seed hue driving both themes, one radius, one
-icon set at one weight, one masthead device and one section-label
-device per page, one accent -- each constraint reads as intent. Every
-place a framework default was inherited rather than decided reads as
-accident, and accident reads as AI.
+choices by default. One observed palette with a provenance, one
+radius, one icon set at one weight, one masthead device and one
+section-label device per page, one accent -- each constraint reads as
+intent. Every place a framework default was inherited rather than
+decided reads as accident, and accident reads as AI.
+
+The constraint is on the *number* of decisions, not on their
+derivation. A palette computed from one seed hue is one decision
+wearing nine values; it reads as a theme because it is one. Four
+materials -- paper, ink, pencil, stamp -- are four decisions, and the
+irregular relationships between them are what the eye reads as a
+thing rather than a setting.
+
+## 6a. Material over method
+
+What binds a build is what it starts from, not what it was told to
+read. Advice that is optional and expensive to load loses to ceremony
+that is mandatory and cheap to satisfy; under pressure a model
+performs the ritual and skips the craft. So the craft ships as
+material: a kit that is already correct, a check that fails, a deck
+that enters the roll. Every rule in this repo that matters is either
+a starting artifact or an executable check; the prose is the why.
 
 ## 7. Brand surface, product surface
 

@@ -23,7 +23,7 @@ Expires: never (structural).
 Why: one page carried the token red, a hardcoded red-50/200/700 sale
 callout and amber star ratings -- three color systems, zero shared
 meaning.
-Reuse: semantic states derive from tokens only; `bans.sh` enforces.
+Reuse: semantic states derive from tokens only; `kit/check.sh` enforces.
 Expires: never (structural).
 
 ## {DATE} rejected: mixed corner languages
@@ -56,17 +56,39 @@ Expires: if the primary task becomes time-critical AND the brief says so.
 
 Why: the dark theme dropped the seed hue to chroma-0 gray with pure
 white cards -- a colder, different product at night, plus halation.
-Reuse: both themes derive neutrals from the same seed; never chroma 0,
-never #fff/#000; dark elevation via surface lightness.
+Reuse: dark is a second observed object with its own inks (a rubbing,
+a lit board), never an inversion; never chroma 0, never #fff/#000;
+dark elevation via surface lightness.
 Expires: never (structural).
 
 ## {DATE} rejected: Latin-first typography on a CJK-primary product
 
-Why: the Latin display face hosted the identity while the CJK fallback
-was unpreloaded -- the primary audience got the fallback experience.
-Reuse: CJK-primary products pick and preload the CJK face first; the
-Latin face harmonizes with it.
-Expires: when the product commissions a bilingual type identity.
+Why: the Latin display face hosted the identity while the CJK face was
+a system stack -- the primary audience got the fallback experience,
+excused as "a CJK webfont is 5-20 MB" (it is 150-400 KB of slices).
+Reuse: CJK-primary products pick and self-host the CJK face first
+(`kit/fonts.sh`); the Latin face harmonizes with it; `kit/check.sh`
+fails a zh page without a CJK @font-face.
+Expires: never (structural).
+
+## {DATE} rejected: a palette computed from one seed hue
+
+Why: neutrals as one hue at nine lightnesses, accent on the same hue;
+the page read as a theme, not a thing. Real inks have irregular
+relationships.
+Reuse: palettes come from a specimen with provenance
+(`specimens/palettes/`) or a world card; ground, ink, rule and accent
+are different materials; `check.sh` warns on a ramp.
+Expires: never (perceptual).
+
+## {DATE} rejected: copy that explains the layout to the reader
+
+Why: "跨月连续排布：月份之间只有一条粗线，没有断行。" narrated the page
+instead of serving the task -- the spec register on a 7 a.m. surface.
+Reuse: every string is read aloud as the person using it at that
+moment; a sentence that explains the page is cut
+(`specimens/zh-voice.md`).
+Expires: never (voice).
 
 ## {DATE} rejected: icon-only multi-state controls
 

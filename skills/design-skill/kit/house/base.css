@@ -1,0 +1,86 @@
+/* kit/house/base.css -- on top of floor/base.css. What the house does to
+ * every element before a single component exists: the sheet, the rule,
+ * the running head, numbers in columns, and the zh voice.
+ */
+
+/* the sheet: one column of content on the paper, a running head above */
+body { background: var(--bg); }
+main, [data-sheet] {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-5) var(--space-10);
+}
+
+/* headings sit on rules, not in boxes; more air above than below */
+h1 { font-size: var(--text-3xl); font-weight: 600; margin: var(--space-8) 0 var(--space-3); }
+h2 { font-size: var(--text-xl);  font-weight: 600; margin: var(--space-8) 0 var(--space-3); padding-top: var(--space-3); border-top: var(--rule-w, 2px) solid var(--fg); }
+h3 { font-size: var(--text-lg);  font-weight: 600; margin: var(--space-6) 0 var(--space-2); }
+h4 { font-size: var(--text-base); font-weight: 600; margin: var(--space-5) 0 var(--space-2); }
+h2 + p, h3 + p { margin-top: 0; }
+h1 + p { font-size: var(--text-lg); color: var(--fg-2); }   /* the dek, in the second ink */
+
+/* the running head: one masthead device per page, and this is it */
+header[data-masthead], .masthead {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: var(--rule-w, 2px) solid var(--fg);
+  font-size: var(--text-sm);
+}
+.masthead strong { font-weight: 600; font-size: var(--text-base); }
+.masthead [data-num], .masthead time { font-family: var(--font-mono); color: var(--fg-2); }
+
+/* the running foot */
+footer[data-colophon], .colophon {
+  margin-top: var(--space-10);
+  padding-top: var(--space-3);
+  border-top: var(--line-w) solid var(--line-strong);
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
+
+/* lists: the marker is a rule mark, not a bullet cloud */
+ul { padding-inline-start: 1.2em; }
+ol { padding-inline-start: 1.6em; }
+li + li { margin-top: var(--space-1); }
+li::marker { color: var(--fg-3); font-variant-numeric: tabular-nums; }
+
+/* numbers: anything that could sit in a column is set as if it does */
+[data-num], .num, time, td:has(> data), output {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums slashed-zero; font-size: 0.95em;
+}
+
+/* the section label: the one section-label device; weight, never uppercase-tracking */
+.label, [data-label] {
+  font-size: var(--text-sm); font-weight: 600; color: var(--fg-2);
+  letter-spacing: 0; text-transform: none;
+  margin-bottom: var(--space-1);
+}
+
+/* quotes and notes are ruled at the side, in the pencil, one pixel */
+blockquote { margin: var(--space-4) 0; padding-inline-start: var(--space-4); border-inline-start: var(--line-w) solid var(--line-strong); color: var(--fg-2); }
+aside, .marginal { font-size: var(--text-sm); color: var(--fg-2); }
+
+/* links in prose are underlined in ink; in tables and nav they are not */
+main a { text-decoration-color: var(--line-strong); }
+main a:hover { text-decoration-color: var(--accent); }
+nav a, table a { text-decoration: none; }
+nav a:hover, table a:hover { text-decoration: underline; }
+
+/* code is a ruled region, never a gray pill */
+pre {
+  padding: var(--space-3) var(--space-4);
+  border-top: var(--line-w) solid var(--line-strong);
+  border-bottom: var(--line-w) solid var(--line-strong);
+  background: var(--surface);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+:not(pre) > code { padding: 0 0.25em; background: var(--surface-2); border-radius: var(--radius-sm); }
+
+/* zh: the house prefers Hei for chrome, Song for anything longer than a paragraph */
+:lang(zh) main p, :lang(zh) article p { font-family: var(--font-body), var(--font-cjk-serif); }
+:lang(zh) .masthead, :lang(zh) .label, :lang(zh) nav, :lang(zh) table, :lang(zh) button { font-family: var(--font-body), var(--font-cjk); }
+:lang(zh) h1 + p { font-family: var(--font-body), var(--font-cjk); }
+
+/* selection is the stamp bleed */
+::selection { background: var(--accent-soft); }

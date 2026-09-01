@@ -1,0 +1,158 @@
+/* kit/house/components.css -- the house vocabulary: rules, not boxes.
+ * Every component is a region of the sheet delimited by rules and tone,
+ * with numbers in columns and one stamp of red. No cards-in-cards, no
+ * uppercase-tracked micro-labels, no gradient, no glow. Classes are
+ * plain nouns; data- attributes carry state.
+ */
+
+/* ---- the ruled region: the house's container. Not a card. ---- */
+.sheet, [data-region] {
+  border-top: var(--rule-w, 2px) solid var(--fg);
+  padding-top: var(--space-3);
+  margin-top: var(--space-6);
+}
+.sheet > .label:first-child { margin-top: calc(-1 * var(--space-1)); }
+.sheet--light { border-top-width: var(--line-w); border-top-color: var(--line-strong); }
+.sheet--toned { background: var(--surface); padding: var(--space-3) var(--space-4); border-top-color: var(--line-strong); }
+
+/* ---- the ledger: the table is the component ---- */
+table.ledger, [data-ledger] { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.ledger thead th {
+  position: sticky; top: 0;
+  background: var(--bg);
+  border-bottom: var(--rule-w, 2px) solid var(--fg);
+  font-weight: 600; text-align: start; padding: var(--space-2) var(--space-3);
+}
+.ledger th[data-unit]::after { content: ", " attr(data-unit); font-weight: 400; color: var(--fg-2); }
+.ledger td { padding: var(--space-2) var(--space-3); border-bottom: var(--line-w) solid var(--line); vertical-align: baseline; }
+.ledger td[data-num], .ledger th[data-num] { text-align: end; font-family: var(--font-mono); font-variant-numeric: tabular-nums slashed-zero; }
+.ledger tbody tr:hover td { background: var(--surface); }
+.ledger tbody tr[aria-selected="true"] td { background: var(--accent-soft); }
+.ledger tfoot td { border-top: var(--line-w) solid var(--line-strong); border-bottom: 0; font-weight: 600; }
+.ledger caption { text-align: start; padding-bottom: var(--space-2); font-weight: 600; caption-side: top; }
+.ledger .worst { color: var(--danger); }   /* summaries show worst case, not averages */
+
+/* ---- the key-value list: a spec sheet line ---- */
+dl.spec, [data-spec] { display: grid; grid-template-columns: max-content 1fr; column-gap: var(--space-5); row-gap: 0; margin: 0; }
+.spec dt { color: var(--fg-2); padding: var(--space-2) 0; border-bottom: var(--line-w) solid var(--line); }
+.spec dd { margin: 0; padding: var(--space-2) 0; border-bottom: var(--line-w) solid var(--line); }
+.spec dd[data-num] { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+@media (max-width: 640px) { dl.spec, [data-spec] { grid-template-columns: 1fr; } .spec dt { border-bottom: 0; padding-bottom: 0; } }
+
+/* ---- the stamp: status, struck once, in the one red ---- */
+.stamp, [data-stamp] {
+  display: inline-block;
+  padding: 0 var(--space-2);
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius);
+  font-size: var(--text-sm); font-weight: 600; line-height: 1.6;
+  color: var(--accent);
+  transform: rotate(-2deg);
+}
+.stamp[data-tone="ok"]     { color: var(--ok); }
+.stamp[data-tone="warn"]   { color: var(--warn); }
+.stamp[data-tone="danger"] { color: var(--danger); }
+.stamp[data-tone="info"]   { color: var(--info); }
+.stamp[data-tone="void"]   { color: var(--fg-3); transform: rotate(-12deg); }
+@media (prefers-reduced-motion: reduce) { .stamp { transform: none; } }
+
+/* ---- the plain status mark: a word and a square, no dot that pulses ---- */
+.status { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); }
+.status::before { content: ""; width: 0.6em; height: 0.6em; background: currentColor; border-radius: var(--radius-sm); }
+.status[data-tone="ok"] { color: var(--ok); } .status[data-tone="warn"] { color: var(--warn); }
+.status[data-tone="danger"] { color: var(--danger); } .status[data-tone="stale"] { color: var(--fg-3); }
+
+/* ---- buttons: a form's boxes, verbs inside ---- */
+.btn, button:not([data-plain]) {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  min-height: 2.25rem; padding: 0 var(--space-4);
+  border: var(--line-w) solid var(--line-strong); border-radius: var(--radius);
+  background: var(--bg); color: var(--fg);
+  font-weight: 500; line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-subtle), border-color var(--dur-micro) var(--ease-subtle);
+}
+.btn:hover, button:not([data-plain]):hover { background: var(--surface); border-color: var(--fg-2); }
+.btn:active, button:not([data-plain]):active { background: var(--surface-2); }
+.btn[data-primary], button[data-primary] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.btn[data-primary]:hover, button[data-primary]:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn[data-danger], button[data-danger] { color: var(--danger); border-color: var(--danger); background: var(--bg); }
+.btn[data-danger][data-confirm], button[data-danger][data-confirm] { background: var(--danger); color: var(--accent-fg); }  /* the confirming step, only */
+.btn[data-quiet], button[data-quiet] { border-color: transparent; background: transparent; }
+.btn:disabled, button:disabled { opacity: 0.5; cursor: not-allowed; }   /* disabled, never hidden */
+@media (pointer: coarse) { .btn, button:not([data-plain]) { min-height: 2.75rem; } }
+
+/* ---- fields: lines to write on; labels above; help and errors below ---- */
+.field { display: grid; gap: var(--space-1); margin-bottom: var(--space-4); max-width: 36rem; }
+.field > label { font-weight: 500; }
+.field > input, .field > select, .field > textarea {
+  min-height: 2.25rem; padding: var(--space-1) var(--space-2);
+  background: var(--surface); color: var(--fg);
+  border: 0; border-bottom: var(--line-w) solid var(--line-strong); border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+.field > input:focus-visible, .field > select:focus-visible, .field > textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 0; border-bottom-color: transparent; }
+.field > .help { font-size: var(--text-sm); color: var(--fg-2); }
+.field[data-invalid] > input, .field[data-invalid] > select, .field[data-invalid] > textarea { border-bottom-color: var(--danger); }
+.field > .error { font-size: var(--text-sm); color: var(--danger); }
+.field > input[type="number"], .field > input[inputmode="numeric"] { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+@media (pointer: coarse) { .field > input, .field > select, .field > textarea { min-height: 2.75rem; font-size: max(1rem, 16px); } }
+fieldset { border: 0; padding: 0; margin: 0 0 var(--space-6); }
+legend { font-weight: 600; padding: 0; margin-bottom: var(--space-3); border-top: var(--line-w) solid var(--line-strong); width: 100%; padding-top: var(--space-2); }
+
+/* ---- the void: an empty state that teaches, drawn as a dashed ruled area ---- */
+.void, [data-empty] {
+  padding: var(--space-6) var(--space-4);
+  border: var(--line-w) dashed var(--line-strong); border-radius: var(--radius);
+  color: var(--fg-2);
+  max-width: 40rem;
+}
+.void > strong { display: block; color: var(--fg); margin-bottom: var(--space-1); }
+.void .btn { margin-top: var(--space-3); }
+
+/* ---- disclosure: a plus that becomes a minus, in the mono ---- */
+details { border-top: var(--line-w) solid var(--line); }
+details > summary { cursor: pointer; padding: var(--space-2) 0; font-weight: 500; list-style: none; display: flex; gap: var(--space-2); align-items: baseline; }
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before { content: "+"; font-family: var(--font-mono); color: var(--fg-3); width: 1ch; }
+details[open] > summary::before { content: "-"; }
+details > :not(summary) { padding-bottom: var(--space-3); }
+
+/* ---- navigation: a table of contents, current line marked by weight and a rule mark ---- */
+nav.toc ul, nav[data-toc] ul { list-style: none; padding: 0; margin: 0; }
+nav.toc li, nav[data-toc] li { margin: 0; }
+nav.toc a, nav[data-toc] a { display: block; padding: var(--space-1) 0 var(--space-1) var(--space-3); color: var(--fg-2); border-inline-start: var(--line-w) solid var(--line); }
+nav.toc a[aria-current], nav[data-toc] a[aria-current] { color: var(--fg); font-weight: 600; border-inline-start: var(--rule-w, 2px) solid var(--fg); }
+nav.toc a:hover, nav[data-toc] a:hover { color: var(--fg); text-decoration: none; }
+
+/* ---- the running-head tabs: text on a rule, selected one underlined in ink ---- */
+[role="tablist"] { display: flex; gap: var(--space-5); border-bottom: var(--line-w) solid var(--line-strong); }
+[role="tab"] { padding: var(--space-2) 0; margin-bottom: -1px; border: 0; border-bottom: var(--rule-w, 2px) solid transparent; background: none; color: var(--fg-2); font-weight: 500; }
+[role="tab"][aria-selected="true"] { color: var(--fg); border-bottom-color: var(--fg); }
+
+/* ---- overlay: a sheet laid over the sheet ---- */
+dialog, .overlay {
+  background: var(--overlay); color: var(--fg);
+  border: var(--line-w) solid var(--line-strong); border-top: var(--rule-w, 2px) solid var(--fg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  padding: var(--space-5);
+  max-width: 32rem; width: calc(100% - 2 * var(--space-4));
+}
+dialog::backdrop { background: oklch(0.2 0.01 250 / 0.35); }
+
+/* ---- notes: toned, ruled, a word before the text; no icon tiles ---- */
+.note, [role="note"] { padding: var(--space-3) var(--space-4); background: var(--surface); border-inline-start: var(--line-w) solid var(--line-strong); font-size: var(--text-sm); }
+.note[data-tone="warn"] { background: var(--warn-soft); border-color: var(--warn); }
+.note[data-tone="danger"] { background: var(--danger-soft); border-color: var(--danger); }
+.note[data-tone="ok"] { background: var(--ok-soft); border-color: var(--ok); }
+.note > strong:first-child::after { content: ". "; }
+
+/* ---- skeleton: a static ruled ghost, never a shimmer ---- */
+[data-loading] { color: transparent !important; background: var(--surface-2); border-radius: var(--radius-sm); user-select: none; }
+
+/* ---- the figure: captioned, numbered in the mono ---- */
+figure { margin: var(--space-6) 0; }
+figcaption { margin-top: var(--space-2); font-size: var(--text-sm); color: var(--fg-2); }
+figcaption::before { content: "Fig. " counter(fig) "  "; counter-increment: fig; font-family: var(--font-mono); color: var(--fg-3); }
+:lang(zh) figcaption::before { content: "图 " counter(fig) "  "; }
+body { counter-reset: fig; }

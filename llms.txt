@@ -1,72 +1,69 @@
 # design-skill
 
-> One agent skill for designing any user-facing surface with taste
-> built in: sense the brief, derive grounded directions and let dice
-> assign one (challengers dealt from a deck of born-designed graphic
-> systems), write the chosen world into the artifact as a five-block
-> promise, build with full commitment against a token contract, and
-> review the render against the promise in a fresh context. Seven
-> material languages sharing one token schema; a worlds deck with a
-> CJK half; a craft layer loaded by need; surface recipes; runnable
-> bans. MIT.
+> One agent skill for designing any user-facing surface, material
+> first: start from a kit that is already correct (tokens, browser
+> surfaces, a real CJK webfont wired), roll a direction where a deck
+> of born-designed worlds competes with the model's own candidates by
+> subject affinity, write the chosen world into the artifact as a
+> five-block promise, build, and let `kit/check.sh` fail what the
+> craft references only used to advise. Observed palettes with
+> provenance instead of seed-hue ramps; a zh mode one `lang`
+> attribute flips; seven material contracts sharing one token schema.
+> MIT.
 
 One repo, one skill. The installed unit is `skills/design-skill/`;
 everything above it is packaging. Install with `npx skills@latest add
 lroolle/design-skill`, or as a Claude Code plugin (`/plugin
 marketplace add lroolle/design-skill`), or by copying
 `skills/design-skill/` into any agent's skill root. No build step;
-`bans.sh` and `validate.sh` are bash + grep, `roll.mjs` is node with
-no dependencies.
+`check.sh`, `fonts.sh` and `validate.sh` are bash + grep + curl,
+`roll.mjs` is node with no dependencies.
 
 ## Entry
 
 - [skills/design-skill/SKILL.md](skills/design-skill/SKILL.md): the
-  protocol -- gate, laws, six phases (sense, direct, contract, build,
-  review, deliver), the modes, the first-sense table by territory, the
-  check, the skill map
+  protocol -- gate, modes, laws, four phases (sense, direct, build,
+  review), the check, the map
+
+## The kit (the product)
+
+- [kit/README.md](skills/design-skill/kit/README.md): which kit when; the zh switch; wiring by stack; governed systems; what check.sh enforces
+- [kit/floor/](skills/design-skill/kit/floor/tokens.css): correct without a look -- tokens, [base.css](skills/design-skill/kit/floor/base.css) (browser surfaces, focus, the `:lang(zh)` block), [fonts.zh.css](skills/design-skill/kit/floor/fonts.zh.css), [fonts.latin.css](skills/design-skill/kit/floor/fonts.latin.css)
+- [kit/house/](skills/design-skill/kit/house/tokens.css): our aesthetic -- ink on paper, administrative register, CJK-native, rules not boxes; [base.css](skills/design-skill/kit/house/base.css), [components.css](skills/design-skill/kit/house/components.css)
+- [kit/check.sh](skills/design-skill/kit/check.sh): FAIL / WARN tiers; raw color, palette classes, saturated faces, fake content, the promise and roll key, zh without a CJK webfont, leading, measure, the computed ramp, the floor shipped unchanged, the generated-dashboard shape
+- [kit/fonts.sh](skills/design-skill/kit/fonts.sh): self-host any face as unicode-range slices (Google Fonts split, or `--slice` a vendor ttf)
+
+## Specimens (observed, with provenance)
+
+- [specimens/palettes/](skills/design-skill/specimens/palettes/README.md): ten observed palettes -- timetable paper, almanac leaf, stone rubbing, nautical chart, patent sheet, Du Bois plates, isotype, split-flap, thread-bound book, teletext -- each with its irregularity and the reflex it must not become
+- [specimens/type/](skills/design-skill/specimens/type/README.md): real settings at real sizes -- zh body, zh display, Latin body, the data table
+- [specimens/zh-voice.md](skills/design-skill/specimens/zh-voice.md): Chinese copy register -- the failure dissected, the rules, good and bad side by side
 
 ## Decks and dice
 
-- [worlds/README.md](skills/design-skill/worlds/README.md): what a world is, tiers, ratings, the deal; one card per `worlds/<id>.md`
-- [stagings/README.md](skills/design-skill/stagings/README.md): compositions for surface-scope rolls; `stagings/<id>.md`
-- [scripts/roll.mjs](skills/design-skill/scripts/roll.mjs): `node scripts/roll.mjs --scope direction|surface --mode <mode> [--grain] [--key] [--reroll n] [--json]`
+- [decks/worlds/](skills/design-skill/decks/worlds/_template.md): 27 born-designed graphic systems (a third CJK), affinity-tagged so they can enter the roll; one card per `<id>.md`
+- [decks/compositions/](skills/design-skill/decks/compositions/_template.md): 14 compositions for surface-scope rolls
+- [decks/recipes/](skills/design-skill/decks/recipes/_template.md): 8 surface recipes -- landing, dashboard, docs, editorial, portfolio, app-shell, forms, deck
+- [scripts/roll.mjs](skills/design-skill/scripts/roll.mjs): `node scripts/roll.mjs --scope direction|surface --mode <mode> --subject "<brief>" [--zh] [--grain] [--key] [--reroll n] [--list] [--json]`
 
-## Design systems (material contracts; same token names, swap the css file)
+## Systems (material contracts; same token names, swap the css file)
 
-- [design-systems/README.md](skills/design-skill/design-systems/README.md): the table, the
-  12-section contract schema, the token contract and its invariants
-- [default](skills/design-skill/design-systems/default.md) · [modernist](skills/design-skill/design-systems/modernist.md) ·
-  [classical](skills/design-skill/design-systems/classical.md) · [industry](skills/design-skill/design-systems/industry.md) ·
-  [organic](skills/design-skill/design-systems/organic.md) · [nocturnes](skills/design-skill/design-systems/nocturnes.md) ·
-  [broadsheets](skills/design-skill/design-systems/broadsheets.md) · [_template](skills/design-skill/design-systems/_template.md)
-- tokens: `skills/design-skill/assets/tokens/<system>.css` (light + dark, OKLCH);
-  [assets/specimen.html](skills/design-skill/assets/specimen.html) renders any of them
+- [systems/README.md](skills/design-skill/systems/README.md): the table, the token contract, the invariants
+- [default](skills/design-skill/systems/default.md) · [modernist](skills/design-skill/systems/modernist.md) · [classical](skills/design-skill/systems/classical.md) · [industry](skills/design-skill/systems/industry.md) · [organic](skills/design-skill/systems/organic.md) · [nocturnes](skills/design-skill/systems/nocturnes.md) · [broadsheets](skills/design-skill/systems/broadsheets.md) -- a 300-word card each beside `systems/<name>.css`
 
-## References (craft layer)
+## References (the why)
 
-- [references/README.md](skills/design-skill/references/README.md): index with load-when
-- [thinking](skills/design-skill/references/thinking.md) · [methods](skills/design-skill/references/methods.md) ·
-  [patterns](skills/design-skill/references/patterns.md) · [anti-patterns](skills/design-skill/references/anti-patterns.md) ·
-  [typography](skills/design-skill/references/typography.md) · [fontbook](skills/design-skill/references/fontbook.md) ·
-  [color](skills/design-skill/references/color.md) · [palettes](skills/design-skill/references/palettes.md) ·
-  [motion](skills/design-skill/references/motion.md) · [simulation](skills/design-skill/references/simulation.md) · [platforms](skills/design-skill/references/platforms.md) ·
-  [frameworks](skills/design-skill/references/frameworks.md) · [sites](skills/design-skill/references/sites.md) ·
-  [skills](skills/design-skill/references/skills.md)
-
-## Templates (surface recipes)
-
-- [templates/README.md](skills/design-skill/templates/README.md): landing, dashboard, docs,
-  editorial, portfolio, app-shell, forms, deck, _template
+- [thinking](skills/design-skill/references/thinking.md) · [craft](skills/design-skill/references/craft.md) (type, structure, motion) · [cjk](skills/design-skill/references/cjk.md) · [color](skills/design-skill/references/color.md) · [simulation](skills/design-skill/references/simulation.md) · [anti-patterns](skills/design-skill/references/anti-patterns.md) · [platforms](skills/design-skill/references/platforms.md)
+- [assets/primitives/](skills/design-skill/assets/primitives/README.md): working behavior models in six layers (point-cloud)
 
 ## The skill used on itself
 
-- [site/README.md](site/README.md): the page at lroolle.com/design-skill -- static, no build step, base-path agnostic; how to run, prove and graft it
-- [site/DESIGN.md](site/DESIGN.md): the material contract written at finish -- the roll and its verdicts, the world as built, what was deferred with reasons, the evidence, and the defects this build found in the skill
+- [site/README.md](site/README.md): the page at lroolle.com/design-skill -- static, no build step
+- [site/DESIGN.md](site/DESIGN.md): the material contract written at finish
 - [site/index.html](site/index.html): the promise is the first comment in the body
-- [site/deal.js](site/deal.js): the deal, running -- roll.mjs ported to the browser over [site/deck.js](site/deck.js) (generated by [site/deck.mjs](site/deck.mjs)); the model card is its header comment; [site/deal-check.mjs](site/deal-check.mjs) proves it equals the CLI
+- [site/deal.js](site/deal.js): the deal, running in the browser over [site/deck.js](site/deck.js) (generated by [site/deck.mjs](site/deck.mjs)); [site/deal-check.mjs](site/deal-check.mjs) proves it equals the CLI
 
 ## Packaging and proof
 
 - [.claude-plugin/plugin.json](.claude-plugin/plugin.json) · [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json)
-- [assets/DESIGN.md.tmpl](skills/design-skill/assets/DESIGN.md.tmpl) · [assets/TASTE.md.tmpl](skills/design-skill/assets/TASTE.md.tmpl) ·
-  [assets/bans.sh](skills/design-skill/assets/bans.sh) · [scripts/validate.sh](scripts/validate.sh)
+- [assets/DESIGN.md.tmpl](skills/design-skill/assets/DESIGN.md.tmpl) · [assets/TASTE.md.tmpl](skills/design-skill/assets/TASTE.md.tmpl) · [scripts/validate.sh](scripts/validate.sh)

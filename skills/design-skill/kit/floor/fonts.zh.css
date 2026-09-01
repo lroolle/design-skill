@@ -1,0 +1,67 @@
+/* kit/floor/fonts.zh.css -- a real CJK webfont, wired, not advised.
+ *
+ * A zh page that ships a bare system stack hands its primary audience
+ * the fallback experience (PingFang on Mac, YaHei on Windows, whatever
+ * on Linux and old Android) while the Latin face gets the identity.
+ * kit/check.sh --zh FAILS a build with no @font-face for a CJK family.
+ *
+ * ROUTE A (default): fetch the sliced face and import its css.
+ *
+ *   kit/fonts.sh "Noto Sans SC" 400,700 public/fonts
+ *   kit/fonts.sh "Noto Serif SC" 400,600 public/fonts     (long reading, Song partner)
+ *   kit/fonts.sh "LXGW WenKai TC" 400 public/fonts          (Kai, warm; TC build covers SC too)
+ *
+ * then in the document head, before this file:
+ *   <link rel="stylesheet" href="/fonts/noto-sans-sc.css">
+ *
+ * Google's split is ~70-120 slices of 30-120 KB, cut by character
+ * frequency; a page fetches only the slices its text touches, so a
+ * typical zh page pays 150-400 KB, not 10 MB. No preload for sliced
+ * CJK faces: the browser cannot know which slices the first paint needs
+ * and a wrong preload is wasted bytes. Preload the Latin display face
+ * and let `font-display: swap` plus the fallback below hold the layout.
+ *
+ * ROUTE B: a face not on Google Fonts (Smiley Sans 得意黑, MiSans,
+ * HarmonyOS Sans, Douyin Sans, Source Han from Adobe). Download from the
+ * vendor, read its license page again (they change), then slice:
+ *
+ *   kit/fonts.sh --slice SmileySans-Oblique.ttf "Smiley Sans" 400 public/fonts
+ *
+ * which writes the same @font-face + unicode-range shape as route A.
+ */
+
+/* ---- metric fallback so the swap does not reflow ----
+ * The system CJK faces are close in advance width to Noto Sans SC (CJK
+ * glyphs are em-square), so no size-adjust; only the vertical metrics
+ * differ enough to shift lines. Re-derive with `npx fontaine` or capsize
+ * if the chosen face is not Noto/Source Han. */
+@font-face {
+  font-family: "Noto Sans SC Fallback";
+  src: local("PingFang SC"), local("HarmonyOS Sans SC"), local("Microsoft YaHei"), local("Noto Sans CJK SC");
+  ascent-override: 115%;
+  descent-override: 29%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Noto Serif SC Fallback";
+  src: local("Songti SC"), local("SimSun"), local("Noto Serif CJK SC");
+  ascent-override: 115%;
+  descent-override: 29%;
+  line-gap-override: 0%;
+}
+
+/* ---- stacks the floor tokens point at; keep the fallback after the webfont ---- */
+:root {
+  --font-cjk:       "Noto Sans SC", "Noto Sans SC Fallback", "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-cjk-serif: "Noto Serif SC", "Noto Serif SC Fallback", "Songti SC", "SimSun", serif;
+}
+
+/* ---- pairing table (references/cjk.md has the reasons) ----
+ * Latin grotesk / neo-grotesque  -> Hei/Gothic: Noto Sans SC, Source Han Sans, HarmonyOS Sans, MiSans
+ * Latin old-style / transitional -> Song/Ming:  Noto Serif SC, Source Han Serif, Huiwen-Mincho
+ * Latin humanist / calligraphic  -> Kai:        LXGW WenKai, LXGW Bright
+ * Display, kinetic               -> Smiley Sans 得意黑 (display only), Douyin Sans
+ * Mono with CJK                  -> Sarasa Mono SC, Maple Mono
+ * Match stroke contrast and x-height, not names. A CJK-first product picks
+ * the CJK face FIRST and finds a Latin face that sits inside its proportions.
+ */

@@ -7,7 +7,7 @@ dated, versioned, and they move -- once a tell is known, it migrates.
 Anti-slop is adversarial. Do not turn a tell into a permanent ban: an
 expired ban is the next monoculture.
 
-Enforcement column: `grep` = `assets/bans.sh` can catch it
+Enforcement column: `grep` = `kit/check.sh` can catch it
 mechanically (evidence, never proof); `eye` = needs a screenshot or a
 read of the rendered thing; `count` = count occurrences per viewport.
 
@@ -48,6 +48,9 @@ read of the rendered thing; `count` = count occurrences per viewport.
 | Mono as costume | monospace for "technical" rather than code, data, measurement | mono for code, numbers, IDs only | eye |
 | System display face on an own-world page | the platform sans as the display voice of a committed world | source and self-host a face whose character matches; system stacks are for product chrome and the quiet default | eye |
 | Template bones | a committed skin over the standard marketing grid (hero, three cards, logo row) | the world's own topology; the first viewport is a thesis | eye |
+| Generated-dashboard shape | masthead + full-bleed band + two columns + a sticky right rail of stacked cards with uppercase-tracked micro-labels | a composition from the deck or the world card; rules instead of a rail | grep (check.sh warns), eye |
+| Computed ramp | neutrals as one hue at one chroma across N lightnesses, or neutrals on the accent hue; "slate and brass" palette names | an observed palette with provenance (specimens/palettes/): ground, ink, rule, accent as different materials | grep (check.sh warns), eye |
+| System stack on a zh page | Latin webfont carries the identity, CJK falls to PingFang / YaHei / nothing | CJK face first, self-hosted as slices (kit/fonts.sh); check.sh fails without it | grep |
 | Framework default inherited | radius, shadow, ring, font never decided -- shipped as installed | every dimension decided in DESIGN.md | eye |
 
 ## Zeitgeist -- 2026-Q3
@@ -88,7 +91,7 @@ this for any similar brief? Name what you changed.
 
 ### Saturated faces
 
-Maintained in `fontbook.md` (dated). Short form: Inter, Roboto,
+Maintained in `craft.md` (dated). Short form: Inter, Roboto,
 Poppins, Montserrat, Open Sans, DM Sans, Plus Jakarta, Outfit,
 Manrope, Space Grotesk/Mono, Syne; display Playfair, Fraunces,
 Cormorant, Newsreader, Lora, Crimson, DM Serif, Instrument
@@ -152,5 +155,5 @@ said what the product is.
 2. Entries older than 18 months that no longer dominate leave. Do not
    promote a zeitgeist entry to permanent unless it fails a perceptual
    or behavioral principle.
-3. Only this file's zeitgeist half and `fontbook.md`'s saturated list
+3. Only this file's zeitgeist half and `craft.md`'s saturated list
    change. Principles, patterns, and design-system contracts stay.

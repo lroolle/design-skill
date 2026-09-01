@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>point-cloud primitive -- specimen</title>
-<link id="tokens" rel="stylesheet" href="../tokens/default.css">
+<link id="tokens" rel="stylesheet" href="../../systems/default.css">
 <style>
 /* specimen: component CSS only; every value is a token. */
 * { box-sizing: border-box; }
@@ -104,7 +104,7 @@ footer { color: var(--fg-3); font-size: var(--text-sm); padding: var(--space-6) 
 </section>
 
 <footer>specimen for the point-cloud primitive &mdash; tokens from
-<span class="mono">assets/tokens/&lt;name&gt;.css</span>; mechanism and provenance in
+<span class="mono">systems/&lt;name&gt;.css</span>; mechanism and provenance in
 <span class="mono">references/simulation.md</span>.</footer>
 
 </div>
@@ -157,7 +157,7 @@ function showFeel() {
   feel.textContent = `--motion-personality: ${p || '(unset -> snappy)'}`;
 }
 document.getElementById('system').addEventListener('change', e => {
-  link.href = `../tokens/${e.target.value}.css`;
+  link.href = `../../systems/${e.target.value}.css`;
   link.addEventListener('load', () => { live.forEach(h => h.refresh()); showFeel(); }, { once: true });
 });
 document.getElementById('speed').addEventListener('input', e => {

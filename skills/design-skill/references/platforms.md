@@ -8,7 +8,7 @@ product spans several platforms and must stay one product.
 The invariant across all of them: the user's goal does not change when
 the screen shrinks or the medium changes. Content priority tiers
 (P0 always visible, P1 collapsible, P2 on demand, P3 large-viewport
-only -- patterns.md) are the portable strategy; everything below is
+only -- craft.md) are the portable strategy; everything below is
 how each platform implements it.
 
 ## Web: marketing and brand surfaces
