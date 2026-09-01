@@ -1,108 +1,24 @@
-# TASTE.md -- prior rulings
+# TASTE.md -- scars
 
-Scars from real rejections. Each carries its why; a scar without a why
-is a ban, and bans fossilize. Read this before any design verdict;
-delete a scar the moment its expiry condition arrives. Material lives
-in DESIGN.md.
+Rulings this project actually made. Each carries its why; a scar
+without a why is a ban, and bans fossilize. Read this before any
+design verdict; delete a scar the moment its expiry condition
+arrives. Material lives in DESIGN.md.
 
-<!-- The scars below are structural seeds that hold on almost every
-product. Keep the ones that apply, delete the rest, and append the
-project's own beneath them. Delete this comment when filled. -->
+This file starts empty and stays empty until something real is
+rejected here. Structural priors that hold on almost every product
+ship with the skill (`references/priors.md` in design-skill); read
+them at Review, do not copy them into this file. A scar is earned
+when a change on this project is rejected on evidence -- record it
+in this form and keep the whole entry under ten lines:
 
-## {DATE} rejected: metric cards replacing the data table
+## {DATE} rejected: {what was rejected, one line}
 
-Why: the surface's primary task was scanning rows for anomalies;
-aggregate cards cut the visible facts from hundreds to four and
-averaged the outlier out of existence. Prettier, task impossible.
-Reuse: on analyst and operator surfaces, summarize above the data,
-never instead of it; summaries show worst case, not averages.
-Expires: never (structural).
-
-## {DATE} rejected: utility-palette breakout for semantic states
-
-Why: one page carried the token red, a hardcoded red-50/200/700 sale
-callout and amber star ratings -- three color systems, zero shared
-meaning.
-Reuse: semantic states derive from tokens only; `kit/check.sh` enforces.
-Expires: never (structural).
-
-## {DATE} rejected: mixed corner languages
-
-Why: 0-radius rules, pill CTAs, 8px alerts and 6px buttons on one
-screen -- four corner languages over an untouched framework default.
-Radius was never decided, only inherited.
-Reuse: choosing a direction includes writing the radius token before
-the first component; every corner speaks it.
-Expires: never (structural).
-
-## {DATE} rejected: device sprawl
-
-Why: one uppercase-tracked eyebrow repeated ten times per page, five
-sub-12px sizes, eight tracking values -- emphasis flattened into
-texture, and that texture is the current generated-editorial tell.
-Reuse: one masthead device + one section-label device per page; at
-most two sub-12px sizes.
-Expires: never (perceptual).
-
-## {DATE} rejected: the urgency kit
-
-Why: pulsing dots, live countdowns and "on sale today" on a product
-whose own brief said no cheap urgency; urgency devices spend trust to
-buy attention.
-Reuse: deadlines render as dated facts. No pulse, no tick, no exclaim.
-Expires: if the primary task becomes time-critical AND the brief says so.
-
-## {DATE} rejected: achromatic dark mode on a tinted brand
-
-Why: the dark theme dropped the seed hue to chroma-0 gray with pure
-white cards -- a colder, different product at night, plus halation.
-Reuse: dark is a second observed object with its own inks (a rubbing,
-a lit board), never an inversion; never chroma 0, never #fff/#000;
-dark elevation via surface lightness.
-Expires: never (structural).
-
-## {DATE} rejected: Latin-first typography on a CJK-primary product
-
-Why: the Latin display face hosted the identity while the CJK face was
-a system stack -- the primary audience got the fallback experience,
-excused as "a CJK webfont is 5-20 MB" (it is 150-400 KB of slices).
-Reuse: CJK-primary products pick and self-host the CJK face first
-(`kit/fonts.sh`); the Latin face harmonizes with it; `kit/check.sh`
-fails a zh page without a CJK @font-face.
-Expires: never (structural).
-
-## {DATE} rejected: a palette computed from one seed hue
-
-Why: neutrals as one hue at nine lightnesses, accent on the same hue;
-the page read as a theme, not a thing. Real inks have irregular
-relationships.
-Reuse: palettes come from a specimen with provenance
-(`specimens/palettes/`) or a world card; ground, ink, rule and accent
-are different materials; `check.sh` warns on a ramp.
-Expires: never (perceptual).
-
-## {DATE} rejected: copy that explains the layout to the reader
-
-Why: "跨月连续排布：月份之间只有一条粗线，没有断行。" narrated the page
-instead of serving the task -- the spec register on a 7 a.m. surface.
-Reuse: every string is read aloud as the person using it at that
-moment; a sentence that explains the page is cut
-(`specimens/zh-voice.md`).
-Expires: never (voice).
-
-## {DATE} rejected: icon-only multi-state controls
-
-Why: theme and locale switchers as bare glyphs forced recognition of
-state from the icon alone.
-Reuse: icon-only is earned by binary universal actions (close, search);
-multi-state controls carry labels.
-Expires: never (behavioral).
-
-## {DATE} rejected: template adoption without a route-and-mount audit
-
-Why: a shipped site still rendered the chassis's demo pricing route,
-unresolved i18n keys, and third-party widgets mounted in the root
-layout -- chassis leakage read as generated within seconds.
-Reuse: adoption ends with a route-and-mount audit; every demo route,
-global mount and orphaned keyframe earns its place or dies.
-Expires: never (structural).
+Why: {the failure, concretely -- what task got harder, what broke,
+what it read as}
+Where: {the surface, run, or capture that shows it}
+Landed: {the narrowest layer that now enforces the correction --
+DESIGN.md prose, a token, a component, a check -- or "nowhere yet"}
+Reuse: {the rule going forward, one or two lines}
+Expires: {never (structural | perceptual | behavioral | voice), or
+the condition that retires it}

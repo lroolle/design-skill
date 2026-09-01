@@ -53,7 +53,7 @@ marketplace add lroolle/design-skill`), or by copying
 
 ## References (the why)
 
-- [thinking](skills/design-skill/references/thinking.md) · [craft](skills/design-skill/references/craft.md) (type, structure, motion) · [cjk](skills/design-skill/references/cjk.md) · [color](skills/design-skill/references/color.md) · [simulation](skills/design-skill/references/simulation.md) · [anti-patterns](skills/design-skill/references/anti-patterns.md) · [platforms](skills/design-skill/references/platforms.md)
+- [thinking](skills/design-skill/references/thinking.md) · [craft](skills/design-skill/references/craft.md) (type, structure, motion) · [cjk](skills/design-skill/references/cjk.md) · [color](skills/design-skill/references/color.md) · [simulation](skills/design-skill/references/simulation.md) · [anti-patterns](skills/design-skill/references/anti-patterns.md) · [priors](skills/design-skill/references/priors.md) (rejections observed across our builds; a project's TASTE.md starts empty) · [platforms](skills/design-skill/references/platforms.md)
 - [assets/primitives/](skills/design-skill/assets/primitives/README.md): working behavior models in six layers (point-cloud)
 
 ## The skill used on itself

@@ -288,6 +288,7 @@ Smash the work if any survive:
 | [references/color.md](references/color.md) | specimens not seeds; strategy; dark; contrast; data viz | re-ink, Review |
 | [references/simulation.md](references/simulation.md) · [assets/primitives/](assets/primitives/README.md) | living elements: model card, six layers, working models | Build with anything that runs |
 | [references/anti-patterns.md](references/anti-patterns.md) | permanent tells and the dated ones | Sense, Review |
+| [references/priors.md](references/priors.md) | rejections observed across our builds; a project's TASTE.md starts empty and earns its own | Review, verdicts |
 | [references/platforms.md](references/platforms.md) | per-platform rules off desktop web | non-web |
 | [assets/](assets/) | DESIGN.md and TASTE.md templates | ship |
 

@@ -56,7 +56,7 @@ desc=$(awk '/^description:/{f=1; next} f && /^[a-z]+:/{exit} f && /^---/{exit} f
 [ ${#desc} -le 1024 ] && ok "description ${#desc} chars (<= 1024)" || bad "description ${#desc} chars (> 1024)"
 for p in kit/README.md kit/check.sh kit/fonts.sh kit/floor/tokens.css kit/floor/base.css kit/floor/fonts.zh.css kit/floor/fonts.latin.css kit/house/tokens.css kit/house/base.css kit/house/components.css \
          specimens/palettes/README.md specimens/type/README.md specimens/zh-voice.md decks/worlds/_template.md decks/compositions/_template.md decks/recipes/_template.md \
-         scripts/roll.mjs systems/README.md references/thinking.md references/craft.md references/cjk.md references/color.md references/simulation.md references/anti-patterns.md references/platforms.md \
+         scripts/roll.mjs systems/README.md references/thinking.md references/craft.md references/cjk.md references/color.md references/simulation.md references/anti-patterns.md references/priors.md references/platforms.md \
          assets/primitives/README.md assets/DESIGN.md.tmpl assets/TASTE.md.tmpl; do
   [ -e "$p" ] || bad "SKILL.md map target missing: $p"
 done
