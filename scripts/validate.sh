@@ -223,4 +223,17 @@ else
   echo "skip  site has no deck.mjs / deal-check.mjs yet; parity checks resume when a die is on the page"
 fi
 
+# 10. Reference intake stays an input queue, not unlabeled doctrine
+for f in evals/intake/*.md; do
+  b=$(basename "$f"); [ "$b" = _template.md ] && continue
+  miss=""
+  for k in id status observed; do grep -qE "^$k:" "$f" || miss="$miss $k"; done
+  grep -qE '^status: (team-check|scenario-ready|declined)$' "$f" || miss="$miss status-value"
+  for h in "## Sources" "## Shortlist" "## Declined" "## Decision"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
+  grep -qF 'Keep:' "$f" || miss="$miss Keep"
+  grep -qF 'Change:' "$f" || miss="$miss Change"
+  grep -qF 'Do not copy:' "$f" || miss="$miss Do-not-copy"
+  [ -z "$miss" ] && ok "reference intake $b" || bad "reference intake $b missing:$miss"
+done
+
 exit "$fail"
