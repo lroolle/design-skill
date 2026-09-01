@@ -68,3 +68,4 @@ marketplace add lroolle/design-skill`), or by copying
 
 - [.claude-plugin/plugin.json](.claude-plugin/plugin.json) · [.claude-plugin/marketplace.json](.claude-plugin/marketplace.json)
 - [assets/DESIGN.md.tmpl](skills/design-skill/assets/DESIGN.md.tmpl) · [assets/TASTE.md.tmpl](skills/design-skill/assets/TASTE.md.tmpl) · [scripts/validate.sh](scripts/validate.sh)
+- [evals/README.md](evals/README.md): the loop that makes rules earn their place -- frozen scenarios with frozen roll keys, baselines, first attempts, corrections routed to the narrowest enforcing layer; [evals/LEDGER.md](evals/LEDGER.md) records which run earned which rule; [evals/scenarios/01-ds-site.md](evals/scenarios/01-ds-site.md) is the live one
