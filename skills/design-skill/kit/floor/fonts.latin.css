@@ -1,0 +1,48 @@
+/* kit/floor/fonts.latin.css -- Latin webfonts, when the floor's system
+ * stack is not the voice. System stacks are never a tell; a webfont is
+ * earned by identity (a persuade or experience surface bound to a world),
+ * not by habit. When one is earned:
+ *
+ *   kit/fonts.sh "Public Sans" 400,600 public/fonts
+ *   kit/fonts.sh "Source Serif 4" 400,600 public/fonts
+ *   <link rel="stylesheet" href="/fonts/public-sans.css">
+ *   <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/public-sans/01.woff2">
+ *
+ * Preload the display face's Latin slice only (the first file fonts.sh
+ * writes is Google's latin subset for the first weight). Then:
+ *
+ *   --font-body: "Public Sans", "Public Sans Fallback", system-ui, sans-serif;
+ *
+ * Do not reach for the saturated list (references/anti-patterns.md) as
+ * the display face: Inter, Roboto, Poppins, Montserrat, DM Sans, Plus
+ * Jakarta, Outfit, Manrope, Space Grotesk/Mono, Playfair, Fraunces,
+ * Cormorant, Newsreader, Lora, Crimson, DM Serif, Instrument Serif;
+ * drifting: Geist, Satoshi, Bricolage, Clash, Cabinet Grotesk.
+ * references/craft.md carries the catalog of faces that are not.
+ */
+
+/* ---- metric fallbacks: the layout holds while the webfont swaps ----
+ * Values are per pair (webfont x local fallback). The ones below are
+ * starting points measured against Arial; re-derive for the pair you
+ * ship with `npx fontaine` or `npx @capsizecss/metrics`, then paste.
+ */
+@font-face {
+  font-family: "Public Sans Fallback";
+  src: local("Arial"), local("Helvetica Neue"), local("Liberation Sans");
+  size-adjust: 103%;        /* re-derive */
+  ascent-override: 96%;     /* re-derive */
+  descent-override: 24%;    /* re-derive */
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Source Serif 4 Fallback";
+  src: local("Georgia"), local("Charter"), local("Times New Roman");
+  size-adjust: 97%;         /* re-derive */
+  ascent-override: 92%;     /* re-derive */
+  descent-override: 27%;    /* re-derive */
+  line-gap-override: 0%;
+}
+
+/* ---- variable faces: enable the axes you rely on ---- */
+h1, h2, h3 { font-optical-sizing: auto; }
+body { font-optical-sizing: auto; font-variation-settings: normal; }

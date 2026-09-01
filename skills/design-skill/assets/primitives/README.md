@@ -45,7 +45,7 @@ the doctrine.
 Pick the behavior from simulation.md's primitives table that has no
 model here yet and that a real surface needed. Write the model card
 first. Build it to the list above, add a specimen page that switches
-across `../tokens/*.css`, and add a row to the table.
+across `../../systems/*.css`, and add a row to the table.
 
 One caution the table cannot carry: a primitive is worth adding when
 a surface must *prove* something with it. A model that proves nothing

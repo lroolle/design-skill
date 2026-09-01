@@ -2,9 +2,10 @@
 # validate.sh -- the proof behind the README's claims.
 #
 # Repo layout checks (packaging: skills/<name>/SKILL.md, plugin manifests)
-# then skill checks (frontmatter, links, systems, tokens, specimen, bans,
-# decks, dice). Exit non-zero on any failure. No dependencies beyond bash,
-# grep, awk, and -- for the dice -- node.
+# then skill checks (frontmatter, links, kits, systems, tokens, check.sh
+# self-test, decks, recipes, dice, site sync). Exit non-zero on any
+# failure. No dependencies beyond bash, grep, awk, and -- for the dice
+# and the site -- node.
 set -uo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 cd "$ROOT"
@@ -29,7 +30,7 @@ if command -v node >/dev/null 2>&1; then
   [ "$pn" = "$SKILL_NAME" ] && ok "plugin.json name = $pn" || bad "plugin.json name is '$pn', expected $SKILL_NAME"
 fi
 
-# 0b. Root-level markdown links (README, llms.txt) resolve
+# 0b. Root-level markdown links resolve
 rootbroken=""
 for f in README.md llms.txt; do
   while IFS= read -r link; do
@@ -48,9 +49,19 @@ name=$(awk '/^name:/{print $2; exit}' SKILL.md)
 [ "$name" = "$(basename "$PWD")" ] && ok "name matches directory" || bad "name '$name' != directory '$(basename "$PWD")'"
 grep -q '^license:' SKILL.md && ok "frontmatter license" || bad "frontmatter has no license"
 lines=$(wc -l < SKILL.md)
-[ "$lines" -le 500 ] && ok "SKILL.md $lines lines (<= 500)" || bad "SKILL.md $lines lines (> 500)"
+[ "$lines" -le 400 ] && ok "SKILL.md $lines lines (<= 400)" || bad "SKILL.md $lines lines (> 400)"
+words=$(wc -w < SKILL.md)
+[ "$words" -le 2600 ] && ok "SKILL.md $words words (<= 2600)" || bad "SKILL.md $words words (> 2600): the protocol is growing back into a method"
 desc=$(awk '/^description:/{f=1; next} f && /^[a-z]+:/{exit} f && /^---/{exit} f {gsub(/^ +| +$/, ""); printf "%s ", $0}' SKILL.md)
 [ ${#desc} -le 1024 ] && ok "description ${#desc} chars (<= 1024)" || bad "description ${#desc} chars (> 1024)"
+for p in kit/README.md kit/check.sh kit/fonts.sh kit/floor/tokens.css kit/floor/base.css kit/floor/fonts.zh.css kit/floor/fonts.latin.css kit/house/tokens.css kit/house/base.css kit/house/components.css \
+         specimens/palettes/README.md specimens/type/README.md specimens/zh-voice.md decks/worlds/_template.md decks/compositions/_template.md decks/recipes/_template.md \
+         scripts/roll.mjs systems/README.md references/thinking.md references/craft.md references/cjk.md references/color.md references/simulation.md references/anti-patterns.md references/platforms.md \
+         assets/primitives/README.md assets/DESIGN.md.tmpl assets/TASTE.md.tmpl; do
+  [ -e "$p" ] || bad "SKILL.md map target missing: $p"
+done
+ok "map targets exist"
+grep -q 'kit/check.sh' SKILL.md && grep -q -- '--subject' SKILL.md && ok "SKILL.md binds check.sh and the affinity roll" || bad "SKILL.md does not mention kit/check.sh and --subject"
 
 # 2. Relative links resolve (markdown files only; skip http and anchors)
 rm -f /tmp/.lds_broken
@@ -66,87 +77,94 @@ while IFS= read -r f; do
 done < <(find . -name '*.md' -not -path './.git/*' -not -path './node_modules/*')
 if [ -f /tmp/.lds_broken ]; then rm -f /tmp/.lds_broken; bad "relative links"; else ok "relative links resolve"; fi
 
-# 3. Design systems: 12 sections + token file + README row
-sections=("## 1. Identity" "## 2. Color" "## 3. Type" "## 4. Space and density" "## 5. Shape and surface" "## 6. Motion" "## 7. Imagery and icons" "## 8. Components" "## 9. Signature moves" "## 10. Voice" "## 11. Where it turns to slop" "## 12. Tokens")
-for f in design-systems/*.md; do
-  n=$(basename "$f" .md)
-  case "$n" in README|_template) continue ;; esac
-  miss=""
-  for s in "${sections[@]}"; do grep -qF "$s" "$f" || miss="$miss | $s"; done
-  [ -f "assets/tokens/$n.css" ] || miss="$miss | tokens css"
-  grep -qF "[$n]($n.md)" design-systems/README.md || miss="$miss | README row"
+# 2b. No references to paths that no longer exist
+stale=$(grep -rnE 'design-systems/|assets/tokens/|assets/bans\.sh|references/(methods|patterns|typography|motion|fontbook|palettes|frameworks|sites|skills)\.md|specimen\.html|(^|[^/a-z-])(worlds|stagings|templates)/' --include='*.md' --include='*.css' --include='*.js' --include='*.mjs' --include='*.sh' --include='*.tmpl' --include='*.html' . 2>/dev/null | grep -v '^./decks/\(worlds\|compositions\)/[^:]*:.*decks/' | grep -vE 'validate|\.git/' | grep -vE 'decks/(worlds|compositions|recipes)/' | head -5)
+[ -z "$stale" ] && ok "no stale pre-rewrite paths" || { bad "stale paths"; echo "$stale" | sed 's/^/      /'; }
+
+# 3. Systems: a card + a css per system, README row, card size
+for css in systems/*.css; do
+  n=$(basename "$css" .css); miss=""
+  [ -f "systems/$n.md" ] || miss="$miss card"
+  for h in "## Faces" "## Dials" "## Signature moves" "## Turns to slop"; do grep -qF "$h" "systems/$n.md" 2>/dev/null || miss="$miss '$h'"; done
+  w=$(wc -w < "systems/$n.md" 2>/dev/null || echo 0); [ "$w" -le 360 ] || miss="$miss card-${w}w(>360)"
+  grep -qF "[$n]($n.md)" systems/README.md || miss="$miss README-row"
+  grep -q -- '--motion-personality:' "$css" || miss="$miss motion-personality"
   [ -z "$miss" ] && ok "system $n" || bad "system $n missing:$miss"
 done
 
-# 4. Token contract: every token defined on :root and [data-theme="dark"]
+# 4. Token contract: every token on :root and [data-theme="dark"], in systems/*.css and both kits
 tokens=(bg surface surface-2 overlay fg fg-2 fg-3 line line-strong accent accent-hover accent-fg accent-soft ok warn danger info focus font-display font-body font-mono font-cjk text-xs text-sm text-base text-lg text-xl text-2xl text-3xl text-4xl leading-body leading-tight tracking-display measure space-1 space-2 space-3 space-4 space-5 space-6 space-7 space-8 space-9 space-10 space-11 space-12 radius radius-sm radius-lg line-w shadow-1 shadow-2 dur-micro dur-base dur-enter ease-out ease-in-out ease-subtle container container-wide)
 themed=(bg surface surface-2 overlay fg fg-2 fg-3 line line-strong accent accent-hover accent-fg accent-soft ok warn danger info focus shadow-1 shadow-2)
-for css in assets/tokens/*.css; do
+for css in systems/*.css kit/floor/tokens.css kit/house/tokens.css; do
   miss=""
   root=$(awk '/^:root[[:space:]]*\{/{f=1} f{print} f&&/^\}/{exit}' "$css")
   dark=$(awk '/^\[data-theme="dark"\][[:space:]]*\{/{f=1} f{print} f&&/^\}/{exit}' "$css")
   for t in "${tokens[@]}"; do grep -qE "^\s*--$t:" <<< "$root" || miss="$miss --$t"; done
   for t in "${themed[@]}"; do grep -qE "^\s*--$t:" <<< "$dark" || miss="$miss dark:--$t"; done
   grep -qE '#(000000|ffffff|000|fff)\b' "$css" && miss="$miss pure-black/white"
-  grep -q 'prefers-reduced-motion' "$css" || miss="$miss reduced-motion"
-  # --fg-3 carries body-size text (captions, micro-labels, fine print), so it
-  # has to clear 4.5:1. Lightness is a browser-free proxy for the real ratio
-  # against these files' ground lightnesses; see design-systems/README.md.
   lroot=$(grep -oE -- '--fg-3:[[:space:]]*oklch\([0-9.]+' <<< "$root" | grep -oE '[0-9.]+$')
   ldark=$(grep -oE -- '--fg-3:[[:space:]]*oklch\([0-9.]+' <<< "$dark" | grep -oE '[0-9.]+$')
   awk -v v="$lroot" 'BEGIN{exit !(v!="" && v<=0.56)}' || miss="$miss fg-3-light-contrast($lroot)"
   awk -v v="$ldark" 'BEGIN{exit !(v!="" && v>=0.59)}' || miss="$miss fg-3-dark-contrast($ldark)"
-  [ -z "$miss" ] && ok "tokens $(basename "$css")" || bad "tokens $(basename "$css") missing:$miss"
+  [ -z "$miss" ] && ok "tokens $css" || bad "tokens $css missing:$miss"
 done
+grep -q 'prefers-reduced-motion' kit/floor/base.css && grep -q ':lang(zh)' kit/floor/base.css && grep -q 'text-emphasis' kit/floor/base.css \
+  && ok "floor base: reduced motion + zh mode" || bad "kit/floor/base.css lacks reduced-motion or the :lang(zh) block"
+grep -q '@font-face' kit/floor/fonts.zh.css && grep -qE 'Noto (Sans|Serif) SC' kit/floor/tokens.css && ok "floor wires a CJK webfont" || bad "floor does not wire a CJK webfont"
+grep -qiE 'provenance' kit/house/tokens.css && ok "house tokens carry provenance" || bad "kit/house/tokens.css has no provenance comment"
+[ -x kit/check.sh ] && [ -x kit/fonts.sh ] && ok "kit scripts executable" || bad "kit/check.sh or kit/fonts.sh not executable"
 
-# 5. Specimen uses only defined tokens (extras must carry a fallback)
-if [ -f assets/specimen.html ]; then
-  miss=""
-  for v in $(grep -oE 'var\(--[a-z0-9-]+' assets/specimen.html | sed 's/var(--//' | grep -vE -- '-$' | sort -u); do
-    defined=1
-    for css in assets/tokens/*.css; do grep -qE -- "--$v:" "$css" || defined=0; done
-    if [ "$defined" -eq 0 ]; then
-      grep -qE "var\(--$v,\s*var\(" assets/specimen.html || miss="$miss --$v"
-    fi
-  done
-  [ -z "$miss" ] && ok "specimen tokens" || bad "specimen uses undefined tokens without fallback:$miss"
-  raw=$(grep -nE '#[0-9a-fA-F]{6}\b|oklch\(|rgba?\(' assets/specimen.html | grep -vE 'getPropertyValue|//|/\*' | wc -l)
-  [ "$raw" -eq 0 ] && ok "specimen has no raw colors" || bad "specimen has $raw raw color lines"
-fi
-
-# 6. bans.sh self-test: clean fixture passes, dirty fixture trips
-BANS="$PWD/assets/bans.sh"
-tmp=$(mktemp -d); mkdir -p "$tmp/clean/app" "$tmp/dirty/app"
-cat > "$tmp/clean/app/page.css" <<'EOF'
+# 5. check.sh self-test: clean passes, dirty trips (incl. zh), floor warns
+CHECK="$PWD/kit/check.sh"
+tmp=$(mktemp -d); mkdir -p "$tmp/clean/src" "$tmp/dirty/src" "$tmp/zh/src" "$tmp/zh/public/fonts"
+cat > "$tmp/clean/src/page.css" <<'EOF'
 .x { color: var(--fg); background: var(--bg); transition: opacity var(--dur-base) var(--ease-out); }
 @media (prefers-reduced-motion: reduce) { .x { transition: none; } }
 EOF
-cat > "$tmp/dirty/app/page.tsx" <<'EOF'
+cat > "$tmp/clean/src/index.html" <<'EOF'
+<html lang="en"><body><!-- THESIS a OWN-WORLD b STORY c FIRST VIEWPORT d FORM roll 3f9a2c1e --></body></html>
+EOF
+cp kit/house/tokens.css "$tmp/clean/src/tokens.css"
+cat > "$tmp/dirty/src/page.tsx" <<'EOF'
 <div className="text-red-500 border-l-4 animate-pulse" style={{color:'#ffffff'}}>Acme Lorem ipsum</div>
 EOF
-if (cd "$tmp/clean" && bash "$BANS" app >/dev/null); then ok "bans.sh clean fixture"; else bad "bans.sh flags a clean fixture"; fi
-if (cd "$tmp/dirty" && bash "$BANS" app >/dev/null); then bad "bans.sh misses a dirty fixture"; else ok "bans.sh trips on dirty fixture"; fi
+cat > "$tmp/zh/src/tokens.css" <<'EOF'
+:root { --bg: oklch(0.98 0.01 250); --surface: oklch(0.96 0.01 250); --surface-2: oklch(0.93 0.01 250); --fg: oklch(0.18 0.01 250); --fg-2: oklch(0.44 0.01 250); --fg-3: oklch(0.56 0.01 250); --line: oklch(0.87 0.01 250); --line-strong: oklch(0.75 0.01 250); --accent: oklch(0.5 0.15 251); --leading-body: 1.5; --measure: 68ch; }
+EOF
+cat > "$tmp/zh/src/index.html" <<'EOF'
+<html lang="zh-Hans"><body><p>今天是8月24日, 宜出行!</p></body></html>
+EOF
+if (cd "$tmp/clean" && bash "$CHECK" src >/dev/null); then ok "check.sh: clean fixture passes"; else bad "check.sh flags a clean fixture"; fi
+if (cd "$tmp/dirty" && bash "$CHECK" --no-promise src >/dev/null); then bad "check.sh misses a dirty fixture"; else ok "check.sh: dirty fixture trips"; fi
+zhout=$(cd "$tmp/zh" && bash "$CHECK" --no-promise src 2>&1)
+grep -q 'FAIL \[zh-font\]' <<< "$zhout" && grep -q 'FAIL \[zh-leading\]' <<< "$zhout" && grep -q 'WARN \[ramp\]' <<< "$zhout" && grep -q 'WARN \[zh-punct\]' <<< "$zhout" \
+  && ok "check.sh: zh fixture trips font, leading, ramp, punctuation" || { bad "check.sh zh fixture"; echo "$zhout" | head -8 | sed 's/^/      /'; }
+mkdir -p "$tmp/floor/src"; cp kit/floor/tokens.css "$tmp/floor/src/tokens.css"; cp "$tmp/clean/src/index.html" "$tmp/floor/src/"
+floorout=$(cd "$tmp/floor" && bash "$CHECK" src 2>&1)
+grep -q 'WARN \[floor\]' <<< "$floorout" && ok "check.sh: floor shipped unchanged warns" || bad "check.sh does not warn on the floor palette"
 rm -rf "$tmp"
 
-# 7. Forbidden names (WIP rule) and non-ascii outside CJK samples
+# 6. Forbidden names (WIP rule) and non-ascii punctuation (CJK references excepted)
 cd "$ROOT"
 if grep -rniE 'open-design|opendesign' . --exclude-dir=.git --exclude-dir=node_modules --exclude=validate.sh -q; then bad "forbidden name present"; else ok "no forbidden names"; fi
-if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' -q; then
-  bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' | head -5
-else ok "ascii punctuation"; fi
+if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' --exclude=cjk.md --exclude=zh-voice.md --exclude=TASTE.md.tmpl -q; then
+  bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' --exclude=cjk.md --exclude=zh-voice.md --exclude=TASTE.md.tmpl | head -5
+else ok "ascii punctuation (cjk.md, zh-voice.md, TASTE.md.tmpl carry CJK punctuation by design)"; fi
 cd "$SKILL_DIR"
 
-# 8. Decks: worlds/ and stagings/ frontmatter + sections; roll.mjs deterministic
-for deck in worlds stagings; do
+# 7. Decks: worlds (with affinity + zh) and compositions; recipes keep their sections
+for deck in worlds compositions; do
   n=0; bad_files=""
-  for f in "$deck"/*.md; do
+  for f in decks/"$deck"/*.md; do
     b=$(basename "$f"); case "$b" in README.md|_template.md) continue ;; esac
     n=$((n+1)); miss=""
     head -1 "$f" | grep -q '^---$' || miss="$miss frontmatter"
     for k in id name modes rating platforms; do grep -qE "^$k:" "$f" || miss="$miss $k"; done
     if [ "$deck" = worlds ]; then
-      for k in tier families grain origin; do grep -qE "^$k:" "$f" || miss="$miss $k"; done
+      for k in tier families grain origin affinity zh; do grep -qE "^$k:" "$f" || miss="$miss $k"; done
       grep -qE '^tier: (graphic|interaction|atmosphere)' "$f" || miss="$miss tier-value"
+      grep -qE '^zh: (true|false)$' "$f" || miss="$miss zh-value"
+      na=$(grep -E '^affinity:' "$f" | tr ',' '\n' | wc -l); [ "$na" -ge 8 ] || miss="$miss affinity<8"
       for h in "## Form" "## Spark" "## System" "## Web leverage" "## Translation" "## Risks"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
       for r in "Palette/material:" "Type/composition:" "Topology/navigation:" "Controls/state:" "Responsive/motion:"; do grep -qF "$r" "$f" || miss="$miss $r"; done
     else
@@ -162,25 +180,46 @@ for deck in worlds stagings; do
   if [ -z "$bad_files" ]; then ok "$deck: $n cards, schema complete"; else bad "$deck schema"; printf "$bad_files
 "; fi
 done
+zhn=$(grep -l '^zh: true' decks/worlds/*.md | wc -l | tr -d ' '); [ "$zhn" -ge 8 ] && ok "worlds: $zhn CJK cards" || bad "worlds: only $zhn CJK cards"
+for f in decks/recipes/*.md; do
+  b=$(basename "$f"); case "$b" in _template.md) continue ;; esac
+  miss=""; for h in "## Job" "## Protected functions" "## Structure" "## Settings" "## States" "## Copy" "## Verify" "## Failure modes"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
+  grep -qF "## Directions" "$f" && miss="$miss has-Directions"
+  [ -z "$miss" ] && ok "recipe ${b%.md}" || bad "recipe $b:$miss"
+done
+for f in specimens/palettes/*.md; do
+  b=$(basename "$f"); case "$b" in README.md) continue ;; esac
+  grep -qE '^Provenance:' "$f" && grep -qF '## The irregularity' "$f" && grep -qF '## Must not become' "$f" && grep -q 'oklch(' "$f" \
+    || bad "palette specimen $b lacks provenance / irregularity / must-not-become / values"
+done
+ok "palette specimens carry provenance and irregularity"
+
+# 8. The dice: deterministic; the deck enters the pool by affinity; surface scope
 if command -v node >/dev/null 2>&1; then
-  a=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 3f9a2c1e --json | tr -d ' \n')
-  b=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 3f9a2c1e --json | tr -d ' \n')
+  a=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --subject "docs for a payments api" --key 3f9a2c1e --json | tr -d ' \n')
+  b=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --subject "docs for a payments api" --key 3f9a2c1e --json | tr -d ' \n')
   [ "$a" = "$b" ] && [ -n "$a" ] && ok "roll.mjs deterministic for a fixed key" || bad "roll.mjs not deterministic"
-  r=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 3f9a2c1e --reroll 1 --json)
+  r=$(node scripts/roll.mjs --scope direction --mode operate --candidates 7 --subject "chinese calendar app daily almanac 黄历" --key 3f9a2c1e --json)
+  grep -q '"affine"' <<< "$r" && grep -q 'almanac-tear-off' <<< "$r" && ok "roll.mjs: almanac brief pulls almanac-tear-off into the pool" || bad "roll.mjs affinity pool"
+  hit=0; for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
+    node scripts/roll.mjs --scope direction --mode operate --candidates 7 --subject "chinese calendar app daily almanac" --key $(printf '%08x' $i) --json | grep -q '"kind": "deck"' && hit=$((hit+1)); done
+  [ "$hit" -ge 2 ] && ok "roll.mjs: deck cards get assigned ($hit/20 keys)" || bad "roll.mjs: deck never assigned ($hit/20)"
+  r=$(node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --subject "x" --key 3f9a2c1e --reroll 1 --json)
   grep -q '"reroll": 1' <<< "$r" && ok "roll.mjs reroll" || bad "roll.mjs reroll"
   s2=$(node scripts/roll.mjs --scope surface --mode operate --grain view --key 3f9a2c1e --json)
-  grep -q '"challengers"' <<< "$s2" && ok "roll.mjs surface scope" || bad "roll.mjs surface scope"
+  grep -q 'decks/compositions/' <<< "$s2" && ok "roll.mjs surface scope deals compositions" || bad "roll.mjs surface scope"
+  node scripts/roll.mjs --scope direction --mode read --key 3f9a2c1e | grep -q 'WARNING: no --subject' && ok "roll.mjs warns without --subject" || bad "roll.mjs silent without --subject"
 else
   echo "skip  node not found; roll.mjs untested"
 fi
 
-# 9. The page's die is the CLI's die: site/deck.js regenerates byte-identical
-#    from the decks, and site/deal.js deals the same hand as roll.mjs
+# 9. The page's die is the CLI's die
 cd "$ROOT"
-if command -v node >/dev/null 2>&1; then
+if command -v node >/dev/null 2>&1 && [ -f site/deck.mjs ] && [ -f site/deal-check.mjs ]; then
   node site/deck.mjs --check >/dev/null 2>&1 && ok "site/deck.js in sync with the decks" || bad "site/deck.js out of date: node site/deck.mjs"
   out=$(node site/deal-check.mjs 12 2>&1); [ $? -eq 0 ] && ok "site/deal.js: $out" || { bad "site/deal.js disagrees with roll.mjs"; echo "$out" | head -5; }
+else
+  echo "skip  site has no deck.mjs / deal-check.mjs yet; parity checks resume when a die is on the page"
 fi
-cd "$SKILL_DIR"
 
 exit "$fail"

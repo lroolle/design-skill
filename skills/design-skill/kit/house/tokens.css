@@ -1,0 +1,141 @@
+/* kit/house/tokens.css -- our aesthetic as an executable default.
+ *
+ * Ink on paper, technical and administrative register, CJK-native,
+ * rules instead of boxes, no gradient, no shadow as decoration, no
+ * photography dependency. Derived from the evidence, not invented: the
+ * worlds deck is printed information design (timetables, datasheets,
+ * patent sheets, charts, catalog cards, almanac leaves) and a third of it
+ * is Chinese; the house doctrine is ascii over ornament and structure
+ * that serves comprehension.
+ *
+ * PALETTE PROVENANCE. Every ink below is named after the physical thing
+ * it was set against. Values were set by eye, not spectrophotometer; the
+ * relationships are the point: the paper is warm, the ink is cool, the
+ * pencil rule is a third hue, the seal-paste red is the only chroma.
+ * That irregularity is what a seed-hue ramp cannot make, and it is why
+ * this file is a specimen and not a generator (specimens/palettes/).
+ *
+ * Usually kept as-is. Re-ink from another specimen when the world
+ * demands it; keep the token names. Load order: tokens -> floor/base ->
+ * house/base -> house/components.
+ */
+
+:root {
+  /* paper: offset stock of a 1980s railway timetable booklet, yellowed at the edges */
+  --bg:          oklch(0.960 0.010 88);
+  --surface:     oklch(0.935 0.011 88);   /* the same sheet under a light tone screen */
+  --surface-2:   oklch(0.900 0.012 85);   /* a heavier screen; shows more of the paper */
+  --overlay:     oklch(0.970 0.009 88);   /* a fresh sheet laid on top */
+
+  /* ink: letterpress carbon black, which is never the paper's hue */
+  --fg:          oklch(0.210 0.010 255);
+  --fg-2:        oklch(0.450 0.008 250);   /* half impression, dot gain */
+  --fg-3:        oklch(0.550 0.006 240);   /* the lightest ink that still clears 4.5:1 on --bg */
+
+  /* rules: pencil graphite, warm; a third material */
+  --line:        oklch(0.800 0.006 60);
+  --line-strong: oklch(0.620 0.008 60);
+
+  /* the one chroma: seal-paste cinnabar (印泥), stamped, slightly bled */
+  --accent:       oklch(0.550 0.190 32);
+  --accent-hover: oklch(0.500 0.195 30);
+  --accent-fg:    oklch(0.960 0.010 88);
+  --accent-soft:  oklch(0.930 0.035 35);  /* where the stamp bled into the paper */
+
+  /* semantic: other inks from the same desk */
+  --ok:          oklch(0.520 0.090 165);  --ok-soft:     oklch(0.930 0.030 165);  /* verdigris of a bronze seal */
+  --warn:        oklch(0.700 0.140 85);   --warn-soft:   oklch(0.950 0.045 88);   /* gamboge (藤黄) */
+  --danger:      oklch(0.470 0.200 25);   --danger-soft: oklch(0.940 0.035 28);   /* cinnabar, darker and hotter than the accent; forms and destructive steps only */
+  --info:        oklch(0.480 0.090 250);  --info-soft:   oklch(0.935 0.025 250);  /* fountain-pen blue-black */
+  --focus:       oklch(0.550 0.140 250);  /* blue, so a ring never reads as an error */
+
+  /* faces: an administrative grotesk, one family by weight; a Hei partner; a code mono */
+  --font-body:        "Public Sans", "Public Sans Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display:     var(--font-body);
+  --font-mono:        "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-cjk:         "Noto Sans SC", "Noto Sans SC Fallback", "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", sans-serif;
+  --font-cjk-serif:   "Noto Serif SC", "Noto Serif SC Fallback", "Songti SC", "SimSun", serif;
+  --font-cjk-display: var(--font-cjk);
+  --font-cjk-mono:    "Sarasa Mono SC", "Maple Mono", var(--font-mono);
+
+  /* scale: ratio 1.2, the quiet one; base 1rem, dense views 0.9375rem */
+  --text-xs:   0.694rem;
+  --text-sm:   0.833rem;
+  --text-base: 1rem;
+  --text-lg:   1.2rem;
+  --text-xl:   1.44rem;
+  --text-2xl:  1.728rem;
+  --text-3xl:  clamp(1.9rem, 1.5rem + 1.2vw, 2.074rem);
+  --text-4xl:  clamp(2.2rem, 1.6rem + 2vw, 2.488rem);
+
+  --leading-body:     1.5;
+  --leading-tight:    1.2;
+  --tracking-display: 0;       /* no negative tracking: it collides CJK strokes and reads as a template */
+  --measure:          66ch;
+
+  /* space: 4px scale, density 0.9 -- a sheet, not a lounge */
+  --density:  0.9;
+  --space-1:  calc(0.25rem * var(--density));
+  --space-2:  calc(0.5rem  * var(--density));
+  --space-3:  calc(0.75rem * var(--density));
+  --space-4:  calc(1rem    * var(--density));
+  --space-5:  calc(1.5rem  * var(--density));
+  --space-6:  calc(2rem    * var(--density));
+  --space-7:  calc(3rem    * var(--density));
+  --space-8:  calc(4rem    * var(--density));
+  --space-9:  calc(6rem    * var(--density));
+  --space-10: calc(8rem    * var(--density));
+  --space-11: calc(12rem   * var(--density));
+  --space-12: calc(16rem   * var(--density));
+
+  /* shape: near-square; the corner language of a printed form */
+  --radius:    0.125rem;
+  --radius-sm: 0;
+  --radius-lg: 0.25rem;
+  --line-w:    1px;
+  --rule-w:    2px;            /* extra: the heavy rule that opens a region */
+
+  /* elevation: overlays only; a sheet laid over a sheet casts a soft shadow */
+  --shadow-1: 0 1px 0 oklch(0.21 0.01 255 / 0.10), 0 2px 6px oklch(0.21 0.01 255 / 0.06);
+  --shadow-2: 0 2px 0 oklch(0.21 0.01 255 / 0.12), 0 12px 28px oklch(0.21 0.01 255 / 0.10);
+
+  /* motion: mechanical -- stepped, settles, no pretense */
+  --motion-personality: mechanical;
+  --dur-micro:   60ms;
+  --dur-base:    120ms;
+  --dur-enter:   160ms;
+  --ease-out:    linear;
+  --ease-in-out: steps(4, end);
+  --ease-subtle: linear;
+
+  --container:      68rem;
+  --container-wide: 88rem;
+
+  color-scheme: light dark;
+}
+
+/* dark: a stone rubbing (碑帖拓片) -- the ink is the ground, the paper is the mark.
+ * Not an inversion: the ground is cool ink, the text is warm paper, the seal
+ * stays cinnabar, the rules are the paper's own gray. */
+[data-theme="dark"] {
+  --bg:          oklch(0.170 0.008 250);
+  --surface:     oklch(0.210 0.008 250);
+  --surface-2:   oklch(0.250 0.008 250);
+  --overlay:     oklch(0.200 0.008 250);
+  --fg:          oklch(0.920 0.010 88);
+  --fg-2:        oklch(0.720 0.010 88);
+  --fg-3:        oklch(0.600 0.008 85);
+  --line:        oklch(0.300 0.006 250);
+  --line-strong: oklch(0.420 0.008 250);
+  --accent:       oklch(0.680 0.160 32);
+  --accent-hover: oklch(0.730 0.160 32);
+  --accent-fg:    oklch(0.170 0.008 250);
+  --accent-soft:  oklch(0.280 0.050 32);
+  --ok:          oklch(0.700 0.090 165);  --ok-soft:     oklch(0.240 0.030 165);
+  --warn:        oklch(0.800 0.130 88);   --warn-soft:   oklch(0.260 0.040 88);
+  --danger:      oklch(0.660 0.170 25);   --danger-soft: oklch(0.250 0.045 28);
+  --info:        oklch(0.700 0.090 250);  --info-soft:   oklch(0.240 0.030 250);
+  --focus:       oklch(0.720 0.130 250);
+  --shadow-1: 0 1px 0 oklch(0 0 0 / 0.30), 0 2px 8px oklch(0 0 0 / 0.30);
+  --shadow-2: 0 2px 0 oklch(0 0 0 / 0.35), 0 16px 40px oklch(0 0 0 / 0.45);
+}

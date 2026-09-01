@@ -1,97 +1,90 @@
 # DESIGN.md -- the material
 
 Read this before touching anything under the app's UI ({UI DIRS: e.g.
-`src/app/`, `src/components/`, `src/blocks/`}). `TASTE.md` holds prior
-rulings; this file holds the material. The one-line test for any UI
-change: **a change that makes the surface prettier and the task harder
-must fail.**
+`src/app/`, `src/components/`}). `TASTE.md` holds prior rulings; this
+file holds the material. The one-line test for any UI change: **a
+change that makes the surface prettier and the task harder must fail.**
+Run `kit/check.sh --fast {UI DIRS}` after every edit.
 
 <!-- Replace every {PLACEHOLDER}. This is a contract: if it lies about
 what the code does it is worse than none. Rewrite it in the same commit
-that changes the material. Delete this comment when filled. -->
+that changes the material. Written at finish, from the built surface.
+Delete this comment when filled. -->
 
 ## Direction
 
-World: **{WORLD or "none (material only)"}** on material **{SYSTEM
-NAME}**, re-seeded as "{one-line feel}". Roll key {KEY}; assigned
-candidate #{N} of {M}; chosen {DATE} because {one sentence: the
-sense-card job and audience it serves}. Hand rejected: {challenger --
-verdict}; {challenger -- verdict}. Raises kept: {from <world>:
-<discipline>}.
+World: **{WORLD from decks/worlds, or "candidate: <name>", or "none
+(material only)"}** on kit **{floor | house}**{, system {NAME} where one
+was bound}. Roll key {KEY}; pool {N} (your {M} + {K} deck cards by
+affinity for "{SUBJECT}"); assigned {deck card <id> | candidate #k};
+chosen {DATE} because {one sentence: the job and audience it serves}.
+Hand rejected: {challenger -- verdict}; {challenger -- verdict}. Raises
+kept: {from <world>: <discipline>}.
 
-The five-block promise (THESIS / OWN-WORLD / STORY / FIRST VIEWPORT /
-FORM) lives in the artifact's first body comment; this file records
-the material the promise was kept with. On a new world this file is
-written at finish from the built surface, never before it.
+The five-block promise lives in the artifact's first body comment;
+this file records the material the promise was kept with.
 
 Scene: {the one physical sentence}.
+Mode of each surface: {landing: persuade; app: operate; docs: read}.
+Protected functions: {the task path, the information actually read,
+labels and navigation, legal copy, the conversion path}.
 
-## Surfaces and modes
+## Palette: provenance
 
-Name the mode of the surface in hand before styling anything:
-
-- **persuade** ({LIST: landing, pricing, launch}): design IS the
-  product; commit fully, then clarify.
-- **operate** ({LIST: dashboard, settings, editor, admin, auth}):
-  design serves the task; density is a feature; expression in the
-  details, never over state or affordance.
-- **read** ({LIST: docs, articles, changelog}): measure, rhythm, quiet
-  hierarchy; wayfinding intact.
-- **experience** ({LIST: gallery, showcase}): the work leads; the
-  interface recedes.
-
-Protected functions (must not break, ever): {LIST: the primary task
-path, the information the user actually reads, labels and navigation,
-legal copy, the conversion path}.
+From **{specimen card in specimens/palettes/, or the world card's
+palette line, or "measured from <brand site> on <date>"}**. Materials:
+ground {name, hue}; ink {name, hue}; rule {name, hue}; accent {name,
+hue}. The irregularity kept: {one sentence -- e.g. "the ink is cool
+and the paper warm; the rule is graphite, a third hue"}. Strategy
+{restrained | committed | full | drenched}. Dark theme is
+{the second observed object, named}. `check.sh` palette warnings and
+their reasons: {none | "ramp: ... because ..."}.
 
 ## The material
 
-Tokens live in `{PATH: e.g. src/styles/tokens.css}` (copied from
-`assets/tokens/{system}.css` and re-seeded). App code uses tokens
-only.
+Tokens in `{PATH: e.g. src/styles/tokens.css}` (from
+`kit/{floor|house}/tokens.css`{ or `systems/<name>.css`}, re-inked as
+above). App code uses tokens only.
 
 | Dimension | Value | Law |
 |---|---|---|
-| Color seed | hue {N} ({name}), neutrals C {range} | Both themes derive from it. Dark mode is a redesign: surface lightness carries elevation, accent chroma drops ~15%. Never chroma 0, never pure black or white. |
-| Strategy | {restrained / committed / full / drenched} | {coverage rule for this strategy} |
-| Accent | `--accent` {oklch value} ({name}) | One accent: primary action, links, focus, selection. Semantic states from tokens only, never raw palette classes. |
-| Type | display {face} / body {face} / mono {face} | {pairing axis or one-family rationale}. CJK: {face}, {preloaded / system}; a CJK-primary product picks the CJK face first. Ratio {N}, base {N}. |
-| Radius | `--radius: {value}`, one corner language | `-sm` / `-lg` derive from it. A second corner language is a defect. |
-| Surfaces | {1px lines + tone steps / elevation model} | Structure before shadow. Shadow only where elevation carries meaning, tinted to the seed. |
-| Density | {value}; product {value}, brand {value} | Never delete information to make a layout breathe: summarize above the data, never instead of it. |
-| Motion | {personality}: {micro / base / enter ms}, `{ease}` | Budget: {feedback, overlays, ...}. No urgency devices. `prefers-reduced-motion` honored. |
-| Living element | {none / one: primitive, what it proves, renderer} | Model-first (model card in the region header); parameters in one block; skin from tokens; settled still frame under reduced motion; provenance of any forked sketch noted here. |
-| Icons | {set} at {weight} | One set, one weight; icon + label on anything multi-state. |
-| Imagery | {photography treatment / illustration / none} | {caption rule; dark-mode dimming} |
+| Faces | display {face} / body {face} / mono {face} / CJK {face, self-hosted via kit/fonts.sh, or "n/a"} | one pairing axis; CJK face first on a zh product |
+| Scale | ratio {N}, base {N}, leading {N} (zh {N}) | four or five levels |
+| Measure | {N}ch Latin / {N}em zh | |
+| Radius | `--radius: {value}` | one corner language |
+| Surfaces | {rules + tone steps / elevation model} | structure before shadow |
+| Density | {value} | never delete information to breathe |
+| Motion | {personality}: {micro / base / enter ms} | budget: {feedback, overlays, ...}; reduced motion honored |
+| Living element | {none / one: primitive, what it proves, renderer, provenance} | model card in the region header; settled frame under reduced motion |
+| Icons | {set} at {weight} | one set, one weight |
+| Imagery | {treatment / none} | captioned; dimmed in dark |
+| zh mode | {on: lang attr, faces, register per specimens/zh-voice.md / off} | |
 
 ## Signature moves and device ration
 
-Signature: {1. ...} {2. ...} {3. ...} -- these and no others.
-
-Per page: **one masthead device** ({which}) + **one section-label
-device** ({which}). At most two sub-12px sizes. Uppercase-tracked
-labels, eyebrows, italic runs, colored kickers are devices; each one
-used elsewhere is a defect.
+Signature: {1.} {2.} {3.} -- these and no others. Per page: one
+masthead device ({which}) + one section-label device ({which}).
 
 ## Voice
 
 {Register in one line.} Verbs on buttons, sentence case, the user's
-vocabulary, no fake names or numbers, {system-specific line}.
+vocabulary, no fake names or numbers. {zh: 你/您 decided; punctuation
+set; no exclamation marks.}
 
-## Hard bans (run `scripts/bans.sh`)
+## Check
 
-Raw hex or oklch outside the token file; raw palette classes for
-semantic states; pure black/white; urgency animation classes;
-layout-property transitions; side-stripe accents; gradient text;
-`lorem` / `Acme` / `John Doe`. Your generator-managed component
-library ({e.g. `src/components/ui/`}) is exempt: it is token-driven.
+`kit/check.sh {UI DIRS}` -- FAIL on raw color, palette classes, pure
+black/white, urgency, layout transitions, gradient text, saturated
+faces, placeholder content, emoji, missing reduced motion, missing
+promise, zh without a CJK face. WARN with reasons recorded here:
+{list, or "none"}. `{e.g. src/components/ui/}` is exempt: it is
+token-driven.
 
 ## Behavioral floor
 
-Visible state (landmarks stay put), disabled-not-hidden, object then
-action, discoverable then fast, verbs on buttons, undo over
-confirmation, modes visible and escapable, honest feedback in the
-user's words, trustworthy representation, keyboard and assistive
-parity. A change proposed against any of these runs the verdict
-protocol first: protected functions, counted evidence, behavior, then
-better / different / costume.
+Visible state, disabled-not-hidden, object then action, discoverable
+then fast, verbs on buttons, undo over confirmation, modes visible and
+escapable, honest feedback, trustworthy representation, keyboard and
+assistive parity. A change against any of these runs the verdict
+first: protected functions, counted evidence, behavior, then better /
+different / costume.

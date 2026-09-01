@@ -2,7 +2,7 @@
 
 Living elements: the part of a surface that runs by itself -- the
 first viewport demonstrating the mechanism, the signature interaction,
-a diagram that computes, an atmosphere that drifts. motion.md governs
+a diagram that computes, an atmosphere that drifts. craft.md governs
 transitions (a drawer opening, a toast arriving); this file governs
 anything that *keeps going*, *responds*, or *varies*. Its one rule:
 
@@ -29,9 +29,9 @@ model. Load this file when a build has anything that runs.
 | read | a concept is better computed than drawn (a solver, a distribution, a queue); the reader can poke it | one per concept, inline, paused until in view |
 | operate | status only: live data, progress, a gauge | none as decoration; a model on an all-day tool is theater |
 
-Frequency still rules (motion.md): a thing seen a hundred times a day
+Frequency still rules (craft.md): a thing seen a hundred times a day
 earns nothing. A living element that explains nothing is decoration
-without information (anti-patterns.md), however well it simulates.
+without information (anti-craft.md), however well it simulates.
 Before building one, answer in one line each: what does it *prove*;
 why *this* model and not another (a membrane that tears says load
 and fragility; a particle cloud says volume; a flock says
@@ -39,14 +39,14 @@ coordination); what would a visitor describe an hour later.
 
 ## Timeline or model
 
-| Author as a timeline (motion.md) | Author as a model (this file) |
+| Author as a timeline (craft.md) | Author as a model (this file) |
 |---|---|
 | enter, exit, state change, feedback | anything continuous, looping, or responding |
 | fixed choreography with a known end | behavior with a rule and no fixed end |
 | "title, then dek, then CTA, 400ms" | "particles, a field, a pointer, a spawn rule" |
 | CSS transitions / keyframes / WAAPI | a loop: integrate, constrain, draw |
 
-Both can share one surface. The split-flap board (worlds/) is a model
+Both can share one surface. The split-flap board (decks/worlds/) is a model
 (cells with a target glyph and a settle rule) whose each flip is a
 transition. When in doubt: if you catch yourself writing seconds and
 pixels for a thing that should react, you are on the wrong side.
@@ -123,7 +123,7 @@ surface must prove (a schooling flock on an orchestration tool; a
 membrane that tears on a load-testing tool; a counter that settles on
 a billing page); which the budget can run on a mid-range phone at the
 count the idea needs; which the world's material can skin without
-looking pasted (worlds/ cards name their own motion).
+looking pasted (decks/worlds/ cards name their own motion).
 
 ## Solvers, honestly
 
@@ -199,7 +199,7 @@ pretending to be two.
 
 ## Physics by personality
 
-The design system's motion personality (motion.md) sets the physics
+The design system's motion personality (craft.md) sets the physics
 of its living elements; a mismatch reads as a pasted demo.
 
 | Personality | Living-element physics | Example |
@@ -254,7 +254,7 @@ taking from outside: read the license of the *specific sketch*
 (OpenProcessing lets authors pick, including all rights reserved;
 visible source is not permission); take the mechanism and rewrite it
 into the six layers, never paste a demo; record provenance in
-DESIGN.md beside the raster provenance (methods.md, medium gate).
+DESIGN.md beside the raster provenance (SKILL.md, Build).
 
 A permissive licence is permission to copy, not a reason to. What
 carries across is the mechanism -- and the mechanism is usually older

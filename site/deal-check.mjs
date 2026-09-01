@@ -38,7 +38,10 @@ while (keys.length < N) keys.push([...webcrypto.getRandomValues(new Uint8Array(4
 for (const key of keys) {
   const cli = JSON.parse(execFileSync('node', [join(root, 'skills/design-skill/scripts/roll.mjs'), '--scope', 'direction', '--mode', 'persuade', '--candidates', '7', '--key', key, '--json'], { encoding: 'utf8' }));
   const web = await deal(key);
-  const a = JSON.stringify({ assigned: cli.assigned, ids: cli.challengers.map(c => c.id) });
+  // the CLI's assignment is {kind, index|id} since the affinity pool; the page deals without a
+  // subject, so only the index form can occur here
+  const cliAssigned = cli.assigned && cli.assigned.kind === 'yours' ? cli.assigned.index : cli.assigned && cli.assigned.id;
+  const a = JSON.stringify({ assigned: cliAssigned, ids: cli.challengers.map(c => c.id) });
   const b = JSON.stringify({ assigned: web.assigned, ids: web.challengers.map(c => c.id) });
   if (a !== b) { bad++; console.log(`MISMATCH ${key}\n  cli  ${a}\n  page ${b}`); }
 }

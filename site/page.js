@@ -38,13 +38,13 @@
 
   // -- 2. the material switch -----------------------------------------------
   var CONTRACTS = {
-    default:     ['assets/tokens/default.css',     'paper and ink; quiet, structural, system type',            'system-ui (never a tell)',      '0.25rem',  '1.0'],
-    modernist:   ['assets/tokens/modernist.css',   'Swiss grid, grotesk, one signal colour, air',              'Switzer (Fontshare)',           '0',        '1.25'],
-    classical:   ['assets/tokens/classical.css',   'book typography, warm paper, restraint',                   'EB Garamond (OFL)',             '0',        '1.15'],
-    industry:    ['assets/tokens/industry.css',    'instrument panel: dense, ruled, mono data, safety accents','Archivo (OFL)',                 '0.125rem', '0.8'],
-    organic:     ['assets/tokens/organic.css',     'humanist, warm, rounded, tactile',                         'Alegreya + Alegreya Sans (OFL)','0.5rem',   '1.1'],
-    nocturnes:   ['assets/tokens/nocturnes.css',   'dark-first, one light source, blue-grey mists and gold',   'Schibsted Grotesk (OFL)',       '0.375rem', '1.0'],
-    broadsheets: ['assets/tokens/broadsheets.css', 'newsroom hierarchy: hed, dek, columns, hairlines, photos', 'Source Serif 4 (OFL)',          '0',        '0.85']
+    default:     ['systems/default.css',     'paper and ink; quiet, structural, system type',            'system-ui (never a tell)',      '0.25rem',  '1.0'],
+    modernist:   ['systems/modernist.css',   'Swiss grid, grotesk, one signal colour, air',              'Switzer (Fontshare)',           '0',        '1.25'],
+    classical:   ['systems/classical.css',   'book typography, warm paper, restraint',                   'EB Garamond (OFL)',             '0',        '1.15'],
+    industry:    ['systems/industry.css',    'instrument panel: dense, ruled, mono data, safety accents','Archivo (OFL)',                 '0.125rem', '0.8'],
+    organic:     ['systems/organic.css',     'humanist, warm, rounded, tactile',                         'Alegreya + Alegreya Sans (OFL)','0.5rem',   '1.1'],
+    nocturnes:   ['systems/nocturnes.css',   'dark-first, one light source, blue-grey mists and gold',   'Schibsted Grotesk (OFL)',       '0.375rem', '1.0'],
+    broadsheets: ['systems/broadsheets.css', 'newsroom hierarchy: hed, dek, columns, hairlines, photos', 'Source Serif 4 (OFL)',          '0',        '0.85']
   };
 
   var specimen = document.getElementById('specimen');

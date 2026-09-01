@@ -8,7 +8,7 @@ changes the material.
 Surface: one page, five sheets, live at `lroolle.com/design-skill`
 (Cloudflare Worker + assets binding; see `deploy/`).
 Mode: **persuade** (the product behind it is operate).
-World: **patent-drawing-sheets** (`skills/design-skill/worlds/`).
+World: **patent-drawing-sheets** (`skills/design-skill/decks/worlds/`).
 Material: **default**, re-seeded (`site/tokens.css`).
 Roll key: **666a7a49** -- `node scripts/roll.mjs --scope direction --mode persuade --candidates 7 --key 666a7a49`
 
@@ -79,7 +79,7 @@ header comment of `site/deal.js`.
   tally) and the rule: `scripts/roll.mjs` ported line for line -- the same
   SHA-256 ranks, the same rating tickets, the same mode and platform filters --
   over `site/deck.js`, which `site/deck.mjs` generates from the same
-  `worlds/*.md` the CLI reads. FIG. 1 renders it at drawing scale (the key
+  `decks/worlds/*.md` the CLI reads. FIG. 1 renders it at drawing scale (the key
   under the die, the marked slot on the rack, the deal in words under the
   figure); FIG. 2 renders it at bench scale (the key strip, the 1-7 scale, the
   three cards, a tally). The same state drives both; a renderer is a skin.
@@ -140,11 +140,11 @@ enamel board -- the tier is the material, not a label.
 Composition rolled at surface scope, key **5849b9a3**, which dealt
 `first-viewport-is-the-product-running` first: for an ad slot that means the
 region must *demonstrate itself* rather than describe itself. Written back into
-the deck as `stagings/sponsor-seats-as-a-numbered-plate.md`.
+the deck as `decks/compositions/sponsor-seats-as-a-numbered-plate.md`.
 
 - **A different world, not an inverted one.** The first pass inverted the
   sheet's own values; that was the cheap version of a register break. The band
-  now wears a second world outright -- `worlds/split-flap-departure-board.md`,
+  now wears a second world outright -- `decks/worlds/split-flap-departure-board.md`,
   matte enamel ground, hinged character cells with visible seams, one condensed
   uppercase grotesk, change that clatters. Nothing about it is borrowed from
   the drawing sheet, which is the point. It is a dark object in both themes,
