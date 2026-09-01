@@ -57,7 +57,7 @@ words=$(wc -w < SKILL.md)
 [ "$words" -le 2600 ] && ok "SKILL.md $words words (<= 2600)" || bad "SKILL.md $words words (> 2600): the protocol is growing back into a method"
 desc=$(awk '/^description:/{f=1; next} f && /^[a-z]+:/{exit} f && /^---/{exit} f {gsub(/^ +| +$/, ""); printf "%s ", $0}' SKILL.md)
 [ ${#desc} -le 1024 ] && ok "description ${#desc} chars (<= 1024)" || bad "description ${#desc} chars (> 1024)"
-for p in kit/README.md kit/check.sh kit/fonts.sh kit/bases/README.md kit/bases/base.css kit/bases/base.js kit/floor/tokens.css kit/floor/base.css kit/floor/fonts.zh.css kit/floor/fonts.latin.css kit/house/tokens.css kit/house/base.css kit/house/components.css \
+for p in kit/README.md kit/check.sh kit/fonts.sh kit/bases/README.md kit/bases/index.html kit/bases/base.css kit/bases/base.js kit/floor/tokens.css kit/floor/base.css kit/floor/fonts.zh.css kit/floor/fonts.latin.css kit/house/tokens.css kit/house/base.css kit/house/components.css \
          specimens/palettes/README.md specimens/type/README.md specimens/zh-voice.md decks/worlds/_template.md decks/compositions/_template.md decks/recipes/_template.md \
          scripts/roll.mjs systems/README.md references/thinking.md references/craft.md references/cjk.md references/color.md references/simulation.md references/anti-patterns.md references/priors.md references/platforms.md \
          assets/primitives/README.md assets/DESIGN.md.tmpl assets/TASTE.md.tmpl; do
@@ -189,7 +189,7 @@ done
 zhn=$(grep -l '^zh: true' decks/worlds/*.md | wc -l | tr -d ' '); [ "$zhn" -ge 8 ] && ok "worlds: $zhn CJK cards" || bad "worlds: only $zhn CJK cards"
 # 7b. Every prose recipe binds to one renderable working base
 base_count=0
-for f in kit/bases/*.html; do
+for f in kit/bases/{app-shell,dashboard,deck,docs,editorial,forms,landing,portfolio}.html; do
   base_count=$((base_count+1)); miss=""; b=$(basename "$f")
   grep -q 'data-base' "$f" || miss="$miss data-base"
   grep -q 'id="system-css"' "$f" || miss="$miss system-css"
@@ -199,6 +199,10 @@ for f in kit/bases/*.html; do
   [ -z "$miss" ] && ok "working base $b" || bad "working base $b missing:$miss"
 done
 [ "$base_count" -eq 8 ] && ok "working bases: 8" || bad "working bases: $base_count, expected 8"
+for b in app-shell dashboard deck docs editorial forms landing portfolio; do
+  grep -qF "href=\"$b.html\"" kit/bases/index.html || bad "base index does not link $b.html"
+done
+ok "working base index links all 8"
 if command -v node >/dev/null 2>&1; then
   node --check kit/bases/base.js 2>/dev/null && ok "working base behavior parses" || bad "kit/bases/base.js does not parse"
 fi

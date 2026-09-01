@@ -1,6 +1,7 @@
 # Base materials
 
-Eight working standing exits, one per recipe. They are not directions and
+Open [the inspection index](index.html). Eight working standing exits,
+one per recipe. They are not directions and
 they are not screenshots to imitate. They make the protected behavior,
 states, density, and responsive failure points concrete before a rolled
 composition remakes the topology.
