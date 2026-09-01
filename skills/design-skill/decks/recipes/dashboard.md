@@ -20,7 +20,11 @@ earns its keep by how fast the eye finds the row that is wrong.
 - Column headers with units; the current view's name; the account /
   environment switch.
 
-## Structure
+## The standing exit
+
+The category standard played straight -- the floor to orient from,
+never the dealt composition. Topology belongs to the content and the
+rolled world; build this shape as-is only when the user pins it.
 
 ```
 +------------------------------------------------------------------+

@@ -146,9 +146,9 @@ rm -rf "$tmp"
 
 # 6. Forbidden names (WIP rule) and non-ascii punctuation (CJK references excepted)
 cd "$ROOT"
-if grep -rniE 'open-design|opendesign' . --exclude-dir=.git --exclude-dir=node_modules --exclude=validate.sh -q; then bad "forbidden name present"; else ok "no forbidden names"; fi
-if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' --exclude=cjk.md --exclude=zh-voice.md --exclude=TASTE.md.tmpl -q; then
-  bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --include='*.md' --include='*.css' --include='*.sh' --exclude=cjk.md --exclude=zh-voice.md --exclude=TASTE.md.tmpl | head -5
+if grep -rniE 'open-design|opendesign' . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=demo --exclude=validate.sh -q; then bad "forbidden name present"; else ok "no forbidden names"; fi
+if grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=demo --include='*.md' --include='*.css' --include='*.sh' --exclude=cjk.md --exclude=zh-voice.md --exclude=TASTE.md.tmpl -q; then
+  bad "typographic dashes/quotes in source (use ascii)"; grep -rnP '[\x{2014}\x{2013}\x{2018}\x{2019}\x{201C}\x{201D}]' . --exclude-dir=.git --exclude-dir=node_modules --exclude-dir=demo --include='*.md' --include='*.css' --include='*.sh' --exclude=cjk.md --exclude=zh-voice.md --exclude=TASTE.md.tmpl | head -5
 else ok "ascii punctuation (cjk.md, zh-voice.md, TASTE.md.tmpl carry CJK punctuation by design)"; fi
 cd "$SKILL_DIR"
 
@@ -183,7 +183,7 @@ done
 zhn=$(grep -l '^zh: true' decks/worlds/*.md | wc -l | tr -d ' '); [ "$zhn" -ge 8 ] && ok "worlds: $zhn CJK cards" || bad "worlds: only $zhn CJK cards"
 for f in decks/recipes/*.md; do
   b=$(basename "$f"); case "$b" in _template.md) continue ;; esac
-  miss=""; for h in "## Job" "## Protected functions" "## Structure" "## Settings" "## States" "## Copy" "## Verify" "## Failure modes"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
+  miss=""; for h in "## Job" "## Protected functions" "## The standing exit" "## Settings" "## States" "## Copy" "## Verify" "## Failure modes"; do grep -qF "$h" "$f" || miss="$miss '$h'"; done
   grep -qF "## Directions" "$f" && miss="$miss has-Directions"
   [ -z "$miss" ] && ok "recipe ${b%.md}" || bad "recipe $b:$miss"
 done

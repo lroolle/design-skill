@@ -24,7 +24,11 @@ entirely; auth and onboarding are product surfaces too, not marketing.
   the user's typed values survive errors.
 - Onboarding: a visible stepper the user can leave and come back to.
 
-## Structure
+## The standing exit
+
+The category standard played straight -- the floor to orient from,
+never the dealt composition. Topology belongs to the content and the
+rolled world; build this shape as-is only when the user pins it.
 
 ```
 DESKTOP (1440)
