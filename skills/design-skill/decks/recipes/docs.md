@@ -20,7 +20,11 @@ else is chrome and should be quiet.
 - Version / edition / language switch where the product has them.
 - Links that look like links inside prose; external marked.
 
-## Structure
+## The standing exit
+
+The category standard played straight -- the floor to orient from,
+never the dealt composition. Topology belongs to the content and the
+rolled world; build this shape as-is only when the user pins it.
 
 ```
 +------------------------------------------------------------------+

@@ -17,9 +17,12 @@ What must not break on this kind of surface, regardless of restyle:
 the task path, the information actually read, labels and navigation,
 legal copy, the conversion path. A verdict checks against this list.
 
-## Structure
+## The standing exit
 
-An ASCII wireframe of the desktop regions, then the mobile collapse
+The category standard for this surface kind, played straight: the
+floor to orient from, never the dealt composition. Topology belongs
+to the content and the rolled world; a build follows this shape as-is
+only when the user pins it. An ASCII wireframe of the desktop regions, then the mobile collapse
 order (primary content first in source order). State the hierarchy:
 what the eye lands on first, second, third. Name where the one
 signature moment lives.

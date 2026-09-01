@@ -24,7 +24,11 @@ authorship, the ability to find the next thing.
 - For changelogs: the version, the date, and what changed, in that
   order, every entry.
 
-## Structure
+## The standing exit
+
+The category standard played straight -- the floor to orient from,
+never the dealt composition. Topology belongs to the content and the
+rolled world; build this shape as-is only when the user pins it.
 
 ```
 +------------------------------------------------------------------+
